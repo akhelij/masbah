@@ -65,7 +65,7 @@ export default {
  name: "AnnouncementCard",
  props:['page'],
  setup(props){
-    const offset = ref(1);
+    const offset = ref(6);
     const router = useRouter();
     const store = useStore();
     const announcements = computed(() => {

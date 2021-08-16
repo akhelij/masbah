@@ -67,8 +67,8 @@ export default {
         const emitter = inject('$emitter')
 
         const form = reactive({
-            email: 'qehuly@mailinator.com',
-            password: 'Pa$$w0rd!',
+            email: '',
+            password: '',
         })
 
         const rules = computed(() => {
