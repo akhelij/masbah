@@ -5,7 +5,8 @@
     "dev": "vite",
     "host": "vite --host",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "deploy": "sudo service nginx restart"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.0-alpha.22",
