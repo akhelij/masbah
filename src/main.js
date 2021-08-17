@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import mitt from 'mitt'
+import VueHotjar from 'vue-hotjar-next'
+import * as Sentry from "@sentry/vue";
+import { Integrations } from "@sentry/tracing";
 import './index.css'
 import 'mosha-vue-toastify/dist/style.css';
 
@@ -20,6 +23,26 @@ import 'mosha-vue-toastify/dist/style.css';
     app.component(componentName, definition.default)
   })
 
+  Sentry.init({
+    app,
+    dsn: "https://175024e18e094cd0be54d98c39ee12ea@o962067.ingest.sentry.io/5910565",
+    integrations: [
+      new Integrations.BrowserTracing({
+        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+        tracingOrigins: ["localhost", "my-site-url.com", /^\//],
+      }),
+    ],
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+  });
+ 
+  app.use(VueHotjar, {
+    id: 2556594,
+    isProduction: true,
+    snippetVersion: 6
+  });
 
   const clickOutSide = {
     beforeMount: (el, binding) => {
