@@ -1,6 +1,6 @@
 <template>
     <div class="sm:flex sm:space-x-3 space-y-2 sm:space-y-0 text-sm sm:text-base">
-      <TSecondaryButton @click.native="googleAuth" class="flex space-x-2 items-center justify-center w-full sm:w-max">
+      <TSecondaryButton @click.native="socialAuthAction('google')" class="flex space-x-2 items-center justify-center w-full sm:w-max">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 488 512"
@@ -14,7 +14,7 @@
         <span>Se connecter avec Google</span>
       </TSecondaryButton>
 
-      <TSecondaryButton @click.native="facebookAuth" class="flex space-x-2 items-center  justify-center w-full  sm:w-max" >
+      <TSecondaryButton @click.native="socialAuthAction('facebook')" class="flex space-x-2 items-center  justify-center w-full  sm:w-max" >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" class="fill-current transform scale-75">
           <path fill="none" d="M0 0h24v24H0z"/>
           <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/>
@@ -34,10 +34,10 @@ export default {
         const store = useStore()
         const emitter = inject('$emitter')
 
-        const googleAuth = () => {
+        const socialAuthAction = (provider) => {
             store.dispatch('progressbar/start')
             store
-                .dispatch('googleAuthAction')
+                .dispatch('socialAuthAction', provider)
                 .then(() => {
                     emitter.emit('hideModal', 'SignInModal')
                     emitter.emit('hideModal', 'RegisterModal')
@@ -55,33 +55,8 @@ export default {
                 })
         }
 
-        const facebookAuth = () => {
-            store.dispatch('progressbar/start')
-            store
-                .dispatch('facebookAuthAction')
-                .then(() => {
-                    emitter.emit('hideModal', 'SignInModal')
-                    emitter.emit('hideModal', 'RegisterModal')
-                    createToast('🥳 Bon retour parmis nous !', {
-                        type: 'success',
-                        timeout: 2000, 
-                        position: 'bottom-left'
-                    })
-
-                    store.dispatch('progressbar/stop')
-                })
-                .catch((error) => {
-                    console.log(error)
-                    createToast(error.data, {
-                        type: 'success',
-                        timeout: 2000, 
-                        position: 'bottom-left'
-                    })
-                    store.dispatch('progressbar/stop')
-                })
-        }
-
-        return { googleAuth, facebookAuth }
+       
+        return { socialAuthAction }
     },
 }
 </script>

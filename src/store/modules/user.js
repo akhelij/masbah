@@ -97,13 +97,14 @@ export default {
           });
         });
       },
-      googleAuthAction({ commit, dispatch })
+      socialAuthAction({ commit, dispatch }, payload)
       {
         return new Promise((resolve, reject) => {
-          
           let provider = new firebase.auth.GoogleAuthProvider();
+          if(payload == "facebook")
+            provider= new firebase.auth.FacebookAuthProvider();
           
-          firebase.auth().signInWithPopup(provider) // Google authentication
+          firebase.auth().signInWithPopup(provider)
           .then((response) => 
           {
             let user = {
@@ -111,51 +112,6 @@ export default {
               username: response.user.displayName,
               email: response.user.email,
               avatar: response.user.photoURL,   
-              info: ""
-            };
-            dispatch("getUserById", user.id) // Verify if user exist
-            .then((response) => 
-            {
-              if(!response.success)// Verify user doesn't exist
-              {      
-                usersCollection // Create new user
-                .doc(user.id)
-                .set({
-                  id: response.user.uid,
-                  username: response.user.displayName,
-                  email: response.user.email,
-                  avatar: response.user.photoURL,   
-                  info: ""   
-                })
-                .then((response) => {
-                  commit('SET_USER', {id: user.id, ...user.data()})
-                })
-                .catch((error) => {                
-                  reject({success: false, data: error.message});
-                });
-              }
-              resolve({success: true, data: response.user});
-            });
-          })
-          .catch((error) => {                
-            reject({success: false, data: error.message});
-          });        
-        });
-      },
-      facebookAuthAction({ commit, dispatch })
-      {
-        return new Promise((resolve, reject) => {
-          
-          let provider = new firebase.auth.FacebookAuthProvider();
-          
-          firebase.auth().signInWithPopup(provider) // Facebook authentication
-          .then((response) => 
-          {
-            let user = {
-              id: response.user.id,
-              username: response.user.name,
-              email: response.user.email,
-              avatar: response.user.profile_pic,   
               info: ""
             };
             dispatch("getUserById", user.id) // Verify if user exist
