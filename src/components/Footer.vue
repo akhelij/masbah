@@ -5,7 +5,15 @@
             <a href="#_" class="text-xl font-black leading-none text-gray-900 select-none logo">Pissina<span class="text-cyan-600">.</span></a>
             <p class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0">© 2021 Pissina - Location de piscines entre particulier !
             </p>
-            <span class="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
+             
+            <span class="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start text-gray-400">
+                <router-link :to="{ name: 'Terms' }" class="ml-5">
+                Terms and conditions 
+                </router-link>
+                
+                <router-link :to="{ name: 'Privacy' }" class="ml-5">
+                    Privacy policy
+                </router-link>
                 <a href="#" class="text-gray-400 hover:text-gray-500">
                     <span class="sr-only">Facebook</span>
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

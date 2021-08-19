@@ -171,7 +171,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name:"Privacy"
+}
 </script>
 
 <style></style>
