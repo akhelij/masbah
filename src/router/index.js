@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Privacy from '../views/Privacy.vue';
-import Terms from '../views/Terms.vue';
-import Home from '../views/Home.vue';
-import Form from '../views/Announcement/Form.vue';
-import Details from '../views/Announcement/Details.vue';
-import Profile from '../views/Profile.vue';
-import store from '../store'
+import Privacy from '@/views/Privacy.vue';
+import Terms from '@/views/Terms.vue';
+import Home from '@/views/Home.vue';
+import Form from '@/views/Announcement/Form.vue';
+import Details from '@/views/Announcement/Details.vue';
+import Profile from '@/views/Profile.vue';
+import store from '@/store'
 
 const routes = [
     {
