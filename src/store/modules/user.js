@@ -142,6 +142,53 @@ export default {
           });        
         });
       },
+      facebookAuthAction({ commit, dispatch })
+      {
+        return new Promise((resolve, reject) => {
+          
+          let provider = new firebase.auth.FacebookAuthProvider();
+          
+          firebase.auth().signInWithPopup(provider) // Facebook authentication
+          .then((response) => 
+          {
+          console.log("🚀 ~ file: user.js ~ line 154 ~ returnnewPromise ~ response", response)
+            return;
+            let user = {
+              id: response.user.id,
+              username: response.user.name,
+              email: response.user.email,
+              avatar: response.user.profile_pic,   
+              info: ""
+            };
+            dispatch("getUserById", user.id) // Verify if user exist
+            .then((response) => 
+            {
+              if(!response.success)// Verify user doesn't exist
+              {      
+                usersCollection // Create new user
+                .doc(user.id)
+                .set({
+                  username: user.username,
+                  email: user.email,                  
+                  avatar: user.avatar,                                            
+                  created_at: timestamp,  
+                  info: ""   
+                })
+                .then((response) => {
+                  commit('SET_USER', {id: user.id, ...user.data()})
+                })
+                .catch((error) => {                
+                  reject({success: false, data: error.message});
+                });
+              }
+              resolve({success: true, data: response.user});
+            });
+          })
+          .catch((error) => {                
+            reject({success: false, data: error.message});
+          });        
+        });
+      },
       logoutAction({ commit }) {
         return new Promise((resolve, reject) => {           
           firebase.auth().signOut()
