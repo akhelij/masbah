@@ -17,12 +17,15 @@
 import { computed, onBeforeMount } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 import firebase from 'firebase/app';
+import { useRoute, useRouter } from 'vue-router';
 
 let offset = 1;
 export default 
 {
   setup(){
     const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
 
     
     const isLoading = computed(() => store.state.user.loading);
@@ -33,6 +36,10 @@ export default
           if(user){
             store.dispatch('getUserById', user.uid);            
             store.dispatch('fetchMyAnnouncementsAction', user.uid);    
+          }else{
+            if(['Profile','CreateAnnouncement','UpdateAnnouncement'].includes(route.name)){
+              router.push('/')
+            }
           }
         });          
       store.dispatch('fetchAnnouncementsAction');            

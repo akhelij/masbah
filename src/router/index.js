@@ -6,6 +6,7 @@ import Form from '@/views/Announcement/Form.vue';
 import Details from '@/views/Announcement/Details.vue';
 import Profile from '@/views/Profile.vue';
 import store from '@/store'
+import firebase from 'firebase/app';
 
 const routes = [
     {
@@ -84,12 +85,17 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    document.title = `Pissina | ${to.meta.title}`;
-    
-    if (typeof to.matched[0]?.components.default === 'function') {
-        store.dispatch('progressbar/start')
+    const user = firebase.auth().currentUser;
+    if(['Profile','CreateAnnouncement','UpdateAnnouncement'].includes(to.name) && user == null){
+        next('/');
+    }else{
+        document.title = `Pissina | ${to.meta.title}`;
+        
+        if (typeof to.matched[0]?.components.default === 'function') {
+            store.dispatch('progressbar/start')
+        }
+        next();
     }
-    next();
 });
 
 router.beforeResolve((to, from, next) => {

@@ -97,7 +97,7 @@ export default {
           });
         });
       },
-      socialAuthAction({ commit, dispatch }, payload)
+      socialAuthAction({ commit, dispatch, state }, payload)
       {
         return new Promise((resolve, reject) => {
           let provider = new firebase.auth.GoogleAuthProvider();
@@ -118,7 +118,8 @@ export default {
             .then((response) => 
             {
               if(!response.success)// Verify user doesn't exist
-              {      
+              {  
+                  
                 usersCollection // Create new user
                 .doc(user.id)
                 .set({
@@ -127,13 +128,8 @@ export default {
                   avatar: user.avatar,                                            
                   created_at: timestamp,  
                   info: ""   
-                })
-                .then((response) => {
-                  commit('SET_USER', {id: user.id, ...user.data()})
-                })
-                .catch((error) => {                
-                  reject({success: false, data: error.message});
-                });
+                }).catch(error => resolve({success: false, data: error.message}));
+                commit('SET_USER', {id: user.id, ...user.data()}); 
               }
               resolve({success: true, data: response.user});
             });

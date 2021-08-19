@@ -8,8 +8,8 @@
         <div>        
           <div class="relative py-2 md:py-6 px-4 sm:px-6  lg:px-8">
             <nav class="relative flex items-center justify-around sm:h-10 lg:justify-start" aria-label="Global">
-              <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
-                <div class="flex items-center justify-between w-full md:w-auto">
+              <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0 w-full md:w-auto">
+                <div class="flex flex-row items-center justify-between w-full md:w-auto">
                   <router-link :to="{ name:'Home' }" v-if="!hero_design">
                     <svg  class="w-6 h-6 mr-2 cursor-pointer outline-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                   </router-link>
@@ -17,7 +17,7 @@
                     <span class="sr-only">Pissina</span>                  
                     <a href="#_" class="text-3xl font-black leading-none text-gray-900 select-none logo">Pissina<span class="text-cyan-600">.</span></a>
                   </router-link>
-                  <div class="-mr-2 flex items-center md:hidden">
+                  <div class="-mr-2 flex items-center justify-between md:hidden">
                     <button type="button" @click="openMenu" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500" aria-expanded="false">
                       <span class="sr-only">Open main menu</span>
                       <!-- Heroicon name: outline/menu -->
@@ -81,22 +81,22 @@
               
               <div  v-if="isAuth" >
                 
-                <router-link :to="{ name: 'CreateAnnouncement' }" class="block w-full px-5 py-3 text-start font-medium text-cyan-600 bg-gray-50 hover:bg-gray-100 border-b">
+                <router-link @click="closeMenu" :to="{ name: 'CreateAnnouncement' }" class="block w-full px-5 py-3 text-start font-medium text-cyan-600 bg-gray-50 hover:bg-gray-100 border-b">
                   📣 Proposer votre piscine 
                 </router-link>
-                <router-link :to="{ name: 'Profile' }" class="block w-full px-5 py-3 text-start font-medium text-cyan-600 bg-gray-50 hover:bg-gray-100 border-b">
+                <router-link @click="closeMenu" :to="{ name: 'Profile' }" class="block w-full px-5 py-3 text-start font-medium text-cyan-600 bg-gray-50 hover:bg-gray-100 border-b">
                   😎 Profile
                 </router-link>
-                <a href="#"  v-if="isAuth" @click="logout" class="block w-full px-5 py-3 text-start font-medium text-gray-400 bg-gray-50 hover:bg-gray-100">
+                <a href="#"  v-if="isAuth" @click="logout; closeMenu" class="block w-full px-5 py-3 text-start font-medium text-gray-400 bg-gray-50 hover:bg-gray-100">
                   🔐 Se déconnecter
                 </a>
               </div>
               
               <div v-else>
-                <a href="#"  @click="emitter.emit('showModal' ,'RegisterModal')" class="block w-full px-5 py-3 text-center font-medium text-cyan-600 bg-gray-50 hover:bg-gray-100 border-b">
+                <a href="#"  @click="emitter.emit('showModal' ,'RegisterModal'); closeMenu" class="block w-full px-5 py-3 text-center font-medium text-cyan-600 bg-gray-50 hover:bg-gray-100 border-b">
                 📝 Créer un compte
                 </a>
-                <a href="#"  @click="emitter.emit('showModal' ,'SignInModal')" class="block w-full px-5 py-3 text-center font-medium text-cyan-600 bg-gray-50 hover:bg-gray-100">
+                <a href="#"  @click="emitter.emit('showModal' ,'SignInModal'); closeMenu" class="block w-full px-5 py-3 text-center font-medium text-cyan-600 bg-gray-50 hover:bg-gray-100">
                   🔐 Se connecter
                 </a>
               </div>
