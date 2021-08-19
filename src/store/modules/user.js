@@ -121,10 +121,10 @@ export default {
                 usersCollection // Create new user
                 .doc(user.id)
                 .set({
-                  username: user.username,
-                  email: user.email,                  
-                  avatar: user.avatar,                                            
-                  created_at: timestamp,  
+                  id: response.user.uid,
+                  username: response.user.displayName,
+                  email: response.user.email,
+                  avatar: response.user.photoURL,   
                   info: ""   
                 })
                 .then((response) => {
@@ -151,8 +151,6 @@ export default {
           firebase.auth().signInWithPopup(provider) // Facebook authentication
           .then((response) => 
           {
-          console.log("🚀 ~ file: user.js ~ line 154 ~ returnnewPromise ~ response", response)
-            return;
             let user = {
               id: response.user.id,
               username: response.user.name,
