@@ -97,7 +97,7 @@ export default {
                         store.dispatch('progressbar/stop')
                     })
                     .catch((error) => {
-                        createToast(error.message, {
+                        createToast(error.data, {
                             type: 'danger',
                             timeout: 2000,
                             position: 'bottom-left',

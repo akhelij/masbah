@@ -33,14 +33,14 @@
                     <router-link :to="{ name: 'CreateAnnouncement' }" v-show="show_publish_btn">
                           <TButton > + Proposer votre piscine 📣 </TButton>
                     </router-link> 
-                    <img  class="h-12 w-12 rounded-full  mt-1" :src="isAuth ? user.avatar : 'defaultAvatar'" alt="">
+                    <img  class="h-12 w-12 rounded-full  mt-1" :src="isAuth && user.avatar != null &&  user.avatar != undefined ? user.avatar : defaultAvatar" alt="">
                         
                     <Dropdown :items="items" :withoutDivider="true" @logout="logout" :_style="'w-44 -ml-40 mt-14 z-50'" class="z-50">
-                        <button v-if="isAuth" id="user-menu" aria-haspopup="true" class="-ml-8 mt-6 transform duration-75 hover:scale-110">
-                          <span class="sr-only">Open user menu</span>
-                          ⚙️
-                        </button>
-                      </Dropdown> 
+                      <button v-if="isAuth" id="user-menu" aria-haspopup="true" class="-ml-8 mt-6 transform duration-75 hover:scale-110">
+                        <span class="sr-only">Open user menu</span>
+                        ⚙️
+                      </button>
+                    </Dropdown> 
                   </div>
                 </div>
               <div class="flex flex-row justify-end w-full" v-else>
@@ -170,6 +170,7 @@ export default {
         const store = useStore();
         const emitter = inject('$emitter');
         const isAuth = computed (() => store.getters.isAuth);
+        
         const user = computed(() => store.getters.getUser);
         const logout = () =>{
           store.dispatch('logoutAction')

@@ -6,10 +6,10 @@
           <div class="relative rounded-full">
           
           <img
-            class="mx-auto rounded-full"
+            class="mx-auto rounded-full max-h-36"
             height="100"
             width="100"
-            :src="user.avatar != '' ? user.avatar : defaultAvatar"
+            :src="user.avatar != null &&  user.avatar != undefined ? user.avatar : defaultAvatar"
           />
 
           <input id="file-upload" name="file-upload" type="file" class="sr-only" @change="previewImage"  accept="image/*"/>
@@ -164,7 +164,7 @@ export default {
     let allowChange = ref(false);
     
     let user = computed(() => store.getters.getUser);    
-    
+    console.log(user.value.avatar);
     let my_announcements = computed(() => store.getters.getMyAnnouncements);    
     
     watchEffect(() =>{

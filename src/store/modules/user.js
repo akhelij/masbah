@@ -33,13 +33,13 @@ export default {
             .then((user) => {
               if(user.exists){
                 commit('SET_USER', {id: user.id, ...user.data()});       
-                resolve({succes: true, data: user.data()});
+                resolve({success: true, data: user.data()});
               }else{              
-                resolve({succes: false, data: "User does not exist"});
+                resolve({success: false, data: "User does not exist"});
               }
             })
             .catch((error) => {
-              reject({succes: false, data: error.message});
+              reject({success: false, data: error.message});
             }); 
         });
       },
@@ -78,7 +78,7 @@ export default {
                 resolve({success: true, data: payload});
             })
             .catch((error) => {
-                reject({success: false, data: error});
+                reject({success: false, data: error.message});
             });
               
          
@@ -90,10 +90,10 @@ export default {
           firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
           .then((response) => {
             dispatch("getUserById", response.user.uid)
-              .then((response) => resolve({succes: true, data: response.data}));
+              .then((response) => resolve({success: true, data: response.data}));
           })
           .catch((error) => {
-            reject({succes: false, data: error});
+            reject({success: false, data: error.message});
           });
         });
       },
@@ -110,9 +110,9 @@ export default {
               id: response.user.uid,
               username: response.user.displayName,
               email: response.user.email,
+              avatar: response.user.photoURL,   
               info: ""
             };
-            
             dispatch("getUserById", user.id) // Verify if user exist
             .then((response) => 
             {
@@ -122,18 +122,23 @@ export default {
                 .doc(user.id)
                 .set({
                   username: user.username,
-                  email: user.email
+                  email: user.email,                  
+                  avatar: user.avatar,                                            
+                  created_at: timestamp,  
+                  info: ""   
                 })
-                .then(() => commit('SET_USER', {id: user.id, ...user.data()}))
+                .then((response) => {
+                  commit('SET_USER', {id: user.id, ...user.data()})
+                })
                 .catch((error) => {                
-                  reject({succes: false, data: error});
+                  reject({success: false, data: error.message});
                 });
               }
               resolve({success: true, data: response.user});
             });
           })
           .catch((error) => {                
-            reject({succes: false, data: error});
+            reject({success: false, data: error.message});
           });        
         });
       },

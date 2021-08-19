@@ -66,3 +66,6 @@ import 'mosha-vue-toastify/dist/style.css';
   app.provide('$emitter', emitter)
   
   app.use(router).use(store).mount('#app')
+
+
+  

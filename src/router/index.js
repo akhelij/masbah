@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Privacy from '../views/Privacy.vue';
+import Terms from '../views/Terms.vue';
 import Home from '../views/Home.vue';
 import Form from '../views/Announcement/Form.vue';
 import Details from '../views/Announcement/Details.vue';
@@ -6,6 +8,22 @@ import Profile from '../views/Profile.vue';
 import store from '../store'
 
 const routes = [
+    {
+        path: '/privacy',
+        name: 'Privacy',
+        component: Privacy,
+        meta: {
+            title: "Privacy policy"
+        }
+    },
+    {
+        path: '/terms',
+        name: 'Terms',
+        component: Terms,
+        meta: {
+            title: "Terms and conditions"
+        }
+    },
     {
         path: '/',
         name: 'Home',
