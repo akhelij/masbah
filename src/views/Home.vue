@@ -22,13 +22,13 @@
                         </template>
                 </multiselect>
                 <div class="flex flex-row space-x-4 items-center">
-                <TSecondaryButton @click.native="orderByPrice" class="w-48">
+                <TSecondaryButton @click.native="orderByPrice" class="w-48 text-sm sm:text-md">
                     <span v-if="orderByPriceActive"> 🗓️ Filtrer par date </span>
                     <span v-else> 💰 Filtrer par prix </span>
                 </TSecondaryButton>
-                <TSecondaryButton @click="resetList">
+                <TSecondaryButton @click="resetList"  class="text-sm sm:text-md">
                     <div class="flex flex-row space-x-2 items-center">
-                    <svg :class="no_data_found ? 'animate-pulse' : ''" class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    <svg :class="no_data_found ? 'animate-pulse' : ''" class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                     <span> Réinitialiser</span>
                     </div>
                 </TSecondaryButton>
