@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Privacy from '@/views/Privacy.vue';
 import Terms from '@/views/Terms.vue';
 import Home from '@/views/Home.vue';
+import List from '@/views/Announcement/List.vue';
 import Form from '@/views/Announcement/Form.vue';
 import Details from '@/views/Announcement/Details.vue';
 import Profile from '@/views/Profile.vue';
@@ -29,7 +30,6 @@ const routes = [
         path: '/',
         name: 'Home',
         component: Home,
-        props: route => ({ page: parseInt(route.query.page) || 1 }),
         meta: {
             title: "Accueil"
         }
@@ -69,6 +69,15 @@ const routes = [
         }
     },
     {
+        path: '/announcements',
+        name: 'ListOfAnnouncement',
+        component: List,        
+        props: route => ({ page: parseInt(route.query.page) || 1 }),
+        meta: {
+            title: "Trouver votre piscine"
+        }
+    },
+    {
         path: '/details/:id',
         props:true,
         name: 'Details',
@@ -76,7 +85,7 @@ const routes = [
         meta: {
             title: "Détail de l'annonce"
         }
-    }
+    },
 ];
 
 const router = createRouter({

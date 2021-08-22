@@ -1,11 +1,11 @@
 <template>
-  <div v-if="isActive">
-    <div class="min-h-extra max-w-screen  opacity-75 fixed inset-0 z-40" @clicks="hide" />
+  <div v-if="isActive" class="">
+    <div class="min-h-full max-w-screen  opacity-75 fixed inset-0 z-50" @clicks="hide" />
 
-      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-30" aria-hidden="true" @click="hide"></div>
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-50" aria-hidden="true" @click="hide"></div>
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-      <div class="fixed inset-0 max-w-screen mx-auto rounded-3xl z-50 min-h-extra flex items-center justify-center p-5" >
+      <div class="fixed inset-0 max-w-screen mx-auto rounded-3xl z-50 min-h-full flex items-center justify-center p-5" >
         <div   v-click-outside="hide" class=" transform scale-90 bg-white rounded-xl overflow-auto z-auto w-screen-1/2 max-w-screen-lg max-h-full h-auto scrolling-auto relative scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400 scrollbar-track-gray-100" :class="_width">
           <div class="relative mb-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-4 h-4 z-10 absolute top-0 right-0 mr-4 mt-5 cursor-pointer" @click="isActive = false">
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { inject, onMounted, ref, watchEffect } from '@vue/runtime-core';
+import { inject, onMounted, ref } from '@vue/runtime-core';
 
 export default {
   name: 'TModal',

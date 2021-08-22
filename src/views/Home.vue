@@ -1,97 +1,259 @@
 <template>
-    <!-- Section 2 -->
-    <section class="relative w-full">
-       
-        <div class="relative w-full md:text-gray-800 px-5 py-10 mx-auto sm:py-12 md:py-16 md:px-10 max-w-7xl">
-            <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 md:items-center">
-                <multiselect 
-                        :searchable="true"
-                        :close-on-select="true"
-                        v-model="city"
-                        :options="cities" 
-                        label="name" track-by="name"
-                        name="city" id="city"
-                        :selectLabel="'Clique Entrer pour selectionner'"
-                        :deselectLabel="'Clique Entrer pour retirer'"
-                        :selectedLabel="'Selectionner'"
-                        placeholder="Trouver la piscine la plus proche"
-                        @select="filterByCity"
+    <section class="relative min-h-screen">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-2 lg:bg-none w-full">
+                <main
+                    :class="route.name == 'Home' ? 'block' : 'hidden'"
+                    class="
+                        my-5
+                        max-w-7xl
+                        px-4
+                        sm:mt-6 sm:px-6
+                        lg:mt-6 lg:px-8
+                        xl:mt-8
+                    "
+                >
+                    <div
+                        class="
+                            text-left
+                            lg:w-3/5
+                            flex flex-col
+                            items-center
+                            md:items-start
+                            justify-between
+                            min-h-9/12
+                            sm:min-h-8/12
+                            lg:min-h-7/12
+                        "
+                    >
+                        <h1
+                            class="
+                                text-5xl
+                                tracking-tight
+                                font-bold
+                                md:text-gray-900
+                                sm:text-6xl
+                                md:text-6xl
+                                text-center
+                                md:text-left
+                            "
                         >
-                        <template v-slot:noResult>
-                        Oups! Aucun élément trouvé. Pensez à modifier la requête de recherche.
-                        </template>
-                </multiselect>
-                <div class="flex flex-row space-x-4 items-center">
-                <TSecondaryButton @click.native="orderByPrice" class="w-48 text-sm sm:text-md">
-                    <span v-if="orderByPriceActive"> 🗓️ Filtrer par date </span>
-                    <span v-else> 💰 Filtrer par prix </span>
-                </TSecondaryButton>
-                <TSecondaryButton @click="resetList"  class="text-sm sm:text-md">
-                    <div class="flex flex-row space-x-2 items-center">
-                    <svg :class="no_data_found ? 'animate-pulse' : ''" class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    <span> Réinitialiser</span>
+                            <span class="block xl:inline leading-snug"
+                                >Location de piscines</span
+                            >
+                            <span
+                                class="
+                                    block
+                                    text-cyan-600
+                                    xl:inline
+                                    leading-snug
+                                "
+                            >
+                                entre particulier
+                            </span>
+                        </h1>
+                        <p
+                            class="
+                                text-center
+                                md:text-left
+                                text-2xl
+                                font-bold
+                                md:font-medium
+                                tracking-widest
+                                leading-loose
+                                text-gray-600
+                                sm:mt-10
+                                max-w-xl
+                                w-full
+                                md:text-xl md:w-1/2
+                                lg:w-4/5 lg:mx-0
+                            "
+                        >
+                            Profiter d'une piscine juste pour vous et au prix
+                            qui vous convient !
+                        </p>
+                        <div
+                            class="mt-8 justify-center sm:flex sm:justify-start"
+                        >
+                            <div
+                                class="
+                                    rounded-md
+                                    space-y-4
+                                    sm:space-y-0
+                                    flex flex-col
+                                    sm:flex-row
+                                    items-center
+                                    justify-start
+                                    space-x-0
+                                    sm:space-x-4
+                                    w-full
+                                    md:w-auto
+                                "
+                            >
+                                <!-- <div class="rounded-md space-y-5">  -->
+                                <TButton
+                                    @click="sendToList()"
+                                    class="
+                                        flex
+                                        items-center
+                                        justify-center
+                                        px-8
+                                        py-3
+                                        border border-transparent
+                                        text-lg
+                                        font-medium
+                                        rounded-md
+                                        text-white
+                                        bg-cyan-600
+                                        hover:bg-cyan-500
+                                        md:py-4 md:text-lg md:px-10
+                                    "
+                                >
+                                    👀 Trouver votre piscine
+                                </TButton>
+
+                                <TSecondaryButton
+                                    @click="
+                                        isAuth
+                                            ? sendToFillForm()
+                                            : emitter.emit(
+                                                  'showModal',
+                                                  'SignInModal'
+                                              )
+                                    "
+                                    class="
+                                        text-lg
+                                        px-8
+                                        py-3
+                                        bg-white
+                                        md:py-4 md:text-lg md:px-10
+                                    "
+                                >
+                                    Vous êtes proprietaire 📣
+                                </TSecondaryButton>
+                            </div>
+                        </div>
                     </div>
-                </TSecondaryButton>
-                </div>
-            </div>            
-            <div v-if="no_data_found" class="p-5 flex items-center justify-center transform scale-75 md:scale-100">
-                <p class="text-6xl font-semibold text-center leading-normal">😖 Oups, Votre recherche n'a pas aboutie</p>
+                    <div
+                        class="
+                            hero_illustration
+                            absolute
+                            top-20
+                            sm:top-0
+                            md:-top-5 md:right-0
+                            w-full
+                            md:w-3/5
+                            lg:w-1/2
+                            p-10
+                            opacity-25
+                            md:opacity-100
+                        "
+                    >
+                        <img :src="illustration5" alt="" />
+                    </div>
+                </main>
             </div>
-            <AnnouncementCard :page="page" v-else/>
         </div>
+        <img
+            :src="waves"
+            alt=""
+            srcset=""
+            class="absolute bottom-20 lg:bottom-10 w-full"
+        />
     </section>
 
+    <HowItWorks />
 </template>
 
 <script>
-import cities from '@/assets/js/cities'
-import Multiselect from 'vue-multiselect'
-import { ref } from '@vue/reactivity';
-import { useStore } from 'vuex';
+import logo from '@/assets/img/logo.png'
+import illustration5 from '@/assets/img/illustrations/Jumping into the pool-pana.svg'
+import waves from '@/assets/img/illustrations/layered-waves-haikei.svg'
+
+import { computed, inject, ref, watchEffect } from '@vue/runtime-core'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+
+import { createToast } from 'mosha-vue-toastify'
+import defaultAvatar from '@/assets/img/default-avatar.png'
+
 export default {
-  components:{Multiselect},  
-  props: ['page'],  
-  setup(){
-      const store = useStore();
-      const city = ref(null);
-      const no_data_found = ref(false);
-      const orderByPriceActive = ref(false);
+    setup() {
+        const router = useRouter()
+        const route = useRoute()
 
-      const filterByCity = _ =>  {
-          no_data_found.value = false;
-          setTimeout(function(){
-                  store.dispatch('filterAnnoucementsByCity', city.value.name)
-                  .then((response) => {
-                      if(!response.success && response.empty){
-                          no_data_found.value = true;
-                      }
-                  })             
-          }, 0)
-      };
+        const open = ref(false)
+        const openMenu = () => {
+            setTimeout(function () {
+                open.value = true
+            }, 0)
+        }
+        const closeMenu = () => {
+            open.value = false
+        }
+        const store = useStore()
+        const emitter = inject('$emitter')
+        const isAuth = computed(() => store.getters.isAuth)
 
-      const resetList = _ =>  {
-          no_data_found.value = false;
-          city.value = false;
-          store.dispatch('fetchAnnouncementsAction');
-      };
+        const user = computed(() => store.getters.getUser)
+        const logout = () => {
+            store
+                .dispatch('logoutAction')
+                .then(() =>
+                    createToast('👋 A bientôt !', {
+                        type: 'success',
+                        timeout: 2000,
+                    })
+                )
+                .catch((error) => console.log(error))
+        }
+        const sendToFillForm = () => {
+            router.push('/profile')
+        }
 
-      const orderByPrice = _ => {
-        let announcements = store.getters.getAnnouncements;
-        orderByPriceActive.value = !orderByPriceActive.value;
-        if(orderByPriceActive.value)
-            announcements.sort((a, b) => a.half_day_price - b.half_day_price);
-        else
-            announcements.sort((a, b) => a.created_at.seconds - b.created_at.seconds );
-      };
+        const sendToList = () => {
+            router.push('/announcements')
+        }
 
-      return {cities, city, filterByCity, resetList, orderByPrice, orderByPriceActive, no_data_found}
-  }
+        const items = [
+            {
+                type: 'link',
+                link: '/profile',
+                icon: "<span class='mr-1'>😎</span>",
+                text: 'Profile',
+                style: 'text-gray-700 py-2',
+            },
+            {
+                type: 'func',
+                func: 'logout',
+                icon: "<span class='mr-2'>🔓 </span>",
+                text: ' Se déconnecter',
+                style: 'text-gray-500 py-2 mt-1 border-t',
+            },
+        ]
+        return {
+            waves,
+            illustration5,
+            sendToFillForm,
+            sendToList,
+            items,
+            logo,
+            defaultAvatar,
+            emitter,
+            isAuth,
+            user,
+            logout,
+            open,
+            openMenu,
+            closeMenu,
+            route,
+        }
+    },
 }
 </script>
 
 <style>
-
+.hero_illustration {
+    z-index: -9999 !important;
+}
 </style>
-
-
-

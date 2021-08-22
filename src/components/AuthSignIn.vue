@@ -1,7 +1,7 @@
 <template>
   <div class="shadow p-8 w-full text-left">
     <h2 class="text-3xl font-bold">Se connecter</h2>
-    <p class="text-sm mb-5"> 👋 Bon retour parmis nous !</p>
+    <p class="text-sm mb-5"> 👋 Connectez-vous pour pouvoir proposer votre piscine !</p>
     <AuthSocial />
 
     <TDivider> Ou </TDivider>

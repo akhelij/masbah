@@ -1,14 +1,14 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import mitt from 'mitt'
-import VueHotjar from 'vue-hotjar-next'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import mitt from 'mitt';
+import vueSocialSharing from 'vue-social-sharing';
+import vueHotjar from 'vue-hotjar-next';
 import * as Sentry from "@sentry/vue";
 import { Integrations } from "@sentry/tracing";
-import './index.css'
+import './index.css';
 import 'mosha-vue-toastify/dist/style.css';
-
   const app = createApp(App)
 
   // Components Auto Importation
@@ -38,7 +38,7 @@ import 'mosha-vue-toastify/dist/style.css';
     tracesSampleRate: 1.0,
   });
  
-  app.use(VueHotjar, {
+  app.use(vueHotjar, {
     id: 2556594,
     isProduction: true,
     snippetVersion: 6
@@ -65,7 +65,4 @@ import 'mosha-vue-toastify/dist/style.css';
   const emitter = mitt()
   app.provide('$emitter', emitter)
   
-  app.use(router).use(store).mount('#app')
-
-
-  
+  app.use(vueSocialSharing).use(router).use(store).mount('#app')

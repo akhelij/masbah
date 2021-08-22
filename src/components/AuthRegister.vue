@@ -1,9 +1,9 @@
 <template>
-   <div class="shadow p-4 w-full text-left">
+   <div class="shadow p-6 w-full text-left">
     <h2 class="text-3xl font-bold">S'inscrire</h2>
     <p class="text-sm mb-5">
       🙌 En vous inscrivant vous acceptez nos
-      <a href="#" class="text-cyan-500">Conditions générales</a>.
+      <router-link :to="{ name:'Terms' }" class="text-cyan-500" @click="emitter.emit('hideModal', 'RegisterModal')">Conditions générales</router-link>.
     </p>
     <AuthSocial />
 
@@ -162,7 +162,7 @@ export default {
             }
         }
 
-        return { ...toRefs(form), switchToConnect, v$, register }
+        return { ...toRefs(form), switchToConnect, v$, register, emitter }
     },
 }
 </script>

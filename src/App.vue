@@ -1,16 +1,18 @@
-<template>    
+<template> 
+<div class="overflow-hidden">
     <ProgressBar />
-    <header>
+    <header :class="route.name != 'Home' ? 'shadow-md md:mb-10' : ''">
         <Header />
     </header>
     
-    <main class="bg-gray-50">      
+    <main>      
       <router-view />    
     </main>
     
-    <footer class="bg-gray-50">      
+    <footer class="bg-white" :class="route.name == 'Home' ? 'pt-20' : ''">      
         <Footer />
-    </footer>
+    </footer>  
+</div>   
 </template>
 
 <script>
@@ -19,14 +21,12 @@ import { useStore } from 'vuex';
 import firebase from 'firebase/app';
 import { useRoute, useRouter } from 'vue-router';
 
-let offset = 1;
 export default 
 {
   setup(){
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
-
     
     const isLoading = computed(() => store.state.user.loading);
 
@@ -46,9 +46,7 @@ export default
       store.dispatch('progressbar/stop'); 
     });
 
-    
-
-    return { isLoading };
+    return { isLoading, route };
   }
   
 }

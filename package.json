@@ -20,6 +20,7 @@
     "vue-hotjar-next": "^1.2.0",
     "vue-multiselect": "^3.0.0-alpha.2",
     "vue-router": "^4.0.10",
+    "vue-social-sharing": "^4.0.0-alpha4",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

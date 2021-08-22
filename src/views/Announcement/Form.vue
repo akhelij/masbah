@@ -6,7 +6,7 @@
   <TButton class="shadow-lg" :button_disabled="disable_for_loading" @click="publish" v-if="!creation_done"> {{  id ? "Modifier" : "Publier"}} 📣 </TButton>
   </div>
   
-  <div class="flex flex-col items-center justify-center w-full space-y-5 py-20" v-if="creation_done">
+  <div class="flex flex-col items-center justify-center w-full space-y-5 py-10" v-if="creation_done">
     <h1 class="text-6xl font-bold">Félicitations 🥳🥳</h1> 
     <p  class="text-4xl font-bold px-5 text-center">Merci de votre générosité, vous n'avez plus qu'a attendre que l'un des locataires vous contacte pour venir profité dans votre petit bout de paradis !</p>
     <router-link :to="{name:'Home'}" class="text-4xl font-bold p-2 text-center flex flex-row items-center justify-center text-cyan-600">
@@ -17,7 +17,7 @@
     </router-link>
     <img :src="congrats" alt="" width="480" height="320">
   </div>
-  <div v-else class="relative w-full md:text-gray-800 px-5 py-10 mx-auto sm:py-12 md:py-16 md:px-10 max-w-7xl">
+  <div v-else class="relative w-full md:text-gray-800 px-5 py-4 mx-auto sm:py-4 md:py-8 md:px-10 max-w-7xl">
     <div>
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
@@ -243,7 +243,7 @@
                     <TInput placeholder="06XXXXXXXX" v-model="phone" type="number"/>
                   </div>
                 
-                  <div class="flex flex-col space-y-2 pt-2">
+                  <div class="flex flex-col space-y-2 pt-2 pb-4 sm:pb-0">
                     <label class="block text-xl font-semibold text-gray-700">
                      Quel produit utilisez-vous pour l'entretien de votre piscine ?
                     </label>
