@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "host": "vite --host",
+    "eslint": "eslint ./",
     "build": "vite build",
     "serve": "vite preview",
     "deploy": "sudo service nginx restart"

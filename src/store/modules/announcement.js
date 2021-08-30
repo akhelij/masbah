@@ -136,7 +136,6 @@ export default {
             resolve({success: true, data: response})
           })
           .catch((error) => {
-            console.log(error);
             reject({success: false, data: error.message})});
         });
       },

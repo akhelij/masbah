@@ -1,7 +1,6 @@
 <template>
- <div class="grid h-full grid-cols-12 gap-5 pb-5 mt-5 sm:mt-12">
-    <div @click="showAnnouncementDetails(announcement)" class="relative flex flex-col items-start justify-end h-full col-span-12 overflow-hidden rounded-xl group md:col-span-6 xl:col-span-4 cursor-pointer shadow" v-for="(announcement,index) in announcements" :key="index">
-                    
+ <ul class="grid h-full grid-cols-12 gap-5 pb-5 mt-5 sm:mt-12">
+    <li v-for="(announcement,index) in announcements"  :key="index" class="relative flex flex-col items-start justify-end h-full col-span-12 overflow-hidden rounded-xl group md:col-span-6 xl:col-span-4 cursor-pointer shadow" @click="showAnnouncementDetails(announcement)">
         <a href="#"  class="block w-full bg-center bg-cover h-72" :style="announcement.media ? { 'backgroundImage':`url('${announcement.media[0]}')` } : { 'backgroundImage':`url('https://fakeimg.pl/1200/')` }">
         </a>
         <div  class="relative z-20 w-full h-auto py-4 px-2 md:px-4   bg-transparent backdrop-filter backdrop-blur-2xl shadow-lg drop-shadow-lg bg-opacity-25 border-t-0  border-gray-900  ">
@@ -21,29 +20,28 @@
                 </div>
             <div class="text-sm font-bold   flex flex-col items-end" >
                 <span class="text-3xl font-semibold text-cyan-600  flex flex-row space-x-1 items-center"><span class="filter drop-shadow-sm brightness-95">{{ announcement.half_day_price }} </span> <span class="flex flex-col -space-y-1"><span class="text-xs font-bold text-cyan-600 filter drop-shadow-sm brightness-95">Dhs </span><span class="text-xs font-light text-cyan-600 filter drop-shadow-sm brightness-95 ">/Personne</span></span>  </span>
-                <p class="text-gray-400" v-if="announcement.max_people == announcement.min_people">👪 {{ announcement.max_people }} personnes</p>
-                <p class="text-gray-400" v-else>👪 {{ announcement.min_people }} à {{ announcement.max_people }} personnes</p>                  
+                <p v-if="announcement.max_people == announcement.min_people" class="text-gray-400">👪 {{ announcement.max_people }} personnes</p>
+                <p v-else class="text-gray-400">👪 {{ announcement.min_people }} à {{ announcement.max_people }} personnes</p>                  
             </div>
             </div>
 
         </div>
-    </div>
-   
- </div>
+    </li>   
+</ul>
 
- <div class="flex  items-center justify-center space-x-2" v-if="hasPagination">
+ <div v-if="hasPagination" class="flex  items-center justify-center space-x-2">
     <router-link
+        v-if="page != 1"
         :to="{ name: 'Home', query: { page: page - 1 } }"
         rel="prev"
-        v-if="page != 1"
     >
         <TSecondaryButton> Précédent </TSecondaryButton>
     </router-link>
     <span class="m-1 p-1 border rounded-md">{{page}}</span>
     <router-link
+        v-if="hasNext"
         :to="{ name: 'Home', query: { page: page + 1 } }"
         rel="next"
-        v-if="hasNext"
     >
         <TSecondaryButton> Suivant </TSecondaryButton>
     </router-link> 
@@ -111,7 +109,3 @@ export default {
  }
 }
 </script>
-
-<style>
-
-</style>

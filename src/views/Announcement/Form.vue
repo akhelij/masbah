@@ -9,7 +9,7 @@
   <div class="flex flex-col items-center justify-center w-full space-y-5 py-10" v-if="creation_done">
     <h1 class="text-6xl font-bold">Félicitations 🥳🥳</h1> 
     <p  class="text-4xl font-bold px-5 text-center">Merci de votre générosité, vous n'avez plus qu'a attendre que l'un des locataires vous contacte pour venir profité dans votre petit bout de paradis !</p>
-    <router-link :to="{name:'Home'}" class="text-4xl font-bold p-2 text-center flex flex-row items-center justify-center text-cyan-600">
+    <router-link :to="{name:'ListOfAnnouncement'}" class="text-4xl font-bold p-2 text-center flex flex-row items-center justify-center text-cyan-600">
       🏠 Revenir a la liste des piscines 
     </router-link>
     <router-link :to="{name:'Profile'}" class="text-4xl font-bold p-2 text-center flex flex-row items-center justify-center text-cyan-600">
