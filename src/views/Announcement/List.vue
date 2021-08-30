@@ -58,7 +58,11 @@ export default {
       const city = ref(null);
       const no_data_found = ref(false);
       const orderByPriceActive = ref(false);
-
+      
+      onBeforeMount(()=>{
+          store.dispatch('fetchAnnouncementsAction');
+      });
+      
       const filterByCity = _ =>  {
           no_data_found.value = false;
           setTimeout(function(){
