@@ -6,9 +6,9 @@
             <img :src="question" srcset="" class="w-1/2 lg:w-1/3 lg:p-10  z-30" alt="question" />
             <div class="w-full flex justify-center lg:justify-start p-5">
                 <div class="p-4">
-                    <h3 class="text-3xl font-semibold flex mb-5">
+                    <h2 class="text-3xl font-semibold flex mb-5">
                         Vous êtes propriétaire de piscine ?
-                    </h3>
+                    </h2>
                     <ul class="flex flex-col  space-y-4">
                         <li> 
                             <p class="text-lg font-semibold">
@@ -54,16 +54,16 @@
         </div>
             
         
-        <h3 class="text-3xl font-semibold hidden lg:block pl-10">
+        <h2 class="text-3xl font-semibold hidden lg:block pl-10">
             Vous voulez profiter d'une piscine ?
-        </h3>
+        </h2>
         <div class="flex flex-col-reverse lg:flex-row  items-center  justify-center">
             
             <div class="w-full flex justify-center lg:justify-end  p-5 sm:px-10 lg:p-5">
                 <div class="p-4">
-                    <h3 class="text-3xl font-semibold mb-5 block lg:hidden">
+                    <h2 class="text-3xl font-semibold mb-5 block lg:hidden">
                         Vous voulez profiter d'une piscine ?
-                    </h3>
+                    </h2>
                     <ul class="flex flex-col space-y-4">
                         <li> 
                             <p class="text-lg font-semibold">
