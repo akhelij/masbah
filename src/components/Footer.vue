@@ -3,7 +3,9 @@
     <section class="text-gray-700 bg-white body-font">
 
         
-        <img :src="waves" class="sm:-mb-5 w-full h-auto" alt="waves">
+        <img :src="waves" class="sm:-mb-5 w-full h-auto" alt="waves" 
+            width="full"
+            height="auto" >
 
         <div class="flex flex-row items-center h-full  justify-center px-4 sm:px-0 space-x-4 sm:space-x-16 py-5"> 
           <img 

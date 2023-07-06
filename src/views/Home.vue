@@ -77,15 +77,26 @@
                                         </template>
                                     </multiselect>
 
-                                    <button @click="sendToList" class="outline-none focus:outline-none font-semibold rounded-full rounded-l-none text-center px-4 h-16 border border-cyan-500 bg-cyan-600 text-white">
-                                        Trouver votre piscine  👀
+                                    <button
+                                        @click="sendToList"
+                                        class="outline-none focus:outline-none font-semibold rounded-full rounded-l-none text-center px-4 h-16 border border-cyan-500 bg-cyan-600 text-white"
+                                    >
+                                        Trouver votre piscine 👀
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="hero_illustration absolute top-20 sm:top-0 md:-top-5 md:right-0 w-full md:w-3/5 lg:w-1/2 p-10 opacity-25 md:opacity-100">
-                        <img :src="illustration5" alt="illustration" class="w-full h-auto"/>
+                    <div
+                        class="hero_illustration absolute top-20 sm:top-0 md:-top-5 md:right-0 w-full md:w-3/5 lg:w-1/2 p-10 opacity-25 md:opacity-100"
+                    >
+                        <img
+                            :src="illustration5"
+                            alt="illustration"
+                            width="full"
+                            height="auto"
+                            class="w-full h-auto"
+                        />
                     </div>
                 </main>
             </div>
@@ -105,13 +116,13 @@
 
 <style>
 .home-filter .multiselect__placeholder {
-    @apply text-base font-bold !important
+    @apply text-base font-bold !important;
 }
 .home-filter .multiselect__tags {
-    @apply w-full rounded-full rounded-r-none h-16 flex flex-col justify-center px-6 placeholder-gray-700 font-bold !important
+    @apply w-full rounded-full rounded-r-none h-16 flex flex-col justify-center px-6 placeholder-gray-700 font-bold !important;
 }
 .home-filter .multiselect__select {
-    @apply hidden !important
+    @apply hidden !important;
 }
 </style>
 
@@ -128,15 +139,14 @@ import { useStore } from 'vuex'
 import { createToast } from 'mosha-vue-toastify'
 import defaultAvatar from '@/assets/img/default-avatar.png'
 
-
 import Multiselect from 'vue-multiselect'
 
-export default {    
+export default {
     components: { Multiselect },
     setup() {
         const router = useRouter()
         const route = useRoute()
-        
+
         const store = useStore()
         const city = ref(null)
         const no_data_found = ref(false)
@@ -150,7 +160,7 @@ export default {
         const closeMenu = () => {
             open.value = false
         }
-        
+
         const emitter = inject('$emitter')
         const isAuth = computed(() => store.getters.isAuth)
 
@@ -171,7 +181,10 @@ export default {
         }
 
         const sendToList = () => {
-            router.push({ path: '/announcements', query: { city: city.value.name } });
+            router.push({
+                path: '/announcements',
+                query: { city: city.value.name },
+            })
         }
 
         const items = [
@@ -191,8 +204,7 @@ export default {
             },
         ]
 
-        
-        const filterByCity = (_) => {            
+        const filterByCity = (_) => {
             no_data_found.value = false
             setTimeout(function () {
                 console.log(city)
@@ -201,8 +213,8 @@ export default {
                     .then((response) => {
                         if (!response.success && response.empty) {
                             no_data_found.value = true
-                        } 
-                        sendToList(no_data_found);
+                        }
+                        sendToList(no_data_found)
                     })
             }, 0)
         }
