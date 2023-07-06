@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="hero_illustration absolute top-20 sm:top-0 md:-top-5 md:right-0 w-full md:w-3/5 lg:w-1/2 p-10 opacity-25 md:opacity-100">
-                        <img :src="illustration5" alt="illustration" class="w-full"/>
+                        <img :src="illustration5" alt="illustration" class="w-full h-auto"/>
                     </div>
                 </main>
             </div>
@@ -94,7 +94,7 @@
             :src="waves"
             alt="waves"
             srcset=""
-            class="lg:absolute lg:bottom-10 w-full"
+            class="lg:absolute lg:bottom-10 w-full h-auto"
         />
     </section>
 

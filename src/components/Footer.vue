@@ -3,10 +3,10 @@
     <section class="text-gray-700 bg-white body-font">
 
         
-        <img :src="waves" class="sm:-mb-5 w-full" alt="waves">
+        <img :src="waves" class="sm:-mb-5 w-full h-auto" alt="waves">
 
         <div class="flex flex-row items-center h-full  justify-center px-4 sm:px-0 space-x-4 sm:space-x-16 py-5"> 
-          <img :src="mobile" class=" w-1/2 md:w-1/3 hidden sm:block" alt="newsletter">
+          <img :src="mobile" class=" w-1/2 md:w-1/3 hidden sm:block h-auto" alt="newsletter">
           <div class="flex flex-col space-y-4 justify-between transform sm:scale-75 md:scale-90 lg:min-h-5/12 xl:min-h-7/12  w-full md:w-1/2 max-w-sm">
             <div class="space-y-1">
                 <h1 class='text-lg font-bold'>Newsletter :</h1>
