@@ -94,6 +94,8 @@
             :src="waves"
             alt="waves"
             srcset=""
+            width="full"
+            height="auto"
             class="lg:absolute lg:bottom-10 w-full h-auto"
         />
     </section>
