@@ -31,31 +31,13 @@
         </p>
         <router-link
             :to="{ name: 'ListOfAnnouncement' }"
-            class="
-                text-4xl
-                font-bold
-                p-2
-                text-center
-                flex flex-row
-                items-center
-                justify-center
-                text-cyan-600
-            "
+            class="text-4xl font-bold p-2 text-center flex flex-row items-center justify-center text-cyan-600"
         >
             🏠 Revenir a la liste des piscines
         </router-link>
         <router-link
             :to="{ name: 'Profile' }"
-            class="
-                text-4xl
-                font-bold
-                p-2
-                text-center
-                flex flex-row
-                items-center
-                justify-center
-                text-cyan-600
-            "
+            class="text-4xl font-bold p-2 text-center flex flex-row items-center justify-center text-cyan-600"
         >
             Voir vos annonces 📢
         </router-link>
@@ -63,33 +45,24 @@
     </div>
     <div
         v-else
-        class="
-            relative
-            w-full
-            md:text-gray-800
-            px-5
-            py-4
-            mx-auto
-            sm:py-4
-            md:py-8 md:px-10
-            max-w-7xl
-        "
+        class="relative w-full md:text-gray-800 px-5 py-4 mx-auto sm:py-4 md:py-8 md:px-10 max-w-7xl"
     >
         <div>
-            <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 md:gap-6">
                 <div class="md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-2xl font-bold leading-6 text-gray-900">
-                            Réglements
+                            Spécifications
                         </h3>
                         <p class="mt-1 text-sm text-gray-600">
-                            Commencez par préciser quelques règles pour vos
-                            locataires.
+                            Commencez par préciser quelques règles et
+                            spécifications pour vos locataires.
                         </p>
                     </div>
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
+                        <span></span>
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                             <TInputError
                                 v-if="v$.rules.$error"
@@ -101,12 +74,7 @@
                                 class="flex justify-between"
                             >
                                 <label
-                                    class="
-                                        block
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                    "
+                                    class="block text-xl font-semibold text-gray-700"
                                 >
                                     {{ rule.title }}
                                 </label>
@@ -116,12 +84,7 @@
 
                             <div class="flex flex-col space-y-2 pt-5">
                                 <label
-                                    class="
-                                        block
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                    "
+                                    class="block text-xl font-semibold text-gray-700"
                                 >
                                     Vos précisions supplémentaires •
                                     (facultatif)
@@ -155,13 +118,15 @@
                             Les prix autour de votre piscine.
                         </p>
 
-                        <p class="mt-4 text-xs text-gray-600 mb-2">
-                            *PS: Vous pouvez saisir un prix pour chaque
-                            équipement.
+                        <p class="mt-4 text-xs font-bold text-gray-600 mb-2">
+                            ⚠️ Chaque équipement est considéré comme inclus
+                            gratuitement dans votre offre. Cependant, si vous
+                            souhaitez proposer un prix pour votre équipement,
+                            cela est également possible.
                         </p>
                         <img
                             :src="extra_tuto"
-                            class="w-32 border border-cyan-500"
+                            class="w-full border border-cyan-500"
                         />
                     </div>
                 </div>
@@ -170,16 +135,16 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="flex flex-col space-y-2 pt-5">
                                 <label
-                                    class="
-                                        block
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                    "
+                                    class="block text-xl font-semibold text-gray-700"
                                 >
                                     A quel prix souhaitez-vous louer votre
-                                    piscine, par demi-journée et par personne ?
+                                    piscine par personne?
                                 </label>
+
+                                <label
+                                    class="block text-lg text-gray-700"
+                                    >Prix demi-journée ?</label
+                                >
                                 <TInputError
                                     v-if="v$.half_day_price.$error"
                                     :message="
@@ -195,15 +160,9 @@
 
                             <div class="flex flex-col space-y-2 pt-5">
                                 <label
-                                    class="
-                                        block
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                    "
+                                    class="block text-lg text-gray-700"
                                 >
-                                    Votre prix à la journée, par personne •
-                                    (facultatif)
+                                    Prix journée complete • (facultatif)
                                 </label>
                                 <TInputError
                                     v-if="v$.full_day_price.$error"
@@ -220,21 +179,13 @@
 
                             <div class="flex flex-col space-y-2 pt-5">
                                 <label
-                                    class="
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                        flex flex-col
-                                    "
+                                    class="text-xl font-semibold text-gray-700 flex flex-col"
                                 >
                                     <span>
                                         Quels équipements proposez-vous ?</span
                                     >
                                     <span
-                                        class="
-                                            text-gray-400 text-xs
-                                            font-normal
-                                        "
+                                        class="text-gray-400 text-xs font-normal"
                                         >Vous pouvez préciser plus de détails
                                         dans la description</span
                                     >
@@ -307,12 +258,7 @@
                         <div class="px-4 bg-white space-y-3 sm:p-6">
                             <div class="flex flex-col space-y-2 pt-2">
                                 <label
-                                    class="
-                                        block
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                    "
+                                    class="block text-xl font-semibold text-gray-700"
                                 >
                                     Combien de personnes souhaitez-vous
                                     accueillir par location ?
@@ -323,12 +269,7 @@
                                 />
                                 <div class="flex justify-between">
                                     <label
-                                        class="
-                                            block
-                                            text-lg
-                                            font-semibold
-                                            text-gray-700
-                                        "
+                                        class="block text-lg font-semibold text-gray-700"
                                     >
                                         Au maximum
                                     </label>
@@ -341,12 +282,7 @@
                                 />
                                 <div class="flex justify-between">
                                     <label
-                                        class="
-                                            block
-                                            text-lg
-                                            font-semibold
-                                            text-gray-700
-                                        "
+                                        class="block text-lg font-semibold text-gray-700"
                                     >
                                         Au minimum
                                     </label>
@@ -356,22 +292,14 @@
 
                             <div class="flex flex-col space-y-2 pt-2">
                                 <label
-                                    class="
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                        flex flex-col
-                                    "
+                                    class="text-xl font-semibold text-gray-700 flex flex-col"
                                 >
                                     <span>
                                         Les photos de votre coin de
                                         paradis</span
                                     >
                                     <span
-                                        class="
-                                            text-gray-400 text-xs
-                                            font-normal
-                                        "
+                                        class="text-gray-400 text-xs font-normal"
                                         >Vous n'avez pas de belles photos sous
                                         la main ? Pas de panique, vous pouvez
                                         quand même passer à l'étape suivante
@@ -390,12 +318,7 @@
 
                             <div class="flex flex-col space-y-2 pt-2">
                                 <label
-                                    class="
-                                        block
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                    "
+                                    class="block text-xl font-semibold text-gray-700"
                                 >
                                     Titre
                                 </label>
@@ -412,12 +335,7 @@
 
                             <div class="flex flex-col space-y-2 pt-2">
                                 <label
-                                    class="
-                                        block
-                                        text-xl
-                                        font-semibold
-                                        text-gray-700
-                                    "
+                                    class="block text-xl font-semibold text-gray-700"
                                 >
                                     Description
                                 </label>
@@ -437,12 +355,7 @@
                             <div class="space-y-4">
                                 <div class="flex flex-col space-y-2 pt-2">
                                     <label
-                                        class="
-                                            block
-                                            text-xl
-                                            font-semibold
-                                            text-gray-700
-                                        "
+                                        class="block text-xl font-semibold text-gray-700"
                                     >
                                         Ville
                                     </label>
@@ -473,12 +386,7 @@
 
                                 <div class="flex flex-col space-y-2 pt-2">
                                     <label
-                                        class="
-                                            block
-                                            text-xl
-                                            font-semibold
-                                            text-gray-700
-                                        "
+                                        class="block text-xl font-semibold text-gray-700"
                                     >
                                         Quelle est l'adresse de votre piscine ?
                                     </label>
@@ -496,12 +404,7 @@
 
                                 <div class="flex flex-col space-y-2 pt-2">
                                     <label
-                                        class="
-                                            block
-                                            text-xl
-                                            font-semibold
-                                            text-gray-700
-                                        "
+                                        class="block text-xl font-semibold text-gray-700"
                                     >
                                         Téléphone
                                     </label>
@@ -517,21 +420,10 @@
                                 </div>
 
                                 <div
-                                    class="
-                                        flex flex-col
-                                        space-y-2
-                                        pt-2
-                                        pb-4
-                                        sm:pb-0
-                                    "
+                                    class="flex flex-col space-y-2 pt-2 pb-4 sm:pb-0"
                                 >
                                     <label
-                                        class="
-                                            block
-                                            text-xl
-                                            font-semibold
-                                            text-gray-700
-                                        "
+                                        class="block text-xl font-semibold text-gray-700"
                                     >
                                         Quel produit utilisez-vous pour
                                         l'entretien de votre piscine ?
@@ -587,10 +479,10 @@ export default {
     name: 'CreateAnnouncement',
     components: { Multiselect },
     props: {
-      id:{
-        type:String,
-        default: null
-      }
+        id: {
+            type: String,
+            default: null,
+        },
     },
     setup(props) {
         onMounted(() =>

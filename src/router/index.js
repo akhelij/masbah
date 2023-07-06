@@ -43,14 +43,6 @@ const routes = [
           }
     },
     {
-        path: '/profile',
-        name: 'Profile',
-        component: Profile,
-        meta: {
-            title: "Profile"
-          }
-    },
-    {
         path: '/announce',
         props:true,
         name: 'CreateAnnouncement',
@@ -72,7 +64,7 @@ const routes = [
         path: '/announcements',
         name: 'ListOfAnnouncement',
         component: List,        
-        props: route => ({ page: parseInt(route.query.page) || 1 }),
+        props: route => ({ city: route.query.city, page: parseInt(route.query.page) || 1 }),
         meta: {
             title: "Trouver votre piscine"
         }

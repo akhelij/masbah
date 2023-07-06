@@ -1,83 +1,108 @@
 <template>
-    <div class="max-w-7xl mx-auto ">
-        <h1 class="hidden sm:block sm:text-4xl md:text-5xl font-semibold justify-center mx-auto text-center mb-10 md:mb-0 ">Comment ça marche ?</h1>
-        <div class="flex flex-col sm:flex-row items-center justify-center sm:-space-x-40">
-            <img :src="question" alt="" srcset="" class="w-1/2 lg:w-1/3 md:p-10  z-30" />
-            <div class="w-full sm:w-2/3 lg:w-1/2 flex justify-center  md:justify-start p-5 sm:px-10 md:p-5  sm:-mb-60 md:-mb-80">
-                <div class="p-4 md:p-6 shadow bg-card-right bg-cover">
-                    <h3 class="text-2xl font-semibold flex justify-start sm:justify-end  mb-5">
-                        vous êtes propriétaire ?
+    <div class="max-w-7xl mx-auto">
+        <h1 class="hidden sm:block sm:text-4xl md:text-5xl font-semibold justify-center mx-auto text-center -mb-20 md:my-10">Comment ça marche ?</h1>
+
+        <div class="flex flex-col lg:flex-row items-center justify-center">
+            <img :src="question" alt="" srcset="" class="w-1/2 lg:w-1/3 lg:p-10  z-30" />
+            <div class="w-full flex justify-center lg:justify-start p-5">
+                <div class="p-4">
+                    <h3 class="text-3xl font-semibold flex mb-5">
+                        Vous êtes propriétaire de piscine ?
                     </h3>
-                    <ul class="flex flex-col sm:flex-row-reverse space-y-4 sm:space-y-10">
-                        <li class="sm:w-1/3"> 
+                    <ul class="flex flex-col  space-y-4">
+                        <li> 
                             <p class="text-lg font-semibold">
                             🔐 S'authentifier
                             </p> 
-                            <p class="text-xs">
+                            <p>
                                 Créez votre profile annonceur en toute simplicité ! c'est là ou vous allez gérer vos annonces et vos informations personnelles.
                             </p>
                         </li>
-                        <li  class="sm:w-1/3 sm:pt-10">
+                        <li>
                             <p class="text-lg font-semibold">
                             📢 Publier
                             </p> 
-                            <p class="text-xs">
+                            <p>
                                Publiez le formulaire de création d'annonces après avoir rempli tous les champs nécessaires, sachez que votre annonce ne sera pas visible si vous ne lui ajoutez pas de belles images !
-                            </p>
-                           
+                            </p>                           
                         </li>
-                        <li class="sm:w-1/3 sm:pt-36 z-20">
+                        <li>
                             <p class="text-lg font-semibold">
                              🤝🏻 Accueillir
                             </p> 
-                            <p class="text-xs">
+                            <p>
                                 Recevez les appels de vos futurs invités et expliquez leur tous ce qu'il faut qu'ils sachent dans le respect, la joie et la générosité.
                             </p>
                         </li>
-                    </ul>                   
+                    </ul>    
+                    <TSecondaryButton
+                        @click="
+                            isAuth
+                                ? sendToFillForm()
+                                : emitter.emit(
+                                        'showModal',
+                                        'SignInModal'
+                                    )
+                        "
+                        class="text-lg px-8 py-3 bg-white lg:py-4 lg:text-lg lg:px-10 my-10"
+                    >
+                        Proposer une piscine 📣
+                    </TSecondaryButton>                               
                 </div>
             </div>
+            
         </div>
- 
-        <div class="flex flex-col sm:flex-row  items-center  justify-center sm:-space-x-40">
-            <div class="w-full sm:w-2/3 lg:w-1/2 flex justify-center md:justify-end  p-5 sm:px-10 md:p-5 sm:mt-44 md:mt-64">
-                <div class="p-4 md:p-6 shadow  bg-card-left bg-cover">
-                    <h3 class="text-2xl font-semibold mb-5">
-                        Vous êtes locataire ?
+            
+        
+        <h3 class="text-3xl font-semibold hidden lg:block pl-10">
+            Vous voulez profiter d'une piscine ?
+        </h3>
+        <div class="flex flex-col-reverse lg:flex-row  items-center  justify-center">
+            
+            <div class="w-full flex justify-center lg:justify-end  p-5 sm:px-10 lg:p-5">
+                <div class="p-4">
+                    <h3 class="text-3xl font-semibold mb-5 block lg:hidden">
+                        Vous voulez profiter d'une piscine ?
                     </h3>
-                    <ul class="flex flex-col sm:flex-row space-y-4 sm:space-y-10">
-                        <li class="sm:w-1/3"> 
+                    <ul class="flex flex-col space-y-4">
+                        <li> 
                             <p class="text-lg font-semibold">
                             👀 A vos marques
                             </p> 
-                            <p class="text-xs">
+                            <p>
                                 Cherchez la piscine la plus proche de chez vous parmis notre large choix de piscines partout au Maroc !
                             </p>
                         </li>
-                        <li  class="sm:w-1/3 sm:pt-4">
+                        <li>
                             <p class="text-lg font-semibold">
                             🎯 Pret
                             </p> 
-                            <p class="text-xs">
+                            <p>
                                Après avoir trouver la piscine qui vous convient, contactez le proprietaire pour fixer une date et vous mettre d'accord sur tout les details.
                             </p>
                            
                         </li>
-                        <li class="sm:w-1/3 sm:pt-28 z-20">
+                        <li>
                             <p class="text-lg font-semibold">
                              💃🏻 Partez
                             </p> 
-                            <p class="text-xs">
+                            <p>
                                 Profitez a fond de votre petit coin de paradis ! <br/>Au cas où vous changer d'avis, veuillez 🙏 informer le locataire le plutôt possible.
                             </p>
                         </li>
                     </ul>
+                    <TButton
+                        @click="sendToList()"
+                        class="flex items-center justify-center px-8 py-3 border border-transparent text-lg font-medium rounded-lg text-white bg-cyan-600 hover:bg-cyan-500 md:py-4 md:text-lg md:px-10 mt-10"
+                    >
+                        👀 Trouver votre piscine
+                    </TButton>
                 </div>
             </div>
             <img class="w-2/3 sm:w-1/2 lg:w-1/3 p-10" :src="happy" alt="" srcset="" />
         </div>
     </div>
-    <div id="absolute bottom-0 h-full background-wrap overflow-hidden w-screen">    
+    <div id="background-wrap" class="absolute bottom-0 h-full overflow-hidden w-screen m-0 p-0">    
         <div class="bubble  x1"></div>
         <div class="bubble  x2"></div>
         <div class="bubble  x3"></div>
@@ -94,11 +119,23 @@
 <script>
 import question from '@/assets/img/illustrations/Questions-amico.svg'
 import happy from '@/assets/img/illustrations/Enthusiastic-amico.svg'
+import { useRoute, useRouter } from 'vue-router'
 import bg_card_right from '@/assets/img/bg_card_right.png'
 import bg_card_left from '@/assets/img/bg_card_left.png'
 export default {
     setup() {
-        return {
+        const router = useRouter()
+        
+        const sendToFillForm = () => {
+            router.push('/profile')
+        }
+
+        const sendToList = () => {
+            router.push('/announcements')
+        }
+        return {            
+            sendToFillForm,
+            sendToList,
             happy,
             question,
             bg_card_right,
@@ -109,11 +146,6 @@ export default {
 </script>
 
 <style>
-body {
-	margin: 0;
-	padding: 0;
-	overflow-x: hidden;
-}
 #background-wrap {
     bottom: 0;
 	left: 0;

@@ -1,9 +1,11 @@
 <template>
+    
     <section class="text-gray-700 bg-white body-font">
 
+        
         <img :src="waves" class="sm:-mb-5 ">
 
-        <div class="flex flex-row items-center h-full  justify-center px-2 sm:px-0 py-5"> 
+        <div class="flex flex-row items-center h-full  justify-center px-4 sm:px-0 space-x-4 sm:space-x-16 py-5"> 
           <img :src="mobile" class=" w-1/2 md:w-1/3 hidden sm:block">
           <div class="flex flex-col space-y-4 justify-between transform sm:scale-75 md:scale-90 lg:min-h-5/12 xl:min-h-7/12  w-full md:w-1/2 max-w-sm">
             <div class="space-y-1">
@@ -77,6 +79,32 @@
             </div>
           </div>
         </div>
+
+        <section class="bg-cyan-200 text-cyan-900 p-6 rounded-lg mx-auto max-w-7xl px-2 sm:px-8">
+            <div class="">
+                <h2 class="text-2xl font-bold mb-4 flex items-end"> ⚠️ Avis important</h2>
+                <p class="mb-4">
+                    Chers utilisateurs,
+                </p>
+                <p class="mb-4">
+                    Nous vous rappelons que les enfants sont sous la responsabilité de leurs parents ou tuteurs légaux lors de leur séjour. Veillez à superviser attentivement vos enfants.
+                </p>                
+                <p class="mb-4">
+                    En cas d'accident, les parents assument l'entière responsabilité des conséquences résultant de l'utilisation de la piscine.
+                </p>
+                <p class="mb-4">
+                    La sécurité et le bien-être de tous nos utilisateurs sont importants pour nous. Nous vous encourageons donc à garder un œil vigilant sur vos enfants, à les accompagner et à veiller à ce qu'ils respectent les règles et les consignes de sécurité en vigueur.
+                </p>
+                <p class="mb-4">
+                    En agissant de manière responsable, nous créons ensemble un environnement sûr et agréable pour tous.
+                </p>
+                <p class="font-semibold">
+                    Merci de votre compréhension et de votre coopération.
+                    <br>
+                    L'équipe de <span class="underline">Pissina</span>.
+                </p>
+            </div>
+        </section>
 
         <div class="container flex flex-col items-left sm:items-center px-2 sm:px-8 py-8 mx-auto max-w-7xl sm:flex-row">
             <a href="#_" class="text-xl font-black leading-none text-gray-900 select-none logo">Pissina<span class="text-cyan-600">.</span></a>

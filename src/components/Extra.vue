@@ -7,16 +7,16 @@
         <span class="font-semibold "> {{ label }} </span> 
     </TCheckBox>
     <div v-show="availableValue" class="flex flex-row  items-center">
-        <span class="font-semibold text-xs sm:hidden"> Prix :</span>
+        <span class="font-semibold sm:hidden"> Prix :</span>
        <input 
         type="number" 
-        class="border-b ml-2 text-sm font-semibold outline-none text-cyan-500 w-20 appearance-none" 
+        class="border-b ml-2 font-semibold outline-none text-cyan-500 w-20 appearance-none" 
         placeholder="Inclus"
         :value="priceValue"
         @input="$emit('update:priceValue', $event.target.value == '' ? null : $event.target.value)"
         /> 
     
-    <div v-show="priceValue != 0 && priceValue != null" class="flex flex-row items-center space-x-1 -ml-6 text-xs">
+    <div v-show="priceValue != 0 && priceValue != null" class="flex flex-row items-center space-x-1 -ml-6">
         <span> MAD</span>
         <div v-if="byoneValue != null" class="flex flex-row items-center">
             /

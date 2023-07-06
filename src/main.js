@@ -29,7 +29,7 @@ import 'mosha-vue-toastify/dist/style.css';
     integrations: [
       new Integrations.BrowserTracing({
         routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-        tracingOrigins: ["localhost", "95.179.219.122", "pissina.com", /^\//],
+        tracingOrigins: ["localhost", "95.179.219.122", "pissina.vercel.app", "pissina.com", /^\//],
       }),
     ],
     // Set tracesSampleRate to 1.0 to capture 100%
