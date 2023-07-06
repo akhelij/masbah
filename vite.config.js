@@ -32,6 +32,11 @@ export default defineConfig({
     display: "standalone",
     icons: [
       {
+        src: "/icon_x144.png", // Replace with the actual path to your app's icon
+        sizes: "144x144",
+        type: "image/png",
+      },
+      {
         src: "/icon_x192.png", // Replace with the actual path to your app's icon
         sizes: "192x192",
         type: "image/png",
