@@ -10,6 +10,7 @@
             height="100"
             width="100"
             :src="user.avatar != null &&  user.avatar != undefined ? user.avatar : defaultAvatar"
+            alt="user-avatar"
           />
 
           <input id="file-upload" name="file-upload" type="file" class="sr-only" @change="previewImage"  accept="image/*"/>
@@ -85,7 +86,7 @@
                                 <span class="animate-pulse hover:animate-none">⚠️</span>
                               </template>
                             </TTooltip>
-                            <img v-for="img,index in announcement.media" :key="index" class="inline-block h-6 w-6 rounded-lg ring-1 ring-white" :src="img" alt="" />
+                            <img v-for="img,index in announcement.media" :key="index" class="inline-block h-6 w-6 rounded-lg ring-1 ring-white" :src="img" alt="media" />
                           </div>
                         </div>                      
                       </div>

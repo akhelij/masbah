@@ -3,7 +3,7 @@
         <h1 class="hidden sm:block sm:text-4xl md:text-5xl font-semibold justify-center mx-auto text-center -mb-20 md:my-10">Comment ça marche ?</h1>
 
         <div class="flex flex-col lg:flex-row items-center justify-center">
-            <img :src="question" alt="" srcset="" class="w-1/2 lg:w-1/3 lg:p-10  z-30" />
+            <img :src="question" srcset="" class="w-1/2 lg:w-1/3 lg:p-10  z-30" alt="question" />
             <div class="w-full flex justify-center lg:justify-start p-5">
                 <div class="p-4">
                     <h3 class="text-3xl font-semibold flex mb-5">
@@ -99,7 +99,7 @@
                     </TButton>
                 </div>
             </div>
-            <img class="w-2/3 sm:w-1/2 lg:w-1/3 p-10" :src="happy" alt="" srcset="" />
+            <img class="w-2/3 sm:w-1/2 lg:w-1/3 p-10" :src="happy" alt="happy" srcset="" />
         </div>
     </div>
     <div id="background-wrap" class="absolute bottom-0 h-full overflow-hidden w-screen m-0 p-0">    

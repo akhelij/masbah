@@ -27,7 +27,7 @@
                     <div v-if="file.url==null">
                         <div class="w-32 h-36 relative pt-1 rounded-lg shadow flex flex-row items-center justify-center">
                             
-                            <img class="w-32 h-36 object-cover object-center rounded-lg shadow-lg opacity-75" :src="file.tmpUrl">   
+                            <img class="w-32 h-36 object-cover object-center rounded-lg shadow-lg opacity-75" :src="file.tmpUrl" alt="uploaded-file">   
                             <div class="absolute top-1/2 overflow-hidden h-2 mb-4 text-xs flex rounded bg-cyan-300 w-28 cursor-wait">
                                 <div :style='{ width: file.uploadValue + "%"}' class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-cyan-600"></div>
                             </div>                   
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div v-else>
-                        <img class="w-32 h-36 object-cover object-center rounded-lg shadow-lg" :src="file.url"> 
+                        <img class="w-32 h-36 object-cover object-center rounded-lg shadow-lg" :src="file.url"  alt="uploaded-file"> 
                         <svg v-if="!upload_started" @click="remove(i)" class="text-red-500 w-4 h-4 absolute top-1 right-1 bg-gray-600 rounded-full shadow-lg cursor-pointer transform duration-300 hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> 
                     </div>
                 </div>

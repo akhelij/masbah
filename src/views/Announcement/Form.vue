@@ -41,7 +41,7 @@
         >
             Voir vos annonces 📢
         </router-link>
-        <img :src="congrats" alt="" width="480" height="320" />
+        <img :src="congrats" width="480" height="320" alt="congrats"/>
     </div>
     <div
         v-else
@@ -127,6 +127,7 @@
                         <img
                             :src="extra_tuto"
                             class="w-full border border-cyan-500"
+                            alt="extra"
                         />
                     </div>
                 </div>

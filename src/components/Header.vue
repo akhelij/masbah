@@ -25,7 +25,7 @@
               <router-link :to="{ name: 'CreateAnnouncement' }" v-show="route.name != 'CreateAnnouncement'">
                     <TButton > + Proposer votre piscine 📣 </TButton>
               </router-link> 
-              <img  class="h-12 w-12 rounded-full  mt-1" :src="isAuth && user.avatar != null &&  user.avatar != undefined ? user.avatar : defaultAvatar" alt="">
+              <img  class="h-12 w-12 rounded-full  mt-1" :src="isAuth && user.avatar != null &&  user.avatar != undefined ? user.avatar : defaultAvatar" alt="avatar">
                   
               <Dropdown :items="items" :withoutDivider="true" @logout="logout" :_style="'w-44 -ml-40 mt-14 z-50'">
                 <button v-if="isAuth" id="user-menu" aria-haspopup="true" class="-ml-8 mt-6 transform duration-75 hover:scale-110">

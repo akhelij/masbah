@@ -3,7 +3,7 @@
       <!-- h-64 grid grid-rows-3 grid-flow-col gap-4 -->
       <div :class="adjust_width ? 'grid-rows-2' : ''" class="grid grid-flow-col gap-2 md:gap-4 px-2 sm:px-8 mx-auto mt-6 max-w-7xl">
         <div v-for="media,index in announcement.media" :key="index" :class="(index == 0 && adjust_width) ? 'col-span-2' : ''" class="rounded-lg overflow-hidden shadow max-h-96">
-          <img :src="media"  class="w-full h-full object-center object-cover" />
+          <img :src="media"  class="w-full h-full object-center object-cover" alt="media"/>
         </div>        
       </div>
       <!-- Product info -->
@@ -85,7 +85,7 @@
 
           <div class="mt-10"> 
             <div class="flex flex-row justify-between items-center" v-if="announcement.user">
-                <img class=" h-16 w-16 rounded-full ring-1 ring-white" :src="announcement.user.avatar" alt="">
+                <img class=" h-16 w-16 rounded-full ring-1 ring-white" :src="announcement.user.avatar" alt="contact-avatar">
                 <span class="text-lg font-bold">{{announcement.user.username}}</span>
             </div>             
 
