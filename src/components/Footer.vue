@@ -1,6 +1,6 @@
 <template>
     
-    <section class="text-gray-700 bg-white body-font">
+    <section class="body-font">
 
         
         <img :src="waves" class="sm:-mb-5 w-full h-auto" alt="waves" 
@@ -18,7 +18,7 @@
           <div class="flex flex-col space-y-4 justify-between transform sm:scale-75 md:scale-90 lg:min-h-5/12 xl:min-h-7/12  w-full md:w-1/2 max-w-sm">
             <div class="space-y-1">
                 <h1 class='text-lg font-bold'>Newsletter :</h1>
-                <p class='text-sm text-gray-400'>Recevez un email de nos dernières annonces !</p>
+                <p class='text-sm text-gray-700'>Recevez un email de nos dernières annonces !</p>
                  <div class='w-full relative'>
                         <TInput
                         placeholder="Adresse e-mail"
@@ -135,7 +135,7 @@
                 </a>
                 <p class="text-lg font-light block sm:hidden -mt-1">@pissinaofficiel</p>
             </div>
-            <div class="inline-flex justify-start mt-4 space-x-5 sm:ml-auto sm:mt-0  text-gray-400">
+            <div class="inline-flex justify-start mt-4 space-x-5 sm:ml-auto sm:mt-0  text-gray-700">
                 <router-link :to="{ name: 'Terms' }" class="sm:ml-5">
                 Terms and conditions 
                 </router-link>
