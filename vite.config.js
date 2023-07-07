@@ -50,7 +50,7 @@ export default defineConfig({
             src: '/maskable-icon.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable'
+            purpose: 'maskable'
           }
           // Add more icons as needed
         ],
