@@ -13,8 +13,6 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,vue,txt,woff2}'],
         cleanupOutdatedCaches: false,
-        clientsClaim: true,
-        skipWaiting: true
       }
     })
   ],
@@ -30,6 +28,9 @@ export default defineConfig({
     theme_color: "#ffffff",
     background_color: "#ffffff",
     display: "standalone",
+    id: "/?source=pwa",
+    start_url: "/?source=pwa",
+    scope: "/",
     icons: [
       {
         src: "/public/icon_x144.png", // Replace with the actual path to your app's icon
@@ -50,7 +51,14 @@ export default defineConfig({
         src: "/public/icon_x512.png", // Replace with the actual path to your app's icon
         sizes: "512x512",
         type: "image/png",
+        purpose: 'any'
       },
+      {
+        src: '/public/maskable-icon.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: 'any maskable'
+      }
       // Add more icons as needed
     ],
   }
