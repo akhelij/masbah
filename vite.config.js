@@ -13,6 +13,47 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,vue,txt,woff2}'],
         cleanupOutdatedCaches: false,
+      },
+      manifest : {
+        name: "Pissina",
+        short_name: "Pissina",
+        description: "1er site de location de piscines entre particulier au Maroc",
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
+        display: "standalone",
+        id: "/?source=pwa",
+        start_url: "/?source=pwa",
+        scope: "/",
+        icons: [
+          {
+            src: "/public/icon_x144.png", // Replace with the actual path to your app's icon
+            sizes: "144x144",
+            type: "image/png",
+          },
+          {
+            src: "/public/icon_x192.png", // Replace with the actual path to your app's icon
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/public/icon_x384.png", // Replace with the actual path to your app's icon
+            sizes: "384x384",
+            type: "image/png",
+          },
+          {
+            src: "/public/icon_x512.png", // Replace with the actual path to your app's icon
+            sizes: "512x512",
+            type: "image/png",
+            purpose: 'any'
+          },
+          {
+            src: '/public/maskable-icon.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          }
+          // Add more icons as needed
+        ],
       }
     })
   ],
@@ -20,46 +61,5 @@ export default defineConfig({
       alias: {
       '@': path.resolve(__dirname, '/src'),
     },
-  },
-  manifest : {
-    name: "Pissina",
-    short_name: "Pissina",
-    description: "1er site de location de piscines entre particulier au Maroc",
-    theme_color: "#ffffff",
-    background_color: "#ffffff",
-    display: "standalone",
-    id: "/?source=pwa",
-    start_url: "/?source=pwa",
-    scope: "/",
-    icons: [
-      {
-        src: "/public/icon_x144.png", // Replace with the actual path to your app's icon
-        sizes: "144x144",
-        type: "image/png",
-      },
-      {
-        src: "/public/icon_x192.png", // Replace with the actual path to your app's icon
-        sizes: "192x192",
-        type: "image/png",
-      },
-      {
-        src: "/public/icon_x384.png", // Replace with the actual path to your app's icon
-        sizes: "384x384",
-        type: "image/png",
-      },
-      {
-        src: "/public/icon_x512.png", // Replace with the actual path to your app's icon
-        sizes: "512x512",
-        type: "image/png",
-        purpose: 'any'
-      },
-      {
-        src: '/public/maskable-icon.png',
-        sizes: '512x512',
-        type: 'image/png',
-        purpose: 'any maskable'
-      }
-      // Add more icons as needed
-    ],
-  }
+  },  
 })
