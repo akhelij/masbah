@@ -26,28 +26,28 @@ export default defineConfig({
         scope: "/",
         icons: [
           {
-            src: "/public/icon_x144.png", // Replace with the actual path to your app's icon
+            src: "/icon_x144.png", // Replace with the actual path to your app's icon
             sizes: "144x144",
             type: "image/png",
           },
           {
-            src: "/public/icon_x192.png", // Replace with the actual path to your app's icon
+            src: "/icon_x192.png", // Replace with the actual path to your app's icon
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/public/icon_x384.png", // Replace with the actual path to your app's icon
+            src: "/icon_x384.png", // Replace with the actual path to your app's icon
             sizes: "384x384",
             type: "image/png",
           },
           {
-            src: "/public/icon_x512.png", // Replace with the actual path to your app's icon
+            src: "/icon_x512.png", // Replace with the actual path to your app's icon
             sizes: "512x512",
             type: "image/png",
             purpose: 'any'
           },
           {
-            src: '/public/maskable-icon.png',
+            src: '/maskable-icon.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
