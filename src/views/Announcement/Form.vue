@@ -45,7 +45,7 @@
     </div>
     <div
         v-else
-        class="relative w-full md:text-gray-800 px-5 py-4 mx-auto sm:py-4 md:py-8 md:px-10 max-w-7xl"
+        class="relative w-full md:text-gray-800 px-5 py-4 mx-auto sm:py-4 md:py-8 md:px-10 max-w-screen-xl"
     >
         <div>
             <div class="grid grid-cols-1 md:grid-cols-3 md:gap-6">

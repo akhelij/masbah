@@ -1,5 +1,6 @@
 <template> 
 <div class="overflow-hidden">
+    <DownloadPwa />
     <ProgressBar />
     <header :class="route.name != 'Home' ? 'shadow-md md:mb-10' : ''">
         <Header />

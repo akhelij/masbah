@@ -1,6 +1,5 @@
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
       backgroundImage: theme => ({
@@ -36,13 +35,6 @@ module.exports = {
         '11/12': '90vh',
         'extra': '130vh'
       },
-    },
-  },
-  variants: {
-    extend: {
-      transitionProperty: ['hover', 'focus'],
-      transform: ['hover', 'focus'],
-      scale: ['active'],
     },
   },
   plugins: [],

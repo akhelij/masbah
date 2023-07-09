@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-7xl mx-auto z-50"  >
+  <section class="max-w-screen-xl mx-auto z-50"  >
       <div class="relative py-2 md:py-6 px-4 sm:px-6  lg:px-8">
         <nav class="relative flex items-center justify-around sm:h-10 lg:justify-start" aria-label="Global">
           <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0 w-full md:w-auto">

@@ -1,10 +1,10 @@
 <template>
     <section class="relative lg:min-h-screen">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-screen-xl mx-auto">
             <div class="relative z-10 pb-2 lg:bg-none w-full">
                 <main
                     :class="route.name == 'Home' ? 'block' : 'hidden'"
-                    class="my-5 max-w-7xl px-4 sm:mt-6 sm:px-6 lg:mt-6 lg:px-8 xl:mt-8"
+                    class="my-5 max-w-screen-xl px-4 sm:mt-6 sm:px-6 lg:mt-6 lg:px-8 xl:mt-8"
                 >
                     <div
                         class="text-left lg:w-3/5 flex flex-col items-center md:items-start justify-evenly lg:justify-between min-h-5/12 lg:min-h-7/12 mx-auto md:mx-0"

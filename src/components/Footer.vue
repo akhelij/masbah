@@ -88,7 +88,7 @@
           </div>
         </div>
 
-        <section class="bg-cyan-200 text-cyan-900 p-6 rounded-lg mx-auto max-w-7xl px-2 sm:px-8">
+        <section class="bg-cyan-200 text-cyan-900 p-6 rounded-lg mx-auto max-w-screen-xl px-2 sm:px-8">
             <div class="">
                 <h2 class="text-2xl font-bold mb-4 flex items-end"> ⚠️ Avis important</h2>
                 <p class="mb-4">
@@ -114,7 +114,7 @@
             </div>
         </section>
 
-        <div class="container flex flex-col items-left sm:items-center px-2 sm:px-8 py-8 mx-auto max-w-7xl sm:flex-row">
+        <div class="container flex flex-col items-left sm:items-center px-2 sm:px-8 py-8 mx-auto max-w-screen-xl sm:flex-row">
             <a href="#_" class="text-xl font-black leading-none text-gray-900 select-none logo">Pissina<span class="text-cyan-600">.</span></a>
             <p class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0">© 2021 Pissina - Location de piscines entre particulier !
             </p>

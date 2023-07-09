@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-screen-xl mx-auto">
         <h1 class="hidden sm:block sm:text-4xl md:text-5xl font-semibold justify-center mx-auto text-center -mb-20 md:my-10">Comment ça marche ?</h1>
 
         <div class="flex flex-col lg:flex-row items-center justify-center">

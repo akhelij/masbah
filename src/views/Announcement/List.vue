@@ -1,7 +1,7 @@
 <template>
     <section class="relative w-full bg-white">
         <div
-            class="relative w-full px-5 py-10 mx-auto sm:py-12 md:py-6 md:px-10 max-w-7xl"
+            class="relative w-full px-5 py-10 mx-auto sm:py-12 md:py-6 md:px-10 max-w-screen-xl"
         >
             <div
                 class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 md:items-center"

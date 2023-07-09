@@ -1,13 +1,13 @@
 <template>
     <div class="bg-white" v-if="announcement">
       <!-- h-64 grid grid-rows-3 grid-flow-col gap-4 -->
-      <div :class="adjust_width ? 'grid-rows-2' : ''" class="grid grid-flow-col gap-2 md:gap-4 px-2 sm:px-8 mx-auto mt-6 max-w-7xl">
+      <div :class="adjust_width ? 'grid-rows-2' : ''" class="grid grid-flow-col gap-2 md:gap-4 px-2 sm:px-8 mx-auto mt-6 max-w-screen-xl">
         <div v-for="media,index in announcement.media" :key="index" :class="(index == 0 && adjust_width) ? 'col-span-2' : ''" class="rounded-lg overflow-hidden shadow max-h-96">
           <img :src="media"  class="w-full h-full object-center object-cover" alt="media"/>
         </div>        
       </div>
       <!-- Product info -->
-      <div class="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
+      <div class="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-screen-xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
        
             <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8 flex flex-col md:flex-row justify-between">
                 <div class="space-y-2">

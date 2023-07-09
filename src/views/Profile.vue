@@ -1,6 +1,6 @@
 <template>
   <section class="relative w-full">
-    <div class="relative flex flex-col justify-center space-y-10 md:space-y-0 md:flex-row md:space-x-5 w-full md:text-gray-800 px-4 sm:px-5 py-10 mx-auto sm:py-12 md:py-16 md:px-10 max-w-7xl" v-if="user!=null">
+    <div class="relative flex flex-col justify-center space-y-10 md:space-y-0 md:flex-row md:space-x-5 w-full md:text-gray-800 px-4 sm:px-5 py-10 mx-auto sm:py-12 md:py-16 md:px-10 max-w-screen-xl" v-if="user!=null">
       <div class="bg-white shadow-xl rounded-2xl md:max-w-xs sm:px-2  h-80 w-full" >
         <div class="flex flex-col items-center justify-center px-6 md:px-8 py-4 space-y-4">
           <div class="relative rounded-full">
