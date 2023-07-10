@@ -66,3 +66,24 @@ import 'mosha-vue-toastify/dist/style.css';
   app.provide('$emitter', emitter)
   
   app.use(vueSocialSharing).use(router).use(store).mount('#app')
+
+  
+//Install PWA via Button//
+const installApp = document.getElementById('installApp');
+let installPrompt;
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  installPrompt = event;
+  installApp.removeAttribute("hidden");
+});
+
+installApp.addEventListener("click", async () => {
+  if (!installPrompt) {
+    return;
+  }
+  const result = await installPrompt.prompt();
+  console.log(`Install prompt was: ${result.outcome}`);
+  installPrompt = null;
+  installButton.setAttribute("hidden", "");
+});
+//Install PWA via Button//

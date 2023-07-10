@@ -1,6 +1,8 @@
 <template> 
 <div class="overflow-hidden">
-    <DownloadPwa />
+    <button id="installApp" class="text-white bg-cyan-600 w-full font-semibold py-4">
+      💫Installer notre application mobile 💫
+    </button>
     <ProgressBar />
     <header :class="route.name != 'Home' ? 'shadow-md md:mb-10' : ''">
         <Header />
