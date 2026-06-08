@@ -96,8 +96,8 @@ async function onSignOut(): Promise<void> {
           </svg>
           {{ t('nav.publish') }}
         </NuxtLink>
-        <LanguageSwitcher class="lang-desk" />
-        <LanguageSwitcher class="lang-mobile" compact />
+        <div class="hidden md:flex"><LanguageSwitcher /></div>
+        <div class="flex md:hidden"><LanguageSwitcher compact /></div>
 
         <!-- Signed out: sign-in CTA -->
         <NuxtLink

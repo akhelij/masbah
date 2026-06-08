@@ -18,25 +18,153 @@
     "priceFmt": "{n} DH",
     "close": "Fermer",
     "cancel": "Annuler",
-    "confirm": "Confirmer"
+    "confirm": "Confirmer",
+    "seeAll": "Voir tout",
+    "retry": "Réessayer",
+    "perPerson": "/ pers"
   },
   "home": {
-    "title": "Louez une piscine près de chez vous",
+    "title": "Louez une piscine privée, rien que pour vous",
     "subtitle": "La première marketplace marocaine de location de piscines entre particuliers. Réservez un créneau, payez en espèces sur place.",
-    "searchPlaceholder": "Ville ou quartier"
+    "searchPlaceholder": "Ville ou quartier",
+    "badge": "Location de piscines privées · Maroc",
+    "search": {
+      "cityLabel": "Où ?",
+      "cityPlaceholder": "Ville ou quartier",
+      "slotLabel": "Créneau",
+      "slotAny": "Indifférent",
+      "submit": "Rechercher"
+    },
+    "popular": {
+      "over": "Partout au Maroc",
+      "title": "Villes populaires"
+    },
+    "featured": {
+      "over": "Tendances de l'été",
+      "title": "Piscines populaires",
+      "empty": "Aucune piscine pour le moment. Revenez bientôt — de nouvelles annonces arrivent chaque semaine.",
+      "error": "Impossible de charger les piscines. Réessayez."
+    },
+    "how": {
+      "over": "Simple comme un plongeon",
+      "title": "Comment ça marche",
+      "subtitle": "Pas de paiement en ligne, pas de complications. Trois étapes et vous êtes dans l'eau.",
+      "step1Title": "Cherchez",
+      "step1Body": "Filtrez par ville et créneau. Appelez ou écrivez à l'hôte sur WhatsApp pour poser vos questions.",
+      "step2Title": "Demandez votre créneau",
+      "step2Body": "Choisissez matinée, après-midi ou journée. Envoyez votre demande — l'hôte confirme, sans avance à payer.",
+      "step3Title": "Profitez, payez sur place",
+      "step3Body": "Le jour J, vous réglez en espèces à l'arrivée. Plus qu'à plonger et profiter en toute tranquillité.",
+      "cta": "En savoir plus"
+    },
+    "cash": {
+      "title": "Paiement sur place — aucun paiement en ligne",
+      "subtitle": "En espèces, à l'arrivée. Vous ne payez rien avant d'avoir vu la piscine."
+    }
   },
   "pool": {
     "sheltered": "À l'abri des regards",
     "reliableHost": "Hôte fiable",
     "favorite": "Ajouter aux favoris",
     "unfavorite": "Retirer des favoris",
-    "reviews": "{count} avis"
+    "reviews": "{count} avis",
+    "verified": "Vérifié",
+    "notFoundTitle": "Cette piscine s'est évaporée",
+    "notFoundBody": "L'annonce que vous cherchez est introuvable ou n'est plus disponible. Pas de panique, l'eau est plus claire ailleurs.",
+    "backHome": "Retour à l'accueil",
+    "share": "Partager",
+    "save": "Enregistrer",
+    "photoAlt": "Photo {n} de {title}",
+    "viewAllPhotos": "Voir les {count} photos",
+    "noPhoto": "Pas de photo",
+    "owner": {
+      "title": "L'hôte",
+      "memberSince": "Membre depuis {year}",
+      "phoneVerified": "Téléphone vérifié",
+      "reassure": "Posez vos questions avant de réserver — l'hôte répond en français ou en arabe.",
+      "call": "Appeler",
+      "whatsapp": "WhatsApp",
+      "lockedTitle": "Contact débloqué après acceptation",
+      "lockedBody": "Le contact de l'hôte est débloqué après l'acceptation de votre demande de réservation.",
+      "revealing": "Affichage du contact…",
+      "contactError": "Impossible de récupérer le contact. Réessayez."
+    },
+    "slots": {
+      "title": "Créneaux & tarifs",
+      "weekendNote": "Un supplément de {pct} % s'applique le week-end.",
+      "empty": "Aucun créneau disponible pour le moment.",
+      "selected": "Créneau sélectionné"
+    },
+    "amenities": {
+      "title": "Équipements & extras",
+      "included": "Inclus dans le prix",
+      "extras": "Extras payants — sur place",
+      "none": "Aucun équipement renseigné."
+    },
+    "rules": {
+      "title": "Règlement intérieur",
+      "kidsYes": "Convient aux enfants",
+      "kidsNo": "Ne convient pas aux enfants",
+      "musicYes": "Musique autorisée",
+      "musicNo": "Musique non autorisée",
+      "eventsYes": "Événements autorisés",
+      "eventsNo": "Événements non autorisés",
+      "petsYes": "Animaux acceptés",
+      "petsNo": "Animaux non acceptés",
+      "quietHours": "Heures calmes : {hours}"
+    },
+    "availability": {
+      "title": "Disponibilités",
+      "subtitle": "Les jours barrés ne sont pas disponibles.",
+      "blocked": "Indisponible",
+      "available": "Disponible"
+    },
+    "location": {
+      "title": "Localisation",
+      "approx": "Zone approximative. L'adresse exacte et l'itinéraire vous sont communiqués après l'acceptation de votre demande par l'hôte.",
+      "mapAlt": "Carte de la zone approximative de la piscine"
+    },
+    "reviews_section": {
+      "title": "Avis",
+      "empty": "Pas encore d'avis",
+      "emptyBody": "Soyez le premier à partager votre expérience après votre visite.",
+      "summary": "{rating} · {count} avis",
+      "cat": {
+        "proprete": "Propreté",
+        "conformite": "Conformité photos",
+        "communication": "Communication",
+        "confidentialite": "Confidentialité"
+      }
+    },
+    "facts": {
+      "guests": "{count} invités",
+      "guestsLabel": "capacité max.",
+      "size": "{l} × {w} m",
+      "sizeLabel": "dimensions",
+      "depth": "Profondeur {min}–{max} m",
+      "depthLabel": "bassin",
+      "heated": "Chauffée",
+      "heatedLabel": "eau chauffée",
+      "covered": "Couverte",
+      "coveredLabel": "à l'abri",
+      "childSafe": "Sécurisée enfants",
+      "childSafeLabel": "clôturée"
+    },
+    "about": "À propos de cette piscine",
+    "reserve": "Réserver",
+    "requestToBook": "Demander à réserver",
+    "noCharge": "Vous ne serez débité de rien aujourd'hui.",
+    "perSlotShort": "/ créneau"
   },
   "slots": {
     "morning": "Matinée",
     "afternoon": "Après-midi",
     "fullDay": "Journée",
-    "evening": "Soirée"
+    "evening": "Soirée",
+    "morningSub": "9h – 14h",
+    "afternoonSub": "15h – 20h",
+    "eveningSub": "20h – 00h",
+    "fullDaySub": "9h – 20h"
   },
   "lang": {
     "switch": "Changer de langue"
