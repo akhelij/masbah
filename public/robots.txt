@@ -1,0 +1,17 @@
+# Masbah — https://masbah.ma
+User-agent: *
+Allow: /
+
+# Internal / authenticated areas (both locales).
+Disallow: /fr/dev/
+Disallow: /ar/dev/
+Disallow: /fr/login
+Disallow: /ar/login
+Disallow: /fr/signup
+Disallow: /ar/signup
+Disallow: /fr/onboarding
+Disallow: /ar/onboarding
+Disallow: /fr/account
+Disallow: /ar/account
+
+Sitemap: https://masbah.ma/sitemap.xml

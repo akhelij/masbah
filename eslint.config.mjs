@@ -23,5 +23,24 @@ export default withNuxt(
       // TS already expresses optionality on props; defaults aren't required.
       'vue/require-default-prop': 'off',
     },
+  },
+  {
+    // Nitro server routes/handlers: parse as TypeScript and register the
+    // runtime auto-imports (h3 utilities, $fetch, useRuntimeConfig) as globals.
+    files: ['server/**/*.{ts,mts}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        sourceType: 'module',
+      },
+      globals: {
+        defineEventHandler: 'readonly',
+        defineNitroPlugin: 'readonly',
+        setHeader: 'readonly',
+        getQuery: 'readonly',
+        useRuntimeConfig: 'readonly',
+        $fetch: 'readonly',
+      },
+    },
   }
 )

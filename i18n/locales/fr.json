@@ -313,6 +313,80 @@
     "backHome": "Retour à l'accueil",
     "illustrationAlt": "Illustration d'une piscine vidée"
   },
+  "search": {
+    "seoTitle": "Piscines à louer",
+    "seoTitleCity": "à {city}",
+    "seoDesc": "Trouvez et réservez une piscine privée au Maroc. Filtrez par ville, créneau, prix et équipements. Paiement en espèces sur place, sans avance.",
+    "seoDescCity": "Toutes les piscines privées à louer à {city}. Filtrez par créneau, prix et équipements — réservez et payez en espèces sur place.",
+    "results": "{n} piscines",
+    "resultsInCity": "{n} piscines à {city}",
+    "view": {
+      "list": "Liste",
+      "map": "Carte"
+    },
+    "sort": {
+      "label": "Trier",
+      "recent": "Plus récentes",
+      "priceAsc": "Prix croissant",
+      "priceDesc": "Prix décroissant",
+      "rating": "Mieux notées"
+    },
+    "filters": {
+      "title": "Filtres",
+      "city": "Ville",
+      "cityAny": "Toutes les villes",
+      "slot": "Créneau",
+      "price": "Prix par créneau",
+      "priceMin": "Minimum",
+      "priceMax": "Maximum",
+      "priceMinPh": "Min DH",
+      "priceMaxPh": "Max DH",
+      "amenities": "Équipements",
+      "clearAll": "Tout effacer",
+      "showResults": "Voir {n} piscines"
+    },
+    "amenities": {
+      "barbecue": "🍖 Barbecue",
+      "parking": "🚗 Parking",
+      "transats": "🧺 Transats",
+      "douche": "🚿 Douche",
+      "wifi": "📶 Wifi",
+      "cuisine": "🍽️ Cuisine",
+      "abri": "🌿 À l'abri des regards"
+    },
+    "empty": {
+      "title": "Aucune piscine trouvée",
+      "body": "Aucun résultat ne correspond à votre recherche. Essayez une autre ville ou élargissez vos filtres.",
+      "reset": "Réinitialiser les filtres"
+    },
+    "error": {
+      "title": "Une vague nous a submergés",
+      "body": "Impossible de charger les piscines. Réessayez dans un instant."
+    },
+    "map": {
+      "ariaLabel": "Carte des piscines disponibles",
+      "priceNa": "Voir le prix"
+    }
+  },
+  "city": {
+    "seoTitle": "Piscines à louer à {city} | Masbah",
+    "seoDesc": "Louez une piscine privée à {city} — réservez un créneau et payez en espèces sur place, sans paiement en ligne. Découvrez les piscines disponibles près de chez vous.",
+    "heroTitle": "Piscines à louer à {city}",
+    "intro": "Louez une piscine privée à {city} le temps d'une matinée, d'un après-midi ou d'une journée entière. Réservez votre créneau en quelques clics et réglez en espèces sur place — sans avance ni paiement en ligne. Familles, amis ou événements : trouvez la piscine qui vous correspond.",
+    "searchCta": "Rechercher à {city}",
+    "poolsOver": "Disponibles maintenant",
+    "poolsTitle": "Piscines à {city}",
+    "poolsTitleGeneric": "Piscines disponibles",
+    "nearbyOver": "Partout au Maroc",
+    "nearbyTitle": "Autres villes",
+    "empty": {
+      "title": "Pas encore de piscine à {city}",
+      "body": "De nouvelles annonces arrivent chaque semaine. En attendant, explorez les piscines dans d'autres villes."
+    },
+    "exploreAll": "Explorer les piscines",
+    "notFoundTitle": "Ville introuvable",
+    "notFoundBody": "Cette ville n'existe pas ou n'est pas encore disponible. Explorez toutes les piscines du Maroc."
+  },
   "dev": {
     "title": "Système de design — Playground",
     "subtitle": "Tous les composants de Masbah, leurs variantes et états, en un seul endroit.",
