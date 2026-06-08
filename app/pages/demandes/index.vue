@@ -16,6 +16,10 @@ useSeoMeta({
 const { requests, pendingRequests, pending, error, refresh } = useOwnerRequests()
 const { accept, decline, pending: responding, error: respondError } = useRespondBooking()
 
+// Accepted + past + not-yet-reviewed requests the owner can still rate (S11).
+const { reviewable } = useReviewableBookings()
+const reviewableIds = computed(() => new Set(reviewable.value.asOwner.map((b) => b.bookingId)))
+
 // ── Tabs: à traiter (pending) / traitées (everything else) ──────────────────
 type Tab = 'pending' | 'handled'
 const tab = ref<Tab>('pending')
@@ -395,6 +399,20 @@ async function confirmDecline(): Promise<void> {
             {{ t('demandes.cancelledNote') }}
           </span>
         </div>
+
+        <!-- rate the renter (accepted + visit passed + not yet rated) -->
+        <NuxtLink
+          v-if="reviewableIds.has(req.id)"
+          :to="localePath('/avis/' + req.id)"
+          class="btn btn-secondary btn-sm rate-cta"
+        >
+          <svg viewBox="0 0 24 24" fill="var(--amber)" aria-hidden="true">
+            <path
+              d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"
+            />
+          </svg>
+          {{ t('reviews.rateRenter') }}
+        </NuxtLink>
       </article>
     </div>
 
@@ -662,6 +680,14 @@ async function confirmDecline(): Promise<void> {
   margin-top: 0.9rem;
   padding-top: 0.9rem;
   border-top: 1px solid var(--line);
+}
+.rate-cta {
+  margin-top: 0.8rem;
+}
+.rate-cta svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
 }
 
 /* status chip colors (applied to PBadge root) */

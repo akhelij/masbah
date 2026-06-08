@@ -131,10 +131,19 @@
       "summary": "{rating} · {count} avis",
       "cat": {
         "proprete": "Propreté",
-        "conformite": "Conformité photos",
+        "conformite": "Conformité à l'annonce",
+        "rapport": "Rapport qualité-prix",
         "communication": "Communication",
         "confidentialite": "Confidentialité"
-      }
+      },
+      "replyFrom": "Réponse de {name}",
+      "hostBadge": "Hôte",
+      "replyCta": "Répondre",
+      "replyPlaceholder": "Merci pour votre visite ! Au plaisir de vous accueillir à nouveau…",
+      "replySend": "Publier la réponse",
+      "replyHint": "Remerciez, restez professionnel et chaleureux. Évitez les informations personnelles.",
+      "replyCancel": "Annuler",
+      "seeProfile": "Voir le profil"
     },
     "facts": {
       "guests": "{count} invités",
@@ -891,5 +900,80 @@
       "cta": "Explorer les piscines"
     },
     "error": "Impossible de charger vos notifications. Réessayez."
+  },
+  "reviews": {
+    "seoTitle": "Laisser un avis",
+    "titlePool": "Votre avis",
+    "titleRenter": "Évaluer le voyageur",
+    "hostLabel": "Hôte : {name}",
+    "visitOn": "Visite du {date}",
+    "visitWithSlot": "Visite du {date} · {slot}",
+    "questionPool": "Comment était {pool} ?",
+    "questionPoolFallback": "Comment était la piscine ?",
+    "questionRenter": "Comment s'est passée la visite ?",
+    "overallLabel": "Note globale",
+    "tapStars": "Touchez les étoiles",
+    "ratingLabels": {
+      "1": "Médiocre",
+      "2": "Correct",
+      "3": "Bien",
+      "4": "Très bien",
+      "5": "Excellent !"
+    },
+    "categoriesTitle": "Détail de votre note",
+    "privateNote": "Votre évaluation aide les autres hôtes — elle reste privée jusqu’à publication mutuelle.",
+    "commentLabel": "Votre commentaire",
+    "commentOptional": "(optionnel)",
+    "commentPlaceholderPool": "Qu’avez-vous le plus aimé ? La piscine était-elle conforme ? La recommanderiez-vous ?",
+    "commentPlaceholderRenter": "Groupe calme et respectueux ? Bienvenue à nouveau ?",
+    "submitPool": "Publier mon avis",
+    "submitRenter": "Envoyer mon évaluation",
+    "ratingRequired": "Touchez les étoiles pour donner une note globale.",
+    "successTitle": "Merci pour votre avis 💙",
+    "successBodyPool": "Il sera publié et aidera les prochaines familles à choisir.",
+    "successBodyRenter": "Votre évaluation a bien été enregistrée.",
+    "backToBookings": "Mes réservations",
+    "backToRequests": "Mes demandes",
+    "doneTitle": "Avis déjà envoyé",
+    "doneBody": "Vous avez déjà laissé un avis pour cette visite. Merci !",
+    "ineligibleTitle": "Avis indisponible",
+    "ineligibleBody": "Cette réservation n’est pas (encore) évaluable. Les avis sont possibles après une visite acceptée et passée.",
+    "leaveReview": "Laisser un avis",
+    "rateRenter": "Évaluer le voyageur",
+    "errors": {
+      "notAccepted": "Les avis nécessitent une réservation acceptée.",
+      "notYet": "Vous pourrez laisser un avis après la date de la visite.",
+      "duplicate": "Vous avez déjà laissé un avis pour cette visite.",
+      "notAuthorized": "Vous n’êtes pas autorisé à laisser cet avis.",
+      "replyEmpty": "Votre réponse ne peut pas être vide.",
+      "generic": "Une erreur est survenue. Réessayez."
+    },
+    "renterCat": {
+      "communication": "Communication",
+      "respect": "Respect des règles",
+      "ponctualite": "Ponctualité"
+    }
+  },
+  "profile": {
+    "seoTitle": "Profil",
+    "seoDescription": "Profil de {name} sur Masbah — avis, piscines et vérifications.",
+    "memberSince": "Membre depuis {year}",
+    "phoneVerified": "Téléphone vérifié",
+    "emailVerified": "E-mail vérifié",
+    "asHost": "En tant qu’hôte",
+    "asGuest": "En tant que voyageur",
+    "hostReviews": "{count} avis de voyageurs",
+    "guestReviews": "{count} avis de propriétaires",
+    "noRatingYet": "Pas encore noté",
+    "listingsTitle": "Ses piscines",
+    "reviewsTitle": "Avis reçus",
+    "tabHost": "En tant qu’hôte",
+    "tabGuest": "En tant que voyageur",
+    "reviewerHost": "voyageur",
+    "reviewerGuest": "propriétaire",
+    "noReviews": "Aucun avis pour le moment.",
+    "notFoundTitle": "Profil introuvable",
+    "notFoundBody": "Ce membre n’existe pas ou n’est plus disponible.",
+    "backHome": "Retour à l’accueil"
   }
 }

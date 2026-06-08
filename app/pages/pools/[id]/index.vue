@@ -7,6 +7,7 @@ const localePath = useLocalePath()
 const localeHead = useLocaleHead({ seo: true })
 const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
+const user = useSupabaseUser()
 const { requireAuth } = useAuthGate()
 
 // The generated Database type is a placeholder, so `supabase.rpc(...)` resolves
@@ -25,7 +26,7 @@ const callContactRpc = supabase.rpc.bind(supabase) as unknown as (
 ) => PoolContactResult
 
 const id = computed(() => String(route.params.id))
-const { detail, pending } = usePool(id)
+const { detail, pending, refresh } = usePool(id)
 
 // ── Favorites ───────────────────────────────────────────────────────────
 const { favoriteIdSet } = useFavorites()
@@ -255,6 +256,69 @@ function reviewDate(iso: string): string {
     month: 'long',
     year: 'numeric',
   })
+}
+
+// Per-review category chips (only the axes that were actually rated).
+const REVIEW_CAT_KEYS: (keyof ReviewCategories)[] = [
+  'proprete',
+  'conformite',
+  'rapport',
+  'communication',
+  'confidentialite',
+]
+function reviewCats(categories: ReviewCategories | null | undefined): {
+  key: string
+  label: string
+  value: number
+}[] {
+  if (!categories) return []
+  return REVIEW_CAT_KEYS.filter((k) => typeof categories[k] === 'number').map((k) => ({
+    key: k,
+    label: t(`pool.reviews_section.cat.${k}`),
+    value: categories[k] as number,
+  }))
+}
+
+// ── Owner reply (only the signed-in pool owner) ─────────────────────────────
+// Resolve the caller's own id via own-row RLS on `profiles` (the user ref's id
+// is unreliable). When it matches the pool's owner_id, show a reply box on each
+// un-replied review.
+const myId = ref<string | null>(null)
+watch(
+  () => detail.value?.owner?.id,
+  async () => {
+    if (!user.value) {
+      myId.value = null
+      return
+    }
+    const { data } = await supabase.from('profiles').select('id').maybeSingle()
+    myId.value = (data as unknown as { id: string } | null)?.id ?? null
+  },
+  { immediate: true }
+)
+const isOwner = computed(
+  () => !!myId.value && !!detail.value?.owner?.id && myId.value === detail.value.owner.id
+)
+
+const { reply: sendReply, pending: replyPending, error: replyError } = useReplyToReview()
+const replyOpenId = ref<string | null>(null)
+const replyText = ref('')
+function openReply(reviewId: string): void {
+  replyError.value = null
+  replyText.value = ''
+  replyOpenId.value = reviewId
+}
+function cancelReply(): void {
+  replyOpenId.value = null
+  replyText.value = ''
+}
+async function submitReply(reviewId: string): Promise<void> {
+  const ok = await sendReply(reviewId, replyText.value)
+  if (ok) {
+    replyOpenId.value = null
+    replyText.value = ''
+    await refresh()
+  }
 }
 
 // ── Availability (simple list of next blocked dates) ────────────────────
@@ -517,12 +581,25 @@ useHead(() => ({
           <!-- 3 · OWNER CARD -->
           <div class="owner-card">
             <div class="owner-top">
-              <span class="avatar owner-avatar">{{ ownerInitials }}</span>
+              <NuxtLink
+                v-if="detail.owner"
+                :to="localePath('/membres/' + detail.owner.id)"
+                class="owner-avatar-link"
+                :aria-label="detail.owner.full_name || t('pool.owner.title')"
+              >
+                <span class="avatar owner-avatar">{{ ownerInitials }}</span>
+              </NuxtLink>
+              <span v-else class="avatar owner-avatar">{{ ownerInitials }}</span>
               <div style="flex: 1; min-width: 0">
                 <div class="owner-name-row">
-                  <strong class="owner-name">{{
-                    detail.owner?.full_name || t('pool.owner.title')
-                  }}</strong>
+                  <NuxtLink
+                    v-if="detail.owner"
+                    :to="localePath('/membres/' + detail.owner.id)"
+                    class="owner-name owner-name-link"
+                  >
+                    {{ detail.owner.full_name || t('pool.owner.title') }}
+                  </NuxtLink>
+                  <strong v-else class="owner-name">{{ t('pool.owner.title') }}</strong>
                   <span v-if="detail.owner?.phone_verified" class="badge badge-phone">
                     <svg
                       viewBox="0 0 24 24"
@@ -823,18 +900,113 @@ useHead(() => ({
               <div class="rev-cards">
                 <div v-for="rev in detail.reviews" :key="rev.id" class="rev-card">
                   <div class="rev-author">
-                    <span class="avatar rev-avatar">{{
-                      reviewInitials(rev.author?.full_name)
-                    }}</span>
+                    <NuxtLink
+                      v-if="rev.author"
+                      :to="localePath('/membres/' + rev.author.id)"
+                      class="rev-avatar-link"
+                      :aria-label="rev.author.full_name || ''"
+                    >
+                      <span class="avatar rev-avatar">{{
+                        reviewInitials(rev.author?.full_name)
+                      }}</span>
+                    </NuxtLink>
+                    <span v-else class="avatar rev-avatar">{{ reviewInitials(null) }}</span>
                     <div>
-                      <strong class="rev-author-name">{{ rev.author?.full_name || '—' }}</strong>
+                      <NuxtLink
+                        v-if="rev.author"
+                        :to="localePath('/membres/' + rev.author.id)"
+                        class="rev-author-name rev-author-link"
+                      >
+                        {{ rev.author.full_name || '—' }}
+                      </NuxtLink>
+                      <strong v-else class="rev-author-name">—</strong>
                       <div class="t-sm muted">{{ reviewDate(rev.created_at) }}</div>
                     </div>
                   </div>
                   <PRating :rating="rev.rating" size="sm" style="margin-top: 0.5rem" />
+
+                  <!-- category chips -->
+                  <div v-if="reviewCats(rev.categories).length" class="rev-chips">
+                    <span v-for="c in reviewCats(rev.categories)" :key="c.key" class="rev-chip">
+                      {{ c.label }}
+                      <strong>{{ c.value.toLocaleString(locale) }}</strong>
+                    </span>
+                  </div>
+
                   <p v-if="rev.comment" class="t-body" style="margin-top: 0.5rem">
                     {{ rev.comment }}
                   </p>
+
+                  <!-- owner's public reply -->
+                  <div v-if="rev.reply" class="rev-reply">
+                    <div class="rev-reply-head">
+                      <strong class="t-sm">{{
+                        t('pool.reviews_section.replyFrom', {
+                          name: detail.owner?.full_name || t('pool.owner.title'),
+                        })
+                      }}</strong>
+                      <PBadge variant="host">{{ t('pool.reviews_section.hostBadge') }}</PBadge>
+                    </div>
+                    <p class="t-sm" style="margin-top: 0.4rem">{{ rev.reply }}</p>
+                  </div>
+
+                  <!-- owner reply composer (signed-in pool owner, un-replied) -->
+                  <template v-else-if="isOwner">
+                    <PButton
+                      v-if="replyOpenId !== rev.id"
+                      variant="ghost"
+                      size="sm"
+                      style="margin-top: 0.5rem"
+                      @click="openReply(rev.id)"
+                    >
+                      <template #icon>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"
+                          />
+                        </svg>
+                      </template>
+                      {{ t('pool.reviews_section.replyCta') }}
+                    </PButton>
+                    <div v-else class="rev-reply-box">
+                      <p class="t-sm reply-hint">{{ t('pool.reviews_section.replyHint') }}</p>
+                      <textarea
+                        v-model="replyText"
+                        class="ta"
+                        rows="3"
+                        :placeholder="t('pool.reviews_section.replyPlaceholder')"
+                      />
+                      <p v-if="replyError" class="hint-err" style="margin-top: 0.4rem">
+                        {{ t(replyError) }}
+                      </p>
+                      <div class="rev-reply-acts">
+                        <PButton
+                          variant="ghost"
+                          size="sm"
+                          :disabled="replyPending"
+                          @click="cancelReply"
+                        >
+                          {{ t('pool.reviews_section.replyCancel') }}
+                        </PButton>
+                        <PButton
+                          size="sm"
+                          :loading="replyPending"
+                          :disabled="!replyText.trim()"
+                          @click="submitReply(rev.id)"
+                        >
+                          {{ t('pool.reviews_section.replySend') }}
+                        </PButton>
+                      </div>
+                    </div>
+                  </template>
                 </div>
               </div>
             </template>
@@ -1424,6 +1596,83 @@ useHead(() => ({
 }
 .rev-author-name {
   font-size: 0.95rem;
+  font-weight: 700;
+}
+.rev-author-link,
+.owner-name-link {
+  color: var(--ink);
+  text-decoration: none;
+}
+.rev-author-link:hover,
+.owner-name-link:hover {
+  color: var(--aqua-800);
+  text-decoration: underline;
+}
+.rev-author-link:focus-visible,
+.owner-name-link:focus-visible,
+.rev-avatar-link:focus-visible,
+.owner-avatar-link:focus-visible {
+  outline: none;
+  border-radius: var(--r-sm);
+  box-shadow: var(--focus);
+}
+.rev-avatar-link,
+.owner-avatar-link {
+  flex: none;
+  border-radius: 999px;
+}
+
+/* per-review category chips */
+.rev-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+.rev-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--aqua-50);
+  color: var(--aqua-800);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--r-pill);
+}
+.rev-chip strong {
+  font-weight: 800;
+}
+
+/* owner reply */
+.rev-reply {
+  margin-top: 0.9rem;
+  padding: 0.85rem 0.95rem;
+  background: var(--aqua-50);
+  border-radius: var(--r-lg);
+  border-inline-start: 3px solid var(--aqua-400);
+}
+.rev-reply-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.rev-reply-box {
+  margin-top: 0.7rem;
+}
+.reply-hint {
+  color: var(--aqua-800);
+  background: var(--aqua-50);
+  border-radius: var(--r-md);
+  padding: 0.5rem 0.65rem;
+  margin-bottom: 0.5rem;
+}
+.rev-reply-acts {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
 }
 .reviews-empty {
   background: #fff;

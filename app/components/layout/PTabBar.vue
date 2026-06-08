@@ -2,6 +2,26 @@
 const { t, locale, locales } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+
+// Resolve the signed-in user's own id (own-row RLS on `profiles`) so the
+// "Profil" tab points at their public member page; fall back to phone
+// verification while unknown / logged out.
+const myId = ref<string | null>(null)
+async function resolveMyId(): Promise<void> {
+  if (!user.value) {
+    myId.value = null
+    return
+  }
+  const { data } = await supabase.from('profiles').select('id').maybeSingle()
+  myId.value = (data as unknown as { id: string } | null)?.id ?? null
+}
+onMounted(resolveMyId)
+watch(user, resolveMyId)
+const profilePath = computed(() =>
+  myId.value ? localePath('/membres/' + myId.value) : localePath('/account/phone')
+)
 
 // Strip the locale prefix so /fr/bookings and /ar/bookings both match "/bookings".
 const basePath = computed(() => {
@@ -87,12 +107,18 @@ void locale
         stroke-linejoin="round"
         aria-hidden="true"
       >
-        <path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z" />
+        <path
+          d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"
+        />
       </svg>
       {{ t('nav.messages') }}
     </NuxtLink>
 
-    <NuxtLink :to="localePath('/profile')" class="tab" :class="{ 'is-on': isActive('/profile') }">
+    <NuxtLink
+      :to="profilePath"
+      class="tab"
+      :class="{ 'is-on': isActive('/profile') || isActive('/membres') || isActive('/account') }"
+    >
       <svg
         viewBox="0 0 24 24"
         fill="none"

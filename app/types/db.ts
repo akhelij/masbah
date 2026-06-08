@@ -51,12 +51,23 @@ export interface PoolRules {
   quiet_hours: string | null
 }
 
-/** `reviews.categories` (jsonb object) — 1..5 per axis, all optional. */
+/**
+ * `reviews.categories` (jsonb object) — 1..5 per axis, all optional.
+ *
+ * The first four axes are used when a renter reviews a POOL (S11), the last
+ * three when an owner reviews a RENTER. They share `communication`.
+ */
 export interface ReviewCategories {
+  // pool axes
   proprete?: number
   conformite?: number
-  communication?: number
   confidentialite?: number
+  rapport?: number
+  // renter axes
+  respect?: number
+  ponctualite?: number
+  // shared
+  communication?: number
 }
 
 // ── Tables / Views ────────────────────────────────────────────────────

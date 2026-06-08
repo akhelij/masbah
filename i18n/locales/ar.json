@@ -131,10 +131,19 @@
       "summary": "{rating} · {count} تقييم",
       "cat": {
         "proprete": "النظافة",
-        "conformite": "مطابقة الصور",
+        "conformite": "مطابقة الإعلان",
+        "rapport": "القيمة مقابل السعر",
         "communication": "التواصل",
         "confidentialite": "الخصوصية"
-      }
+      },
+      "replyFrom": "رد {name}",
+      "hostBadge": "المضيف",
+      "replyCta": "الرد",
+      "replyPlaceholder": "شكرًا على زيارتك! يسعدنا استقبالك مرة أخرى…",
+      "replySend": "نشر الرد",
+      "replyHint": "اشكر الضيف وابقَ مهنيًا ولطيفًا. تجنّب المعلومات الشخصية.",
+      "replyCancel": "إلغاء",
+      "seeProfile": "عرض الملف الشخصي"
     },
     "facts": {
       "guests": "{count} ضيوف",
@@ -891,5 +900,80 @@
       "cta": "استكشف المسابح"
     },
     "error": "تعذّر تحميل إشعاراتك. حاول مرة أخرى."
+  },
+  "reviews": {
+    "seoTitle": "ترك تقييم",
+    "titlePool": "تقييمك",
+    "titleRenter": "تقييم الضيف",
+    "hostLabel": "المضيف: {name}",
+    "visitOn": "زيارة يوم {date}",
+    "visitWithSlot": "زيارة يوم {date} · {slot}",
+    "questionPool": "كيف كانت {pool}؟",
+    "questionPoolFallback": "كيف كان المسبح؟",
+    "questionRenter": "كيف جرت الزيارة؟",
+    "overallLabel": "التقييم العام",
+    "tapStars": "اضغط على النجوم",
+    "ratingLabels": {
+      "1": "ضعيف",
+      "2": "مقبول",
+      "3": "جيد",
+      "4": "جيد جدًا",
+      "5": "ممتاز!"
+    },
+    "categoriesTitle": "تفاصيل تقييمك",
+    "privateNote": "تقييمك يساعد المضيفين الآخرين — ويبقى خاصًا إلى حين النشر المتبادل.",
+    "commentLabel": "تعليقك",
+    "commentOptional": "(اختياري)",
+    "commentPlaceholderPool": "ما الذي أعجبك أكثر؟ هل كان المسبح مطابقًا؟ هل تنصح به؟",
+    "commentPlaceholderRenter": "مجموعة هادئة ومحترمة؟ مرحبًا بك مرة أخرى؟",
+    "submitPool": "نشر تقييمي",
+    "submitRenter": "إرسال تقييمي",
+    "ratingRequired": "اضغط على النجوم لإعطاء تقييم عام.",
+    "successTitle": "شكرًا على تقييمك 💙",
+    "successBodyPool": "سيُنشر التقييم وسيساعد العائلات القادمة على الاختيار.",
+    "successBodyRenter": "تم تسجيل تقييمك بنجاح.",
+    "backToBookings": "حجوزاتي",
+    "backToRequests": "طلباتي",
+    "doneTitle": "تم إرسال التقييم مسبقًا",
+    "doneBody": "لقد تركت تقييمًا لهذه الزيارة من قبل. شكرًا لك!",
+    "ineligibleTitle": "التقييم غير متاح",
+    "ineligibleBody": "هذا الحجز غير قابل للتقييم (بعد). تُتاح التقييمات بعد زيارة مقبولة ومنتهية.",
+    "leaveReview": "ترك تقييم",
+    "rateRenter": "تقييم الضيف",
+    "errors": {
+      "notAccepted": "تتطلب التقييمات حجزًا مقبولًا.",
+      "notYet": "يمكنك ترك تقييم بعد تاريخ الزيارة.",
+      "duplicate": "لقد تركت تقييمًا لهذه الزيارة من قبل.",
+      "notAuthorized": "غير مسموح لك بترك هذا التقييم.",
+      "replyEmpty": "لا يمكن أن يكون ردك فارغًا.",
+      "generic": "حدث خطأ. أعد المحاولة."
+    },
+    "renterCat": {
+      "communication": "التواصل",
+      "respect": "احترام القواعد",
+      "ponctualite": "الالتزام بالمواعيد"
+    }
+  },
+  "profile": {
+    "seoTitle": "الملف الشخصي",
+    "seoDescription": "الملف الشخصي لـ {name} على مسبح — التقييمات والمسابح والتحقق.",
+    "memberSince": "عضو منذ {year}",
+    "phoneVerified": "هاتف مُوثَّق",
+    "emailVerified": "بريد إلكتروني مُوثَّق",
+    "asHost": "كمضيف",
+    "asGuest": "كضيف",
+    "hostReviews": "{count} تقييم من الضيوف",
+    "guestReviews": "{count} تقييم من الملاك",
+    "noRatingYet": "لا يوجد تقييم بعد",
+    "listingsTitle": "مسابحه",
+    "reviewsTitle": "التقييمات المستلمة",
+    "tabHost": "كمضيف",
+    "tabGuest": "كضيف",
+    "reviewerHost": "ضيف",
+    "reviewerGuest": "مالك",
+    "noReviews": "لا توجد تقييمات حاليًا.",
+    "notFoundTitle": "الملف الشخصي غير موجود",
+    "notFoundBody": "هذا العضو غير موجود أو لم يعد متاحًا.",
+    "backHome": "العودة إلى الرئيسية"
   }
 }

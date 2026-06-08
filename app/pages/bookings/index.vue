@@ -15,6 +15,10 @@ useSeoMeta({
 
 const { bookings, pending, error, refresh } = useRenterBookings()
 
+// Accepted + past + not-yet-reviewed bookings the renter can still review (S11).
+const { reviewable } = useReviewableBookings()
+const reviewableIds = computed(() => new Set(reviewable.value.asRenter.map((b) => b.bookingId)))
+
 // ── Slot labels ───────────────────────────────────────────────────────────
 const SLOT_LABELS: Record<SlotKey, string> = {
   morning: 'slots.morning',
@@ -89,8 +93,13 @@ function expiresLabel(expiresAt: string): string {
   const ms = new Date(expiresAt).getTime() - now.value
   if (ms <= 0) return t('bookings.expired')
   const minutes = Math.floor(ms / 60_000)
-  if (minutes >= 60) return t('bookings.expiresIn', { time: t('bookings.hoursShort', { count: Math.floor(minutes / 60) }) })
-  return t('bookings.expiresIn', { time: t('bookings.minutesShort', { count: Math.max(1, minutes) }) })
+  if (minutes >= 60)
+    return t('bookings.expiresIn', {
+      time: t('bookings.hoursShort', { count: Math.floor(minutes / 60) }),
+    })
+  return t('bookings.expiresIn', {
+    time: t('bookings.minutesShort', { count: Math.max(1, minutes) }),
+  })
 }
 
 // ── Cancel flow (PModal confirm → RPC) ────────────────────────────────────
@@ -176,7 +185,7 @@ const emptyCopy = computed(() => ({
     <!-- tabs -->
     <div class="tabs" role="tablist">
       <button
-        v-for="key in (['pending', 'accepted', 'past'] as const)"
+        v-for="key in ['pending', 'accepted', 'past'] as const"
         :key="key"
         class="tabx"
         :class="{ 'is-on': tab === key }"
@@ -221,8 +230,14 @@ const emptyCopy = computed(() => ({
         </svg>
       </span>
       <h2 class="t-h3" style="margin-top: 1rem">{{ emptyCopy.title }}</h2>
-      <p class="t-body muted" style="max-width: 28rem; margin: 0.5rem auto 0">{{ emptyCopy.body }}</p>
-      <NuxtLink :to="localePath('/search')" class="btn btn-primary btn-lg" style="margin-top: 1.2rem">
+      <p class="t-body muted" style="max-width: 28rem; margin: 0.5rem auto 0">
+        {{ emptyCopy.body }}
+      </p>
+      <NuxtLink
+        :to="localePath('/search')"
+        class="btn btn-primary btn-lg"
+        style="margin-top: 1.2rem"
+      >
         {{ t('bookings.empty.cta') }}
       </NuxtLink>
     </div>
@@ -245,7 +260,9 @@ const emptyCopy = computed(() => ({
           <div class="bcard-info">
             <div class="bcard-top">
               <strong class="bcard-title">{{ b.poolTitle ?? t('bookings.untitled') }}</strong>
-              <PBadge :class="STATUS_CLASS[b.status]">{{ t(`bookings.status.${b.status}`) }}</PBadge>
+              <PBadge :class="STATUS_CLASS[b.status]">{{
+                t(`bookings.status.${b.status}`)
+              }}</PBadge>
             </div>
             <div class="bmeta">
               <svg
@@ -275,8 +292,9 @@ const emptyCopy = computed(() => ({
                 <circle cx="9" cy="8" r="3.4" />
                 <path d="M3 20a6 6 0 0 1 12 0M16 5.5a3 3 0 0 1 0 5M19 20a5.5 5.5 0 0 0-4-5.3" />
               </svg>
-              <span v-if="b.cityName">{{ b.cityName }} · </span>{{ t('bookings.guests', { count: b.guests }) }}
-              · <strong style="color: var(--ink)">{{ formatMad(b.totalEstimateMad, locale) }}</strong>
+              <span v-if="b.cityName">{{ b.cityName }} · </span
+              >{{ t('bookings.guests', { count: b.guests }) }} ·
+              <strong style="color: var(--ink)">{{ formatMad(b.totalEstimateMad, locale) }}</strong>
             </div>
           </div>
         </div>
@@ -326,7 +344,9 @@ const emptyCopy = computed(() => ({
                 <circle cx="12" cy="10" r="3" />
               </svg>
               <div>
-                <strong>{{ contactByBooking[b.id]?.address || t('bookings.reveal.address') }}</strong>
+                <strong>{{
+                  contactByBooking[b.id]?.address || t('bookings.reveal.address')
+                }}</strong>
                 <div class="t-sm muted">{{ t('bookings.reveal.addressHint') }}</div>
               </div>
             </div>
@@ -355,7 +375,9 @@ const emptyCopy = computed(() => ({
             <!-- host contact -->
             <div class="reveal-host">
               <div class="reveal-host-name">
-                <strong>{{ contactByBooking[b.id]?.ownerName || t('bookings.reveal.host') }}</strong>
+                <strong>{{
+                  contactByBooking[b.id]?.ownerName || t('bookings.reveal.host')
+                }}</strong>
                 <div v-if="contactByBooking[b.id]?.ownerPhone" class="t-sm muted">
                   {{ contactByBooking[b.id]?.ownerPhone }}
                 </div>
@@ -429,6 +451,20 @@ const emptyCopy = computed(() => ({
             {{ t('bookings.reveal.error') }}
           </p>
           <p v-else class="reveal-locked">{{ t('bookings.reveal.locked') }}</p>
+
+          <!-- post-visit review CTA (accepted + visit passed + not yet reviewed) -->
+          <NuxtLink
+            v-if="reviewableIds.has(b.id)"
+            :to="localePath('/avis/' + b.id)"
+            class="btn btn-secondary btn-sm btn-block review-cta"
+          >
+            <svg viewBox="0 0 24 24" fill="var(--amber)" aria-hidden="true">
+              <path
+                d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"
+              />
+            </svg>
+            {{ t('reviews.leaveReview') }}
+          </NuxtLink>
         </div>
 
         <!-- DECLINED · reason -->
@@ -445,7 +481,9 @@ const emptyCopy = computed(() => ({
             <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
           </svg>
           <span class="t-sm">
-            <template v-if="b.declineReason">{{ t('bookings.declineReason', { reason: b.declineReason }) }}</template>
+            <template v-if="b.declineReason">{{
+              t('bookings.declineReason', { reason: b.declineReason })
+            }}</template>
             <template v-else>{{ t('bookings.declinedNoReason') }}</template>
           </span>
         </div>
@@ -690,6 +728,14 @@ const emptyCopy = computed(() => ({
 .reveal-locked {
   font-size: 0.85rem;
   color: var(--ink-muted);
+}
+.review-cta {
+  margin-top: 0.8rem;
+}
+.review-cta svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
 }
 
 /* declined */

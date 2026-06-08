@@ -3,8 +3,25 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
 const route = useRoute()
+const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const { signOut } = useAuthForm()
+
+// Resolve the signed-in user's own id (own-row RLS on `profiles`; the user
+// ref's id is unreliable) so the "Profil" links point at their public member
+// page. Falls back to phone verification while unknown.
+const myId = ref<string | null>(null)
+async function resolveMyId(): Promise<void> {
+  if (!user.value) {
+    myId.value = null
+    return
+  }
+  const { data } = await supabase.from('profiles').select('id').maybeSingle()
+  myId.value = (data as unknown as { id: string } | null)?.id ?? null
+}
+const profilePath = computed(() =>
+  myId.value ? localePath('/membres/' + myId.value) : localePath('/account/phone')
+)
 
 const city = ref('')
 
@@ -12,12 +29,20 @@ const city = ref('')
 // opens the realtime channel so the badge updates without a refresh.
 const { unreadCount, subscribe, unsubscribe } = useNotifications()
 onMounted(() => {
-  if (user.value) subscribe()
+  if (user.value) {
+    subscribe()
+    void resolveMyId()
+  }
 })
 // Open the channel as soon as the user signs in (and close it on sign-out).
 watch(user, (u) => {
-  if (u) subscribe()
-  else unsubscribe()
+  if (u) {
+    subscribe()
+    void resolveMyId()
+  } else {
+    unsubscribe()
+    myId.value = null
+  }
 })
 onBeforeUnmount(unsubscribe)
 
@@ -163,7 +188,7 @@ async function onSignOut(): Promise<void> {
           </button>
 
           <div v-if="menuOpen" class="menu" role="menu">
-            <NuxtLink :to="localePath('/profile')" class="menu-item" role="menuitem">
+            <NuxtLink :to="profilePath" class="menu-item" role="menuitem">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"

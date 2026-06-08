@@ -1,0 +1,12 @@
+-- ════════════════════════════════════════════════════════════════
+-- Masbah V2 — 0014 · stop exposing the trigger function as an RPC
+--
+-- notify_owner_new_request() (0012) is an AFTER INSERT trigger function. It is
+-- never meant to be called directly, yet PostgREST exposes every public
+-- function as /rest/v1/rpc/<name>, and Supabase grants EXECUTE to anon +
+-- authenticated via default privileges (revoking from PUBLIC alone is not
+-- enough — same lesson as 0008). Triggers fire WITHOUT an EXECUTE check on the
+-- invoking role, so revoking from every role keeps the trigger working while
+-- removing the RPC surface. (Security-advisor 0028/0029.)
+-- ════════════════════════════════════════════════════════════════
+revoke execute on function public.notify_owner_new_request() from public, anon, authenticated;
