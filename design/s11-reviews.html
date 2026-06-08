@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E7490">
+<title>Pissina · Avis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ════════ PISSINA TOKENS — identical to S1 ════════ */
+:root{
+  --aqua-50:#ECFEFF;--aqua-100:#CFF7FB;--aqua-200:#A4ECF5;--aqua-300:#6FDDED;--aqua-400:#22D3EE;--aqua-500:#06B6D4;--aqua-600:#0891B2;--aqua-700:#0E7490;--aqua-800:#155E75;--aqua-900:#164E63;
+  --ink-strong:#0A2D38;--ink:#0F3D4C;--ink-muted:#4F6E78;--ink-faint:#8AA2AB;
+  --coral:#FB7185;--coral-deep:#F43F5E;--coral-soft:#FFE4E8;--coral-ink:#9F1239;
+  --wa:#17A24E;--wa-deep:#138A42;--amber:#F59E0B;--amber-soft:#FEF3C7;--amber-ink:#92580A;
+  --success:#15A24A;--success-soft:#DCFCE7;--danger:#DC2626;--danger-deep:#B91C1C;--danger-soft:#FEE2E2;
+  --sand:#FAFAF7;--sand-2:#F1F1EA;--white:#FFFFFF;--line:#E6E7E1;--line-2:#EDEEE8;--line-strong:#D3D6CE;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-3xl:32px;--r-pill:999px;
+  --sh-sm:0 1px 2px rgba(15,61,76,.06),0 1px 1px rgba(15,61,76,.05);
+  --sh-card:0 6px 24px -8px rgba(15,61,76,.18),0 2px 6px -3px rgba(15,61,76,.08);
+  --sh-pop:0 12px 30px -8px rgba(15,61,76,.22);--sh-lg:0 22px 55px -14px rgba(15,61,76,.32);
+  --grad-fab:linear-gradient(160deg,#22D3EE 0%,#0E7490 100%);
+  --ease-water:cubic-bezier(.22,1,.36,1);--ease-soft:cubic-bezier(.4,0,.2,1);
+  --dur-1:.18s;--dur-2:.3s;--dur-3:.5s;--focus:0 0 0 3px rgba(6,182,212,.40);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+[hidden]{display:none!important;}
+.ar{font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;}
+::selection{background:var(--aqua-200);color:var(--ink-strong);}
+.wrap{max-width:840px;margin-inline:auto;padding-inline:16px;}
+@media(min-width:768px){.wrap{padding-inline:24px;}}
+.t-h2{font-size:clamp(1.4rem,3.2vw,1.8rem);font-weight:800;letter-spacing:-.02em;}
+.t-h3{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;}
+.t-body{font-size:.9375rem;line-height:1.6;}.t-sm{font-size:.8125rem;line-height:1.45;}
+.muted{color:var(--ink-muted);}.faint{color:var(--ink-faint);}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:var(--r-pill);padding:.65rem 1.1rem;font-size:.92rem;line-height:1;cursor:pointer;border:1.5px solid transparent;transition:background-color var(--dur-1) var(--ease-soft),border-color var(--dur-1),color var(--dur-1),transform var(--dur-1),box-shadow var(--dur-1);white-space:nowrap;min-height:44px;}
+.btn:active{transform:translateY(1px);}.btn:focus-visible{outline:none;box-shadow:var(--focus);}.btn svg{width:17px;height:17px;flex:none;}
+.btn-lg{padding:.9rem 1.4rem;font-size:1.02rem;min-height:52px;}.btn-sm{padding:.45rem .8rem;font-size:.83rem;min-height:38px;}.btn-block{width:100%;}
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));}
+.btn-primary:hover{background-color:var(--aqua-800);}.btn-primary:disabled{background:var(--aqua-200);color:#fff;background-image:none;cursor:not-allowed;box-shadow:none;}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong);}.btn-secondary:hover{border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50);}
+.btn-ghost{background:transparent;color:var(--ink-muted);border-color:transparent;}.btn-ghost:hover{background:var(--sand-2);color:var(--ink);}
+.icon-btn{width:40px;height:40px;border-radius:var(--r-pill);display:inline-flex;align-items:center;justify-content:center;border:none;background:var(--sand-2);color:var(--ink);cursor:pointer;flex:none;}.icon-btn svg{width:20px;height:20px;}
+
+/* badge / avatar / chip / ta */
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .55rem;border-radius:var(--r-pill);font-size:.72rem;font-weight:700;line-height:1;}.badge svg{width:13px;height:13px;}
+.badge-slot{background:var(--aqua-50);color:var(--aqua-800);}
+.avatar{border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;}
+.ta{width:100%;background:#fff;border:1.5px solid var(--line-strong);border-radius:var(--r-md);padding:.8rem .9rem;font-size:.95rem;color:var(--ink);min-height:110px;font-family:inherit;resize:vertical;line-height:1.5;}
+.ta::placeholder{color:var(--ink-faint);}.ta:focus{outline:none;border-color:var(--aqua-500);box-shadow:var(--focus);}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .8rem;border-radius:var(--r-pill);border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);font-weight:600;font-size:.84rem;cursor:pointer;min-height:40px;}
+.chip.is-on{background:var(--aqua-700);color:#fff;border-color:var(--aqua-700);}
+
+/* stars (static display) */
+.stars{position:relative;display:inline-block;font-size:1rem;line-height:1;letter-spacing:.06em;}.stars .base{color:var(--line-strong);}.stars .fill{position:absolute;top:0;inset-inline-start:0;color:var(--amber);overflow:hidden;white-space:nowrap;}
+
+/* ════════ S11-specific ════════ */
+.site-header{position:sticky;top:0;z-index:30;background:rgba(250,250,247,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);}
+.notif-card{display:flex;gap:.8rem;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-pop);padding:.85rem 1rem;}
+.notif-card .app{width:42px;height:42px;border-radius:11px;background:var(--grad-fab);display:grid;place-items:center;color:#fff;flex:none;}
+
+.rev-bar{display:flex;align-items:center;gap:.7rem;}
+.rev-bar .nm{flex:none;width:9.5rem;font-size:.88rem;font-weight:600;}
+.rev-bar .track{flex:1;height:7px;border-radius:99px;background:var(--sand-2);overflow:hidden;}.rev-bar .fill{height:100%;background:var(--aqua-600);border-radius:99px;}
+.rev-bar .vv{flex:none;font-weight:700;font-size:.84rem;width:2rem;text-align:end;}
+.dist-row{display:flex;align-items:center;gap:.6rem;}
+.dist-row .lvl{flex:none;width:2.4rem;font-size:.82rem;font-weight:700;color:var(--ink-muted);display:flex;align-items:center;gap:.15rem;}
+.dist-row .track{flex:1;height:7px;border-radius:99px;background:var(--sand-2);overflow:hidden;}.dist-row .fill{height:100%;background:var(--amber);border-radius:99px;}
+.dist-row .cnt{flex:none;width:1.6rem;text-align:end;font-size:.8rem;color:var(--ink-muted);font-weight:600;}
+
+.rev-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);padding:1.1rem;box-shadow:var(--sh-sm);}
+.rev-reply{margin-top:.9rem;margin-inline-start:.5rem;padding:.85rem .95rem;background:var(--aqua-50);border-radius:var(--r-lg);border-inline-start:3px solid var(--aqua-400);}
+.report{display:inline-flex;align-items:center;gap:.3rem;color:var(--ink-faint);font-size:.78rem;font-weight:600;background:none;border:none;cursor:pointer;}
+.report:hover{color:var(--danger);}.report svg{width:14px;height:14px;}
+
+/* clickable star rating */
+.srate{display:inline-flex;gap:.25rem;}
+.srate button{background:none;border:none;cursor:pointer;color:var(--line-strong);padding:0;line-height:1;transition:transform var(--dur-1);}
+.srate button:hover{transform:scale(1.12);}
+.srate button.on{color:var(--amber);}
+.srate svg{width:38px;height:38px;}
+.srate-sm svg{width:26px;height:26px;}
+
+/* photo upload */
+.pgrid{display:flex;gap:.5rem;flex-wrap:wrap;}
+.ptile{position:relative;width:72px;height:72px;border-radius:var(--r-md);overflow:hidden;background:var(--sand-2);}
+.ptile img{width:100%;height:100%;object-fit:cover;}
+.ptile .rm{position:absolute;top:.2rem;inset-inline-end:.2rem;width:22px;height:22px;border-radius:99px;background:rgba(10,45,56,.7);color:#fff;border:none;display:grid;place-items:center;cursor:pointer;}.ptile .rm svg{width:12px;height:12px;}
+.padd{width:72px;height:72px;border:2px dashed var(--line-strong);border-radius:var(--r-md);display:grid;place-items:center;cursor:pointer;color:var(--ink-muted);background:#fff;}.padd:hover{border-color:var(--aqua-400);color:var(--aqua-700);}.padd svg{width:22px;height:22px;}
+
+/* sheet */
+.sheet-overlay{position:fixed;inset:0;background:rgba(10,45,56,.5);backdrop-filter:blur(3px);z-index:50;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--dur-2),visibility var(--dur-2);}
+.sheet-overlay.show{opacity:1;visibility:visible;pointer-events:auto;}
+@media(min-width:768px){.sheet-overlay{align-items:center;padding:1.5rem;}}
+.sheet{background:#fff;width:100%;max-height:94dvh;border-radius:var(--r-3xl) var(--r-3xl) 0 0;box-shadow:var(--sh-lg);display:flex;flex-direction:column;overflow:hidden;transform:translateY(100%);transition:transform var(--dur-3) var(--ease-water);}
+.sheet-overlay.show .sheet{transform:translateY(0);}
+@media(min-width:768px){.sheet{max-width:480px;border-radius:var(--r-3xl);transform:translateY(12px) scale(.98);max-height:90vh;}}
+.sheet-grip{width:40px;height:5px;border-radius:99px;background:var(--line-strong);margin:.7rem auto 0;}@media(min-width:768px){.sheet-grip{display:none;}}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--line);}
+.sheet-body{padding:1.2rem;overflow-y:auto;flex:1;}
+.sheet-foot{padding:1rem 1.2rem calc(1rem + env(safe-area-inset-bottom));border-top:1px solid var(--line);}
+.cat-row{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.7rem 0;border-bottom:1px solid var(--line-2);}
+
+/* demo bar */
+.demo-bar{position:fixed;top:.6rem;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:.3rem;border:1px dashed rgba(255,255,255,.5);border-radius:var(--r-pill);padding:.3rem .35rem .3rem .7rem;background:rgba(10,45,56,.65);backdrop-filter:blur(8px);max-width:94vw;overflow-x:auto;scrollbar-width:none;}
+.demo-bar::-webkit-scrollbar{display:none;}
+.demo-bar .lab{font-size:.64rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.75);white-space:nowrap;}
+.demo-bar button{font-size:.74rem;font-weight:600;padding:.3rem .6rem;border-radius:999px;border:none;background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap;}
+.demo-bar button.is-on{background:#fff;color:var(--aqua-800);}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+  <symbol id="star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></symbol>
+</defs></svg>
+
+<!-- demo state switcher -->
+<div class="demo-bar" role="group" aria-label="Aperçu">
+  <span class="lab">Aperçu</span>
+  <button data-go="display" class="is-on">Affichage</button>
+  <button data-go="write">Donner un avis</button>
+  <button data-go="ownerrenter">Avis voyageur</button>
+  <button data-go="all">Tous les avis</button>
+  <button data-go="reply">Réponse hôte</button>
+</div>
+
+<!-- header -->
+<header class="site-header">
+  <div class="wrap" style="display:flex;align-items:center;gap:.8rem;height:56px">
+    <button class="icon-btn" aria-label="Retour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div style="flex:1;min-width:0"><strong>Avis</strong><div class="t-sm muted" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Villa avec piscine chauffée · Dar Bouazza</div></div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:1.2rem;padding-bottom:3rem">
+
+  <!-- post-visit push notification card -->
+  <div class="notif-card" id="notifCard" style="margin-bottom:1.4rem">
+    <span class="app"><svg width="26" height="26" viewBox="0 0 32 32" fill="none"><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg></span>
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;justify-content:space-between;gap:.5rem"><strong style="font-size:.92rem">Pissina</strong><span class="t-sm faint">maintenant</span></div>
+      <div class="t-sm" style="margin-top:.1rem">🏊 Comment était la piscine de Yasmine ? Partagez votre avis — ça aide les prochaines familles.</div>
+    </div>
+    <button class="btn btn-primary btn-sm" data-go="write" style="flex:none">Noter</button>
+  </div>
+
+  <!-- ═══════════ REVIEW DISPLAY ═══════════ -->
+  <div class="card" style="padding:1.3rem;margin-bottom:1.4rem">
+    <div style="display:flex;align-items:center;gap:1.1rem;margin-bottom:1.3rem">
+      <div style="text-align:center;flex:none">
+        <div style="font-size:2.6rem;font-weight:800;line-height:1">4,8</div>
+        <span class="stars" aria-label="4,8 sur 5"><span class="base">★★★★★</span><span class="fill" style="width:96%">★★★★★</span></span>
+        <div class="t-sm muted" style="margin-top:.2rem">12 avis</div>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:.45rem">
+        <div class="dist-row"><span class="lvl">5 <svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><use href="#star"/></svg></span><span class="track"><span class="fill" style="width:67%"></span></span><span class="cnt">8</span></div>
+        <div class="dist-row"><span class="lvl">4 <svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><use href="#star"/></svg></span><span class="track"><span class="fill" style="width:25%"></span></span><span class="cnt">3</span></div>
+        <div class="dist-row"><span class="lvl">3 <svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><use href="#star"/></svg></span><span class="track"><span class="fill" style="width:8%"></span></span><span class="cnt">1</span></div>
+        <div class="dist-row"><span class="lvl">2 <svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><use href="#star"/></svg></span><span class="track"><span class="fill" style="width:0"></span></span><span class="cnt">0</span></div>
+        <div class="dist-row"><span class="lvl">1 <svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><use href="#star"/></svg></span><span class="track"><span class="fill" style="width:0"></span></span><span class="cnt">0</span></div>
+      </div>
+    </div>
+    <div class="grid sm:grid-cols-2" style="gap:.6rem 1.8rem;padding-top:1.1rem;border-top:1px solid var(--line)">
+      <div class="rev-bar"><span class="nm">Propreté</span><span class="track"><span class="fill" style="width:98%"></span></span><span class="vv">4,9</span></div>
+      <div class="rev-bar"><span class="nm">Conformité photos</span><span class="track"><span class="fill" style="width:96%"></span></span><span class="vv">4,8</span></div>
+      <div class="rev-bar"><span class="nm">Communication</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="vv">5,0</span></div>
+      <div class="rev-bar"><span class="nm">Confidentialité</span><span class="track"><span class="fill" style="width:98%"></span></span><span class="vv">4,9</span></div>
+    </div>
+  </div>
+
+  <!-- review cards -->
+  <div style="display:flex;flex-direction:column;gap:1rem">
+    <div class="rev-card">
+      <div style="display:flex;align-items:flex-start;gap:.7rem">
+        <span class="avatar" style="width:44px;height:44px;font-size:.9rem;background:linear-gradient(135deg,#22D3EE,#0E7490)">IK</span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap"><strong>Imane K.</strong><span class="t-sm faint">Juin 2026</span></div>
+          <div style="display:flex;align-items:center;gap:.5rem;margin-top:.3rem;flex-wrap:wrap"><span class="stars" style="font-size:.9rem"><span class="base">★★★★★</span><span class="fill" style="width:100%">★★★★★</span></span><span class="badge badge-slot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Journée complète</span></div>
+        </div>
+      </div>
+      <p class="t-body" style="margin-top:.7rem">Piscine impeccable et vraiment à l'abri des regards, parfait pour l'anniversaire de ma fille. Yasmine très réactive sur WhatsApp. Paiement sur place sans souci, je recommande à 100%.</p>
+      <div class="rev-reply">
+        <div style="display:flex;align-items:center;gap:.5rem"><span class="avatar" style="width:26px;height:26px;font-size:.66rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">YA</span><strong style="font-size:.85rem">Réponse de Yasmine</strong><span class="badge" style="background:#fff;color:var(--aqua-800);border:1px solid var(--line)">Hôte</span></div>
+        <p class="t-sm" style="margin-top:.45rem">Merci Imane ! Ravie que la fête se soit bien passée, vous êtes la bienvenue quand vous voulez 💙</p>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:.6rem"><button class="report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>Signaler</button></div>
+    </div>
+
+    <div class="rev-card">
+      <div style="display:flex;align-items:flex-start;gap:.7rem">
+        <span class="avatar" style="width:44px;height:44px;font-size:.9rem;background:linear-gradient(135deg,#0E7490,#155E75)">MR</span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap"><strong>Mehdi R.</strong><span class="t-sm faint">Mai 2026</span></div>
+          <div style="display:flex;align-items:center;gap:.5rem;margin-top:.3rem;flex-wrap:wrap"><span class="stars" style="font-size:.9rem"><span class="base">★★★★★</span><span class="fill" style="width:90%">★★★★★</span></span><span class="badge badge-slot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Après-midi</span></div>
+        </div>
+      </div>
+      <p class="t-body" style="margin-top:.7rem">Eau bien chauffée, grand jardin, parking facile. Conforme aux photos. Le barbecue en extra valait le coup pour notre groupe.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">
+        <button class="btn btn-ghost btn-sm" data-go="reply" style="padding-inline:.6rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>Répondre</button>
+        <button class="report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>Signaler</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-secondary" data-go="all" style="margin-top:1.2rem;width:100%">Voir les 12 avis</button>
+
+</main>
+
+<!-- ═══════════ WRITE REVIEW (renter) ═══════════ -->
+<div class="sheet-overlay" id="sheet-write">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="writeTitle">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head"><h2 id="writeTitle" class="t-h3">Votre avis</h2><button class="icon-btn" data-close aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="sheet-body" data-rv-view="form">
+      <div style="display:flex;align-items:center;gap:.7rem;background:var(--sand-2);border-radius:var(--r-lg);padding:.6rem .8rem;margin-bottom:1.2rem">
+        <span class="avatar" style="width:40px;height:40px;font-size:.85rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">YA</span>
+        <div><strong style="font-size:.92rem">Villa avec piscine chauffée</strong><div class="t-sm muted">Hôte : Yasmine · visite du 18 juil.</div></div>
+      </div>
+      <div style="text-align:center;margin-bottom:1.4rem">
+        <h3 class="t-h3" style="font-size:1.15rem">Comment était la piscine de Yasmine ?</h3>
+        <div class="srate" data-stars data-rating="0" id="overallRate" style="justify-content:center;margin-top:.8rem"></div>
+        <div class="t-sm" style="font-weight:700;color:var(--aqua-700);margin-top:.5rem;min-height:1.2em" id="overallLabel">Touchez les étoiles</div>
+      </div>
+      <div style="margin-bottom:1.2rem">
+        <div class="cat-row"><span style="font-weight:600">🧼 Propreté</span><div class="srate srate-sm" data-stars data-rating="0"></div></div>
+        <div class="cat-row"><span style="font-weight:600">📸 Conformité aux photos</span><div class="srate srate-sm" data-stars data-rating="0"></div></div>
+        <div class="cat-row"><span style="font-weight:600">💬 Communication</span><div class="srate srate-sm" data-stars data-rating="0"></div></div>
+        <div class="cat-row" style="border-bottom:none"><span style="font-weight:600">🙈 Confidentialité</span><div class="srate srate-sm" data-stars data-rating="0"></div></div>
+      </div>
+      <div class="field" style="margin-bottom:1.1rem"><span class="label" style="font-weight:700;display:block;margin-bottom:.4rem">Votre commentaire</span>
+        <textarea class="ta" placeholder="Qu'avez-vous le plus aimé ? La piscine était-elle conforme ? Le recommanderiez-vous à une famille ?"></textarea>
+      </div>
+      <div><span class="label" style="font-weight:700;display:block;margin-bottom:.5rem">Ajouter des photos <span class="muted" style="font-weight:400">(optionnel)</span></span>
+        <div class="pgrid" id="revPhotos"></div>
+      </div>
+    </div>
+    <div class="sheet-foot" data-rv-view="form"><button class="btn btn-primary btn-block" id="publishReview">Publier mon avis</button></div>
+
+    <div class="sheet-body" data-rv-view="thanks" hidden style="text-align:center;padding:2.5rem 1.4rem">
+      <div style="width:84px;height:84px;border-radius:50%;background:var(--success-soft);color:var(--success);display:grid;place-items:center;margin-inline:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:42px;height:42px"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h2 class="t-h2" style="margin-top:1rem;font-size:1.4rem">Merci pour votre avis 💙</h2>
+      <p class="t-body muted" style="max-width:26rem;margin:.5rem auto 0">Il sera publié après une vérification rapide et aidera les prochaines familles à choisir.</p>
+      <button class="btn btn-primary btn-lg" data-close style="margin-top:1.4rem">Terminé</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ OWNER REVIEWS RENTER ═══════════ -->
+<div class="sheet-overlay" id="sheet-ownerrenter">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="orTitle">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head"><h2 id="orTitle" class="t-h3">Évaluer le voyageur</h2><button class="icon-btn" data-close aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="sheet-body">
+      <div style="display:flex;align-items:center;gap:.7rem;background:var(--sand-2);border-radius:var(--r-lg);padding:.6rem .8rem;margin-bottom:1.2rem">
+        <span class="avatar" style="width:40px;height:40px;font-size:.85rem;background:linear-gradient(135deg,#0E7490,#155E75)">KB</span>
+        <div><strong style="font-size:.92rem">Karim Benali</strong><div class="t-sm muted">Visite du 18 juil. · Après-midi</div></div>
+      </div>
+      <h3 class="t-h3" style="font-size:1.1rem;text-align:center;margin-bottom:.4rem">Comment s'est passée la visite ?</h3>
+      <p class="t-sm muted" style="text-align:center;margin-bottom:1.2rem">Votre évaluation aide les autres hôtes — elle reste privée jusqu'à publication mutuelle.</p>
+      <div style="margin-bottom:1.2rem">
+        <div class="cat-row"><span style="font-weight:600">🏡 Respect des lieux</span><div class="srate srate-sm" data-stars data-rating="0"></div></div>
+        <div class="cat-row"><span style="font-weight:600">⏱️ Ponctualité</span><div class="srate srate-sm" data-stars data-rating="0"></div></div>
+        <div class="cat-row" style="border-bottom:none"><span style="font-weight:600">💬 Communication</span><div class="srate srate-sm" data-stars data-rating="0"></div></div>
+      </div>
+      <label class="field"><span class="label" style="font-weight:700">Commentaire <span class="muted" style="font-weight:400">(optionnel)</span></span><textarea class="ta" placeholder="Groupe calme et respectueux ? Bienvenue à nouveau ?"></textarea></label>
+    </div>
+    <div class="sheet-foot"><button class="btn btn-primary btn-block" data-close>Envoyer mon évaluation</button></div>
+  </div>
+</div>
+
+<!-- ═══════════ OWNER REPLY COMPOSER ═══════════ -->
+<div class="sheet-overlay" id="sheet-reply">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="rpTitle">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head"><h2 id="rpTitle" class="t-h3">Répondre à l'avis</h2><button class="icon-btn" data-close aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="sheet-body">
+      <div style="background:var(--sand-2);border-radius:var(--r-lg);padding:.85rem .95rem;margin-bottom:1rem">
+        <div style="display:flex;align-items:center;gap:.5rem"><span class="avatar" style="width:32px;height:32px;font-size:.72rem;background:linear-gradient(135deg,#0E7490,#155E75)">MR</span><strong style="font-size:.9rem">Mehdi R.</strong><span class="stars" style="font-size:.8rem"><span class="base">★★★★★</span><span class="fill" style="width:90%">★★★★★</span></span></div>
+        <p class="t-sm" style="margin-top:.5rem;color:var(--ink)">« Eau bien chauffée, grand jardin, parking facile. Conforme aux photos. »</p>
+      </div>
+      <div style="display:flex;gap:.6rem;align-items:flex-start;background:var(--aqua-50);border-radius:var(--r-lg);padding:.8rem .9rem;margin-bottom:1rem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none;margin-top:1px"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1h6c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+        <span class="t-sm" style="color:var(--aqua-800)"><strong>Conseil :</strong> remerciez, restez professionnel et chaleureux. Évitez les informations personnelles et les longues justifications.</span>
+      </div>
+      <label class="field"><span class="label" style="font-weight:700">Votre réponse publique</span><textarea class="ta" placeholder="Merci Mehdi pour votre visite ! Au plaisir de vous accueillir à nouveau…"></textarea></label>
+    </div>
+    <div class="sheet-foot"><button class="btn btn-primary btn-block" data-close>Publier la réponse</button></div>
+  </div>
+</div>
+
+<!-- ═══════════ ALL REVIEWS ═══════════ -->
+<div class="sheet-overlay" id="sheet-all">
+  <div class="sheet" style="max-height:96dvh" role="dialog" aria-modal="true" aria-labelledby="allTitle">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head"><h2 id="allTitle" class="t-h3">12 avis · ★ 4,8</h2><button class="icon-btn" data-close aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div style="padding:.8rem 1.2rem;border-bottom:1px solid var(--line);display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none">
+      <div class="select-wrap" style="position:relative;flex:none"><button class="chip" id="sortChip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M3 6h18M6 12h12M10 18h4"/></svg><span id="sortLabel">Plus récents</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m6 9 6 6 6-6"/></svg></button></div>
+      <button class="chip">📸 Avec photos</button>
+      <button class="chip">Journée complète</button>
+      <button class="chip">Après-midi</button>
+    </div>
+    <div class="sheet-body" id="allList" style="display:flex;flex-direction:column;gap:1rem"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESIGN NOTES · S11 — Avis
+     ────────────────────────────────────────────────────────────────
+     • Boucle de confiance complète : relance post-visite (carte notification + feuille
+       in-app), note globale + 4 catégories (Propreté, Conformité photos, Communication,
+       Confidentialité) en étoiles cliquables, commentaire guidé et photos optionnelles.
+       L'hôte évalue aussi le voyageur (respect des lieux, ponctualité, communication).
+     • Affichage qui aide à décider : note moyenne, barres par catégorie, distribution
+       par niveau d'étoiles, cartes d'avis avec tag de créneau (« Journée complète »),
+       réponse de l'hôte en évidence, et bouton Signaler discret.
+     • « Voir tous les avis » ouvre une feuille avec tri (récents / mieux notés) et
+       filtres (avec photos, par créneau).
+     • Réponse de l'hôte accompagnée : encart de conseil « Remerciez, restez
+       professionnel, évitez les infos personnelles ». Tokens/composants S1 réutilisés.
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+const $=id=>document.getElementById(id);
+
+/* ── clickable star ratings ── */
+const STAR='<svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg>';
+document.querySelectorAll('[data-stars]').forEach(s=>{
+  s.innerHTML=[1,2,3,4,5].map(v=>`<button type="button" data-v="${v}" aria-label="${v} étoile${v>1?'s':''}">${STAR}</button>`).join('');
+  const paint=n=>[...s.children].forEach((b,i)=>b.classList.toggle('on',i<n));
+  s.addEventListener('mouseover',e=>{const b=e.target.closest('button');if(b)paint(+b.dataset.v);});
+  s.addEventListener('mouseleave',()=>paint(+s.dataset.rating));
+  s.addEventListener('click',e=>{const b=e.target.closest('button');if(b){s.dataset.rating=b.dataset.v;paint(+b.dataset.v);s.dispatchEvent(new CustomEvent('rate',{detail:+b.dataset.v}));}});
+  paint(+s.dataset.rating);
+});
+const LABELS=['Touchez les étoiles','Médiocre','Correct 🙂','Bien 👍','Très bien ✨','Excellent ! 💙'];
+$('overallRate').addEventListener('rate',e=>{$('overallLabel').textContent=LABELS[e.detail];});
+
+/* ── review photos ── */
+let rphotos=[],rp=0;const RPOOL=['1571896349842-33c89424de2d','1613977257363-707ba9348227','1576013551627-0cc20b96c2a7'];
+function renderRevPhotos(){$('revPhotos').innerHTML=rphotos.map((pi,i)=>`<div class="ptile"><img src="https://images.unsplash.com/photo-${pi}?auto=format&fit=crop&w=200&q=60" alt="Photo ${i+1}"><button class="rm" data-rmphoto="${i}" aria-label="Retirer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>`).join('')+`<button class="padd" id="addRevPhoto" aria-label="Ajouter une photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>`;}
+$('revPhotos').addEventListener('click',e=>{if(e.target.closest('#addRevPhoto')){rphotos.push(RPOOL[rp++%RPOOL.length]);renderRevPhotos();}const rm=e.target.closest('[data-rmphoto]');if(rm){rphotos.splice(+rm.dataset.rmphoto,1);renderRevPhotos();}});
+renderRevPhotos();
+
+/* ── sheet routing ── */
+function closeSheets(){document.querySelectorAll('.sheet-overlay.show').forEach(s=>s.classList.remove('show'));document.body.style.overflow='';document.querySelectorAll('.demo-bar button').forEach(b=>b.classList.toggle('is-on',b.dataset.go==='display'));}
+function goTo(v){
+  document.querySelectorAll('.sheet-overlay.show').forEach(s=>s.classList.remove('show'));
+  if(v==='display'){document.body.style.overflow='';}
+  else{const s=$('sheet-'+v);if(s){if(v==='write')resetWrite();if(v==='all')renderAll();s.classList.add('show');document.body.style.overflow='hidden';}}
+  document.querySelectorAll('.demo-bar button').forEach(b=>b.classList.toggle('is-on',b.dataset.go===v));
+}
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.go)));
+document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeSheets();});
+document.querySelectorAll('.sheet-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeSheets();}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheets();});
+
+/* ── write review submit ── */
+function resetWrite(){document.querySelectorAll('#sheet-write [data-rv-view="form"]').forEach(e=>e.hidden=false);document.querySelector('#sheet-write [data-rv-view="thanks"]').hidden=true;}
+$('publishReview').addEventListener('click',()=>{document.querySelectorAll('#sheet-write [data-rv-view="form"]').forEach(e=>e.hidden=true);document.querySelector('#sheet-write [data-rv-view="thanks"]').hidden=false;});
+
+/* ── all reviews ── */
+const GRAD=['#22D3EE,#0E7490','#FB7185,#F43F5E','#0E7490,#155E75','#F59E0B,#D97706'];
+const ALLR=[
+  {n:'Imane K.',ini:'IK',d:'Juin 2026',w:100,slot:'Journée complète',t:'Piscine impeccable et vraiment à l\'abri des regards, parfait pour l\'anniversaire de ma fille. Paiement sur place sans souci.',reply:'Merci Imane ! Vous êtes la bienvenue quand vous voulez 💙'},
+  {n:'Mehdi R.',ini:'MR',d:'Mai 2026',w:90,slot:'Après-midi',t:'Eau bien chauffée, grand jardin, parking facile. Conforme aux photos.'},
+  {n:'Nadia E.',ini:'NE',d:'Mai 2026',w:100,slot:'Journée complète',t:'Très bon moment en famille. Jardin agréable et calme. Je recommande.'},
+  {n:'Hicham M.',ini:'HM',d:'Avril 2026',w:80,slot:'Matinée',t:'Bien dans l\'ensemble, un peu loin du centre mais ça vaut le détour.'},
+  {n:'Salma B.',ini:'SB',d:'Avril 2026',w:100,slot:'Après-midi',t:'Parfait pour un anniversaire entre amies, vraiment à l\'abri des regards.'},
+  {n:'Omar F.',ini:'OF',d:'Mars 2026',w:90,slot:'Journée complète',t:'Grande piscine, propre. Yasmine très arrangeante sur l\'horaire.'},
+];
+function renderAll(){const el=$('allList');if(el.dataset.done)return;el.dataset.done='1';
+  el.innerHTML=ALLR.map((r,i)=>`<div class="rev-card" style="box-shadow:none;border-radius:var(--r-lg)">
+    <div style="display:flex;align-items:flex-start;gap:.7rem"><span class="avatar" style="width:42px;height:42px;font-size:.85rem;background:linear-gradient(135deg,${GRAD[i%GRAD.length]})">${r.ini}</span>
+    <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap"><strong>${r.n}</strong><span class="t-sm faint">${r.d}</span></div>
+    <div style="display:flex;align-items:center;gap:.5rem;margin-top:.3rem;flex-wrap:wrap"><span class="stars" style="font-size:.85rem"><span class="base">★★★★★</span><span class="fill" style="width:${r.w}%">★★★★★</span></span><span class="badge badge-slot">${r.slot}</span></div></div></div>
+    <p class="t-body" style="margin-top:.6rem">${r.t}</p>
+    ${r.reply?`<div class="rev-reply"><div style="display:flex;align-items:center;gap:.4rem"><span class="avatar" style="width:24px;height:24px;font-size:.6rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">YA</span><strong style="font-size:.82rem">Réponse de Yasmine</strong></div><p class="t-sm" style="margin-top:.35rem">${r.reply}</p></div>`:''}
+  </div>`).join('');
+}
+
+/* ── sort + filter ── */
+const SORTS=['Plus récents','Mieux notés','Moins bien notés'];let si=0;
+$('sortChip').addEventListener('click',()=>{si=(si+1)%SORTS.length;$('sortLabel').textContent=SORTS[si];});
+document.querySelectorAll('#sheet-all .chip').forEach(c=>{if(c.id!=='sortChip')c.addEventListener('click',()=>c.classList.toggle('is-on'));});
+</script>
+</body>
+</html>

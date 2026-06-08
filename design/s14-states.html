@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E7490">
+<title>Pissina · Kit d'états (S14)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ════════ PISSINA TOKENS — identical to S1 ════════ */
+:root{
+  --aqua-50:#ECFEFF;--aqua-100:#CFF7FB;--aqua-200:#A4ECF5;--aqua-300:#6FDDED;--aqua-400:#22D3EE;--aqua-500:#06B6D4;--aqua-600:#0891B2;--aqua-700:#0E7490;--aqua-800:#155E75;--aqua-900:#164E63;
+  --ink-strong:#0A2D38;--ink:#0F3D4C;--ink-muted:#4F6E78;--ink-faint:#8AA2AB;
+  --coral:#FB7185;--coral-deep:#F43F5E;--coral-soft:#FFE4E8;--coral-ink:#9F1239;
+  --wa:#17A24E;--wa-deep:#138A42;--amber:#F59E0B;--amber-soft:#FEF3C7;--amber-ink:#92580A;
+  --success:#15A24A;--success-soft:#DCFCE7;--danger:#DC2626;--danger-deep:#B91C1C;--danger-soft:#FEE2E2;
+  --sand:#FAFAF7;--sand-2:#F1F1EA;--white:#FFFFFF;--line:#E6E7E1;--line-2:#EDEEE8;--line-strong:#D3D6CE;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-3xl:32px;--r-pill:999px;
+  --sh-sm:0 1px 2px rgba(15,61,76,.06),0 1px 1px rgba(15,61,76,.05);
+  --sh-card:0 6px 24px -8px rgba(15,61,76,.18),0 2px 6px -3px rgba(15,61,76,.08);
+  --sh-pop:0 12px 30px -8px rgba(15,61,76,.22);--sh-lg:0 22px 55px -14px rgba(15,61,76,.32);
+  --grad-hero:linear-gradient(140deg,#0E7490 0%,#0891B2 38%,#22C9DE 72%,#7FE6EF 100%);--grad-fab:linear-gradient(160deg,#22D3EE 0%,#0E7490 100%);
+  --ease-water:cubic-bezier(.22,1,.36,1);--ease-soft:cubic-bezier(.4,0,.2,1);
+  --dur-1:.18s;--dur-2:.3s;--dur-3:.5s;--focus:0 0 0 3px rgba(6,182,212,.40);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+[hidden]{display:none!important;}
+.ar{font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;}
+::selection{background:var(--aqua-200);color:var(--ink-strong);}
+section{scroll-margin-top:78px;}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:20px;}
+@media(min-width:768px){.wrap{padding-inline:32px;}}
+.t-over{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua-700);}
+.t-display{font-size:clamp(2rem,5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;}
+.t-h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.02em;}
+.t-h3{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;}
+.t-body{font-size:.9375rem;line-height:1.55;}.t-sm{font-size:.8125rem;line-height:1.45;}
+.muted{color:var(--ink-muted);}.faint{color:var(--ink-faint);}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:var(--r-pill);padding:.62rem 1.1rem;font-size:.9rem;line-height:1;cursor:pointer;border:1.5px solid transparent;transition:all var(--dur-1) var(--ease-soft);white-space:nowrap;min-height:44px;}
+.btn:active{transform:translateY(1px);}.btn:focus-visible{outline:none;box-shadow:var(--focus);}.btn svg{width:17px;height:17px;flex:none;}
+.btn-sm{padding:.45rem .8rem;font-size:.83rem;min-height:38px;}.btn-block{width:100%;}
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));}.btn-primary:hover{background-color:var(--aqua-800);}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong);}.btn-secondary:hover{border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50);}
+.btn-ghost{background:transparent;color:var(--ink-muted);border-color:transparent;}.btn-ghost:hover{background:var(--sand-2);color:var(--ink);}
+.btn-danger-solid{background:var(--danger);color:#fff;}.btn-danger-solid:hover{background:var(--danger-deep);}
+.btn-white{background:#fff;color:var(--aqua-800);}
+
+/* badge / spinner / skeleton / toggle */
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.28rem .55rem;border-radius:var(--r-pill);font-size:.7rem;font-weight:700;line-height:1;}
+.spinner{width:20px;height:20px;border-radius:50%;border:2.5px solid rgba(255,255,255,.45);border-top-color:#fff;animation:spin .7s linear infinite;display:inline-block;}
+.spinner.dark{border-color:var(--aqua-100);border-top-color:var(--aqua-600);}
+@keyframes spin{to{transform:rotate(360deg);}}
+.skel{position:relative;overflow:hidden;background:var(--sand-2);border-radius:var(--r-sm);}
+.skel::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);animation:shimmer 1.5s infinite;}
+@keyframes shimmer{100%{transform:translateX(100%);}}
+.toggle{position:relative;width:46px;height:27px;border-radius:999px;background:var(--line-strong);border:none;flex:none;}.toggle::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:21px;height:21px;border-radius:999px;background:#fff;box-shadow:var(--sh-sm);}.toggle.is-on{background:var(--aqua-600);}.toggle.is-on::after{inset-inline-start:22px;}
+
+/* ════════ S14-specific ════════ */
+.subnav{position:sticky;top:0;z-index:40;background:rgba(250,250,247,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.subnav a{white-space:nowrap;padding:.4rem .8rem;border-radius:var(--r-pill);font-size:.82rem;font-weight:600;color:var(--ink-muted);}.subnav a:hover{color:var(--aqua-800);background:var(--aqua-50);}
+.scroll-x{overflow-x:auto;scrollbar-width:none;}.scroll-x::-webkit-scrollbar{display:none;}
+.hero{position:relative;overflow:hidden;background:var(--grad-hero);color:#fff;}
+
+.state-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);padding:1.5rem 1.3rem;text-align:center;display:flex;flex-direction:column;align-items:center;height:100%;}
+.state-tag{font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--aqua-700);margin-bottom:.7rem;}
+.ill-circle{width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 50% 34%,var(--aqua-100),var(--aqua-50));display:grid;place-items:center;color:var(--aqua-700);position:relative;margin-bottom:1rem;}
+.ill-circle>svg{width:42px;height:42px;}
+.ill-circle .acc{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--coral);top:10px;inset-inline-end:16px;box-shadow:0 0 0 4px #fff;}
+.sc-title{font-weight:700;font-size:1.02rem;}
+.sc-copy{font-size:.86rem;color:var(--ink-muted);line-height:1.5;margin-top:.35rem;max-width:24rem;flex:1;}
+.sc-action{margin-top:1.1rem;}
+
+/* error / scene panels */
+.scene{background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);overflow:hidden;}
+.scene-ill{background:linear-gradient(180deg,var(--aqua-50),#fff);display:grid;place-items:center;padding:1.8rem;}
+
+/* toast */
+.toast{display:flex;align-items:center;gap:.7rem;background:var(--ink-strong);color:#fff;border-radius:var(--r-xl);padding:.8rem 1rem;box-shadow:var(--sh-lg);}
+.toast .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;}
+.toast-err{background:#fff;color:var(--ink);border:1px solid var(--danger-soft);}
+.toast-live{position:fixed;left:50%;bottom:1.5rem;transform:translate(-50%,140%);z-index:60;transition:transform var(--dur-3) var(--ease-water);max-width:min(92vw,460px);width:max-content;}
+.toast-live.show{transform:translate(-50%,0);}
+
+/* inline form error */
+.input{width:100%;background:#fff;border:1.5px solid var(--line-strong);border-radius:var(--r-md);padding:.7rem .85rem;font-size:.92rem;min-height:46px;font-family:inherit;}
+.input.err{border-color:var(--danger);}
+.field-err{display:flex;align-items:center;gap:.35rem;color:var(--danger);font-size:.8rem;font-weight:600;margin-top:.35rem;}.field-err svg{width:14px;height:14px;}
+
+/* confirmation dialog card */
+.cdlg{background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-card);padding:1.4rem 1.3rem;text-align:center;}
+.cdlg .ic{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;margin-inline:auto;margin-bottom:.9rem;}
+.cdlg-acts{display:flex;gap:.7rem;margin-top:1.2rem;}.cdlg-acts .btn{flex:1;}
+
+/* skeleton blocks */
+.sk-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);overflow:hidden;}
+
+@media (prefers-reduced-motion:reduce){.skel::after,.spinner{animation:none;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+</defs></svg>
+
+<!-- hero -->
+<header class="hero">
+  <div class="wrap" style="padding-top:2.4rem;padding-bottom:2.6rem">
+    <div style="display:flex;align-items:center;gap:.6rem"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="9" fill="#fff" opacity=".18"/><rect x="1.5" y="1.5" width="29" height="29" rx="8" fill="none" stroke="#fff" stroke-opacity=".5"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg><span style="font-weight:800;font-size:1.2rem">pissina</span><span class="t-over" style="color:rgba(255,255,255,.85);margin-inline-start:.3rem">S14</span></div>
+    <h1 class="t-display" style="margin-top:1.2rem">Kit d'états</h1>
+    <p class="t-body" style="margin-top:.7rem;color:rgba(255,255,255,.92);max-width:52ch">Vide, erreur, hors-ligne, chargement, confirmation — une illustration ligne + turquoise, une phrase humaine, une action claire. Tokens et composants S1 réutilisés.</p>
+  </div>
+  <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style="display:block;width:100%;height:40px" aria-hidden="true"><path d="M0,28 C240,52 480,4 720,24 C960,44 1200,10 1440,30 L1440,50 L0,50 Z" fill="#FAFAF7"/></svg>
+</header>
+
+<nav class="subnav" aria-label="Sections">
+  <div class="wrap scroll-x" style="display:flex;gap:.3rem;padding-block:.55rem">
+    <a href="#empty">États vides</a><a href="#errors">Erreurs & 404</a><a href="#offline">Hors-ligne & MAJ</a><a href="#loading">Chargement</a><a href="#confirm">Confirmations</a>
+  </div>
+</nav>
+
+<main class="wrap" style="padding-top:2.6rem;padding-bottom:4rem;display:flex;flex-direction:column;gap:3.4rem">
+
+  <!-- ═══════════ EMPTY STATES ═══════════ -->
+  <section id="empty">
+    <div style="margin-bottom:1.3rem"><span class="t-over">01 · États vides</span><h2 class="t-h2" style="margin-top:.3rem">Quand il n'y a (encore) rien</h2></div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="state-card"><span class="state-tag">Recherche</span>
+        <span class="ill-circle"><span class="acc"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-3.5-3.5"/><path d="M8 11c.8-1 2.2-1 3 0s2.2 1 3 0"/></svg></span>
+        <div class="sc-title">Aucune piscine trouvée</div><p class="sc-copy">Aucun résultat à Fès pour cette date. Essayez une autre date ou une ville voisine.</p>
+        <div class="sc-action"><button class="btn btn-primary btn-sm">Modifier la recherche</button></div></div>
+
+      <div class="state-card"><span class="state-tag">Réservations</span>
+        <span class="ill-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8.5 15h7"/></svg></span>
+        <div class="sc-title">Aucune réservation à venir</div><p class="sc-copy">Trouvez la piscine parfaite pour votre prochaine sortie en famille ou entre amis.</p>
+        <div class="sc-action"><button class="btn btn-primary btn-sm">Explorer les piscines</button></div></div>
+
+      <div class="state-card"><span class="state-tag">Annonces</span>
+        <span class="ill-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 12v5M9.5 14.5h5"/></svg></span>
+        <div class="sc-title">Pas encore d'annonce</div><p class="sc-copy">Publiez votre piscine en 5 minutes et commencez à recevoir des demandes.</p>
+        <div class="sc-action"><button class="btn btn-primary btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Publier ma première annonce</button></div></div>
+
+      <div class="state-card"><span class="state-tag">Avis</span>
+        <span class="ill-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 4 2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4L7.5 17.7l.9-5L4.8 9.2l5-.7Z"/></svg></span>
+        <div class="sc-title">Pas encore d'avis</div><p class="sc-copy">Vos avis apparaîtront ici après vos premières visites — ils renforcent la confiance.</p>
+        <div class="sc-action"><button class="btn btn-secondary btn-sm">Comment ça marche</button></div></div>
+
+      <div class="state-card"><span class="state-tag">Notifications</span>
+        <span class="ill-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="acc" style="background:var(--success);inset-inline-end:18px"></span></span>
+        <div class="sc-title">Vous êtes à jour ✓</div><p class="sc-copy">Aucune nouvelle notification. Demandes, confirmations et rappels apparaîtront ici.</p></div>
+
+      <div class="state-card"><span class="state-tag">Favoris</span>
+        <span class="ill-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5C2 10.8 3.5 12.5 5 14l7 7Z"/></svg></span>
+        <div class="sc-title">Aucun favori</div><p class="sc-copy">Touchez le cœur ♥ sur une annonce pour enregistrer vos piscines préférées.</p>
+        <div class="sc-action"><button class="btn btn-secondary btn-sm">Explorer</button></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ERRORS & 404 ═══════════ -->
+  <section id="errors">
+    <div style="margin-bottom:1.3rem"><span class="t-over">02 · Erreurs & 404</span><h2 class="t-h2" style="margin-top:.3rem">Quand quelque chose dérape</h2></div>
+
+    <!-- 404 drained pool scene -->
+    <div class="scene grid lg:grid-cols-2" style="margin-bottom:1.2rem">
+      <div class="scene-ill">
+        <svg viewBox="0 0 260 180" width="100%" style="max-width:340px" role="img" aria-label="Illustration d'une piscine vidée">
+          <!-- sun -->
+          <g stroke="#F59E0B" stroke-width="2.4" stroke-linecap="round"><path d="M40 12v-7M40 49v0M21 31h-7M59 31h0M27 18l-5-5M53 44l0 0M27 44l-5 5M53 18l0 0"/></g>
+          <circle cx="40" cy="31" r="12" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.4"/>
+          <!-- coping -->
+          <ellipse cx="135" cy="106" rx="100" ry="60" fill="#CFF7FB" stroke="#0E7490" stroke-width="3.5"/>
+          <ellipse cx="135" cy="106" rx="83" ry="46" fill="#F1F1EA" stroke="#0E7490" stroke-width="1.6"/>
+          <clipPath id="basin"><ellipse cx="135" cy="106" rx="83" ry="46"/></clipPath>
+          <g clip-path="url(#basin)" stroke="#A4ECF5" stroke-width="1.6"><path d="M75 80v60M105 70v72M135 66v80M165 70v72M195 80v60M55 96h160M55 116h160"/></g>
+          <!-- leftover puddle -->
+          <path d="M100 126q14-10 30-4q14 6 3 11q-20 8-35 0z" fill="#6FDDED" opacity=".85"/>
+          <!-- float ring -->
+          <g transform="translate(176 96)"><circle r="21" fill="#FFE4E8" stroke="#F43F5E" stroke-width="3"/><circle r="9" fill="#F1F1EA" stroke="#F43F5E" stroke-width="2"/><g stroke="#F43F5E" stroke-width="3" stroke-linecap="round"><path d="M0-21v6M0 15v6M-21 0h6M15 0h6"/></g></g>
+          <!-- ladder -->
+          <g stroke="#0E7490" stroke-width="3.2" stroke-linecap="round" fill="none"><path d="M116 48v22M130 48v22M116 55h14M116 62h14"/></g>
+        </svg>
+      </div>
+      <div style="padding:clamp(1.6rem,4vw,2.4rem);display:flex;flex-direction:column;justify-content:center">
+        <span class="badge" style="background:var(--coral-soft);color:var(--coral-ink);align-self:flex-start">Erreur 404</span>
+        <h3 class="t-h3" style="font-size:1.5rem;margin-top:.7rem">Cette piscine s'est évaporée</h3>
+        <p class="t-body muted" style="margin-top:.5rem">La page que vous cherchez est introuvable — peut-être vidée pour l'hiver. Pas de panique, l'eau est plus claire ailleurs.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem">
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Retour à l'accueil</button>
+          <button class="btn btn-secondary">Explorer les piscines</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4">
+      <!-- server error -->
+      <div class="state-card"><span class="state-tag">Erreur serveur</span>
+        <span class="ill-circle" style="color:var(--danger)"><span class="acc" style="background:var(--amber)"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.3 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4.5M12 17h.01"/></svg></span>
+        <div class="sc-title">Une vague nous a submergés</div><p class="sc-copy">Nos serveurs rament un peu. Réessayez dans quelques secondes.</p>
+        <div class="sc-action"><button class="btn btn-primary btn-sm" data-retry><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span>Réessayer</span></button></div></div>
+
+      <!-- slot taken -->
+      <div class="state-card"><span class="state-tag">Créneau pris</span>
+        <span class="ill-circle" style="color:var(--amber-ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9.5 14.5 5 4M14.5 14.5l-5 4"/></svg></span>
+        <div class="sc-title">Ce créneau vient d'être réservé</div><p class="sc-copy">Quelqu'un a réservé l'après-midi du 18 juil. juste avant vous. Il en reste d'autres !</p>
+        <div class="sc-action"><button class="btn btn-primary btn-sm">Choisir un autre créneau</button></div></div>
+
+      <!-- form error (inline + toast) -->
+      <div class="state-card" style="text-align:start;align-items:stretch"><span class="state-tag" style="text-align:center">Formulaire</span>
+        <div style="display:flex;flex-direction:column;gap:.3rem">
+          <label class="t-sm" style="font-weight:700">Téléphone</label>
+          <input class="input err" value="06 12" aria-invalid="true">
+          <span class="field-err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>Numéro marocain incomplet (10 chiffres).</span>
+        </div>
+        <div class="toast toast-err" style="margin-top:1rem"><span class="ic" style="background:var(--danger-soft);color:var(--danger)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg></span><div style="flex:1"><strong style="font-size:.86rem">Impossible d'enregistrer</strong><div class="t-sm muted">Vérifiez les champs en rouge.</div></div></div>
+        <button class="btn btn-secondary btn-sm" style="margin-top:.8rem" data-toast="err">Rejouer le toast</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ OFFLINE & UPDATE ═══════════ -->
+  <section id="offline">
+    <div style="margin-bottom:1.3rem"><span class="t-over">03 · Hors-ligne & mise à jour</span><h2 class="t-h2" style="margin-top:.3rem">Quand le réseau lâche (PWA)</h2></div>
+
+    <!-- offline banner -->
+    <div style="display:flex;align-items:center;gap:.7rem;background:var(--ink-strong);color:#fff;border-radius:var(--r-lg);padding:.7rem 1rem;margin-bottom:1.2rem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M1 1l22 22M16.7 16.7A11 11 0 0 1 5 12M8.5 8.5A11 11 0 0 1 21 12M5 12a16 16 0 0 1 4-2.8M12 20h.01"/></svg>
+      <span class="t-sm" style="flex:1;font-weight:600">Vous êtes hors-ligne — certaines fonctions sont limitées.</span>
+      <button class="btn btn-sm" style="background:rgba(255,255,255,.16);color:#fff;min-height:34px">Réessayer</button>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="state-card"><span class="state-tag">Hors-ligne</span>
+        <span class="ill-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M18.4 12.3A4 4 0 0 0 16 5h-1.3A7 7 0 0 0 4 7.5M4.5 11.5A4 4 0 0 0 6 19h10"/></svg><span class="acc" style="background:var(--amber)"></span></span>
+        <div class="sc-title">Pas de connexion</div><p class="sc-copy">Vérifiez votre Wi-Fi ou vos données mobiles. Vos favoris restent consultables hors-ligne.</p>
+        <div class="sc-action"><button class="btn btn-primary btn-sm" data-retry><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span>Réessayer</span></button></div></div>
+
+      <div class="state-card" style="justify-content:center">
+        <span class="state-tag">Mise à jour disponible</span>
+        <div class="toast" style="width:100%;max-width:340px"><span class="ic" style="background:var(--grad-fab)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg></span><div style="flex:1"><strong style="font-size:.88rem">Nouvelle version de Pissina</strong><div class="t-sm" style="color:rgba(255,255,255,.75)">Des améliorations vous attendent.</div></div><button class="btn btn-white btn-sm" style="min-height:34px">Actualiser</button></div>
+        <button class="btn btn-secondary btn-sm" style="margin-top:1rem" data-toast="update">Rejouer le toast</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ LOADING ═══════════ -->
+  <section id="loading">
+    <div style="margin-bottom:1.3rem"><span class="t-over">04 · Chargement</span><h2 class="t-h2" style="margin-top:.3rem">Pendant que ça charge</h2></div>
+
+    <!-- button spinners -->
+    <div style="background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);padding:1.2rem;margin-bottom:1.2rem">
+      <div class="t-sm" style="font-weight:700;margin-bottom:.8rem">Boutons en cours</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.7rem;align-items:center">
+        <button class="btn btn-primary" disabled style="opacity:1"><span class="spinner"></span>Envoi de la demande…</button>
+        <button class="btn btn-secondary" disabled><span class="spinner dark"></span>Enregistrement…</button>
+        <button class="btn btn-primary" id="liveSpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Cliquez pour charger</button>
+      </div>
+    </div>
+
+    <div class="t-sm" style="font-weight:700;margin-bottom:.7rem;padding-inline:.2rem">Squelettes de page</div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- list skeleton -->
+      <div><div class="t-over" style="font-size:.66rem;margin-bottom:.5rem">Liste</div>
+        <div class="sk-card"><div class="skel" style="aspect-ratio:4/3;border-radius:0"></div><div style="padding:.85rem"><div class="skel" style="height:14px;width:80%"></div><div class="skel" style="height:11px;width:55%;margin-top:.55rem"></div><div class="skel" style="height:18px;width:46%;margin-top:.8rem;border-radius:99px"></div></div></div>
+      </div>
+      <!-- detail skeleton -->
+      <div><div class="t-over" style="font-size:.66rem;margin-bottom:.5rem">Détail</div>
+        <div class="sk-card" style="padding:0"><div class="skel" style="aspect-ratio:16/9;border-radius:0"></div><div style="padding:.85rem"><div class="skel" style="height:18px;width:70%"></div><div class="skel" style="height:11px;width:50%;margin-top:.5rem"></div><div style="display:flex;gap:.5rem;margin-top:.8rem"><div class="skel" style="height:40px;width:40px;border-radius:99px"></div><div style="flex:1"><div class="skel" style="height:11px;width:60%"></div><div class="skel" style="height:10px;width:40%;margin-top:.4rem"></div></div></div><div class="skel" style="height:44px;width:100%;margin-top:.9rem;border-radius:99px"></div></div></div>
+      </div>
+      <!-- dashboard skeleton -->
+      <div><div class="t-over" style="font-size:.66rem;margin-bottom:.5rem">Tableau de bord</div>
+        <div class="sk-card" style="padding:.85rem"><div style="display:flex;gap:.5rem"><div class="skel" style="height:54px;flex:1;border-radius:var(--r-md)"></div><div class="skel" style="height:54px;flex:1;border-radius:var(--r-md)"></div></div><div class="skel" style="height:120px;margin-top:.7rem;border-radius:var(--r-md)"></div><div class="skel" style="height:11px;width:70%;margin-top:.8rem"></div><div class="skel" style="height:11px;width:50%;margin-top:.45rem"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONFIRMATION DIALOGS ═══════════ -->
+  <section id="confirm">
+    <div style="margin-bottom:1.3rem"><span class="t-over">05 · Confirmations</span><h2 class="t-h2" style="margin-top:.3rem">Avant une action importante</h2></div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="cdlg">
+        <span class="ic" style="background:var(--amber-soft);color:var(--amber-ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span>
+        <h3 class="t-h3">Annuler cette demande ?</h3>
+        <p class="t-sm muted" style="margin-top:.4rem">Prévenez l'hôte si possible. Vous pourrez en envoyer une nouvelle à tout moment.</p>
+        <div class="cdlg-acts"><button class="btn btn-ghost" style="border:1.5px solid var(--line-strong)">Garder</button><button class="btn btn-danger-solid">Annuler la demande</button></div>
+      </div>
+      <div class="cdlg">
+        <span class="ic" style="background:var(--sand-2);color:var(--ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+        <h3 class="t-h3">Refuser cette demande ?</h3>
+        <p class="t-sm muted" style="margin-top:.4rem">Indiquez une raison au voyageur — elle reste courtoise et privée.</p>
+        <div class="cdlg-acts"><button class="btn btn-ghost" style="border:1.5px solid var(--line-strong)">Annuler</button><button class="btn btn-danger-solid">Refuser</button></div>
+      </div>
+      <div class="cdlg">
+        <span class="ic" style="background:var(--danger-soft);color:var(--danger)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+        <h3 class="t-h3">Supprimer cette annonce ?</h3>
+        <p class="t-sm muted" style="margin-top:.4rem">Action définitive. Les réservations à venir liées à cette piscine seront annulées.</p>
+        <div class="cdlg-acts"><button class="btn btn-ghost" style="border:1.5px solid var(--line-strong)">Garder</button><button class="btn btn-danger-solid">Supprimer</button></div>
+      </div>
+      <div class="cdlg">
+        <span class="ic" style="background:var(--aqua-50);color:var(--aqua-700)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg></span>
+        <h3 class="t-h3">Se déconnecter ?</h3>
+        <p class="t-sm muted" style="margin-top:.4rem">Vous devrez vous reconnecter pour réserver ou gérer vos annonces.</p>
+        <div class="cdlg-acts"><button class="btn btn-ghost" style="border:1.5px solid var(--line-strong)">Rester connecté</button><button class="btn btn-secondary" style="border-color:var(--line-strong)">Se déconnecter</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid var(--line);padding-top:1.8rem;text-align:center;color:var(--ink-muted)">
+    <div style="display:inline-flex;align-items:center;gap:.5rem"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg><strong>pissina</strong> <span class="t-sm">· Kit d'états S14</span></div>
+    <p class="t-sm" style="margin-top:.5rem">Dernier écran de la série S1 → S14. Tokens et composants réutilisés à l'identique.</p>
+  </footer>
+
+</main>
+
+<style>.subnav a.is-on{color:#fff;background:var(--aqua-700);}</style>
+<div class="toast toast-live" id="liveToast" role="status" aria-live="polite"></div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESIGN NOTES · S14 — Kit d'états
+     ────────────────────────────────────────────────────────────────
+     • Un langage d'état cohérent : illustration ligne + remplissage turquoise
+       (cercle dégradé aqua + accent corail), UNE phrase humaine en français, UNE
+       action claire. Jamais de cul-de-sac — toujours une porte de sortie.
+     • Couverture complète : 6 états vides, 404 (piscine vidée, ton léger), erreur
+       serveur, créneau pris, formulaire (erreur inline + toast), hors-ligne PWA +
+       réessayer, toast « nouvelle version », squelettes (liste/détail/dashboard) +
+       spinners de boutons, et 4 dialogues de confirmation (annuler, refuser,
+       supprimer, déconnexion) avec destructif clairement signalé.
+     • Marque marocaine respectée : copie chaleureuse, jamais culpabilisante ;
+       réassurance (« vos favoris restent hors-ligne »), humour mesuré sur le 404.
+     • Tokens et composants S1 réutilisés à l'identique — ce kit clôt la série S1→S14.
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+const $=id=>document.getElementById(id);
+
+/* live toast */
+const TOASTS={
+  err:'<span class="ic" style="background:var(--danger);color:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="width:17px;height:17px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg></span><div style="flex:1"><strong style="font-size:.88rem">Impossible d\'enregistrer</strong><div class="t-sm" style="color:rgba(255,255,255,.75)">Vérifiez les champs en rouge.</div></div>',
+  update:'<span class="ic" style="background:var(--grad-fab)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg></span><div style="flex:1"><strong style="font-size:.88rem">Nouvelle version disponible</strong><div class="t-sm" style="color:rgba(255,255,255,.75)">Actualisez pour en profiter.</div></div><button class="btn btn-white btn-sm" style="min-height:34px">Actualiser</button>',
+};
+let toastT=null;
+function showToast(type){const el=$('liveToast');el.innerHTML=TOASTS[type]||TOASTS.err;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),3600);}
+document.querySelectorAll('[data-toast]').forEach(b=>b.addEventListener('click',()=>showToast(b.dataset.toast)));
+
+/* retry / spinner demos */
+document.querySelectorAll('[data-retry]').forEach(b=>b.addEventListener('click',function(){const h=this.innerHTML;this.disabled=true;this.style.opacity='1';this.innerHTML='<span class="spinner"></span>Reconnexion…';setTimeout(()=>{this.disabled=false;this.innerHTML=h;},1400);}));
+$('liveSpin').addEventListener('click',function(){const h=this.innerHTML;this.disabled=true;this.innerHTML='<span class="spinner"></span>Chargement…';setTimeout(()=>{this.disabled=false;this.innerHTML=h;},1400);});
+
+/* sub-nav active */
+const links=[...document.querySelectorAll('.subnav a')];
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)links.forEach(l=>l.classList.toggle('is-on',l.getAttribute('href')==='#'+en.target.id));}),{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

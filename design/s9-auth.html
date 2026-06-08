@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E7490">
+<title>Pissina · Connexion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ════════ PISSINA TOKENS — identical to S1 ════════ */
+:root{
+  --aqua-50:#ECFEFF;--aqua-100:#CFF7FB;--aqua-200:#A4ECF5;--aqua-300:#6FDDED;--aqua-400:#22D3EE;--aqua-500:#06B6D4;--aqua-600:#0891B2;--aqua-700:#0E7490;--aqua-800:#155E75;--aqua-900:#164E63;
+  --ink-strong:#0A2D38;--ink:#0F3D4C;--ink-muted:#4F6E78;--ink-faint:#8AA2AB;
+  --coral:#FB7185;--coral-deep:#F43F5E;--coral-soft:#FFE4E8;--coral-ink:#9F1239;
+  --wa:#17A24E;--wa-deep:#138A42;--amber:#F59E0B;--amber-soft:#FEF3C7;--amber-ink:#92580A;
+  --success:#15A24A;--success-soft:#DCFCE7;--danger:#DC2626;--danger-deep:#B91C1C;--danger-soft:#FEE2E2;
+  --sand:#FAFAF7;--sand-2:#F1F1EA;--white:#FFFFFF;--line:#E6E7E1;--line-2:#EDEEE8;--line-strong:#D3D6CE;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-3xl:32px;--r-pill:999px;
+  --sh-sm:0 1px 2px rgba(15,61,76,.06),0 1px 1px rgba(15,61,76,.05);
+  --sh-card:0 6px 24px -8px rgba(15,61,76,.18),0 2px 6px -3px rgba(15,61,76,.08);
+  --sh-pop:0 12px 30px -8px rgba(15,61,76,.22);--sh-lg:0 22px 55px -14px rgba(15,61,76,.32);
+  --grad-hero:linear-gradient(140deg,#0E7490,#0891B2 40%,#22C9DE 75%,#7FE6EF);
+  --ease-water:cubic-bezier(.22,1,.36,1);--ease-soft:cubic-bezier(.4,0,.2,1);
+  --dur-1:.18s;--dur-2:.3s;--dur-3:.5s;--focus:0 0 0 3px rgba(6,182,212,.40);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+[hidden]{display:none!important;}
+.ar{font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;}
+::selection{background:var(--aqua-200);color:var(--ink-strong);}
+.t-h2{font-size:1.45rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;}
+.t-body{font-size:.9375rem;line-height:1.55;}.t-sm{font-size:.8125rem;line-height:1.45;}
+.muted{color:var(--ink-muted);}.faint{color:var(--ink-faint);}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:var(--r-pill);padding:.78rem 1.2rem;font-size:.98rem;line-height:1;cursor:pointer;border:1.5px solid transparent;transition:background-color var(--dur-1) var(--ease-soft),border-color var(--dur-1),color var(--dur-1),transform var(--dur-1),box-shadow var(--dur-1);white-space:nowrap;min-height:52px;width:100%;}
+.btn:active{transform:translateY(1px);}.btn:focus-visible{outline:none;box-shadow:var(--focus);}.btn svg{width:20px;height:20px;flex:none;}
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));}
+.btn-primary:hover{background-color:var(--aqua-800);}
+.btn-primary:disabled{background:var(--aqua-200);color:#fff;background-image:none;cursor:not-allowed;box-shadow:none;}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong);}.btn-secondary:hover{border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50);}
+.btn-ghost{background:transparent;color:var(--aqua-800);min-height:44px;}.btn-ghost:hover{background:var(--aqua-50);}
+.btn-link{background:none;border:none;color:var(--aqua-700);font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
+.btn-fb{background:#1877F2;border-color:#1877F2;color:#fff;}.btn-fb:hover{background:#1568d8;}
+.icon-btn{width:40px;height:40px;border-radius:var(--r-pill);display:inline-flex;align-items:center;justify-content:center;border:none;background:var(--sand-2);color:var(--ink);cursor:pointer;flex:none;width:40px;}.icon-btn svg{width:20px;height:20px;}
+
+/* fields */
+.field{display:flex;flex-direction:column;gap:.4rem;}.label{font-size:.86rem;font-weight:700;color:var(--ink);}
+.input{width:100%;background:#fff;border:1.5px solid var(--line-strong);border-radius:var(--r-md);padding:.8rem .9rem;font-size:.98rem;color:var(--ink);min-height:50px;font-family:inherit;transition:border-color var(--dur-1),box-shadow var(--dur-1);}
+.input::placeholder{color:var(--ink-faint);}.input:focus{outline:none;border-color:var(--aqua-500);box-shadow:var(--focus);}
+.input.err{border-color:var(--danger);}
+.check{width:24px;height:24px;border-radius:7px;border:1.8px solid var(--line-strong);background:#fff;display:grid;place-items:center;cursor:pointer;flex:none;transition:all var(--dur-1);}
+.check svg{width:16px;height:16px;color:#fff;opacity:0;transform:scale(.6);transition:all var(--dur-1) var(--ease-water);}
+.check.is-on{background:var(--aqua-700);border-color:var(--aqua-700);}.check.is-on svg{opacity:1;transform:scale(1);}
+.avatar{border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;}
+
+/* ════════ S9-specific ════════ */
+.btn-social{justify-content:center;gap:.7rem;border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);font-weight:700;}
+.btn-social:hover{background:var(--sand-2);}
+.or{display:flex;align-items:center;gap:.8rem;color:var(--ink-faint);font-size:.8rem;font-weight:600;margin:.2rem 0;}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line);}
+.reassure{display:flex;align-items:center;justify-content:center;gap:1rem;color:var(--ink-muted);font-size:.82rem;font-weight:600;flex-wrap:wrap;}
+.reassure span{display:inline-flex;align-items:center;gap:.35rem;}.reassure svg{width:15px;height:15px;color:var(--success);}
+.pw{position:relative;}.pw .input{padding-inline-end:3rem;}
+.pw .eye{position:absolute;inset-inline-end:.5rem;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:99px;border:none;background:none;color:var(--ink-muted);cursor:pointer;display:grid;place-items:center;}.pw .eye svg{width:20px;height:20px;}
+.otp{display:flex;gap:.5rem;justify-content:space-between;}
+.otp input{width:100%;aspect-ratio:1;max-width:50px;text-align:center;font-size:1.4rem;font-weight:800;border:1.5px solid var(--line-strong);border-radius:var(--r-md);color:var(--ink);background:#fff;}
+.otp input:focus{outline:none;border-color:var(--aqua-500);box-shadow:var(--focus);}
+.otp input.filled{border-color:var(--aqua-500);background:var(--aqua-50);}
+.otp.err input{border-color:var(--danger);background:var(--danger-soft);}
+.err-banner{display:flex;gap:.6rem;align-items:flex-start;background:var(--danger-soft);border:1px solid #F3C0C0;border-radius:var(--r-lg);padding:.75rem .85rem;color:var(--danger-deep);font-size:.86rem;font-weight:600;line-height:1.4;}
+.err-banner svg{width:18px;height:18px;flex:none;margin-top:1px;}
+.trust-note{display:flex;gap:.55rem;align-items:center;background:var(--aqua-50);border-radius:var(--r-lg);padding:.7rem .85rem;color:var(--aqua-800);font-size:.85rem;font-weight:600;}
+.trust-note svg{width:18px;height:18px;flex:none;}
+.phone-in{display:flex;gap:.5rem;}.phone-in .pre{display:flex;align-items:center;gap:.3rem;padding:.8rem .8rem;border:1.5px solid var(--line-strong);border-radius:var(--r-md);font-weight:700;background:var(--sand-2);white-space:nowrap;}
+
+/* auth sheet */
+.auth-overlay{position:fixed;inset:0;background:rgba(10,45,56,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:50;display:flex;align-items:flex-end;justify-content:center;}
+@media(min-width:768px){.auth-overlay{align-items:center;padding:1.5rem;}}
+.auth-sheet{background:#fff;width:100%;max-height:96dvh;border-radius:var(--r-3xl) var(--r-3xl) 0 0;box-shadow:var(--sh-lg);display:flex;flex-direction:column;overflow:hidden;animation:up var(--dur-3) var(--ease-water);}
+@media(min-width:768px){.auth-sheet{max-width:430px;border-radius:var(--r-3xl);animation:pop var(--dur-2) var(--ease-water);}}
+@keyframes up{from{transform:translateY(100%)}}@keyframes pop{from{transform:translateY(10px) scale(.98);opacity:0}}
+.auth-grip{width:40px;height:5px;border-radius:99px;background:var(--line-strong);margin:.7rem auto 0;}
+@media(min-width:768px){.auth-grip{display:none;}}
+.auth-head{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.1rem .2rem;min-height:44px;}
+.auth-body{padding:.6rem 1.3rem 1.6rem;overflow-y:auto;}
+
+/* demo bar */
+.demo-bar{position:fixed;top:.6rem;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:.3rem;border:1px dashed rgba(255,255,255,.5);border-radius:var(--r-pill);padding:.3rem .35rem .3rem .7rem;background:rgba(10,45,56,.65);backdrop-filter:blur(8px);max-width:94vw;overflow-x:auto;scrollbar-width:none;}
+.demo-bar::-webkit-scrollbar{display:none;}
+.demo-bar .lab{font-size:.64rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.75);white-space:nowrap;}
+.demo-bar button{font-size:.74rem;font-weight:600;padding:.3rem .6rem;border-radius:999px;border:none;background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap;}
+.demo-bar button.is-on{background:#fff;color:var(--aqua-800);}
+.demo-bar button.errbtn{background:rgba(220,38,38,.35);}.demo-bar button.errbtn.is-on{background:#fff;color:var(--danger-deep);}
+
+@media (prefers-reduced-motion:reduce){.auth-sheet{animation:none;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+</defs></svg>
+
+<!-- ░░ dimmed app context behind (a listing) ░░ -->
+<div aria-hidden="true" style="min-height:100dvh">
+  <div style="position:relative;height:46vh;min-height:240px;background:var(--ink-strong);overflow:hidden"><img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=60" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.85"></div>
+  <div style="max-width:760px;margin-inline:auto;padding:1.2rem">
+    <h1 style="font-size:1.5rem;font-weight:800;letter-spacing:-.02em">Villa avec piscine chauffée</h1>
+    <p class="muted" style="margin-top:.3rem">★ 4,8 (12 avis) · Dar Bouazza, Casablanca · Hôte : Yasmine</p>
+  </div>
+</div>
+
+<!-- demo state switcher -->
+<div class="demo-bar" role="group" aria-label="Aperçu des états">
+  <span class="lab">Vues</span>
+  <button data-go="entry" class="is-on">Entrée</button>
+  <button data-go="context">Contextuel</button>
+  <button data-go="signup">Inscription</button>
+  <button data-go="signin">Connexion</button>
+  <button data-go="phone">Téléphone</button>
+  <button data-go="otp">Code SMS</button>
+  <button data-go="forgot">Oublié</button>
+  <span class="lab" style="margin-inline-start:.3rem">Erreurs</span>
+  <button class="errbtn" data-go="signin" data-err="password">Mot de passe</button>
+  <button class="errbtn" data-go="signup" data-err="google">Compte Google</button>
+  <button class="errbtn" data-go="otp" data-err="code">Code invalide</button>
+</div>
+
+<!-- ═══════════════ AUTH SHEET ═══════════════ -->
+<div class="auth-overlay" id="overlay">
+  <div class="auth-sheet" role="dialog" aria-modal="true" aria-label="Connexion à Pissina">
+    <div class="auth-grip"></div>
+    <div class="auth-head">
+      <button class="icon-btn" id="backBtn" hidden aria-label="Retour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+      <span style="flex:1"></span>
+      <button class="icon-btn" id="closeBtn" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+
+    <div class="auth-body">
+
+      <!-- ENTRY -->
+      <section data-view="entry">
+        <div style="text-align:center;margin-bottom:1.2rem">
+          <svg width="48" height="48" viewBox="0 0 32 32" fill="none" style="margin-inline:auto"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg>
+          <h2 class="t-h2" style="margin-top:.8rem">Bienvenue sur Pissina</h2>
+          <p class="muted t-body" style="margin-top:.3rem">Réservez ou publiez une piscine en quelques secondes.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.7rem">
+          <button class="btn btn-social"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>Continuer avec Google</button>
+          <button class="btn btn-social btn-fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95H15.8c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12z"/></svg>Continuer avec Facebook</button>
+          <div class="or">ou</div>
+          <button class="btn btn-secondary" data-nav="signup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>Continuer avec téléphone ou e-mail</button>
+        </div>
+        <div class="reassure" style="margin-top:1.2rem"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gratuit</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Sans engagement</span></div>
+        <p class="t-sm muted" style="text-align:center;margin-top:1rem">Déjà un compte ? <button class="btn-link" data-nav="signin">Se connecter</button></p>
+      </section>
+
+      <!-- CONTEXTUAL (tapped "Demander à réserver" while logged out) -->
+      <section data-view="context" hidden>
+        <div style="text-align:center;margin-bottom:1.1rem">
+          <span class="avatar" style="width:56px;height:56px;font-size:1.1rem;background:linear-gradient(135deg,#22D3EE,#0E7490);margin-inline:auto">YA</span>
+          <h2 class="t-h2" style="margin-top:.7rem;font-size:1.3rem">Connectez-vous pour envoyer votre demande à Yasmine</h2>
+          <p class="muted t-body" style="margin-top:.35rem">Une seconde, et votre demande pour <strong>Villa avec piscine chauffée</strong> part. Aucun paiement maintenant.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.7rem">
+          <button class="btn btn-social"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>Continuer avec Google</button>
+          <button class="btn btn-social btn-fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95H15.8c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12z"/></svg>Continuer avec Facebook</button>
+          <div class="or">ou</div>
+          <button class="btn btn-secondary" data-nav="signup">Continuer avec téléphone ou e-mail</button>
+        </div>
+        <div class="reassure" style="margin-top:1.1rem"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gratuit</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Paiement sur place</span></div>
+      </section>
+
+      <!-- SIGN UP -->
+      <section data-view="signup" hidden>
+        <h2 class="t-h2" style="margin-bottom:.3rem">Créer un compte</h2>
+        <p class="muted t-sm" style="margin-bottom:1.1rem">Quelques infos et c'est parti.</p>
+        <div class="err-banner" data-err="google" hidden style="margin-bottom:1rem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <div>Un compte existe déjà avec cette adresse via Google.<br><button class="btn-link" style="color:var(--danger-deep)">Continuer avec Google</button></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <label class="field"><span class="label">Nom complet</span><input class="input" type="text" placeholder="ex. Salma Bennani"></label>
+          <label class="field"><span class="label">E-mail</span><input class="input" type="email" placeholder="vous@exemple.com"></label>
+          <div class="field"><span class="label">Mot de passe</span><div class="pw"><input class="input" type="password" value="motdepasse" data-pw><button class="eye" type="button" data-eye aria-label="Afficher le mot de passe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button></div><span class="t-sm muted">8 caractères minimum.</span></div>
+          <label style="display:flex;align-items:flex-start;gap:.6rem;cursor:pointer"><span class="check is-on" role="checkbox" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 6"/></svg></span><span class="t-sm">J'accepte les <a href="#" style="color:var(--aqua-700);font-weight:700">CGU</a> et la <a href="#" style="color:var(--aqua-700);font-weight:700">politique de confidentialité</a>.</span></label>
+          <button class="btn btn-primary" data-nav="phone">Créer mon compte</button>
+        </div>
+        <p class="t-sm muted" style="text-align:center;margin-top:1rem">Déjà un compte ? <button class="btn-link" data-nav="signin">Se connecter</button></p>
+      </section>
+
+      <!-- SIGN IN -->
+      <section data-view="signin" hidden>
+        <h2 class="t-h2" style="margin-bottom:.3rem">Bon retour 👋</h2>
+        <p class="muted t-sm" style="margin-bottom:1.1rem">Connectez-vous pour continuer.</p>
+        <div class="err-banner" data-err="password" hidden style="margin-bottom:1rem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <div>Mot de passe incorrect. Réessayez ou <button class="btn-link" style="color:var(--danger-deep)" data-nav="forgot">réinitialisez-le</button>.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <label class="field"><span class="label">E-mail</span><input class="input" type="email" value="salma@exemple.com"></label>
+          <div class="field"><div style="display:flex;justify-content:space-between;align-items:center"><span class="label">Mot de passe</span><button class="btn-link t-sm" data-nav="forgot" style="text-decoration:none">Mot de passe oublié ?</button></div><div class="pw"><input class="input" type="password" value="motdepasse" data-pw><button class="eye" type="button" data-eye aria-label="Afficher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+          <button class="btn btn-primary" id="signinBtn">Se connecter</button>
+          <div class="or">ou</div>
+          <button class="btn btn-social"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>Continuer avec Google</button>
+        </div>
+        <p class="t-sm muted" style="text-align:center;margin-top:1rem">Pas encore de compte ? <button class="btn-link" data-nav="signup">S'inscrire</button></p>
+      </section>
+
+      <!-- PHONE -->
+      <section data-view="phone" hidden>
+        <h2 class="t-h2" style="margin-bottom:.3rem">Vérifiez votre numéro</h2>
+        <p class="muted t-body" style="margin-bottom:1.1rem">Un numéro vérifié rassure les propriétaires et débloque la réservation.</p>
+        <div class="field">
+          <span class="label">Numéro de téléphone</span>
+          <div class="phone-in">
+            <span class="pre">🇲🇦 +212</span>
+            <input class="input" type="tel" inputmode="numeric" placeholder="6 12 34 56 78" value="6 12 34 56 78">
+          </div>
+          <span class="t-sm muted">Nous vous enverrons un code par SMS.</span>
+        </div>
+        <button class="btn btn-primary" data-nav="otp" style="margin-top:1.2rem">Envoyer le code par SMS</button>
+        <div class="trust-note" style="margin-top:1rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>Votre numéro reste privé — il n'est jamais affiché publiquement.</div>
+      </section>
+
+      <!-- OTP -->
+      <section data-view="otp" hidden>
+        <h2 class="t-h2" style="margin-bottom:.3rem">Entrez le code</h2>
+        <p class="muted t-body" style="margin-bottom:1.1rem">Code à 6 chiffres envoyé au <strong>+212 6 12 34 56 78</strong>. <button class="btn-link t-sm" data-nav="phone" style="text-decoration:none">Modifier</button></p>
+        <div class="err-banner" data-err="code" hidden style="margin-bottom:1rem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          <div>Code invalide. Vérifiez les 6 chiffres et réessayez.</div>
+        </div>
+        <div class="otp" id="otpBoxes">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Chiffre 1">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Chiffre 2">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Chiffre 3">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Chiffre 4">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Chiffre 5">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Chiffre 6">
+        </div>
+        <div style="text-align:center;margin-top:1rem">
+          <span class="t-sm muted" id="resendTxt">Renvoyer le code dans <strong id="countdown">0:42</strong></span>
+          <button class="btn-link t-sm" id="resendBtn" hidden>Renvoyer le code</button>
+        </div>
+        <button class="btn btn-primary" id="verifyBtn" style="margin-top:1rem">Vérifier</button>
+        <div class="trust-note" style="margin-top:1rem;background:var(--success-soft);color:#0F7A38"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Votre numéro vérifié rassure les propriétaires ✓</div>
+      </section>
+
+      <!-- FORGOT -->
+      <section data-view="forgot" hidden>
+        <h2 class="t-h2" style="margin-bottom:.3rem">Mot de passe oublié ?</h2>
+        <p class="muted t-body" style="margin-bottom:1.1rem">Entrez votre e-mail, on vous envoie un lien de réinitialisation.</p>
+        <label class="field"><span class="label">E-mail</span><input class="input" type="email" value="salma@exemple.com"></label>
+        <button class="btn btn-primary" data-nav="forgot-sent" style="margin-top:1.2rem">Envoyer le lien</button>
+        <p class="t-sm muted" style="text-align:center;margin-top:1rem"><button class="btn-link" data-nav="signin">Retour à la connexion</button></p>
+      </section>
+
+      <!-- FORGOT · SENT -->
+      <section data-view="forgot-sent" hidden style="text-align:center;padding-top:.5rem">
+        <div style="width:84px;height:84px;border-radius:50%;background:var(--success-soft);color:var(--success);display:grid;place-items:center;margin-inline:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:42px;height:42px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></div>
+        <h2 class="t-h2" style="margin-top:1rem">E-mail envoyé ✓</h2>
+        <p class="muted t-body" style="max-width:26rem;margin:.5rem auto 0">Un lien de réinitialisation est parti vers <strong>salma@exemple.com</strong>. Vérifiez votre boîte (et les spams).</p>
+        <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:1.4rem">
+          <button class="btn btn-primary">Ouvrir ma messagerie</button>
+          <button class="btn btn-ghost" data-nav="signin" style="border:none">Retour à la connexion</button>
+        </div>
+        <p class="t-sm muted" style="margin-top:1rem">Rien reçu ? <button class="btn-link" data-nav="forgot-sent">Renvoyer</button></p>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESIGN NOTES · S9 — Authentification
+     ────────────────────────────────────────────────────────────────
+     • Auth rapide, demandée seulement au besoin : feuille d'entrée minimale
+       (Google, Facebook, puis e-mail/téléphone) + réassurance « Gratuit · Sans
+       engagement ». Déclencheur contextuel : « Connectez-vous pour envoyer votre
+       demande à Yasmine » avec le contexte de l'annonce.
+     • La vérification du téléphone est le pivot de confiance : saisie +212, code
+       SMS à 6 cases (auto-avance + collage), renvoi avec compte à rebours, et le
+       message clé « Votre numéro vérifié rassure les propriétaires ✓ ».
+     • Friction minimale : mot de passe affichable, CGU liées, connexion Google en
+       repli partout. Mot de passe oublié → confirmation « E-mail envoyé ✓ ».
+     • États d'erreur clairs et orientés action : mauvais mot de passe (→ réinitialiser),
+       compte déjà lié à Google (→ Continuer avec Google), code SMS invalide (cases
+       rouges). Tokens/composants S1 réutilisés à l'identique.
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+const $=id=>document.getElementById(id);
+const BACK={signup:'entry',signin:'entry',phone:'entry',otp:'phone',forgot:'signin','forgot-sent':'forgot'};
+let current='entry', cdTimer=null;
+
+function showView(v,err){
+  current=v;
+  $('overlay').style.display='flex';
+  document.querySelectorAll('.auth-body [data-view]').forEach(s=>s.hidden=s.dataset.view!==v);
+  document.querySelectorAll('.err-banner[data-err]').forEach(e=>e.hidden=true);
+  $('otpBoxes').classList.remove('err');
+  $('backBtn').hidden=!BACK[v];
+  document.querySelectorAll('.demo-bar button').forEach(b=>b.classList.toggle('is-on', b.dataset.go===v && (err? b.dataset.err===err : !b.dataset.err)));
+  if(err){
+    const banner=document.querySelector(`[data-view="${v}"] .err-banner[data-err="${err}"]`);
+    if(banner)banner.hidden=false;
+    if(v==='otp'&&err==='code'){const bx=$('otpBoxes');bx.classList.add('err');[...bx.children].forEach((i,k)=>{i.value='904285'[k];i.classList.add('filled');});}
+  }
+  if(v==='otp')startCountdown();
+  document.querySelector('.auth-body').scrollTop=0;
+}
+
+/* navigation */
+document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.nav)));
+document.querySelectorAll('.demo-bar button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.go,b.dataset.err)));
+$('backBtn').addEventListener('click',()=>{const t=BACK[current];if(t)showView(t);});
+$('closeBtn').addEventListener('click',()=>{$('overlay').style.display='none';});
+$('signinBtn').addEventListener('click',()=>{$('overlay').style.display='none';});
+$('verifyBtn').addEventListener('click',()=>{$('overlay').style.display='none';});
+
+/* password show/hide */
+document.querySelectorAll('[data-eye]').forEach(b=>b.addEventListener('click',function(){const inp=this.parentElement.querySelector('[data-pw]');inp.type=inp.type==='password'?'text':'password';this.style.color=inp.type==='text'?'var(--aqua-700)':'var(--ink-muted)';}));
+
+/* checkbox (terms) */
+document.addEventListener('click',e=>{const c=e.target.closest('.check');if(c){c.classList.toggle('is-on');c.setAttribute('aria-checked',c.classList.contains('is-on'));}});
+
+/* OTP boxes */
+const otp=$('otpBoxes');
+otp.addEventListener('input',e=>{const i=e.target;i.value=i.value.replace(/\D/g,'').slice(0,1);i.classList.toggle('filled',!!i.value);otp.classList.remove('err');const idx=[...otp.children].indexOf(i);if(i.value&&idx<5)otp.children[idx+1].focus();});
+otp.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!e.target.value){const idx=[...otp.children].indexOf(e.target);if(idx>0){otp.children[idx-1].focus();}}});
+otp.addEventListener('paste',e=>{e.preventDefault();const d=(e.clipboardData.getData('text')||'').replace(/\D/g,'').slice(0,6);[...otp.children].forEach((c,k)=>{c.value=d[k]||'';c.classList.toggle('filled',!!d[k]);});if(d.length){otp.children[Math.min(d.length,5)].focus();}});
+
+/* resend countdown */
+function startCountdown(){
+  clearInterval(cdTimer);let t=42;$('resendTxt').hidden=false;$('resendBtn').hidden=true;
+  $('countdown').textContent='0:'+String(t).padStart(2,'0');
+  cdTimer=setInterval(()=>{t--;if(t<=0){clearInterval(cdTimer);$('resendTxt').hidden=true;$('resendBtn').hidden=false;}else{$('countdown').textContent='0:'+String(t).padStart(2,'0');}},1000);
+}
+$('resendBtn').addEventListener('click',startCountdown);
+
+showView('entry');
+</script>
+</body>
+</html>

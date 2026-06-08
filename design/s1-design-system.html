@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E7490">
+<title>Pissina · Système de design (S1)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   PISSINA — DESIGN TOKENS (single source of truth, reused on every screen)
+   ════════════════════════════════════════════════════════════════ */
+:root{
+  /* ——— Aqua / primary (identity + actions) ——— */
+  --aqua-50:#ECFEFF;  --aqua-100:#CFF7FB; --aqua-200:#A4ECF5; --aqua-300:#6FDDED;
+  --aqua-400:#22D3EE; --aqua-500:#06B6D4; /* brand/identity */ --aqua-600:#0891B2;
+  --aqua-700:#0E7490; /* actions/text on light */ --aqua-800:#155E75; --aqua-900:#164E63; /* petrol */
+
+  /* ——— Ink / text (petrol-ink family) ——— */
+  --ink-strong:#0A2D38;  --ink:#0F3D4C;  --ink-muted:#4F6E78;  --ink-faint:#8AA2AB;
+
+  /* ——— Warm accent — coral (the ONE accent: heart, promo, highlights) ——— */
+  --coral:#FB7185; --coral-deep:#F43F5E; --coral-soft:#FFE4E8; --coral-ink:#9F1239;
+
+  /* ——— Functional ——— */
+  --wa:#17A24E; --wa-deep:#138A42;            /* WhatsApp (white only on large/bold + icons) */
+  --amber:#F59E0B; --amber-soft:#FEF3C7; --amber-ink:#92580A;  /* rating stars + cash callout */
+  --success:#15A24A; --success-soft:#DCFCE7;
+  --danger:#DC2626; --danger-deep:#B91C1C; --danger-soft:#FEE2E2;
+
+  /* ——— Surfaces / neutrals ——— */
+  --sand:#FAFAF7;  --sand-2:#F1F1EA;  --white:#FFFFFF;
+  --line:#E6E7E1;  --line-2:#EDEEE8;  --line-strong:#D3D6CE;
+
+  /* ——— Radius ——— */
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-2xl:24px; --r-3xl:32px; --r-pill:999px;
+
+  /* ——— Elevation (cool-tinted shadows) ——— */
+  --sh-sm:0 1px 2px rgba(15,61,76,.06), 0 1px 1px rgba(15,61,76,.05);
+  --sh-card:0 6px 24px -8px rgba(15,61,76,.18), 0 2px 6px -3px rgba(15,61,76,.08);
+  --sh-pop:0 12px 30px -8px rgba(15,61,76,.22);
+  --sh-lg:0 22px 55px -14px rgba(15,61,76,.32);
+
+  /* ——— Gradients (hero / heels only) ——— */
+  --grad-hero:linear-gradient(140deg,#0E7490 0%,#0891B2 38%,#22C9DE 72%,#7FE6EF 100%);
+  --grad-fab:linear-gradient(160deg,#22D3EE 0%,#0E7490 100%);
+
+  /* ——— Motion ——— */
+  --ease-water:cubic-bezier(.22,1,.36,1); --ease-soft:cubic-bezier(.4,0,.2,1);
+  --dur-1:.18s; --dur-2:.3s; --dur-3:.5s;
+
+  /* ——— Focus ——— */
+  --focus:0 0 0 3px rgba(6,182,212,.40);
+
+  /* texture */
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── base ───────────────────────────────────────────────────────── */
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+.ar{font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;}
+::selection{background:var(--aqua-200);color:var(--ink-strong);}
+section{scroll-margin-top:84px;}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:20px;}
+@media(min-width:768px){.wrap{padding-inline:32px;}}
+
+/* ── type scale ─────────────────────────────────────────────────── */
+.t-over{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua-700);}
+.t-display{font-size:clamp(2.3rem,6.4vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.03;}
+.t-h1{font-size:clamp(1.9rem,4.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.12;}
+.t-h2{font-size:clamp(1.5rem,3.4vw,2rem);font-weight:700;letter-spacing:-.02em;line-height:1.18;}
+.t-h3{font-size:1.3rem;font-weight:700;letter-spacing:-.015em;line-height:1.28;}
+.t-bodyl{font-size:1.0625rem;line-height:1.62;font-weight:400;}
+.t-body{font-size:.9375rem;line-height:1.6;font-weight:400;}
+.t-sm{font-size:.8125rem;line-height:1.45;}
+.muted{color:var(--ink-muted);}
+.faint{color:var(--ink-faint);}
+
+/* ── buttons ────────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;
+  border-radius:var(--r-pill);padding:.72rem 1.25rem;font-size:.95rem;line-height:1;cursor:pointer;
+  border:1.5px solid transparent;transition:background-color var(--dur-1) var(--ease-soft),border-color var(--dur-1),color var(--dur-1),transform var(--dur-1),box-shadow var(--dur-1);white-space:nowrap;min-height:44px;}
+.btn:active{transform:translateY(1px);}
+.btn:focus-visible{outline:none;box-shadow:var(--focus);}
+.btn svg{width:18px;height:18px;flex:none;}
+.btn-lg{padding:.95rem 1.6rem;font-size:1.0625rem;min-height:52px;} /* ≥17px/700 */
+.btn-sm{padding:.55rem .95rem;font-size:.85rem;min-height:38px;}
+.btn-block{width:100%;}
+
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);
+  background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));}
+.btn-primary:hover{background-color:var(--aqua-800);}
+.btn-primary:disabled,.btn-primary.is-disabled{background:var(--aqua-200);color:#fff;background-image:none;box-shadow:none;cursor:not-allowed;transform:none;}
+
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong);}
+.btn-secondary:hover{border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50);}
+.btn-secondary:disabled,.btn-secondary.is-disabled{color:var(--ink-faint);border-color:var(--line);background:var(--sand-2);cursor:not-allowed;}
+
+.btn-ghost{background:transparent;color:var(--aqua-800);}
+.btn-ghost:hover{background:var(--aqua-50);}
+.btn-ghost:disabled,.btn-ghost.is-disabled{color:var(--ink-faint);cursor:not-allowed;}
+
+.btn-wa{background:var(--wa);color:#fff;}            /* white text only on lg/bold per AA */
+.btn-wa:hover{background:var(--wa-deep);}
+.btn-wa:disabled,.btn-wa.is-disabled{background:#A7D9BC;color:#fff;cursor:not-allowed;}
+
+.btn-danger{background:var(--danger);color:#fff;}
+.btn-danger:hover{background:var(--danger-deep);}
+.btn-danger:disabled,.btn-danger.is-disabled{background:var(--danger-soft);color:#fff;cursor:not-allowed;}
+
+.icon-btn{width:44px;height:44px;border-radius:var(--r-pill);display:inline-flex;align-items:center;justify-content:center;
+  border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);cursor:pointer;transition:all var(--dur-1) var(--ease-soft);}
+.icon-btn:hover{border-color:var(--aqua-500);color:var(--aqua-800);}
+.icon-btn:focus-visible{outline:none;box-shadow:var(--focus);}
+.icon-btn svg{width:20px;height:20px;}
+.icon-btn-wa{background:var(--wa);border-color:transparent;color:#fff;}
+.icon-btn-wa:hover{background:var(--wa-deep);color:#fff;}
+
+/* ── form controls ──────────────────────────────────────────────── */
+.field{display:flex;flex-direction:column;gap:.4rem;}
+.label{font-size:.82rem;font-weight:600;color:var(--ink);}
+.hint{font-size:.78rem;color:var(--ink-muted);}
+.hint-err{font-size:.78rem;color:var(--danger);font-weight:600;display:flex;align-items:center;gap:.3rem;}
+.input,.select{width:100%;background:#fff;border:1.5px solid var(--line-strong);border-radius:var(--r-md);
+  padding:.78rem .9rem;font-size:.95rem;color:var(--ink);min-height:48px;font-family:inherit;
+  transition:border-color var(--dur-1),box-shadow var(--dur-1);}
+.input::placeholder{color:var(--ink-faint);}
+.input:focus,.select:focus{outline:none;border-color:var(--aqua-500);box-shadow:var(--focus);}
+.input.is-error{border-color:var(--danger);}
+.input.is-error:focus{box-shadow:0 0 0 3px rgba(220,38,38,.25);}
+.select-wrap{position:relative;}
+.select{appearance:none;-webkit-appearance:none;padding-inline-end:2.6rem;cursor:pointer;}
+.select-wrap > svg{position:absolute;inset-inline-end:.85rem;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--ink-muted);pointer-events:none;}
+
+.stepper{display:inline-flex;align-items:center;gap:.4rem;border:1.5px solid var(--line-strong);border-radius:var(--r-pill);padding:.28rem;background:#fff;}
+.stepper button{width:38px;height:38px;border-radius:var(--r-pill);border:none;background:var(--sand-2);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:all var(--dur-1);}
+.stepper button:hover{background:var(--aqua-50);color:var(--aqua-800);}
+.stepper button:focus-visible{outline:none;box-shadow:var(--focus);}
+.stepper button:disabled{opacity:.4;cursor:not-allowed;}
+.stepper button svg{width:18px;height:18px;}
+.stepper .val{min-width:2.2rem;text-align:center;font-weight:700;font-variant-numeric:tabular-nums;}
+
+.check{width:24px;height:24px;border-radius:7px;border:1.8px solid var(--line-strong);background:#fff;display:grid;place-items:center;cursor:pointer;flex:none;transition:all var(--dur-1);}
+.check svg{width:16px;height:16px;color:#fff;opacity:0;transform:scale(.6);transition:all var(--dur-1) var(--ease-water);}
+.check.is-on{background:var(--aqua-700);border-color:var(--aqua-700);}
+.check.is-on svg{opacity:1;transform:scale(1);}
+.check:focus-visible{outline:none;box-shadow:var(--focus);}
+
+.toggle{position:relative;width:52px;height:30px;border-radius:999px;background:var(--line-strong);cursor:pointer;border:none;flex:none;transition:background-color var(--dur-2) var(--ease-soft);}
+.toggle::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:24px;height:24px;border-radius:999px;background:#fff;box-shadow:var(--sh-sm);transition:inset-inline-start var(--dur-2) var(--ease-water);}
+.toggle.is-on{background:var(--aqua-600);}
+.toggle.is-on::after{inset-inline-start:25px;}
+.toggle:focus-visible{outline:none;box-shadow:var(--focus);}
+
+.chip{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .9rem;border-radius:var(--r-pill);
+  border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);font-weight:600;font-size:.85rem;cursor:pointer;min-height:42px;transition:all var(--dur-1);}
+.chip:hover{border-color:var(--aqua-500);}
+.chip:focus-visible{outline:none;box-shadow:var(--focus);}
+.chip .chk{width:15px;height:15px;display:none;}
+.chip.is-on{background:var(--aqua-700);color:#fff;border-color:var(--aqua-700);}
+.chip.is-on .chk{display:block;}
+
+/* search bar */
+.searchbar{display:flex;align-items:center;gap:.5rem;background:#fff;border:1.5px solid var(--line-strong);
+  border-radius:var(--r-pill);padding:.4rem .4rem .4rem 1rem;box-shadow:var(--sh-sm);}
+.searchbar .seg-divider{width:1px;height:28px;background:var(--line);flex:none;}
+.searchbar input{border:none;outline:none;font-size:.95rem;color:var(--ink);min-width:0;flex:1;background:transparent;font-family:inherit;}
+.searchbar input::placeholder{color:var(--ink-faint);}
+
+/* ── segmented (slot selector) ──────────────────────────────────── */
+.seg{display:flex;background:var(--sand-2);border-radius:var(--r-pill);padding:.3rem;gap:.25rem;}
+.seg-item{flex:1;border:none;background:transparent;border-radius:var(--r-pill);padding:.55rem .7rem;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:.12rem;min-height:48px;color:var(--ink-muted);transition:all var(--dur-1) var(--ease-soft);}
+.seg-item .lab{font-weight:700;font-size:.9rem;}
+.seg-item .sub{font-size:.72rem;font-weight:500;opacity:.85;}
+.seg-item:hover{color:var(--ink);}
+.seg-item.is-on{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);}
+.seg-item.is-on .sub{opacity:.92;}
+.seg-item:focus-visible{outline:none;box-shadow:var(--focus);}
+
+/* ── badges ─────────────────────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.34rem .62rem;border-radius:var(--r-pill);font-size:.76rem;font-weight:700;line-height:1;}
+.badge svg{width:14px;height:14px;}
+.badge-verified{background:var(--aqua-50);color:var(--aqua-800);}
+.badge-host{background:#fff;color:var(--ink);box-shadow:var(--sh-sm);border:1px solid var(--line);}
+.badge-host svg{color:var(--coral-deep);}
+.badge-privacy{background:rgba(10,45,56,.86);color:#fff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+.badge-cash{background:var(--amber-soft);color:var(--amber-ink);}
+.badge-phone{background:var(--success-soft);color:#0F7A38;}
+
+/* stars */
+.stars{position:relative;display:inline-block;font-size:1rem;line-height:1;letter-spacing:.08em;}
+.stars .base{color:var(--line-strong);}
+.stars .fill{position:absolute;top:0;inset-inline-start:0;color:var(--amber);overflow:hidden;white-space:nowrap;}
+[dir="rtl"] .stars .fill{inset-inline-start:auto;inset-inline-end:0;}
+
+/* avatar */
+.avatar{width:48px;height:48px;border-radius:999px;object-fit:cover;border:2px solid #fff;box-shadow:var(--sh-sm);display:grid;place-items:center;color:#fff;font-weight:700;font-size:1rem;flex:none;}
+
+/* ── pool card ──────────────────────────────────────────────────── */
+.pcard{background:#fff;border-radius:var(--r-2xl);overflow:hidden;box-shadow:var(--sh-card);border:1px solid var(--line);
+  transition:transform var(--dur-2) var(--ease-water),box-shadow var(--dur-2);}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg);}
+.pcard .ph{position:relative;aspect-ratio:4/3;background:var(--sand-2);overflow:hidden;}
+.pcard .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform var(--dur-3) var(--ease-water);}
+.pcard:hover .ph img{transform:scale(1.05);}
+.pcard .body{padding:.95rem 1.05rem 1.15rem;}
+.fav{position:absolute;top:.7rem;inset-inline-end:.7rem;width:38px;height:38px;border-radius:999px;border:none;cursor:pointer;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;box-shadow:var(--sh-sm);transition:transform var(--dur-1);}
+.fav:hover{transform:scale(1.08);}
+.fav:focus-visible{outline:none;box-shadow:var(--focus);}
+.fav svg{width:20px;height:20px;color:var(--ink);fill:none;stroke:var(--ink);stroke-width:2;transition:all var(--dur-1);}
+.fav.is-on svg{color:var(--coral-deep);fill:var(--coral-deep);stroke:var(--coral-deep);}
+.ph-badges{position:absolute;top:.7rem;inset-inline-start:.7rem;display:flex;flex-direction:column;gap:.35rem;align-items:flex-start;}
+
+/* ── skeleton shimmer ───────────────────────────────────────────── */
+.skel{position:relative;overflow:hidden;background:var(--sand-2);border-radius:var(--r-sm);}
+.skel::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);animation:shimmer 1.5s infinite;}
+@keyframes shimmer{100%{transform:translateX(100%);}}
+
+/* ── navigation: tab bar + headers ──────────────────────────────── */
+.tabbar{display:flex;justify-content:space-around;align-items:flex-end;background:#fff;border-top:1px solid var(--line);padding:.45rem .4rem;}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:.18rem;color:var(--ink-muted);font-size:.66rem;font-weight:600;padding:.25rem 0;background:none;border:none;cursor:pointer;min-height:48px;}
+.tab svg{width:23px;height:23px;}
+.tab.is-on{color:var(--aqua-700);}
+.tab-fab{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;border:none;background:none;cursor:pointer;}
+.tab-fab .ring{width:50px;height:50px;border-radius:999px;background:var(--grad-fab);display:grid;place-items:center;color:#fff;margin-top:-22px;box-shadow:0 8px 18px -4px rgba(14,116,144,.55);border:3px solid var(--sand);}
+.tab-fab .ring svg{width:24px;height:24px;}
+.tab-fab span{font-size:.66rem;font-weight:700;color:var(--aqua-700);}
+
+/* phone frame */
+.phone{width:100%;max-width:390px;border-radius:34px;background:var(--sand);border:1px solid var(--line-strong);box-shadow:var(--sh-lg);overflow:hidden;}
+.phone .notch{height:26px;display:flex;align-items:center;justify-content:center;background:#fff;}
+.phone .notch::after{content:"";width:90px;height:5px;border-radius:99px;background:var(--line-strong);}
+
+/* sticky listing action bar */
+.actionbar{display:flex;align-items:center;gap:.7rem;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px -10px rgba(15,61,76,.2);padding:.75rem 1rem;}
+
+/* wave dividers */
+.wave-flip{transform:rotate(180deg);}
+
+/* hero atmosphere */
+.hero{position:relative;overflow:hidden;background:var(--grad-hero);color:#fff;isolation:isolate;}
+.hero .noise{position:absolute;inset:0;background-image:var(--noise);opacity:.05;mix-blend-mode:overlay;pointer-events:none;}
+.blob{position:absolute;border-radius:999px;filter:blur(36px);opacity:.5;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(255,255,255,0) 70%);pointer-events:none;z-index:-1;}
+
+/* misc */
+.tok-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-sm);}
+.spec{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.74rem;color:var(--ink-muted);}
+.swatch{height:64px;border-radius:var(--r-md);box-shadow:inset 0 0 0 1px rgba(10,45,56,.06);}
+.subnav{position:sticky;top:0;z-index:40;background:rgba(250,250,247,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.subnav a{white-space:nowrap;padding:.4rem .8rem;border-radius:var(--r-pill);font-size:.82rem;font-weight:600;color:var(--ink-muted);transition:all var(--dur-1);}
+.subnav a:hover{color:var(--aqua-800);background:var(--aqua-50);}
+.subnav a.is-on{color:#fff;background:var(--aqua-700);}
+.scroll-x{overflow-x:auto;scrollbar-width:none;}
+.scroll-x::-webkit-scrollbar{display:none;}
+.idx{font-variant-numeric:tabular-nums;}
+
+/* entrance */
+@media (prefers-reduced-motion:no-preference){
+  .rise{opacity:0;transform:translateY(16px);animation:rise .7s var(--ease-water) forwards;}
+  .blob{animation:float 14s ease-in-out infinite;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-26px)}}
+}
+@media (prefers-reduced-motion:reduce){
+  .skel::after{animation:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- shared SVG gradient defs -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#22D3EE"/><stop offset="1" stop-color="#0E7490"/>
+  </linearGradient>
+</defs></svg>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="noise"></div>
+  <div class="blob" style="width:320px;height:320px;top:-80px;inset-inline-start:-60px"></div>
+  <div class="blob" style="width:260px;height:260px;bottom:-40px;inset-inline-end:8%;animation-delay:-5s"></div>
+  <div class="wrap" style="padding-top:clamp(2.5rem,6vw,4.5rem);padding-bottom:clamp(4rem,8vw,6rem)">
+    <div class="rise" style="display:flex;align-items:center;gap:.6rem">
+      <svg width="34" height="34" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="#fff" opacity=".18"/>
+        <rect x="1.5" y="1.5" width="29" height="29" rx="8" fill="none" stroke="#fff" stroke-opacity=".5"/>
+        <path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/>
+        <path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/>
+        <circle cx="22.5" cy="10" r="3" fill="#FCD34D"/>
+      </svg>
+      <span style="font-weight:800;font-size:1.25rem;letter-spacing:-.02em">pissina</span>
+      <span class="t-over" style="color:rgba(255,255,255,.85);margin-inline-start:.4rem">Système de design</span>
+    </div>
+
+    <h1 class="t-display rise" style="margin-top:1.4rem;max-width:18ch;animation-delay:.06s">Le plongeon dans l'eau claire, en pixels.</h1>
+    <p class="t-bodyl rise" style="margin-top:1rem;max-width:54ch;color:rgba(255,255,255,.92);animation-delay:.12s">
+      Les fondations visuelles de Pissina — la première marketplace marocaine de location de piscines entre particuliers.
+      Tokens, composants et règles définis <strong>une seule fois</strong>, réutilisés sur chaque écran.
+    </p>
+
+    <div class="rise" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem;animation-delay:.18s">
+      <span class="badge" style="background:rgba(255,255,255,.16);color:#fff">v2 · 2026</span>
+      <span class="badge" style="background:rgba(255,255,255,.16);color:#fff">Mobile-first · PWA</span>
+      <span class="badge" style="background:rgba(255,255,255,.16);color:#fff">FR / العربية · RTL</span>
+      <span class="badge" style="background:rgba(255,255,255,.16);color:#fff">WCAG AA</span>
+      <span class="badge" style="background:rgba(255,255,255,.16);color:#fff">Paiement sur place</span>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" style="display:block;width:100%;height:54px" aria-hidden="true">
+    <path d="M0,38 C240,72 480,8 720,30 C960,52 1200,14 1440,40 L1440,70 L0,70 Z" fill="#FAFAF7"/>
+  </svg>
+</header>
+
+<!-- ═══════════════ STICKY SUB-NAV ═══════════════ -->
+<nav class="subnav" aria-label="Sections du système de design">
+  <div class="wrap scroll-x" style="display:flex;gap:.3rem;align-items:center;padding-top:.55rem;padding-bottom:.55rem">
+    <a href="#couleurs" class="is-on">Couleurs</a>
+    <a href="#typo">Typographie</a>
+    <a href="#espace">Espacement</a>
+    <a href="#boutons">Boutons</a>
+    <a href="#formulaires">Formulaires</a>
+    <a href="#carte">Carte piscine</a>
+    <a href="#confiance">Confiance</a>
+    <a href="#creneaux">Créneaux</a>
+    <a href="#nav">Navigation</a>
+    <a href="#rtl">RTL · العربية</a>
+  </div>
+</nav>
+
+<main class="wrap" style="padding-top:3rem;padding-bottom:5rem;display:flex;flex-direction:column;gap:4.5rem">
+
+  <!-- ═══════════ 01 · COULEURS ═══════════ -->
+  <section id="couleurs">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">01</span><span class="t-over">Couleurs</span>
+    </div>
+    <h2 class="t-h2">Une palette fraîche, ancrée par le pétrole.</h2>
+    <p class="t-body muted" style="max-width:62ch;margin-top:.5rem">
+      Turquoise pour l'identité et les actions, encre pétrole pour le texte, <strong>un seul</strong> accent corail pour
+      le cœur et les promos. Règle d'accessibilité clé : l'aqua&nbsp;500 est <em>décoratif</em> ; pour le texte et les
+      boutons sur fond clair on utilise l'aqua&nbsp;700 (contraste AA).
+    </p>
+
+    <!-- aqua ramp -->
+    <div class="tok-card" style="padding:1.1rem;margin-top:1.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem">
+        <strong>Aqua — primaire</strong>
+        <span class="spec">#06B6D4 → #164E63</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem" id="aquaRamp"></div>
+    </div>
+
+    <!-- token groups -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:.9rem" id="tokGrid"></div>
+
+    <!-- gradient -->
+    <div class="tok-card" style="margin-top:.9rem;overflow:hidden">
+      <div style="height:96px;background:var(--grad-hero)"></div>
+      <div style="padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem">
+        <strong>Dégradé hero</strong>
+        <span class="spec">linear-gradient · sections hero uniquement</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 02 · TYPOGRAPHIE ═══════════ -->
+  <section id="typo">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">02</span><span class="t-over">Typographie</span>
+    </div>
+    <h2 class="t-h2">Plus Jakarta Sans, accompagné de l'arabe.</h2>
+    <p class="t-body muted" style="max-width:62ch;margin-top:.5rem">
+      Une géométrique humaniste pour le latin, <strong>IBM&nbsp;Plex&nbsp;Sans&nbsp;Arabic</strong> pour l'arabe.
+      Titres serrés, corps détendu. Les chiffres restent occidentaux : «&nbsp;350&nbsp;DH&nbsp;» / «&nbsp;350&nbsp;درهم&nbsp;».
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:.8rem;margin-top:1.5rem">
+      <div class="tok-card" style="padding:1.2rem 1.3rem">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3rem">
+          <span class="t-display">Pissina</span><span class="spec">Display · 800 · -3% · clamp 37→58px</span>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem 1.3rem">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3rem">
+          <span class="t-h1">Louez une piscine près de chez vous</span><span class="spec">H1 · 800 · -2.5% · 30→42px</span>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem 1.3rem">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3rem">
+          <span class="t-h2">Piscines à l'abri des regards</span><span class="spec">H2 · 700 · -2% · 24→32px</span>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem 1.3rem">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3rem">
+          <span class="t-h3">Villa avec piscine — Dar Bouazza</span><span class="spec">H3 · 700 · -1.5% · 21px</span>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem 1.3rem">
+        <p class="t-bodyl" style="margin:0;max-width:60ch">Grande piscine familiale clôturée, profondeur 1,40&nbsp;m, transats et coin barbecue. Idéale pour un après-midi entre amis.</p>
+        <span class="spec">Body L · 400 · 17px · 1.62</span>
+      </div>
+      <div class="tok-card" style="padding:1.1rem 1.3rem">
+        <p class="t-body" style="margin:0;max-width:64ch">Réservez votre créneau, l'hôte confirme, et vous réglez en espèces sur place. Appelez ou écrivez sur WhatsApp avant de réserver pour poser vos questions.</p>
+        <span class="spec">Body · 400 · 15px · 1.6 &nbsp;·&nbsp; Small 13px · Overline 12px/700/+14%</span>
+      </div>
+
+      <!-- arabic -->
+      <div class="tok-card" dir="rtl" lang="ar" style="padding:1.2rem 1.3rem">
+        <div class="ar" style="font-size:1.7rem;font-weight:700;letter-spacing:0;line-height:1.5">احجز مسبحًا بالقرب منك</div>
+        <p class="ar t-body" style="margin:.4rem 0 0;color:var(--ink-muted);max-width:60ch">
+          مسبح خاص بعيد عن الأنظار، الدفع نقدًا عند الوصول. اتصل أو راسل عبر واتساب قبل الحجز. ابتداءً من 350 درهم للحصة.
+        </p>
+        <span class="spec" dir="ltr" style="display:block;margin-top:.6rem">IBM Plex Sans Arabic · 400/700 · line-height 1.5</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 03 · ESPACEMENT & RAYONS ═══════════ -->
+  <section id="espace">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">03</span><span class="t-over">Espacement · Rayons · Élévation</span>
+    </div>
+    <h2 class="t-h2">Une trame de 4&nbsp;px, des coins généreux.</h2>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:.8rem;margin-top:1.5rem">
+      <!-- spacing -->
+      <div class="tok-card" style="padding:1.2rem 1.3rem">
+        <strong style="display:block;margin-bottom:.9rem">Espacement — base 4&nbsp;px</strong>
+        <div id="spaceScale" style="display:flex;flex-direction:column;gap:.55rem"></div>
+      </div>
+      <!-- radius + shadow -->
+      <div style="display:grid;grid-template-columns:1fr;gap:.8rem">
+        <div class="tok-card" style="padding:1.2rem 1.3rem">
+          <strong style="display:block;margin-bottom:.9rem">Rayons</strong>
+          <div id="radiusScale" style="display:flex;flex-wrap:wrap;gap:1rem"></div>
+        </div>
+        <div class="tok-card" style="padding:1.2rem 1.3rem">
+          <strong style="display:block;margin-bottom:1rem">Élévation</strong>
+          <div style="display:flex;flex-wrap:wrap;gap:1.4rem">
+            <div style="text-align:center"><div style="width:84px;height:60px;border-radius:var(--r-lg);background:#fff;box-shadow:var(--sh-sm)"></div><span class="spec" style="display:block;margin-top:.5rem">sm</span></div>
+            <div style="text-align:center"><div style="width:84px;height:60px;border-radius:var(--r-lg);background:#fff;box-shadow:var(--sh-card)"></div><span class="spec" style="display:block;margin-top:.5rem">card</span></div>
+            <div style="text-align:center"><div style="width:84px;height:60px;border-radius:var(--r-lg);background:#fff;box-shadow:var(--sh-pop)"></div><span class="spec" style="display:block;margin-top:.5rem">pop</span></div>
+            <div style="text-align:center"><div style="width:84px;height:60px;border-radius:var(--r-lg);background:#fff;box-shadow:var(--sh-lg)"></div><span class="spec" style="display:block;margin-top:.5rem">lg</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 04 · BOUTONS ═══════════ -->
+  <section id="boutons">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">04</span><span class="t-over">Boutons</span>
+    </div>
+    <h2 class="t-h2">Pilules, actions claires, WhatsApp de premier rang.</h2>
+    <p class="t-body muted" style="max-width:64ch;margin-top:.5rem">
+      Le bouton WhatsApp est un citoyen de premier rang, jamais caché derrière la réservation. Son vert n'accompagne le
+      blanc que sur libellé large/gras (≥17&nbsp;px) et icônes — règle de contraste AA.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;margin-top:1.5rem">
+      <!-- each variant card: 3 states -->
+      <div class="tok-card" style="padding:1.1rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem"><strong>Primaire</strong><span class="spec">aqua-700</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center">
+          <button class="btn btn-primary">Réserver</button>
+          <button class="btn btn-primary" style="background-color:var(--aqua-800)">Survol</button>
+          <button class="btn btn-primary is-disabled" disabled>Désactivé</button>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem"><strong>Secondaire</strong><span class="spec">contour</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center">
+          <button class="btn btn-secondary">Voir le profil</button>
+          <button class="btn btn-secondary" style="border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50)">Survol</button>
+          <button class="btn btn-secondary is-disabled" disabled>Désactivé</button>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem"><strong>Ghost</strong><span class="spec">texte</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center">
+          <button class="btn btn-ghost">Annuler</button>
+          <button class="btn btn-ghost" style="background:var(--aqua-50)">Survol</button>
+          <button class="btn btn-ghost is-disabled" disabled>Désactivé</button>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem"><strong>WhatsApp</strong><span class="spec">vert · lg/gras</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center">
+          <button class="btn btn-lg btn-wa"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>WhatsApp</button>
+          <button class="btn btn-lg btn-wa" style="background:var(--wa-deep)">Survol</button>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem"><strong>Destructif</strong><span class="spec">danger</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center">
+          <button class="btn btn-danger">Refuser</button>
+          <button class="btn btn-danger" style="background:var(--danger-deep)">Survol</button>
+          <button class="btn btn-danger is-disabled" disabled>Désactivé</button>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.1rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem"><strong>Icône</strong><span class="spec">44px · cible tactile</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center">
+          <button class="icon-btn" aria-label="Appeler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button>
+          <button class="icon-btn icon-btn-wa" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg></button>
+          <button class="icon-btn" aria-label="Partager"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 05 · FORMULAIRES ═══════════ -->
+  <section id="formulaires">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">05</span><span class="t-over">Champs de formulaire</span>
+    </div>
+    <h2 class="t-h2">Labels toujours visibles, focus net.</h2>
+    <p class="t-body muted" style="max-width:64ch;margin-top:.5rem">Jamais de label uniquement en placeholder. Anneau de focus aqua sur chaque contrôle, cibles ≥44&nbsp;px.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;margin-top:1.5rem">
+      <!-- text -->
+      <div class="tok-card" style="padding:1.2rem">
+        <label class="field">
+          <span class="label">Votre nom</span>
+          <input class="input" type="text" placeholder="ex. Salma Bennani" value="Youssef El Amrani">
+          <span class="hint">Visible par l'hôte lors de la demande.</span>
+        </label>
+      </div>
+      <!-- error -->
+      <div class="tok-card" style="padding:1.2rem">
+        <label class="field">
+          <span class="label">Téléphone</span>
+          <input class="input is-error" type="tel" value="06 12" aria-invalid="true">
+          <span class="hint-err"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>Numéro marocain incomplet (10 chiffres).</span>
+        </label>
+      </div>
+      <!-- select -->
+      <div class="tok-card" style="padding:1.2rem">
+        <div class="field">
+          <span class="label" id="lblVille">Ville</span>
+          <div class="select-wrap">
+            <select class="select" aria-labelledby="lblVille">
+              <option>Casablanca</option><option selected>Dar Bouazza</option><option>Bouskoura</option>
+              <option>Marrakech</option><option>Rabat</option><option>Agadir</option><option>Tanger</option><option>Fès</option>
+            </select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+      </div>
+      <!-- date -->
+      <div class="tok-card" style="padding:1.2rem">
+        <label class="field">
+          <span class="label">Date de visite</span>
+          <input class="input" type="date" value="2026-07-18">
+          <span class="hint">Pic de saison&nbsp;: juin – septembre.</span>
+        </label>
+      </div>
+      <!-- stepper -->
+      <div class="tok-card" style="padding:1.2rem">
+        <div class="field">
+          <span class="label">Nombre d'invités</span>
+          <div style="display:flex;align-items:center;gap:1rem">
+            <div class="stepper" role="group" aria-label="Nombre d'invités">
+              <button data-dir="down" aria-label="Moins"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+              <span class="val">8</span>
+              <button data-dir="up" aria-label="Plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <span class="hint">Max. 25 personnes</span>
+          </div>
+        </div>
+      </div>
+      <!-- checkbox + toggle -->
+      <div class="tok-card" style="padding:1.2rem">
+        <span class="label" style="display:block;margin-bottom:.8rem">Cases & interrupteurs</span>
+        <label style="display:flex;align-items:center;gap:.7rem;cursor:pointer;margin-bottom:.9rem">
+          <span class="check is-on" role="checkbox" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg></span>
+          <span class="t-body">J'accepte le règlement intérieur</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:.7rem;cursor:pointer">
+          <span class="toggle is-on" role="switch" aria-checked="true" tabindex="0"></span>
+          <span class="t-body">Piscine à l'abri des regards</span>
+        </label>
+      </div>
+      <!-- search bar (full width) -->
+      <div class="tok-card" style="padding:1.2rem;grid-column:1/-1">
+        <span class="label" style="display:block;margin-bottom:.8rem">Barre de recherche</span>
+        <div class="searchbar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" stroke-linecap="round" style="width:20px;height:20px;flex:none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input type="search" placeholder="Ville ou quartier" value="Dar Bouazza" aria-label="Ville ou quartier">
+          <span class="seg-divider"></span>
+          <div class="select-wrap" style="flex:none">
+            <select class="select" aria-label="Créneau" style="border:none;min-height:40px;padding-block:.4rem;box-shadow:none">
+              <option>Tout créneau</option><option selected>Après-midi</option><option>Matinée</option><option>Journée</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" style="padding-inline:1.1rem" aria-label="Rechercher">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- chips (full width) -->
+      <div class="tok-card" style="padding:1.2rem;grid-column:1/-1">
+        <span class="label" style="display:block;margin-bottom:.8rem">Chips de filtre <span class="muted" style="font-weight:400">(sélectionnables)</span></span>
+        <div style="display:flex;flex-wrap:wrap;gap:.55rem">
+          <button class="chip is-on" aria-pressed="true"><svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 6"/></svg>À l'abri des regards</button>
+          <button class="chip" aria-pressed="false">🍖 Barbecue</button>
+          <button class="chip" aria-pressed="false">🚗 Parking</button>
+          <button class="chip is-on" aria-pressed="true"><svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 6"/></svg>Eau chauffée</button>
+          <button class="chip" aria-pressed="false">🧺 Transats</button>
+          <button class="chip" aria-pressed="false">👶 Adapté enfants</button>
+          <button class="chip" aria-pressed="false">🚿 Douche</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 06 · CARTE PISCINE ═══════════ -->
+  <section id="carte">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">06</span><span class="t-over">Carte piscine</span>
+    </div>
+    <h2 class="t-h2">Le composant vedette — la photo d'abord.</h2>
+    <p class="t-body muted" style="max-width:64ch;margin-top:.5rem">
+      Photo dominante, coins 2xl, cœur corail, badge confidentialité en superposition. Prix « à partir de » par créneau.
+      Variante skeleton avec shimmer pour le chargement.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:1.1rem;margin-top:1.5rem">
+      <!-- card 1 -->
+      <article class="pcard">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=70" alt="Piscine privée bleue bordée de transats devant une villa à Dar Bouazza" loading="lazy">
+          <div class="ph-badges">
+            <span class="badge badge-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>À l'abri des regards</span>
+            <span class="badge badge-host"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"/></svg>Hôte fiable</span>
+          </div>
+          <button class="fav" aria-label="Ajouter aux favoris" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+        </div>
+        <div class="body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:.6rem">
+            <h3 style="font-size:1.02rem;font-weight:700;letter-spacing:-.01em;line-height:1.25">Villa avec piscine privée</h3>
+            <span style="display:inline-flex;align-items:center;gap:.25rem;font-weight:700;font-size:.9rem;flex:none"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:15px;height:15px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,9</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.3rem;color:var(--ink-muted);margin-top:.25rem" class="t-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Dar Bouazza · 87 avis
+          </div>
+          <div style="display:flex;gap:.4rem;margin-top:.6rem;font-size:.95rem">🍖 🚗 🧺 🚿</div>
+          <div style="margin-top:.7rem;display:flex;align-items:baseline;gap:.3rem">
+            <span class="muted t-sm">à partir de</span>
+            <span style="font-weight:800;font-size:1.15rem;color:var(--ink-strong)">350 DH</span>
+            <span class="muted t-sm">/ créneau</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- card 2 (fav active) -->
+      <article class="pcard">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=70" alt="Piscine chauffée entourée de palmiers dans la Palmeraie de Marrakech au coucher du soleil" loading="lazy">
+          <div class="ph-badges">
+            <span class="badge badge-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>À l'abri des regards</span>
+          </div>
+          <button class="fav is-on" aria-label="Retirer des favoris" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+        </div>
+        <div class="body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:.6rem">
+            <h3 style="font-size:1.02rem;font-weight:700;letter-spacing:-.01em;line-height:1.25">Piscine chauffée · Palmeraie</h3>
+            <span style="display:inline-flex;align-items:center;gap:.25rem;font-weight:700;font-size:.9rem;flex:none"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:15px;height:15px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,8</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.3rem;color:var(--ink-muted);margin-top:.25rem" class="t-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Marrakech · 126 avis
+          </div>
+          <div style="display:flex;gap:.4rem;margin-top:.6rem;font-size:.95rem">🍖 🌴 🧺 👶</div>
+          <div style="margin-top:.7rem;display:flex;align-items:baseline;gap:.3rem">
+            <span class="muted t-sm">à partir de</span>
+            <span style="font-weight:800;font-size:1.15rem;color:var(--ink-strong)">500 DH</span>
+            <span class="muted t-sm">/ créneau</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- card 3 -->
+      <article class="pcard">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=800&q=70" alt="Grande piscine familiale rectangulaire avec transats devant une maison à Bouskoura" loading="lazy">
+          <button class="fav" aria-label="Ajouter aux favoris" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+        </div>
+        <div class="body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:.6rem">
+            <h3 style="font-size:1.02rem;font-weight:700;letter-spacing:-.01em;line-height:1.25">Grande piscine familiale</h3>
+            <span style="display:inline-flex;align-items:center;gap:.25rem;font-weight:700;font-size:.9rem;flex:none"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:15px;height:15px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,7</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.3rem;color:var(--ink-muted);margin-top:.25rem" class="t-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Bouskoura · 54 avis
+          </div>
+          <div style="display:flex;gap:.4rem;margin-top:.6rem;font-size:.95rem">👶 🚗 🧺 🛟</div>
+          <div style="margin-top:.7rem;display:flex;align-items:baseline;gap:.3rem">
+            <span class="muted t-sm">à partir de</span>
+            <span style="font-weight:800;font-size:1.15rem;color:var(--ink-strong)">400 DH</span>
+            <span class="muted t-sm">/ créneau</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- skeleton -->
+      <article class="pcard" aria-hidden="true">
+        <div class="skel" style="aspect-ratio:4/3;border-radius:0"></div>
+        <div class="body">
+          <div class="skel" style="height:16px;width:80%"></div>
+          <div class="skel" style="height:12px;width:55%;margin-top:.6rem"></div>
+          <div class="skel" style="height:12px;width:40%;margin-top:.9rem"></div>
+          <div class="skel" style="height:20px;width:48%;margin-top:.9rem;border-radius:99px"></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ 07 · CONFIANCE & BADGES ═══════════ -->
+  <section id="confiance">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">07</span><span class="t-over">Confiance & badges</span>
+    </div>
+    <h2 class="t-h2">La confiance, partout et visible.</h2>
+    <p class="t-body muted" style="max-width:64ch;margin-top:.5rem">
+      C'est le frein n°1 à la conversion au Maroc. On affiche la vérification, la note, le taux et le délai de réponse,
+      l'ancienneté — et le paiement sur place comme un argument fort.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:.8rem;margin-top:1.5rem">
+      <!-- badges -->
+      <div class="tok-card" style="padding:1.2rem">
+        <span class="label" style="display:block;margin-bottom:.9rem">Badges</span>
+        <div style="display:flex;flex-wrap:wrap;gap:.55rem">
+          <span class="badge badge-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>Vérifié</span>
+          <span class="badge badge-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.1 4.18 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>Téléphone vérifié</span>
+          <span class="badge badge-verified">Identité vérifiée</span>
+          <span class="badge" style="background:rgba(10,45,56,.86);color:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>À l'abri des regards</span>
+          <span class="badge badge-host"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"/></svg>Hôte fiable</span>
+          <span class="badge badge-cash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="12" cy="12" r="2.5"/></svg>Paiement sur place</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:.8rem">
+        <!-- rating + avatar -->
+        <div style="display:grid;grid-template-columns:1fr;gap:.8rem">
+          <div class="tok-card" style="padding:1.2rem">
+            <span class="label" style="display:block;margin-bottom:.9rem">Note & étoiles</span>
+            <div style="display:flex;align-items:center;gap:.9rem">
+              <span style="font-size:2.2rem;font-weight:800;letter-spacing:-.02em;line-height:1">4,8</span>
+              <div>
+                <span class="stars" aria-label="Noté 4,8 sur 5"><span class="base" aria-hidden="true">★★★★★</span><span class="fill" aria-hidden="true" style="width:96%">★★★★★</span></span>
+                <div class="t-sm muted" style="margin-top:.2rem">126 avis vérifiés</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:1rem;margin-top:.6rem;flex-wrap:wrap">
+              <span class="stars" style="font-size:.85rem" aria-label="3 sur 5"><span class="base">★★★★★</span><span class="fill" style="width:60%">★★★★★</span></span>
+              <span class="stars" style="font-size:.85rem" aria-label="5 sur 5"><span class="base">★★★★★</span><span class="fill" style="width:100%">★★★★★</span></span>
+            </div>
+          </div>
+
+          <!-- host block -->
+          <div class="tok-card" style="padding:1.2rem">
+            <span class="label" style="display:block;margin-bottom:.9rem">Bloc hôte</span>
+            <div style="display:flex;gap:.9rem;align-items:center">
+              <span class="avatar" style="background:linear-gradient(135deg,#22D3EE,#0E7490)" aria-hidden="true">SB</span>
+              <div style="min-width:0">
+                <div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
+                  <strong style="font-size:1.02rem">Salma Bennani</strong>
+                  <span class="badge badge-verified" style="padding:.2rem .45rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M20 6 9 17l-5-5"/></svg>Vérifiée</span>
+                </div>
+                <div class="t-sm muted" style="margin-top:.15rem">Membre depuis 2024 · Casablanca</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap">
+              <div style="flex:1;min-width:120px;background:var(--sand-2);border-radius:var(--r-md);padding:.6rem .8rem">
+                <div style="font-weight:800">~ 1 h</div><div class="t-sm muted">Délai de réponse</div>
+              </div>
+              <div style="flex:1;min-width:120px;background:var(--sand-2);border-radius:var(--r-md);padding:.6rem .8rem">
+                <div style="font-weight:800;color:var(--success)">98 %</div><div class="t-sm muted">Taux de réponse</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- cash reassurance callout -->
+        <div class="tok-card" style="padding:1.3rem;background:linear-gradient(180deg,var(--amber-soft),#fff);border-color:#F3E2B3">
+          <div style="display:flex;gap:.9rem;align-items:start">
+            <span style="width:46px;height:46px;border-radius:var(--r-md);background:#fff;box-shadow:var(--sh-sm);display:grid;place-items:center;flex:none;color:var(--amber-ink)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/></svg>
+            </span>
+            <div>
+              <strong style="font-size:1.05rem;color:var(--amber-ink)">Paiement sur place — aucun paiement en ligne</strong>
+              <p class="t-body" style="margin:.3rem 0 0;color:var(--ink)">Vous réglez en espèces à l'arrivée, après avoir vu la piscine. Pas de carte, pas d'avance. Un argument de réassurance, pas un repli.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 08 · CRÉNEAUX ═══════════ -->
+  <section id="creneaux">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">08</span><span class="t-over">Sélecteur de créneau</span>
+    </div>
+    <h2 class="t-h2">On loue des créneaux, pas des nuits.</h2>
+    <p class="t-body muted" style="max-width:64ch;margin-top:.5rem">
+      Le prix est par créneau. Contrôle segmenté, état sélectionné aqua-700. Heures et tarif sous chaque option.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:.8rem;margin-top:1.5rem">
+      <div class="tok-card" style="padding:1.2rem">
+        <span class="label" style="display:block;margin-bottom:.9rem">3 créneaux (par défaut)</span>
+        <div class="seg" role="tablist" aria-label="Créneau">
+          <button class="seg-item" role="tab" aria-selected="false"><span class="lab">Matinée</span><span class="sub">9h–14h · 350 DH</span></button>
+          <button class="seg-item is-on" role="tab" aria-selected="true"><span class="lab">Après-midi</span><span class="sub">15h–20h · 400 DH</span></button>
+          <button class="seg-item" role="tab" aria-selected="false"><span class="lab">Journée</span><span class="sub">9h–20h · 700 DH</span></button>
+        </div>
+      </div>
+      <div class="tok-card" style="padding:1.2rem">
+        <span class="label" style="display:block;margin-bottom:.9rem">4 créneaux (avec Soirée)</span>
+        <div class="seg" role="tablist" aria-label="Créneau étendu">
+          <button class="seg-item is-on" role="tab" aria-selected="true"><span class="lab">Matinée</span><span class="sub">9h–14h</span></button>
+          <button class="seg-item" role="tab" aria-selected="false"><span class="lab">Après-midi</span><span class="sub">15h–20h</span></button>
+          <button class="seg-item" role="tab" aria-selected="false"><span class="lab">Journée</span><span class="sub">9h–20h</span></button>
+          <button class="seg-item" role="tab" aria-selected="false"><span class="lab">Soirée</span><span class="sub">20h–00h</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 09 · NAVIGATION ═══════════ -->
+  <section id="nav">
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">09</span><span class="t-over">Navigation</span>
+    </div>
+    <h2 class="t-h2">Tab bar mobile, en-tête desktop.</h2>
+    <p class="t-body muted" style="max-width:64ch;margin-top:.5rem">
+      5 onglets sur mobile, bouton Publier central surélevé. Sur la fiche, barre d'action collante en bas. Sur desktop, en-tête unique.
+    </p>
+
+    <!-- mobile frame + action bar -->
+    <div style="display:flex;flex-wrap:wrap;gap:1.4rem;margin-top:1.5rem;align-items:flex-start">
+      <div style="flex:0 1 390px;min-width:0;max-width:100%">
+        <span class="spec" style="display:block;margin-bottom:.6rem">Mobile · en-tête + tab bar (390px)</span>
+        <div class="phone">
+          <div class="notch"></div>
+          <!-- top header -->
+          <div style="background:#fff;padding:.7rem .9rem;border-bottom:1px solid var(--line)">
+            <div style="display:flex;align-items:center;gap:.5rem">
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg>
+              <strong style="font-size:1.05rem;letter-spacing:-.02em">pissina</strong>
+              <div style="margin-inline-start:auto;display:flex;align-items:center;gap:.5rem">
+                <span style="display:inline-flex;border:1.5px solid var(--line-strong);border-radius:999px;overflow:hidden;font-size:.74rem;font-weight:700">
+                  <span style="padding:.25rem .55rem;background:var(--aqua-700);color:#fff">FR</span><span class="ar" style="padding:.25rem .55rem;color:var(--ink-muted)">ع</span>
+                </span>
+                <span class="avatar" style="width:34px;height:34px;font-size:.8rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">YA</span>
+              </div>
+            </div>
+            <div class="searchbar" style="margin-top:.6rem;padding:.3rem .3rem .3rem .8rem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" stroke-linecap="round" style="width:18px;height:18px;flex:none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <input type="search" placeholder="Ville ou quartier" aria-label="Rechercher" style="font-size:.9rem">
+              <button class="btn btn-primary btn-sm" aria-label="Rechercher" style="padding:.4rem .6rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+            </div>
+          </div>
+          <!-- content teaser -->
+          <div style="padding:.9rem;background:var(--sand)">
+            <strong style="font-size:.95rem">Piscines à Dar Bouazza</strong>
+            <article class="pcard" style="margin-top:.6rem;box-shadow:var(--sh-sm)">
+              <div class="ph" style="aspect-ratio:16/9">
+                <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=60" alt="Piscine familiale à Dar Bouazza" loading="lazy">
+                <span class="badge badge-privacy" style="position:absolute;top:.5rem;inset-inline-start:.5rem;font-size:.66rem">À l'abri des regards</span>
+              </div>
+              <div class="body" style="padding:.7rem .8rem">
+                <div style="display:flex;justify-content:space-between;align-items:center"><strong style="font-size:.92rem">Villa piscine privée</strong><span style="font-size:.82rem;font-weight:700">★ 4,9</span></div>
+                <div style="font-weight:800;margin-top:.3rem">350 DH <span class="muted t-sm" style="font-weight:400">/ créneau</span></div>
+              </div>
+            </article>
+          </div>
+          <!-- tab bar -->
+          <nav class="tabbar" aria-label="Navigation principale">
+            <button class="tab is-on" data-tab="explorer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3 6.3-2.1Z"/></svg>Explorer</button>
+            <button class="tab" data-tab="resa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>Réservations</button>
+            <button class="tab-fab" data-tab="publier" aria-label="Publier une piscine"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span>Publier</span></button>
+            <button class="tab" data-tab="msg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>Messages</button>
+            <button class="tab" data-tab="profil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profil</button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- action bar -->
+      <div style="flex:1;min-width:260px">
+        <span class="spec" style="display:block;margin-bottom:.6rem">Mobile · barre d'action fiche (collante)</span>
+        <div class="actionbar" style="border-radius:var(--r-xl);border:1px solid var(--line)">
+          <div>
+            <div style="font-weight:800;font-size:1.1rem">350 DH <span class="muted t-sm" style="font-weight:400">/ créneau</span></div>
+            <div class="t-sm muted">Après-midi · 15h–20h</div>
+          </div>
+          <div style="margin-inline-start:auto;display:flex;gap:.5rem;align-items:center">
+            <button class="icon-btn icon-btn-wa" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg></button>
+            <button class="btn btn-primary btn-lg">Réserver</button>
+          </div>
+        </div>
+        <p class="t-sm muted" style="margin-top:.7rem">Le bouton WhatsApp est à côté de « Réserver », jamais caché derrière — le contact direct est essentiel.</p>
+
+        <!-- desktop header -->
+        <span class="spec" style="display:block;margin:1.4rem 0 .6rem">Desktop · en-tête</span>
+        <div style="overflow-x:auto" class="scroll-x">
+          <div style="min-width:760px;background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-sm);padding:.7rem 1rem;display:flex;align-items:center;gap:1rem">
+            <div style="display:flex;align-items:center;gap:.5rem;flex:none">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg>
+              <strong style="letter-spacing:-.02em">pissina</strong>
+            </div>
+            <div class="searchbar" style="flex:1;max-width:420px;padding:.3rem .3rem .3rem .9rem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" style="width:18px;height:18px;flex:none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <input type="search" placeholder="Ville" aria-label="Ville" style="font-size:.88rem">
+              <span class="seg-divider"></span>
+              <span class="t-sm muted" style="white-space:nowrap">Après-midi</span>
+              <button class="btn btn-primary btn-sm" aria-label="Rechercher" style="padding:.4rem .6rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+            </div>
+            <div style="margin-inline-start:auto;display:flex;align-items:center;gap:.7rem;flex:none">
+              <button class="btn btn-ghost btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><path d="M12 5v14M5 12h14"/></svg>Publier</button>
+              <span style="display:inline-flex;border:1.5px solid var(--line-strong);border-radius:999px;overflow:hidden;font-size:.76rem;font-weight:700">
+                <span style="padding:.3rem .6rem;background:var(--aqua-700);color:#fff">FR</span><span class="ar" style="padding:.3rem .6rem;color:var(--ink-muted)">العربية</span>
+              </span>
+              <span class="avatar" style="width:34px;height:34px;font-size:.8rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">YA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 10 · RTL · العربية ═══════════ -->
+  <section id="rtl">
+    <style>[dir="rtl"] .flip-x{transform:scaleX(-1)}</style>
+    <div style="display:flex;align-items:baseline;gap:.8rem;margin-bottom:.4rem">
+      <span class="t-over idx">10</span><span class="t-over">RTL · العربية</span>
+    </div>
+    <h2 class="t-h2">Tout se reflète proprement.</h2>
+    <p class="t-body muted" style="max-width:64ch;margin-top:.5rem">
+      Propriétés logiques (start/end) partout&nbsp;: le cœur, les badges, les chevrons et la barre s'inversent automatiquement.
+      Les chiffres restent occidentaux, le mot « درهم » remplace « DH ».
+    </p>
+
+    <div dir="rtl" lang="ar" class="ar" style="margin-top:1.5rem;background:var(--sand-2);border:1px solid var(--line);border-radius:var(--r-2xl);padding:1.1rem;display:flex;flex-direction:column;gap:.9rem">
+      <!-- header strip with flipping chevron -->
+      <div style="display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:.55rem .8rem">
+        <button class="icon-btn" style="width:38px;height:38px" aria-label="رجوع"><svg class="flip-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="m15 18-6-6 6-6"/></svg></button>
+        <strong>مسابح في دار بوعزة</strong>
+        <span class="badge badge-cash" style="margin-inline-start:auto">الدفع عند الوصول</span>
+      </div>
+
+      <!-- search bar -->
+      <div class="searchbar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" stroke-linecap="round" style="width:20px;height:20px;flex:none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <input type="search" placeholder="المدينة أو الحي" aria-label="المدينة أو الحي" style="font-family:'IBM Plex Sans Arabic',sans-serif">
+        <button class="btn btn-primary" style="padding-inline:1.1rem">بحث</button>
+      </div>
+
+      <!-- slot selector -->
+      <div class="seg" role="tablist" aria-label="الحصة">
+        <button class="seg-item" role="tab" aria-selected="false"><span class="lab">صباحًا</span><span class="sub">9–14 · 350 درهم</span></button>
+        <button class="seg-item is-on" role="tab" aria-selected="true"><span class="lab">بعد الظهر</span><span class="sub">15–20 · 400 درهم</span></button>
+        <button class="seg-item" role="tab" aria-selected="false"><span class="lab">يوم كامل</span><span class="sub">9–20 · 700 درهم</span></button>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:.9rem;align-items:stretch">
+        <!-- mirrored pool card -->
+        <article class="pcard" style="width:240px;max-width:100%">
+          <div class="ph" style="aspect-ratio:16/10">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=600&q=60" alt="مسبح خاص في فيلا بدار بوعزة" loading="lazy">
+            <div class="ph-badges"><span class="badge badge-privacy">بعيد عن الأنظار</span></div>
+            <button class="fav" aria-label="أضف إلى المفضّلة" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+          </div>
+          <div class="body">
+            <div style="display:flex;justify-content:space-between;align-items:center"><strong>فيلا بمسبح خاص</strong><span style="font-weight:700;font-size:.88rem">★ 4,9</span></div>
+            <div class="t-sm muted" style="margin-top:.25rem">دار بوعزة · 87 تقييم</div>
+            <div style="margin-top:.6rem"><span style="font-weight:800;font-size:1.1rem">ابتداءً من 350 درهم</span> <span class="muted t-sm">/ حصة</span></div>
+          </div>
+        </article>
+
+        <!-- buttons + host -->
+        <div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:.7rem;justify-content:center">
+          <button class="btn btn-primary btn-lg btn-block">احجز الآن</button>
+          <button class="btn btn-wa btn-lg btn-block"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24z"/></svg>واتساب</button>
+          <div style="display:flex;align-items:center;gap:.6rem;margin-top:.2rem">
+            <span class="avatar" style="width:40px;height:40px;font-size:.85rem;background:linear-gradient(135deg,#22D3EE,#0E7490)">سب</span>
+            <div><strong style="font-size:.95rem">سلمى بناني</strong><div class="t-sm muted">عضو منذ 2024 · يردّ خلال ~ساعة</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- mirrored tab bar -->
+      <nav class="tabbar" style="border:1px solid var(--line);border-radius:var(--r-lg);border-top:1px solid var(--line)" aria-label="التنقل">
+        <button class="tab is-on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3 6.3-2.1Z"/></svg>استكشف</button>
+        <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>حجوزاتي</button>
+        <button class="tab-fab"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span>انشر</span></button>
+        <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>الرسائل</button>
+        <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>حسابي</button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer style="border-top:1px solid var(--line);padding-top:2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:.55rem">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg>
+      <div><strong>pissina</strong> <span class="muted t-sm">· Système de design</span><div class="t-sm muted">S1 — fondations réutilisées sur S2 → S14</div></div>
+    </div>
+    <p class="t-sm muted" style="max-width:42ch">Tokens définis une seule fois ici (variables CSS) et repris à l'identique sur chaque écran pour garder le système cohérent.</p>
+  </footer>
+
+</main>
+
+<script>
+/* ── token data → render swatches/scales ─────────────────────────── */
+const aquaRamp=[['50','#ECFEFF'],['100','#CFF7FB'],['200','#A4ECF5'],['300','#6FDDED'],['400','#22D3EE'],['500','#06B6D4'],['600','#0891B2'],['700','#0E7490'],['800','#155E75'],['900','#164E63']];
+const aR=document.getElementById('aquaRamp');
+if(aR)aquaRamp.forEach(([k,v])=>{const d=document.createElement('div');const dark=parseInt(k)>=400;d.innerHTML=`<div class="swatch" style="background:${v}"></div><div style="margin-top:.35rem;font-weight:700;font-size:.78rem">${k}</div><div class="spec">${v}</div>`;aR.appendChild(d);});
+
+const toks=[
+  ['Encre — texte','--ink','#0F3D4C','Texte principal · AA',1],
+  ['Encre atténuée','--ink-muted','#4F6E78','Texte secondaire · AA',1],
+  ['Pétrole 900','--aqua-900','#164E63','Ancrages, puces actives',1],
+  ['Corail — accent','--coral','#FB7185','Cœur, promo (l\'unique accent)',1],
+  ['Corail profond','--coral-deep','#F43F5E','Cœur actif, survol',1],
+  ['WhatsApp','--wa','#17A24E','Vert — texte large/gras + icônes',1],
+  ['Ambre','--amber','#F59E0B','Étoiles d\'avis, «sur place»',0],
+  ['Succès','--success','#15A24A','Réservation acceptée',1],
+  ['Danger','--danger','#DC2626','Refus, suppression',1],
+  ['Sable — fond','--sand','#FAFAF7','Fond de l\'app',0],
+  ['Sable 2','--sand-2','#F1F1EA','Surfaces, base skeleton',0],
+  ['Ligne','--line-strong','#D3D6CE','Bordures, séparateurs',0],
+];
+const tG=document.getElementById('tokGrid');
+if(tG)toks.forEach(([n,varn,hex,use,dark])=>{const d=document.createElement('div');d.className='tok-card';d.style.padding='0';d.style.overflow='hidden';
+  d.innerHTML=`<div class="swatch" style="border-radius:0;height:58px;background:${hex}"></div>
+  <div style="padding:.7rem .8rem"><div style="font-weight:700;font-size:.85rem">${n}</div>
+  <div class="spec" style="margin:.15rem 0">${hex}</div>
+  <div class="t-sm muted">${use}</div></div>`;tG.appendChild(d);});
+
+const sp=[['1','4px'],['2','8px'],['3','12px'],['4','16px'],['5','20px'],['6','24px'],['8','32px'],['10','40px'],['12','48px'],['16','64px']];
+const sS=document.getElementById('spaceScale');
+if(sS)sp.forEach(([k,v])=>{const d=document.createElement('div');d.style.cssText='display:flex;align-items:center;gap:.8rem';
+  d.innerHTML=`<span class="spec" style="width:5rem;flex:none">space-${k}</span><div style="height:14px;width:${v};background:var(--aqua-300);border-radius:4px"></div><span class="spec">${v}</span>`;sS.appendChild(d);});
+
+const rad=[['sm','8'],['md','12'],['lg','16'],['xl','20'],['2xl','24'],['3xl','32'],['pill','999']];
+const rS=document.getElementById('radiusScale');
+if(rS)rad.forEach(([k,v])=>{const d=document.createElement('div');d.style.textAlign='center';
+  d.innerHTML=`<div style="width:74px;height:64px;background:var(--aqua-50);border:1.5px solid var(--aqua-300);border-radius:${v=='999'?'999px':v+'px'};border-bottom-right-radius:${v=='999'?'999px':v+'px'}"></div><div class="spec" style="margin-top:.5rem">${k}</div>`;rS.appendChild(d);});
+
+/* ── interactions (delegated; safe before later sections exist) ──── */
+document.addEventListener('click',e=>{
+  const fav=e.target.closest('.fav');               if(fav){fav.classList.toggle('is-on');fav.setAttribute('aria-pressed',fav.classList.contains('is-on'));}
+  const chip=e.target.closest('.chip');             if(chip){chip.classList.toggle('is-on');chip.setAttribute('aria-pressed',chip.classList.contains('is-on'));}
+  const tog=e.target.closest('.toggle');            if(tog){tog.classList.toggle('is-on');tog.setAttribute('aria-checked',tog.classList.contains('is-on'));}
+  const chk=e.target.closest('.check');             if(chk){chk.classList.toggle('is-on');chk.setAttribute('aria-checked',chk.classList.contains('is-on'));}
+  const seg=e.target.closest('.seg-item');          if(seg){seg.parentNode.querySelectorAll('.seg-item').forEach(s=>{s.classList.remove('is-on');s.setAttribute('aria-selected','false');});seg.classList.add('is-on');seg.setAttribute('aria-selected','true');}
+  const tab=e.target.closest('.tab');               if(tab&&tab.dataset.tab){tab.parentNode.querySelectorAll('.tab').forEach(t=>t.classList.remove('is-on'));tab.classList.add('is-on');}
+  const step=e.target.closest('.stepper button');   if(step){const w=step.closest('.stepper');const v=w.querySelector('.val');let n=parseInt(v.textContent);n=step.dataset.dir==='up'?Math.min(20,n+1):Math.max(1,n-1);v.textContent=n;}
+});
+
+/* sub-nav active state */
+const links=[...document.querySelectorAll('.subnav a')];
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){links.forEach(l=>l.classList.toggle('is-on',l.getAttribute('href')==='#'+en.target.id));}});},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>io.observe(s));
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESIGN NOTES · S1 — Système de design
+     ────────────────────────────────────────────────────────────────
+     • Confiance d'abord : badges de vérification, note + nb d'avis, taux/délai
+       de réponse, « Membre depuis », et un encart « Paiement sur place » assumé
+       comme argument — c'est le frein n°1 à la conversion au Maroc.
+     • WhatsApp de premier rang : CTA vert + bouton-icône placés À CÔTÉ de
+       « Réserver », jamais derrière. Le blanc sur vert n'est utilisé que sur
+       libellé large/gras et icônes (graphique 3:1) pour rester conforme AA.
+     • Contraste inscrit dans les tokens : aqua-500 = identité/décoratif ;
+       aqua-700 = texte et actions sur fond clair (AA). Les étoiles sont
+       toujours doublées d'une valeur chiffrée (jamais la couleur seule).
+     • RTL natif : propriétés logiques (start/end) partout → miroir propre ;
+       les icônes directionnelles s'inversent (.flip-x) ; chiffres occidentaux,
+       « DH » → « درهم ».
+     • Source unique : tous les tokens sont des variables CSS définies une seule
+       fois ici ; les composants sont des classes réutilisables (.btn, .pcard,
+       .seg, .badge, .chip…) repris à l'identique sur S2 → S14.
+     ════════════════════════════════════════════════════════════════ -->
+</body>
+</html>

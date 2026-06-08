@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E7490">
+<title>Pissina · Espace hôte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ════════ PISSINA TOKENS — identical to S1 ════════ */
+:root{
+  --aqua-50:#ECFEFF;--aqua-100:#CFF7FB;--aqua-200:#A4ECF5;--aqua-300:#6FDDED;--aqua-400:#22D3EE;--aqua-500:#06B6D4;--aqua-600:#0891B2;--aqua-700:#0E7490;--aqua-800:#155E75;--aqua-900:#164E63;
+  --ink-strong:#0A2D38;--ink:#0F3D4C;--ink-muted:#4F6E78;--ink-faint:#8AA2AB;
+  --coral:#FB7185;--coral-deep:#F43F5E;--coral-soft:#FFE4E8;--coral-ink:#9F1239;
+  --wa:#17A24E;--wa-deep:#138A42;--amber:#F59E0B;--amber-soft:#FEF3C7;--amber-ink:#92580A;
+  --success:#15A24A;--success-soft:#DCFCE7;--danger:#DC2626;--danger-deep:#B91C1C;--danger-soft:#FEE2E2;
+  --sand:#FAFAF7;--sand-2:#F1F1EA;--white:#FFFFFF;--line:#E6E7E1;--line-2:#EDEEE8;--line-strong:#D3D6CE;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-3xl:32px;--r-pill:999px;
+  --sh-sm:0 1px 2px rgba(15,61,76,.06),0 1px 1px rgba(15,61,76,.05);
+  --sh-card:0 6px 24px -8px rgba(15,61,76,.18),0 2px 6px -3px rgba(15,61,76,.08);
+  --sh-pop:0 12px 30px -8px rgba(15,61,76,.22);--sh-lg:0 22px 55px -14px rgba(15,61,76,.32);
+  --grad-fab:linear-gradient(160deg,#22D3EE 0%,#0E7490 100%);--grad-hero:linear-gradient(140deg,#0E7490,#0891B2 40%,#22C9DE 75%,#7FE6EF);
+  --ease-water:cubic-bezier(.22,1,.36,1);--ease-soft:cubic-bezier(.4,0,.2,1);
+  --dur-1:.18s;--dur-2:.3s;--dur-3:.5s;--focus:0 0 0 3px rgba(6,182,212,.40);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+[hidden]{display:none!important;}
+.ar{font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;}
+::selection{background:var(--aqua-200);color:var(--ink-strong);}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:16px;}
+@media(min-width:768px){.wrap{padding-inline:24px;}}
+.t-h1{font-size:clamp(1.4rem,3.4vw,1.85rem);font-weight:800;letter-spacing:-.02em;}
+.t-h3{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;}
+.t-body{font-size:.9375rem;line-height:1.6;}.t-sm{font-size:.8125rem;line-height:1.45;}
+.muted{color:var(--ink-muted);}.faint{color:var(--ink-faint);}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:var(--r-pill);padding:.65rem 1.1rem;font-size:.92rem;line-height:1;cursor:pointer;border:1.5px solid transparent;transition:background-color var(--dur-1) var(--ease-soft),border-color var(--dur-1),color var(--dur-1),transform var(--dur-1),box-shadow var(--dur-1);white-space:nowrap;min-height:44px;}
+.btn:active{transform:translateY(1px);}.btn:focus-visible{outline:none;box-shadow:var(--focus);}.btn svg{width:17px;height:17px;flex:none;}
+.btn-lg{padding:.9rem 1.4rem;font-size:1.02rem;min-height:52px;}.btn-sm{padding:.45rem .7rem;font-size:.82rem;min-height:38px;}.btn-block{width:100%;}
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));}
+.btn-primary:hover{background-color:var(--aqua-800);}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong);}.btn-secondary:hover{border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50);}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-strong);}.btn-ghost:hover{background:var(--sand-2);}
+.btn-wa{background:var(--wa);color:#fff;}.btn-wa:hover{background:var(--wa-deep);}
+.btn-danger-solid{background:var(--danger);color:#fff;}.btn-danger-solid:hover{background:var(--danger-deep);}
+.icon-btn{width:42px;height:42px;border-radius:var(--r-pill);display:inline-flex;align-items:center;justify-content:center;border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);cursor:pointer;flex:none;transition:all var(--dur-1);}
+.icon-btn:hover{border-color:var(--aqua-500);color:var(--aqua-800);}.icon-btn svg{width:20px;height:20px;}
+
+/* avatar / badge / toggle / radio / stars */
+.avatar{border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;object-fit:cover;}
+.st{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .58rem;border-radius:var(--r-pill);font-size:.73rem;font-weight:700;line-height:1;white-space:nowrap;}.st svg{width:12px;height:12px;}
+.st-ok{background:var(--success-soft);color:#0F7A38;}.st-no{background:var(--sand-2);color:var(--ink-muted);}.st-wait{background:var(--amber-soft);color:var(--amber-ink);}
+.toggle{position:relative;width:48px;height:28px;border-radius:999px;background:var(--line-strong);cursor:pointer;border:none;flex:none;transition:background-color var(--dur-2) var(--ease-soft);}
+.toggle::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:22px;height:22px;border-radius:999px;background:#fff;box-shadow:var(--sh-sm);transition:inset-inline-start var(--dur-2) var(--ease-water);}
+.toggle.is-on{background:var(--success);}.toggle.is-on::after{inset-inline-start:23px;}.toggle:focus-visible{outline:none;box-shadow:var(--focus);}
+.radio{width:22px;height:22px;border-radius:99px;border:2px solid var(--line-strong);display:grid;place-items:center;flex:none;}
+.radio.is-on{border-color:var(--aqua-700);}.radio.is-on::after{content:"";width:11px;height:11px;border-radius:99px;background:var(--aqua-700);}
+.stars{position:relative;display:inline-block;font-size:.9rem;line-height:1;letter-spacing:.05em;}.stars .base{color:var(--line-strong);}.stars .fill{position:absolute;top:0;inset-inline-start:0;color:var(--amber);overflow:hidden;white-space:nowrap;}
+
+/* ════════ S7-specific ════════ */
+.site-header{position:sticky;top:0;z-index:30;background:rgba(250,250,247,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.dash-grid{display:grid;gap:1.5rem;align-items:start;}
+@media(min-width:1024px){.dash-grid{grid-template-columns:248px 1fr;}}
+
+.sidebar{position:sticky;top:76px;background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);padding:1rem;}
+.snav{display:flex;flex-direction:column;gap:.25rem;margin-top:.6rem;}
+.snav button{display:flex;align-items:center;gap:.7rem;padding:.7rem .8rem;border-radius:var(--r-lg);font-weight:600;font-size:.92rem;color:var(--ink-muted);cursor:pointer;background:none;border:none;width:100%;text-align:start;transition:all var(--dur-1);}
+.snav button:hover{background:var(--sand-2);color:var(--ink);}
+.snav button.is-on{background:var(--aqua-50);color:var(--aqua-800);}
+.snav button svg{width:20px;height:20px;flex:none;}
+.snav .nb{margin-inline-start:auto;background:var(--coral-deep);color:#fff;font-size:.72rem;font-weight:800;min-width:1.3rem;height:1.3rem;border-radius:99px;display:grid;place-items:center;padding-inline:.3rem;}
+
+.toptabs{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.2rem;}
+.toptabs::-webkit-scrollbar{display:none;}
+.toptab{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem .9rem;border-radius:var(--r-pill);font-weight:700;font-size:.88rem;color:var(--ink-muted);background:#fff;border:1.5px solid var(--line);cursor:pointer;white-space:nowrap;}
+.toptab.is-on{background:var(--aqua-700);color:#fff;border-color:var(--aqua-700);}
+.toptab .nb{background:var(--coral-deep);color:#fff;font-size:.7rem;font-weight:800;padding:.05rem .35rem;border-radius:99px;}
+.toptab.is-on .nb{background:rgba(255,255,255,.25);}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);}
+.req-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);padding:1.1rem;}
+.req-msg{background:var(--sand-2);border-radius:var(--r-lg);padding:.75rem .9rem;font-size:.9rem;line-height:1.5;position:relative;}
+.req-meta{display:flex;flex-wrap:wrap;gap:.5rem;}
+.mchip{display:inline-flex;align-items:center;gap:.35rem;background:var(--aqua-50);color:var(--aqua-800);font-weight:600;font-size:.82rem;padding:.35rem .6rem;border-radius:var(--r-pill);}
+.mchip svg{width:14px;height:14px;}
+
+/* listings */
+.listing-row{display:flex;gap:.9rem;padding:1rem;align-items:center;}
+.listing-thumb{width:84px;height:84px;border-radius:var(--r-lg);object-fit:cover;flex:none;background:var(--sand-2);}
+.meter{height:7px;border-radius:99px;background:var(--sand-2);overflow:hidden;}.meter i{display:block;height:100%;background:var(--amber);border-radius:99px;}
+
+/* stats */
+.stat-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-sm);padding:1rem 1.1rem;}
+.stat-card .ic{width:38px;height:38px;border-radius:var(--r-md);display:grid;place-items:center;}
+.bars{display:flex;align-items:flex-end;gap:.5rem;height:160px;}
+.bars .bar{flex:1;background:linear-gradient(180deg,var(--aqua-400),var(--aqua-600));border-radius:6px 6px 0 0;position:relative;transition:opacity var(--dur-1);min-height:4px;}
+.bars .bar:hover{opacity:.85;}
+.bars .bar span{position:absolute;top:-1.3rem;inset-inline:0;text-align:center;font-size:.68rem;font-weight:700;color:var(--ink-muted);}
+
+/* calendar */
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.3rem;}
+.cal-dow{text-align:center;font-size:.68rem;font-weight:700;color:var(--ink-muted);padding:.2rem 0;}
+.cal-day{aspect-ratio:1;border:1px solid var(--line);background:#fff;border-radius:var(--r-md);font-weight:600;font-size:.85rem;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;position:relative;transition:all var(--dur-1);}
+.cal-day:hover{border-color:var(--aqua-400);}
+.cal-day.empty{border:none;background:none;cursor:default;}
+.cal-day .num{font-size:.85rem;}
+.cal-day.today{border-color:var(--aqua-700);box-shadow:inset 0 0 0 1px var(--aqua-700);}
+.cdots{display:flex;gap:2px;}
+.cdot{width:5px;height:5px;border-radius:99px;}
+.cdot.booked{background:var(--aqua-700);}.cdot.blocked{background:var(--ink-faint);}.cdot.free{background:var(--aqua-200);}
+
+/* tab bar */
+.tabbar{display:flex;justify-content:space-around;align-items:flex-end;background:#fff;border-top:1px solid var(--line);padding:.45rem .4rem calc(.45rem + env(safe-area-inset-bottom));}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:.18rem;color:var(--ink-muted);font-size:.66rem;font-weight:600;padding:.25rem 0;background:none;border:none;cursor:pointer;min-height:48px;}.tab svg{width:23px;height:23px;}.tab.is-on{color:var(--aqua-700);}
+
+/* dialog / sheet */
+.dlg-overlay{position:fixed;inset:0;background:rgba(10,45,56,.5);backdrop-filter:blur(3px);z-index:50;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--dur-2),visibility var(--dur-2);}
+.dlg-overlay.show{opacity:1;visibility:visible;pointer-events:auto;}
+@media(min-width:768px){.dlg-overlay{align-items:center;padding:1.5rem;}}
+.dlg{background:#fff;width:100%;max-height:92vh;border-radius:var(--r-3xl) var(--r-3xl) 0 0;box-shadow:var(--sh-lg);display:flex;flex-direction:column;overflow:hidden;transform:translateY(100%);transition:transform var(--dur-3) var(--ease-water);}
+.dlg-overlay.show .dlg{transform:translateY(0);}
+@media(min-width:768px){.dlg{max-width:460px;border-radius:var(--r-3xl);transform:translateY(12px) scale(.98);}}
+.dlg-grip{width:40px;height:5px;border-radius:99px;background:var(--line-strong);margin:.7rem auto 0;}
+@media(min-width:768px){.dlg-grip{display:none;}}
+.reason{display:flex;align-items:center;gap:.7rem;padding:.7rem .85rem;border:1.5px solid var(--line-strong);border-radius:var(--r-lg);cursor:pointer;transition:all var(--dur-1);background:#fff;width:100%;text-align:start;font-weight:600;font-size:.92rem;}
+.reason.is-on{border-color:var(--aqua-700);background:var(--aqua-50);}
+
+@media(max-width:1023px){body{padding-bottom:74px;}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+</defs></svg>
+
+<!-- header -->
+<header class="site-header">
+  <div class="wrap" style="display:flex;align-items:center;gap:1rem;height:60px">
+    <a href="#" style="display:flex;align-items:center;gap:.5rem"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg><strong style="font-size:1.1rem;letter-spacing:-.02em">pissina</strong></a>
+    <span class="st" style="background:var(--aqua-900);color:#fff">Espace hôte</span>
+    <div style="margin-inline-start:auto;display:flex;align-items:center;gap:.7rem">
+      <button class="btn btn-ghost btn-sm hidden sm:inline-flex" style="border:none">Voir comme voyageur</button>
+      <button class="icon-btn" aria-label="Notifications" style="position:relative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span style="position:absolute;top:7px;inset-inline-end:8px;width:8px;height:8px;border-radius:99px;background:var(--coral-deep);border:2px solid #fff"></span></button>
+      <span class="avatar" style="width:36px;height:36px;font-size:.82rem;background:linear-gradient(135deg,#22D3EE,#0E7490)">YA</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:1.3rem;padding-bottom:2.5rem">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem">
+    <div>
+      <h1 class="t-h1">Bonjour, Yasmine 👋</h1>
+      <p class="muted t-sm" style="margin-top:.2rem">Vous avez <strong style="color:var(--aqua-800)">3 nouvelles demandes</strong> à traiter.</p>
+    </div>
+    <div role="group" aria-label="Aperçu" style="display:inline-flex;align-items:center;gap:.35rem;border:1px dashed var(--line-strong);border-radius:var(--r-pill);padding:.25rem .3rem .25rem .7rem;background:#fff">
+      <span style="font-size:.66rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)">Aperçu</span>
+      <button class="demo-btn is-on" data-demo="active" style="font-size:.78rem;font-weight:600;padding:.3rem .6rem;border-radius:999px;border:none;background:var(--aqua-700);color:#fff;cursor:pointer">Compte actif</button>
+      <button class="demo-btn" data-demo="new" style="font-size:.78rem;font-weight:600;padding:.3rem .6rem;border-radius:999px;border:none;background:var(--sand-2);color:var(--ink-muted);cursor:pointer">Nouvel hôte</button>
+    </div>
+  </div>
+
+  <!-- mobile top tabs -->
+  <div class="toptabs lg:hidden" id="topNav" style="margin-bottom:1.1rem">
+    <button class="toptab is-on" data-sec="demandes">Demandes <span class="nb">3</span></button>
+    <button class="toptab" data-sec="calendrier">Calendrier</button>
+    <button class="toptab" data-sec="annonces">Mes annonces</button>
+    <button class="toptab" data-sec="stats">Statistiques</button>
+  </div>
+
+  <div class="dash-grid" id="dashGrid">
+    <!-- ░░ DESKTOP SIDEBAR ░░ -->
+    <aside class="sidebar hidden lg:block">
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.3rem .2rem .8rem;border-bottom:1px solid var(--line)">
+        <span class="avatar" style="width:42px;height:42px;font-size:.9rem;background:linear-gradient(135deg,#22D3EE,#0E7490)">YA</span>
+        <div style="min-width:0"><strong style="font-size:.95rem">Yasmine A.</strong><div class="t-sm" style="color:var(--amber-ink);font-weight:600">★ Superhôte</div></div>
+      </div>
+      <nav class="snav" id="sideNav" aria-label="Sections">
+        <button class="is-on" data-sec="demandes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Demandes<span class="nb" id="navBadge">3</span></button>
+        <button data-sec="calendrier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendrier</button>
+        <button data-sec="annonces"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Mes annonces</button>
+        <button data-sec="stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>Statistiques</button>
+      </nav>
+      <button class="btn btn-primary btn-block" style="margin-top:1rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nouvelle annonce</button>
+    </aside>
+
+    <!-- ░░ CONTENT ░░ -->
+    <div id="content" style="min-width:0">
+
+      <!-- DEMANDES -->
+      <section data-sec="demandes">
+        <h2 class="t-h3" style="margin-bottom:.9rem">Demandes en attente</h2>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+
+          <!-- request 1 -->
+          <article class="req-card" data-req>
+            <div data-view="pending">
+              <div style="display:flex;gap:.8rem;align-items:flex-start">
+                <span class="avatar" style="width:48px;height:48px;font-size:.95rem;background:linear-gradient(135deg,#0E7490,#155E75)">KB</span>
+                <div style="flex:1;min-width:0">
+                  <div style="display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap"><strong>Karim Benali</strong><span class="t-sm faint">il y a 2 h</span></div>
+                  <div class="t-sm muted" style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">Membre depuis 2025 · <span style="display:inline-flex;align-items:center;gap:.2rem;color:var(--ink);font-weight:600"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:13px;height:13px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,9 (8 visites)</span></div>
+                </div>
+              </div>
+              <div class="req-meta" style="margin-top:.8rem">
+                <span class="mchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Sam. 18 juil.</span>
+                <span class="mchip">Après-midi · 15h–20h</span>
+                <span class="mchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M3 20a6 6 0 0 1 12 0M16 5.5a3 3 0 0 1 0 5"/></svg>8 invités</span>
+              </div>
+              <div class="req-msg" style="margin-top:.8rem">« Bonjour, c'est pour l'anniversaire de ma fille, on sera une famille calme. Possible d'arriver à 15h pile ? »</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.9rem;flex-wrap:wrap">
+                <div><span class="muted t-sm">Total · sur place</span> <strong style="font-size:1.1rem">400 DH</strong></div>
+                <div style="display:flex;gap:.6rem;flex:1;justify-content:flex-end;min-width:200px">
+                  <button class="btn btn-ghost" style="flex:1;max-width:160px" data-refuse>Refuser</button>
+                  <button class="btn btn-primary" style="flex:1.2;max-width:200px" data-accept><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Accepter</button>
+                </div>
+              </div>
+            </div>
+            <div data-view="accepted" hidden>
+              <div style="display:flex;align-items:center;gap:.6rem;color:#0F7A38;font-weight:700"><span class="st st-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Demande acceptée</span><span class="t-sm muted" style="font-weight:400">Karim a été prévenu.</span></div>
+              <div style="display:flex;align-items:center;gap:.7rem;margin-top:.9rem;background:var(--aqua-50);border-radius:var(--r-lg);padding:.75rem .9rem">
+                <span class="avatar" style="width:42px;height:42px;font-size:.9rem;background:linear-gradient(135deg,#0E7490,#155E75)">KB</span>
+                <div style="flex:1"><strong>Karim Benali</strong><div class="t-sm muted">+212 6 61 22 33 44</div></div>
+                <a href="tel:+212661223344" class="icon-btn" aria-label="Appeler Karim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.1 4.18 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></a>
+                <a href="#" class="icon-btn" style="background:var(--wa);border-color:transparent;color:#fff" aria-label="WhatsApp Karim"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02z"/></svg></a>
+              </div>
+            </div>
+            <div data-view="refused" hidden>
+              <div style="display:flex;align-items:center;gap:.6rem"><span class="st st-no">Refusée</span><span class="t-sm muted" data-reason-text>Vous avez refusé cette demande.</span></div>
+            </div>
+          </article>
+
+          <!-- request 2 -->
+          <article class="req-card" data-req>
+            <div data-view="pending">
+              <div style="display:flex;gap:.8rem;align-items:flex-start">
+                <span class="avatar" style="width:48px;height:48px;font-size:.95rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">NE</span>
+                <div style="flex:1;min-width:0">
+                  <div style="display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap"><strong>Nadia El Fassi</strong><span class="t-sm faint">il y a 5 h</span></div>
+                  <div class="t-sm muted" style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">Membre depuis 2024 · <span style="display:inline-flex;align-items:center;gap:.2rem;color:var(--ink);font-weight:600"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:13px;height:13px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>5,0 (15 visites)</span></div>
+                </div>
+              </div>
+              <div class="req-meta" style="margin-top:.8rem">
+                <span class="mchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Dim. 26 juil.</span>
+                <span class="mchip">Journée · 9h–20h</span>
+                <span class="mchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M3 20a6 6 0 0 1 12 0M16 5.5a3 3 0 0 1 0 5"/></svg>12 invités</span>
+                <span class="mchip" style="background:var(--amber-soft);color:var(--amber-ink)">🍖 +1 extra</span>
+              </div>
+              <div class="req-msg" style="margin-top:.8rem">« Salam, on est un groupe d'amies, on cherche une piscine privée à l'abri des regards. Le barbecue est possible ? »</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.9rem;flex-wrap:wrap">
+                <div><span class="muted t-sm">Total · sur place</span> <strong style="font-size:1.1rem">750 DH</strong></div>
+                <div style="display:flex;gap:.6rem;flex:1;justify-content:flex-end;min-width:200px">
+                  <button class="btn btn-ghost" style="flex:1;max-width:160px" data-refuse>Refuser</button>
+                  <button class="btn btn-primary" style="flex:1.2;max-width:200px" data-accept><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Accepter</button>
+                </div>
+              </div>
+            </div>
+            <div data-view="accepted" hidden>
+              <div style="display:flex;align-items:center;gap:.6rem;color:#0F7A38;font-weight:700"><span class="st st-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Demande acceptée</span><span class="t-sm muted" style="font-weight:400">Nadia a été prévenue.</span></div>
+              <div style="display:flex;align-items:center;gap:.7rem;margin-top:.9rem;background:var(--aqua-50);border-radius:var(--r-lg);padding:.75rem .9rem">
+                <span class="avatar" style="width:42px;height:42px;font-size:.9rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">NE</span>
+                <div style="flex:1"><strong>Nadia El Fassi</strong><div class="t-sm muted">+212 6 70 88 99 00</div></div>
+                <a href="tel:+212670889900" class="icon-btn" aria-label="Appeler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.1 4.18 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></a>
+                <a href="#" class="icon-btn" style="background:var(--wa);border-color:transparent;color:#fff" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02z"/></svg></a>
+              </div>
+            </div>
+            <div data-view="refused" hidden><div style="display:flex;align-items:center;gap:.6rem"><span class="st st-no">Refusée</span><span class="t-sm muted" data-reason-text>Vous avez refusé cette demande.</span></div></div>
+          </article>
+
+          <!-- request 3 -->
+          <article class="req-card" data-req>
+            <div data-view="pending">
+              <div style="display:flex;gap:.8rem;align-items:flex-start">
+                <span class="avatar" style="width:48px;height:48px;font-size:.95rem;background:linear-gradient(135deg,#F59E0B,#D97706)">HM</span>
+                <div style="flex:1;min-width:0">
+                  <div style="display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap"><strong>Hicham Mansouri</strong><span class="t-sm faint">hier</span></div>
+                  <div class="t-sm muted">Nouveau membre · <span class="faint">pas encore d'avis</span></div>
+                </div>
+              </div>
+              <div class="req-meta" style="margin-top:.8rem">
+                <span class="mchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Sam. 1 août</span>
+                <span class="mchip">Matinée · 9h–14h</span>
+                <span class="mchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M3 20a6 6 0 0 1 12 0M16 5.5a3 3 0 0 1 0 5"/></svg>6 invités</span>
+              </div>
+              <div class="req-msg" style="margin-top:.8rem">« Bonjour, c'est ma première réservation sur Pissina. On vient en famille, merci. »</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.9rem;flex-wrap:wrap">
+                <div><span class="muted t-sm">Total · sur place</span> <strong style="font-size:1.1rem">350 DH</strong></div>
+                <div style="display:flex;gap:.6rem;flex:1;justify-content:flex-end;min-width:200px">
+                  <button class="btn btn-ghost" style="flex:1;max-width:160px" data-refuse>Refuser</button>
+                  <button class="btn btn-primary" style="flex:1.2;max-width:200px" data-accept><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Accepter</button>
+                </div>
+              </div>
+            </div>
+            <div data-view="accepted" hidden>
+              <div style="display:flex;align-items:center;gap:.6rem;color:#0F7A38;font-weight:700"><span class="st st-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Demande acceptée</span><span class="t-sm muted" style="font-weight:400">Hicham a été prévenu.</span></div>
+              <div style="display:flex;align-items:center;gap:.7rem;margin-top:.9rem;background:var(--aqua-50);border-radius:var(--r-lg);padding:.75rem .9rem">
+                <span class="avatar" style="width:42px;height:42px;font-size:.9rem;background:linear-gradient(135deg,#F59E0B,#D97706)">HM</span>
+                <div style="flex:1"><strong>Hicham Mansouri</strong><div class="t-sm muted">+212 6 55 44 33 22</div></div>
+                <a href="tel:+212655443322" class="icon-btn" aria-label="Appeler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.1 4.18 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></a>
+                <a href="#" class="icon-btn" style="background:var(--wa);border-color:transparent;color:#fff" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02z"/></svg></a>
+              </div>
+            </div>
+            <div data-view="refused" hidden><div style="display:flex;align-items:center;gap:.6rem"><span class="st st-no">Refusée</span><span class="t-sm muted" data-reason-text>Vous avez refusé cette demande.</span></div></div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- CALENDRIER -->
+      <section data-sec="calendrier" hidden>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.9rem">
+          <h2 class="t-h3">Calendrier</h2>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;font-size:.78rem;font-weight:600">
+            <span style="display:inline-flex;align-items:center;gap:.35rem"><span class="cdot booked" style="width:8px;height:8px"></span>Réservé</span>
+            <span style="display:inline-flex;align-items:center;gap:.35rem"><span class="cdot blocked" style="width:8px;height:8px"></span>Bloqué</span>
+            <span style="display:inline-flex;align-items:center;gap:.35rem"><span class="cdot free" style="width:8px;height:8px"></span>Libre</span>
+          </div>
+        </div>
+        <div class="card" style="padding:1.1rem">
+          <div id="calMount"></div>
+          <p class="t-sm muted" style="margin-top:.8rem;display:flex;align-items:center;gap:.4rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Touchez un jour pour bloquer/débloquer des créneaux ou voir la réservation.</p>
+        </div>
+      </section>
+
+      <!-- MES ANNONCES -->
+      <section data-sec="annonces" hidden>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.9rem">
+          <h2 class="t-h3">Mes annonces</h2>
+          <button class="btn btn-primary btn-sm lg:hidden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nouvelle</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+
+          <!-- listing 1 · publiée, 100% -->
+          <article class="card">
+            <div class="listing-row">
+              <img class="listing-thumb" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=240&q=60" alt="Villa avec piscine chauffée">
+              <div style="flex:1;min-width:0">
+                <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><strong>Villa avec piscine chauffée</strong><span class="st st-ok">Publiée</span></div>
+                <div class="t-sm muted" style="margin-top:.2rem">Dar Bouazza, Casablanca</div>
+                <div style="display:flex;gap:1.2rem;margin-top:.5rem;font-size:.85rem">
+                  <span><strong>342</strong> <span class="muted">vues · 7j</span></span>
+                  <span><strong>8</strong> <span class="muted">demandes</span></span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;flex:none">
+                <span class="toggle is-on" role="switch" aria-checked="true" tabindex="0" aria-label="Statut publié"></span>
+                <button class="btn btn-secondary btn-sm">Modifier</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- listing 2 · en pause, incomplète -->
+          <article class="card">
+            <div class="listing-row">
+              <img class="listing-thumb" src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=240&q=60" alt="Piscine du jardin">
+              <div style="flex:1;min-width:0">
+                <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><strong>Piscine du jardin</strong><span class="st st-no">En pause</span></div>
+                <div class="t-sm muted" style="margin-top:.2rem">Bouskoura</div>
+                <div style="display:flex;gap:1.2rem;margin-top:.5rem;font-size:.85rem">
+                  <span><strong>0</strong> <span class="muted">vues · 7j</span></span>
+                  <span><strong>0</strong> <span class="muted">demandes</span></span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;flex:none">
+                <span class="toggle" role="switch" aria-checked="false" tabindex="0" aria-label="Statut publié"></span>
+                <button class="btn btn-secondary btn-sm">Modifier</button>
+              </div>
+            </div>
+            <div style="padding:0 1rem 1rem">
+              <div style="background:var(--amber-soft);border-radius:var(--r-lg);padding:.8rem .9rem">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.5rem">
+                  <strong style="font-size:.88rem;color:var(--amber-ink)">Complétez votre annonce</strong>
+                  <strong style="font-size:.88rem;color:var(--amber-ink)">70 %</strong>
+                </div>
+                <div class="meter"><i style="width:70%"></i></div>
+                <div class="t-sm" style="color:var(--amber-ink);margin-top:.5rem">Il manque : 3 photos · prix du créneau Soirée</div>
+                <button class="btn btn-primary btn-sm" style="margin-top:.7rem">Compléter l'annonce</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- STATISTIQUES -->
+      <section data-sec="stats" hidden>
+        <h2 class="t-h3" style="margin-bottom:.9rem">Statistiques · juillet</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" style="margin-bottom:1.2rem">
+          <div class="stat-card">
+            <div style="display:flex;justify-content:space-between;align-items:start"><span class="ic" style="background:var(--aqua-50);color:var(--aqua-700)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="t-sm" style="color:var(--success);font-weight:700">+12 %</span></div>
+            <div style="font-size:1.6rem;font-weight:800;margin-top:.5rem">1 248</div><div class="t-sm muted">Vues du mois</div>
+          </div>
+          <div class="stat-card">
+            <div style="display:flex;justify-content:space-between;align-items:start"><span class="ic" style="background:var(--success-soft);color:var(--success)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+            <div style="font-size:1.6rem;font-weight:800;margin-top:.5rem">88 %</div><div class="t-sm muted">Taux d'acceptation</div>
+          </div>
+          <div class="stat-card">
+            <div style="display:flex;justify-content:space-between;align-items:start"><span class="ic" style="background:var(--amber-soft);color:var(--amber-ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="12" cy="12" r="2.5"/></svg></span><span class="t-sm" style="color:var(--success);font-weight:700">+8 %</span></div>
+            <div style="font-size:1.6rem;font-weight:800;margin-top:.5rem">4 200 <span style="font-size:1rem">DH</span></div><div class="t-sm muted">Revenus estimés</div>
+          </div>
+          <div class="stat-card">
+            <div style="display:flex;justify-content:space-between;align-items:start"><span class="ic" style="background:var(--amber-soft);color:var(--amber)"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></span></div>
+            <div style="font-size:1.6rem;font-weight:800;margin-top:.5rem">4,8</div><div class="t-sm muted">Note moyenne · 23 avis</div>
+          </div>
+        </div>
+        <div class="card" style="padding:1.2rem">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem"><strong>Vues par semaine</strong><span class="t-sm muted">8 dernières semaines</span></div>
+          <div class="bars">
+            <div class="bar" style="height:38%"><span>96</span></div>
+            <div class="bar" style="height:52%"><span>134</span></div>
+            <div class="bar" style="height:45%"><span>118</span></div>
+            <div class="bar" style="height:68%"><span>176</span></div>
+            <div class="bar" style="height:60%"><span>155</span></div>
+            <div class="bar" style="height:82%"><span>212</span></div>
+            <div class="bar" style="height:74%"><span>190</span></div>
+            <div class="bar" style="height:100%"><span>248</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:.6rem;font-size:.68rem;color:var(--ink-faint);font-weight:600">
+            <span>S22</span><span>S23</span><span>S24</span><span>S25</span><span>S26</span><span>S27</span><span>S28</span><span>S29</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- new-owner empty state -->
+  <div id="newOwner" hidden>
+    <div class="card" style="overflow:hidden">
+      <div style="background:var(--grad-hero);color:#fff;padding:clamp(1.6rem,4vw,2.6rem);text-align:center;position:relative">
+        <div style="font-size:2.4rem">🏖️</div>
+        <h2 style="font-size:clamp(1.5rem,3.4vw,2rem);font-weight:800;letter-spacing:-.02em;margin-top:.6rem">Transformez votre piscine en revenu</h2>
+        <p class="t-body" style="color:rgba(255,255,255,.92);max-width:34rem;margin:.6rem auto 0">Les hôtes à Casablanca gagnent en moyenne <strong>jusqu'à 3 000 DH par week-end</strong>. Inscription gratuite, vous gardez le contrôle de chaque demande.</p>
+        <button class="btn btn-lg" style="background:#fff;color:var(--aqua-800);margin-top:1.3rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Publier ma première annonce</button>
+      </div>
+      <div class="grid sm:grid-cols-3" style="padding:1.2rem;gap:1rem">
+        <div style="text-align:center"><div style="font-size:1.4rem">📸</div><strong style="display:block;margin-top:.3rem">Ajoutez vos photos</strong><span class="t-sm muted">Décrivez votre piscine en 5 min</span></div>
+        <div style="text-align:center"><div style="font-size:1.4rem">🗓️</div><strong style="display:block;margin-top:.3rem">Fixez vos créneaux</strong><span class="t-sm muted">Vous choisissez vos disponibilités</span></div>
+        <div style="text-align:center"><div style="font-size:1.4rem">💵</div><strong style="display:block;margin-top:.3rem">Encaissez sur place</strong><span class="t-sm muted">Paiement en espèces, sans avance</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- refuse dialog -->
+<div class="dlg-overlay" id="refuseDlg">
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="refTitle">
+    <div class="dlg-grip"></div>
+    <div style="padding:1.1rem 1.2rem .4rem"><h2 id="refTitle" class="t-h3">Refuser cette demande ?</h2><p class="t-sm muted" style="margin-top:.3rem">Une raison aide le voyageur — elle reste courtoise et privée.</p></div>
+    <div style="padding:.6rem 1.2rem 1rem;display:flex;flex-direction:column;gap:.5rem;overflow-y:auto">
+      <button class="reason" data-reason="Déjà réservé ce jour-là."><span class="radio"></span>Déjà réservé ce jour-là</button>
+      <button class="reason" data-reason="Le groupe est trop grand pour la piscine."><span class="radio"></span>Le groupe est trop grand</button>
+      <button class="reason" data-reason="Ce créneau n'est pas disponible."><span class="radio"></span>Créneau indisponible</button>
+      <button class="reason" data-reason="Je ne peux pas accueillir ce jour-là."><span class="radio"></span>Je ne peux pas ce jour-là</button>
+      <button class="reason" data-reason="Demande refusée."><span class="radio"></span>Autre raison</button>
+    </div>
+    <div style="padding:1rem 1.2rem calc(1rem + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;gap:.7rem">
+      <button class="btn btn-ghost" style="flex:1" data-ref-close>Annuler</button>
+      <button class="btn btn-danger-solid" style="flex:1.4" id="confirmRefuse">Refuser la demande</button>
+    </div>
+  </div>
+</div>
+
+<!-- calendar day sheet -->
+<div class="dlg-overlay" id="daySheet">
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="daySheetTitle">
+    <div class="dlg-grip"></div>
+    <div style="padding:1.1rem 1.2rem .6rem;display:flex;align-items:center;justify-content:space-between;gap:.8rem">
+      <h2 id="daySheetTitle" class="t-h3">Créneaux du jour</h2>
+      <button class="icon-btn" data-day-close aria-label="Fermer" style="border:none;background:var(--sand-2);width:38px;height:38px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div style="padding:.4rem 1.2rem 1.2rem" id="daySlots"></div>
+  </div>
+</div>
+
+<!-- @@DIALOGS@@ -->
+
+<!-- bottom tab bar -->
+<nav class="tabbar lg:hidden" style="position:fixed;inset-inline:0;bottom:0;z-index:34;box-shadow:0 -6px 20px -12px rgba(15,61,76,.25)" aria-label="Navigation">
+  <button class="tab is-on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Hôte</button>
+  <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendrier</button>
+  <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>Messages</button>
+  <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profil</button>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESIGN NOTES · S7 — Espace hôte (owner dashboard)
+     ────────────────────────────────────────────────────────────────
+     • Command center à deux navigations : sidebar sticky sur desktop, onglets
+       défilants sur mobile, pilotées par le même état. Badge corail de demandes en
+       attente, décrémenté à chaque accept/refus.
+     • Décider en confiance : carte demande = profil voyageur (ancienneté + note de
+       ses visites passées), créneau/invités, message, total ; Accepter (primaire)
+       révèle téléphone + WhatsApp ; Refuser passe par une raison (liste préréglée).
+     • Contrôle du calendrier : points colorés par créneau (réservé/bloqué/libre) ;
+       taper un jour ouvre une feuille pour bloquer/débloquer ou voir la réservation.
+     • Annonces gérables : toggle Publiée/En pause, vues 7j + demandes, et jauge
+       « Complétez votre annonce » quand < 100 %. Stats simples + histogramme des vues.
+     • État « nouvel hôte » : pitch de revenus + « Publier ma première annonce ».
+       Tokens/composants S1 réutilisés à l'identique ; calendrier rendu depuis des données.
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+const $=id=>document.getElementById(id);
+const WD=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const weekday=d=>WD[(3+(d-1))%7];
+
+/* ── section navigation ── */
+function showSection(s){
+  document.querySelectorAll('#content section[data-sec]').forEach(sec=>sec.hidden=sec.dataset.sec!==s);
+  document.querySelectorAll('#sideNav button,.toptab').forEach(b=>b.classList.toggle('is-on',b.dataset.sec===s));
+  if(s==='calendrier')renderCal();
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('#sideNav button,.toptab').forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.sec)));
+
+/* ── demo: active / new owner ── */
+let demo='active';
+document.querySelectorAll('.demo-btn').forEach(b=>b.addEventListener('click',()=>{
+  demo=b.dataset.demo;
+  document.querySelectorAll('.demo-btn').forEach(x=>{const on=x.dataset.demo===demo;x.style.background=on?'var(--aqua-700)':'var(--sand-2)';x.style.color=on?'#fff':'var(--ink-muted)';});
+  const isNew=demo==='new';
+  $('newOwner').hidden=!isNew;$('dashGrid').hidden=isNew;$('topNav').hidden=isNew;
+}));
+
+/* ── badge ── */
+function updateBadge(){const n=document.querySelectorAll('[data-req] [data-view="pending"]:not([hidden])').length;document.querySelectorAll('#navBadge,.toptab[data-sec="demandes"] .nb').forEach(el=>{el.textContent=n;el.hidden=n===0;});}
+
+/* ── accept ── */
+document.querySelectorAll('[data-accept]').forEach(b=>b.addEventListener('click',()=>{
+  const c=b.closest('[data-req]');c.querySelector('[data-view="pending"]').hidden=true;c.querySelector('[data-view="accepted"]').hidden=false;updateBadge();
+}));
+
+/* ── refuse dialog ── */
+const refuseDlg=$('refuseDlg'),daySheet=$('daySheet');
+function openDlg(el){el.classList.add('show');document.body.style.overflow='hidden';}
+function closeDlg(el){el.classList.remove('show');document.body.style.overflow='';}
+let activeCard=null;
+document.querySelectorAll('[data-refuse]').forEach(b=>b.addEventListener('click',()=>{activeCard=b.closest('[data-req]');refuseDlg.querySelectorAll('.reason').forEach(x=>{x.classList.remove('is-on');x.querySelector('.radio').classList.remove('is-on');});openDlg(refuseDlg);}));
+refuseDlg.querySelectorAll('.reason').forEach(r=>r.addEventListener('click',()=>{refuseDlg.querySelectorAll('.reason').forEach(x=>{x.classList.remove('is-on');x.querySelector('.radio').classList.remove('is-on');});r.classList.add('is-on');r.querySelector('.radio').classList.add('is-on');}));
+$('confirmRefuse').addEventListener('click',()=>{
+  const sel=refuseDlg.querySelector('.reason.is-on');const reason=sel?sel.dataset.reason:'Demande refusée.';
+  if(activeCard){activeCard.querySelector('[data-view="pending"]').hidden=true;activeCard.querySelector('[data-view="refused"]').hidden=false;activeCard.querySelector('[data-reason-text]').textContent='Raison : '+reason;updateBadge();}
+  closeDlg(refuseDlg);
+});
+refuseDlg.addEventListener('click',e=>{if(e.target===refuseDlg||e.target.closest('[data-ref-close]'))closeDlg(refuseDlg);});
+
+/* ── listing status toggle ── */
+document.addEventListener('click',e=>{const t=e.target.closest('.toggle');if(t){t.classList.toggle('is-on');t.setAttribute('aria-checked',t.classList.contains('is-on'));}});
+
+/* ── calendar ── */
+const DOW=['L','M','M','J','V','S','D'];
+const chev=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="${d==='l'?'m15 18-6-6 6-6':'m9 18 6-6-6-6'}"/></svg>`;
+function slotState(day,i){
+  if((day===18&&i===1)||(day===26&&i===2)||(day===12&&i===0)||(day===5&&i===2))return 'booked';
+  if(day===20||day===21||(day===9&&i===0))return 'blocked';
+  const m=(day*3+i)%7;if(m===0)return 'booked';if(m===5)return 'blocked';return 'free';
+}
+function renderCal(){
+  const mt=$('calMount');if(mt.dataset.done)return;mt.dataset.done='1';
+  let h=`<div class="cal-head"><button class="icon-btn" style="width:34px;height:34px" aria-label="Mois précédent">${chev('l')}</button><strong>Juillet 2026</strong><button class="icon-btn" style="width:34px;height:34px" aria-label="Mois suivant">${chev('r')}</button></div><div class="cal-grid">`;
+  h+=DOW.map(d=>`<span class="cal-dow">${d}</span>`).join('')+'<span class="cal-day empty"></span><span class="cal-day empty"></span>';
+  for(let d=1;d<=31;d++){const dots=[0,1,2].map(i=>`<span class="cdot ${slotState(d,i)}"></span>`).join('');h+=`<button class="cal-day ${d===18?'today':''}" data-day="${d}"><span class="num">${d}</span><span class="cdots">${dots}</span></button>`;}
+  mt.innerHTML=h+'</div>';
+}
+function openDaySheet(day){
+  $('daySheetTitle').textContent=`${weekday(day)} ${day} juillet`;
+  const slots=[['Matinée','9h–14h'],['Après-midi','15h–20h'],['Journée','9h–20h']];
+  $('daySlots').innerHTML=slots.map((s,i)=>{
+    const st=slotState(day,i);
+    const lab=st==='booked'?'<span class="st st-ok">Réservé</span>':st==='blocked'?'<span class="st st-no">Bloqué</span>':'<span class="st" style="background:var(--aqua-50);color:var(--aqua-800)">Libre</span>';
+    const act=st==='booked'?'<button class="btn btn-secondary btn-sm">Voir la réservation</button>':st==='blocked'?'<button class="btn btn-secondary btn-sm" data-toggle-slot>Débloquer</button>':'<button class="btn btn-ghost btn-sm" data-toggle-slot>Bloquer</button>';
+    return `<div class="dslot" style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.85rem 0;border-bottom:1px solid var(--line-2)"><div><strong>${s[0]}</strong> <span class="muted t-sm">· ${s[1]}</span><div class="slot-lab" style="margin-top:.35rem">${lab}</div></div>${act}</div>`;
+  }).join('');
+  openDlg(daySheet);
+}
+document.addEventListener('click',e=>{const d=e.target.closest('.cal-day[data-day]');if(d)openDaySheet(+d.dataset.day);});
+$('daySlots').addEventListener('click',e=>{const b=e.target.closest('[data-toggle-slot]');if(!b)return;
+  const lab=b.closest('.dslot').querySelector('.slot-lab');const blocking=b.textContent.trim()==='Bloquer';
+  if(blocking){lab.innerHTML='<span class="st st-no">Bloqué</span>';b.classList.remove('btn-ghost');b.classList.add('btn-secondary');b.textContent='Débloquer';}
+  else{lab.innerHTML='<span class="st" style="background:var(--aqua-50);color:var(--aqua-800)">Libre</span>';b.classList.remove('btn-secondary');b.classList.add('btn-ghost');b.textContent='Bloquer';}
+});
+daySheet.addEventListener('click',e=>{if(e.target===daySheet||e.target.closest('[data-day-close]'))closeDlg(daySheet);});
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDlg(refuseDlg);closeDlg(daySheet);}});
+
+showSection('demandes');updateBadge();
+</script>
+</body>
+</html>

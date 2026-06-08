@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E7490">
+<title>Pissina · Demander à réserver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ════════ PISSINA TOKENS — identical to S1 ════════ */
+:root{
+  --aqua-50:#ECFEFF;--aqua-100:#CFF7FB;--aqua-200:#A4ECF5;--aqua-300:#6FDDED;--aqua-400:#22D3EE;--aqua-500:#06B6D4;--aqua-600:#0891B2;--aqua-700:#0E7490;--aqua-800:#155E75;--aqua-900:#164E63;
+  --ink-strong:#0A2D38;--ink:#0F3D4C;--ink-muted:#4F6E78;--ink-faint:#8AA2AB;
+  --coral:#FB7185;--coral-deep:#F43F5E;--coral-soft:#FFE4E8;--coral-ink:#9F1239;
+  --wa:#17A24E;--wa-deep:#138A42;--amber:#F59E0B;--amber-soft:#FEF3C7;--amber-ink:#92580A;
+  --success:#15A24A;--success-soft:#DCFCE7;--danger:#DC2626;--danger-deep:#B91C1C;--danger-soft:#FEE2E2;
+  --sand:#FAFAF7;--sand-2:#F1F1EA;--white:#FFFFFF;--line:#E6E7E1;--line-2:#EDEEE8;--line-strong:#D3D6CE;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-3xl:32px;--r-pill:999px;
+  --sh-sm:0 1px 2px rgba(15,61,76,.06),0 1px 1px rgba(15,61,76,.05);
+  --sh-card:0 6px 24px -8px rgba(15,61,76,.18),0 2px 6px -3px rgba(15,61,76,.08);
+  --sh-pop:0 12px 30px -8px rgba(15,61,76,.22);--sh-lg:0 22px 55px -14px rgba(15,61,76,.32);
+  --grad-fab:linear-gradient(160deg,#22D3EE 0%,#0E7490 100%);
+  --ease-water:cubic-bezier(.22,1,.36,1);--ease-soft:cubic-bezier(.4,0,.2,1);
+  --dur-1:.18s;--dur-2:.3s;--dur-3:.5s;--focus:0 0 0 3px rgba(6,182,212,.40);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+.ar{font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;}
+::selection{background:var(--aqua-200);color:var(--ink-strong);}
+[hidden]{display:none!important;}
+.t-h3{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;}
+.t-body{font-size:.9375rem;line-height:1.6;}.t-sm{font-size:.8125rem;line-height:1.45;}
+.muted{color:var(--ink-muted);}.faint{color:var(--ink-faint);}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:var(--r-pill);padding:.7rem 1.2rem;font-size:.95rem;line-height:1;cursor:pointer;border:1.5px solid transparent;transition:background-color var(--dur-1) var(--ease-soft),border-color var(--dur-1),color var(--dur-1),transform var(--dur-1),box-shadow var(--dur-1);white-space:nowrap;min-height:46px;}
+.btn:active{transform:translateY(1px);}.btn:focus-visible{outline:none;box-shadow:var(--focus);}.btn svg{width:18px;height:18px;flex:none;}
+.btn-lg{padding:.9rem 1.4rem;font-size:1.05rem;min-height:52px;}.btn-sm{padding:.5rem .85rem;font-size:.85rem;min-height:40px;}.btn-block{width:100%;}
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));}
+.btn-primary:hover{background-color:var(--aqua-800);}
+.btn-primary:disabled,.btn-primary.is-disabled{background:var(--aqua-200);color:#fff;background-image:none;box-shadow:none;cursor:not-allowed;}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong);}.btn-secondary:hover{border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50);}
+.btn-ghost{background:transparent;color:var(--aqua-800);}.btn-ghost:hover{background:var(--aqua-50);}
+.btn-wa{background:var(--wa);color:#fff;}.btn-wa:hover{background:var(--wa-deep);}
+.icon-btn{width:42px;height:42px;border-radius:var(--r-pill);display:inline-flex;align-items:center;justify-content:center;border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);cursor:pointer;transition:all var(--dur-1);flex:none;}
+.icon-btn:hover{border-color:var(--aqua-500);color:var(--aqua-800);}.icon-btn svg{width:20px;height:20px;}
+
+/* badges / avatar / check / stepper / seg */
+.badge{display:inline-flex;align-items:center;gap:.32rem;padding:.32rem .58rem;border-radius:var(--r-pill);font-size:.74rem;font-weight:700;line-height:1;}.badge svg{width:13px;height:13px;}
+.badge-verified{background:var(--aqua-50);color:var(--aqua-800);}.badge-privacy{background:rgba(10,45,56,.86);color:#fff;}.badge-cash{background:var(--amber-soft);color:var(--amber-ink);}
+.avatar{border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;object-fit:cover;}
+.check{width:24px;height:24px;border-radius:7px;border:1.8px solid var(--line-strong);background:#fff;display:grid;place-items:center;cursor:pointer;flex:none;transition:all var(--dur-1);}
+.check svg{width:16px;height:16px;color:#fff;opacity:0;transform:scale(.6);transition:all var(--dur-1) var(--ease-water);}
+.check.is-on{background:var(--aqua-700);border-color:var(--aqua-700);}.check.is-on svg{opacity:1;transform:scale(1);}
+.stepper{display:inline-flex;align-items:center;gap:.4rem;border:1.5px solid var(--line-strong);border-radius:var(--r-pill);padding:.28rem;background:#fff;}
+.stepper button{width:40px;height:40px;border-radius:var(--r-pill);border:none;background:var(--sand-2);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:all var(--dur-1);}
+.stepper button:hover{background:var(--aqua-50);color:var(--aqua-800);}.stepper button:disabled{opacity:.4;cursor:not-allowed;}.stepper button svg{width:18px;height:18px;}
+.stepper .val{min-width:2.4rem;text-align:center;font-weight:800;font-size:1.05rem;font-variant-numeric:tabular-nums;}
+.seg{display:flex;background:var(--sand-2);border-radius:var(--r-pill);padding:.3rem;gap:.25rem;}
+.seg-item{flex:1;border:none;background:transparent;border-radius:var(--r-pill);padding:.55rem .4rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.1rem;color:var(--ink-muted);transition:all var(--dur-1);min-height:54px;}
+.seg-item .lab{font-weight:700;font-size:.86rem;}.seg-item .pr{font-size:.74rem;font-weight:600;}
+.seg-item:hover{color:var(--ink);}.seg-item.is-on{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);}
+
+/* calendar */
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.2rem;}
+.cal-dow{text-align:center;font-size:.68rem;font-weight:700;color:var(--ink-muted);padding:.2rem 0;}
+.cal-day{aspect-ratio:1;border:none;background:none;border-radius:var(--r-md);font-weight:600;font-size:.88rem;color:var(--ink-faint);cursor:default;display:grid;place-items:center;position:relative;}
+.cal-day.avail{background:var(--aqua-50);color:var(--aqua-800);cursor:pointer;}.cal-day.avail:hover{background:var(--aqua-100);}
+.cal-day.off{color:var(--ink-faint);text-decoration:line-through;}
+.cal-day.sel{background:var(--aqua-700)!important;color:#fff;}
+.cal-day .dot{position:absolute;bottom:5px;width:4px;height:4px;border-radius:99px;background:var(--success);}.cal-day.sel .dot{background:#fff;}
+
+/* textarea */
+.ta{width:100%;border:1.5px solid var(--line-strong);border-radius:var(--r-md);padding:.8rem .9rem;font-family:inherit;font-size:.95rem;color:var(--ink);min-height:112px;resize:vertical;line-height:1.5;}
+.ta::placeholder{color:var(--ink-faint);}.ta:focus{outline:none;border-color:var(--aqua-500);box-shadow:var(--focus);}
+
+/* extra rows */
+.x-row{display:flex;align-items:center;justify-content:space-between;gap:.7rem;padding:.7rem .85rem;border:1.5px solid var(--line-strong);border-radius:var(--r-lg);cursor:pointer;transition:all var(--dur-1);background:#fff;}
+.x-row.is-on{border-color:var(--aqua-700);background:var(--aqua-50);}
+.x-price{font-weight:700;color:var(--aqua-800);font-size:.85rem;white-space:nowrap;}
+
+/* recap */
+.recap-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:.55rem 0;}
+.recap-row+.recap-row{border-top:1px solid var(--line-2);}
+.notice{display:flex;gap:.6rem;align-items:flex-start;background:var(--amber-soft);border:1px solid #F3E2B3;border-radius:var(--r-lg);padding:.85rem .95rem;color:var(--amber-ink);}
+.notice svg{width:20px;height:20px;flex:none;margin-top:1px;}
+
+/* ════════ flow shell ════════ */
+.flow-overlay{position:fixed;inset:0;background:rgba(10,45,56,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:50;display:flex;align-items:flex-end;justify-content:center;}
+@media(min-width:768px){.flow-overlay{align-items:center;padding:1.5rem;}}
+.flow{background:#fff;width:100%;max-height:94dvh;border-radius:var(--r-3xl) var(--r-3xl) 0 0;box-shadow:var(--sh-lg);display:flex;flex-direction:column;overflow:hidden;animation:sheetUp var(--dur-3) var(--ease-water);}
+@media(min-width:768px){.flow{max-width:540px;border-radius:var(--r-3xl);max-height:90vh;animation:modalIn var(--dur-2) var(--ease-water);}}
+@keyframes sheetUp{from{transform:translateY(100%);}}
+@keyframes modalIn{from{transform:translateY(12px) scale(.98);opacity:0;}}
+.flow-grip{width:40px;height:5px;border-radius:99px;background:var(--line-strong);margin:.7rem auto 0;}
+@media(min-width:768px){.flow-grip{display:none;}}
+.flow-head{padding:.9rem 1.2rem .9rem;border-bottom:1px solid var(--line);}
+.flow-body{padding:1.2rem;overflow-y:auto;flex:1;}
+.flow-foot{padding:.9rem 1.2rem calc(.9rem + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;flex-direction:column;gap:.6rem;}
+@media(min-width:480px){.flow-foot{flex-direction:row;align-items:center;}}
+.progress-seg{display:flex;gap:.35rem;margin-top:.6rem;}
+.progress-seg span{height:5px;border-radius:99px;background:var(--sand-2);flex:1;overflow:hidden;}
+.progress-seg span i{display:block;height:100%;width:0;background:var(--aqua-600);border-radius:99px;transition:width var(--dur-3) var(--ease-water);}
+.progress-seg span.fill i{width:100%;}
+
+/* success / error */
+.burst{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;margin-inline:auto;}
+.burst.ok{background:var(--success-soft);color:var(--success);}
+.burst.err{background:var(--danger-soft);color:var(--danger);}
+.burst svg{width:46px;height:46px;}
+.confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
+.confetti i{position:absolute;top:-14px;width:9px;height:15px;border-radius:2px;opacity:.95;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(115vh) rotate(620deg);opacity:.2;}}
+
+/* demo switcher */
+.demo-bar{position:fixed;top:.7rem;left:50%;transform:translateX(-50%);z-index:60;display:inline-flex;align-items:center;gap:.35rem;border:1px dashed rgba(255,255,255,.55);border-radius:var(--r-pill);padding:.3rem .35rem .3rem .8rem;background:rgba(10,45,56,.6);backdrop-filter:blur(8px);}
+.demo-bar .lab{font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.8);}
+.demo-bar button{font-size:.78rem;font-weight:600;padding:.32rem .65rem;border-radius:999px;border:none;background:rgba(255,255,255,.15);color:#fff;cursor:pointer;}
+.demo-bar button.is-on{background:#fff;color:var(--aqua-800);}
+
+@media (prefers-reduced-motion:reduce){.flow,.confetti i{animation:none!important;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+</defs></svg>
+
+<!-- ░░ dimmed S4 context behind ░░ -->
+<div aria-hidden="true" style="min-height:100dvh">
+  <div style="position:relative;height:42vh;min-height:240px;background:var(--ink-strong);overflow:hidden">
+    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=60" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.9">
+  </div>
+  <div style="max-width:760px;margin-inline:auto;padding:1.2rem">
+    <div style="display:flex;gap:.5rem;margin-bottom:.6rem"><span class="badge badge-verified">Vérifié</span><span class="badge badge-privacy">À l'abri des regards</span></div>
+    <h1 style="font-size:1.6rem;font-weight:800;letter-spacing:-.02em">Villa avec piscine chauffée</h1>
+    <p class="muted" style="margin-top:.3rem">★ 4,8 (12 avis) · Dar Bouazza, Casablanca</p>
+  </div>
+</div>
+
+<!-- demo state switcher -->
+<div class="demo-bar" role="group" aria-label="Aperçu des états">
+  <span class="lab">Aperçu</span>
+  <button data-go="1" class="is-on">Flux</button>
+  <button data-go="success">Succès</button>
+  <button data-go="error">Créneau pris</button>
+</div>
+
+<!-- ═══════════════ BOOKING FLOW (modal / sheet) ═══════════════ -->
+<div class="flow-overlay" id="overlay">
+  <div class="flow" role="dialog" aria-modal="true" aria-labelledby="flowTitle">
+    <div class="flow-grip"></div>
+
+    <!-- header: title + close + progress -->
+    <header class="flow-head" id="flowHead">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:.8rem">
+        <div style="min-width:0">
+          <div class="t-sm" style="font-weight:700;color:var(--aqua-700)" id="stepCount">Étape 1 sur 3</div>
+          <h2 id="flowTitle" class="t-h3" style="margin-top:.1rem" data-title>Choisissez votre créneau</h2>
+        </div>
+        <button class="icon-btn" id="closeBtn" aria-label="Fermer" style="border:none;background:var(--sand-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="progress-seg" id="progress"><span class="fill"><i></i></span><span><i></i></span><span><i></i></span></div>
+    </header>
+
+    <div class="flow-body" id="flowBody">
+
+      <!-- STEP 1 · CRÉNEAU -->
+      <section data-step="1">
+        <div class="cal-mount" style="border:1px solid var(--line);border-radius:var(--r-lg);padding:.9rem;background:#fff;margin-bottom:1.1rem"></div>
+        <div class="label" style="font-weight:700;margin-bottom:.5rem">Créneau</div>
+        <div class="seg" id="slotSeg" role="tablist" aria-label="Créneau">
+          <button class="seg-item" role="tab" data-slot="Matinée" data-price="350" data-hours="9h – 14h"><span class="lab">Matinée</span><span class="pr">350 DH</span></button>
+          <button class="seg-item is-on" role="tab" data-slot="Après-midi" data-price="400" data-hours="15h – 20h"><span class="lab">Après-midi</span><span class="pr">400 DH</span></button>
+          <button class="seg-item" role="tab" data-slot="Journée" data-price="650" data-hours="9h – 20h"><span class="lab">Journée</span><span class="pr">650 DH</span></button>
+        </div>
+        <div style="display:flex;align-items:center;gap:.7rem;margin-top:1rem;background:var(--aqua-50);border-radius:var(--r-lg);padding:.85rem .95rem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;flex:none"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+          <div><strong id="sumSlot">Après-midi · 15h – 20h</strong><div class="t-sm muted" id="sumDate">Samedi 18 juillet 2026 · 400 DH</div></div>
+        </div>
+      </section>
+
+      <!-- STEP 2 · DÉTAILS -->
+      <section data-step="2" hidden>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.4rem">
+          <div><div class="label" style="font-weight:700">Nombre d'invités</div><div class="t-sm muted">Capacité max. 15 personnes</div></div>
+          <div class="stepper" role="group" aria-label="Nombre d'invités">
+            <button data-dir="down" aria-label="Moins"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+            <span class="val" id="guestVal">6</span>
+            <button data-dir="up" aria-label="Plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+        <div id="maxWarn" hidden style="display:flex;align-items:center;gap:.5rem;background:var(--amber-soft);color:var(--amber-ink);border-radius:var(--r-md);padding:.55rem .75rem;font-size:.84rem;font-weight:600;margin-top:.6rem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>Capacité maximale atteinte pour cette piscine.
+        </div>
+
+        <div class="label" style="font-weight:700;margin:1.4rem 0 .5rem">Extras (optionnels) <span class="muted" style="font-weight:400">· payés sur place</span></div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <button class="x-row" data-extra="bbq" data-amount="100" data-mode="flat"><span style="display:flex;align-items:center;gap:.7rem"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 6"/></svg></span><span>🍖 Pack barbecue</span></span><span class="x-price">+100 DH</span></button>
+          <button class="x-row" data-extra="towels" data-amount="20" data-mode="perguest"><span style="display:flex;align-items:center;gap:.7rem"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 6"/></svg></span><span>🧺 Serviettes</span></span><span class="x-price">+20 DH/pers</span></button>
+          <button class="x-row" data-extra="speaker" data-amount="50" data-mode="flat"><span style="display:flex;align-items:center;gap:.7rem"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m5 12 5 5L20 6"/></svg></span><span>🎵 Enceinte Bluetooth</span></span><span class="x-price">+50 DH</span></button>
+        </div>
+
+        <div class="label" style="font-weight:700;margin:1.4rem 0 .5rem">Message à Yasmine</div>
+        <textarea class="ta" placeholder="Présentez-vous : qui vient, à quelle occasion…"></textarea>
+        <div style="display:flex;gap:.5rem;align-items:flex-start;margin-top:.55rem;color:var(--aqua-800)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex:none;margin-top:2px"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1h6c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          <span class="t-sm">Un bon message <strong>augmente vos chances d'être accepté</strong> — les hôtes répondent plus vite aux profils qui se présentent.</span>
+        </div>
+      </section>
+
+      <!-- STEP 3 · RÉCAPITULATIF -->
+      <section data-step="3" hidden>
+        <div style="display:flex;gap:.8rem;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:.7rem;margin-bottom:1rem">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=200&q=60" alt="Villa avec piscine chauffée" style="width:64px;height:64px;border-radius:var(--r-md);object-fit:cover;flex:none">
+          <div style="min-width:0"><strong>Villa avec piscine chauffée</strong><div class="t-sm muted">Dar Bouazza, Casablanca · Hôte : Yasmine</div></div>
+        </div>
+
+        <div style="background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:.4rem 1rem 1rem">
+          <div class="recap-row"><span class="muted">Date</span><strong id="rcDate" style="text-align:end">Samedi 18 juillet 2026</strong></div>
+          <div class="recap-row"><span class="muted">Créneau</span><strong id="rcSlot" style="text-align:end">Après-midi · 15h – 20h</strong></div>
+          <div class="recap-row"><span class="muted">Invités</span><strong id="rcGuests">6 personnes</strong></div>
+          <div class="recap-row" id="rcExtrasRow"><span class="muted">Extras</span><span id="rcExtras" style="text-align:end;font-weight:600">Aucun</span></div>
+          <div class="recap-row" style="border-top:1.5px solid var(--line);margin-top:.3rem;padding-top:.8rem;align-items:center"><span style="font-weight:800;font-size:1.05rem">Total estimé</span><strong id="rcTotal" style="font-size:1.4rem">400 DH</strong></div>
+        </div>
+
+        <div class="notice" style="margin-top:1rem">
+          <span style="font-size:1.2rem;line-height:1">💵</span>
+          <div><strong>Paiement en espèces sur place.</strong> Aucun paiement en ligne — vous réglez à l'arrivée, après avoir vu la piscine.</div>
+        </div>
+        <div style="display:flex;gap:.5rem;align-items:flex-start;margin-top:.8rem;color:var(--ink-muted)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex:none;margin-top:2px"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+          <span class="t-sm">Vous envoyez une <strong>demande</strong> : Yasmine doit l'accepter. Annulation gratuite jusqu'à 48&nbsp;h avant la visite.</span>
+        </div>
+      </section>
+
+      <!-- SUCCESS -->
+      <section data-step="success" hidden style="position:relative;text-align:center;padding-top:.5rem">
+        <div class="confetti" id="confetti"></div>
+        <div class="burst ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h2 class="t-h3" style="font-size:1.4rem;margin-top:1rem">Demande envoyée à Yasmine ✓</h2>
+        <p class="t-body muted" style="max-width:30rem;margin:.5rem auto 0">Vous recevrez une réponse <strong>sous 24&nbsp;h</strong> — souvent en moins d'1&nbsp;h. On vous prévient par notification, e-mail et SMS.</p>
+
+        <!-- contact variant (two states) -->
+        <div style="display:inline-flex;gap:.3rem;margin-top:1.2rem;background:var(--sand-2);border-radius:999px;padding:.25rem" role="group" aria-label="Variante de contact">
+          <button class="seg-mini is-on" data-cv="locked" style="font-size:.78rem;font-weight:700;padding:.35rem .7rem;border:none;border-radius:999px;background:#fff;color:var(--aqua-800);cursor:pointer;box-shadow:var(--sh-sm)">🔒 Téléphone verrouillé</button>
+          <button class="seg-mini" data-cv="public" style="font-size:.78rem;font-weight:700;padding:.35rem .7rem;border:none;border-radius:999px;background:transparent;color:var(--ink-muted);cursor:pointer">🌐 Contact public</button>
+        </div>
+
+        <div id="cvLocked" style="text-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:.95rem;margin-top:.8rem;display:flex;gap:.7rem;align-items:flex-start">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;flex:none;margin-top:1px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div><strong>Le numéro de Yasmine se débloque après acceptation.</strong><p class="t-sm muted" style="margin-top:.2rem">En attendant, vous pouvez échanger sur WhatsApp pour poser vos questions.</p>
+            <a href="#" class="btn btn-wa btn-sm" style="margin-top:.6rem"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 4.54 0 8.23 3.69 8.24 8.23 0 4.54-3.7 8.24-8.24 8.24z"/></svg>WhatsApp</a>
+          </div>
+        </div>
+        <div id="cvPublic" hidden style="text-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:.95rem;margin-top:.8rem">
+          <div style="display:flex;gap:.7rem;align-items:center"><span class="avatar" style="width:42px;height:42px;font-size:.9rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">YA</span><div><strong>Yasmine partage son contact</strong><div class="t-sm muted">+212 6 12 34 56 78</div></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.7rem">
+            <a href="tel:+212612345678" class="btn btn-secondary btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.1 4.18 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>Appeler</a>
+            <a href="#" class="btn btn-wa btn-sm"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02z"/></svg>WhatsApp</a>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem">
+          <button class="btn btn-primary btn-lg btn-block">Voir ma demande</button>
+          <button class="btn btn-ghost btn-block" id="exploreBtn">Continuer à explorer</button>
+        </div>
+      </section>
+
+      <!-- ERROR · slot taken -->
+      <section data-step="error" hidden style="text-align:center;padding-top:.5rem">
+        <div class="burst err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></div>
+        <h2 class="t-h3" style="font-size:1.35rem;margin-top:1rem">Ce créneau vient d'être réservé</h2>
+        <p class="t-body muted" style="max-width:30rem;margin:.5rem auto 0">Un autre visiteur a réservé l'après-midi du 18 juillet pendant que vous remplissiez votre demande. Choisissez un autre créneau ou une autre date — il en reste de nombreux.</p>
+        <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:1.4rem">
+          <button class="btn btn-primary btn-lg btn-block" data-go="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Choisir un autre créneau</button>
+          <button class="btn btn-ghost btn-block" id="exploreBtn2">Voir d'autres piscines</button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- footer -->
+    <footer class="flow-foot" id="flowFoot">
+      <div style="display:flex;align-items:center;gap:.9rem;flex:1">
+        <button class="btn btn-ghost" id="backBtn" hidden style="padding-inline:.4rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Retour</button>
+        <div><div class="t-sm muted" style="line-height:1">Total estimé</div><strong id="footTotal" style="font-size:1.2rem">400 DH</strong></div>
+      </div>
+      <button class="btn btn-primary btn-lg" id="nextBtn" style="flex:1">Continuer</button>
+    </footer>
+
+  </div>
+</div>
+
+<!-- relaunch bar (shown when the flow is closed) -->
+<div id="relaunch" hidden style="position:fixed;inset-inline:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px -12px rgba(15,61,76,.25);padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom));display:flex;align-items:center;gap:.8rem">
+  <div style="flex:1"><span class="muted t-sm">à partir de</span> <strong style="font-size:1.1rem">350 DH</strong> <span class="muted t-sm">/ matinée</span></div>
+  <button class="btn btn-primary btn-lg" id="relaunchBtn">Demander à réserver</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESIGN NOTES · S5 — Flux de demande de réservation
+     ────────────────────────────────────────────────────────────────
+     • Demande, pas paiement : 3 étapes (Créneau → Détails → Récap) en bottom-sheet
+       mobile / modale desktop, indicateur de progression 1·2·3 + « Étape X sur 3 ».
+       Le total estimé est toujours visible dans le pied et se met à jour en direct
+       (créneau + extras, serviettes × invités).
+     • Cash assumé jusqu'au bout : récap → « 💵 Paiement en espèces sur place. Aucun
+       paiement en ligne » + note d'annulation ; CTA « Envoyer la demande ».
+     • Le message compte : placeholder « Présentez-vous… » + rappel que se présenter
+       augmente les chances d'acceptation — levier de confiance propre au marché.
+     • Succès qui rassure : confettis légers, « Demande envoyée à Yasmine ✓ »,
+       délai annoncé (24 h, souvent < 1 h), et DEUX variantes de contact (téléphone
+       verrouillé jusqu'à acceptation / contact public) — WhatsApp reste accessible.
+     • États gérés : indicateur de progression inline + état d'erreur « Ce créneau
+       vient d'être réservé » → re-choisir un créneau. Tokens/composants S1 réutilisés
+       à l'identique ; calendrier rendu depuis des données.
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+/* ── state ── */
+const MAXG=15, WD=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+let step='1', selDay=18, guests=6;
+let selSlot={name:'Après-midi',hours:'15h – 20h',price:400};
+const EX={bbq:false,towels:false,speaker:false};
+const $=id=>document.getElementById(id);
+
+/* ── calendar ── */
+const DOW=['L','M','M','J','V','S','D'], AVAIL=new Set([2,3,4,5,9,10,11,12,16,17,18,19,23,24,25,26,30,31]);
+const chev=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="${d==='l'?'m15 18-6-6 6-6':'m9 18 6-6-6-6'}"/></svg>`;
+function weekday(d){return WD[(3+(d-1))%7];}
+function calHTML(){
+  let h=`<div class="cal-head"><button class="icon-btn" style="width:34px;height:34px" aria-label="Mois précédent">${chev('l')}</button><strong>Juillet 2026</strong><button class="icon-btn" style="width:34px;height:34px" aria-label="Mois suivant">${chev('r')}</button></div><div class="cal-grid">`;
+  h+=DOW.map(d=>`<span class="cal-dow">${d}</span>`).join('')+'<span></span><span></span>';
+  for(let d=1;d<=31;d++){const av=AVAIL.has(d);h+=`<button class="cal-day ${av?'avail':'off'} ${d===selDay?'sel':''}" data-day="${d}" ${av?'':'disabled aria-disabled=true'}>${d}${av?'<span class="dot"></span>':''}</button>`;}
+  return h+'</div>';
+}
+document.querySelectorAll('.cal-mount').forEach(m=>m.innerHTML=calHTML());
+
+/* ── totals ── */
+function extrasTotal(){return (EX.bbq?100:0)+(EX.towels?20*guests:0)+(EX.speaker?50:0);}
+function total(){return selSlot.price+extrasTotal();}
+function updateAll(){
+  $('sumSlot').textContent=`${selSlot.name} · ${selSlot.hours}`;
+  $('sumDate').textContent=`${weekday(selDay)} ${selDay} juillet 2026 · ${selSlot.price} DH`;
+  $('footTotal').textContent=total()+' DH';
+  if(step==='3')fillRecap();
+}
+function fillRecap(){
+  $('rcDate').textContent=`${weekday(selDay)} ${selDay} juillet 2026`;
+  $('rcSlot').textContent=`${selSlot.name} · ${selSlot.hours}`;
+  $('rcGuests').textContent=`${guests} personne${guests>1?'s':''}`;
+  const lines=[];if(EX.bbq)lines.push('Pack barbecue +100 DH');if(EX.towels)lines.push(`Serviettes +${20*guests} DH`);if(EX.speaker)lines.push('Enceinte +50 DH');
+  $('rcExtras').innerHTML=lines.length?lines.join('<br>'):'Aucun';
+  $('rcTotal').textContent=total()+' DH';
+}
+
+/* ── slot segmented ── */
+$('slotSeg').addEventListener('click',e=>{const b=e.target.closest('.seg-item');if(!b)return;
+  $('slotSeg').querySelectorAll('.seg-item').forEach(s=>s.classList.remove('is-on'));b.classList.add('is-on');
+  selSlot={name:b.dataset.slot,hours:b.dataset.hours,price:+b.dataset.price};updateAll();});
+
+/* ── calendar day select ── */
+document.addEventListener('click',e=>{const d=e.target.closest('.cal-day.avail');if(d){selDay=+d.dataset.day;document.querySelectorAll('.cal-mount .cal-day').forEach(x=>x.classList.toggle('sel',+x.dataset.day===selDay&&x.classList.contains('avail')));updateAll();}});
+
+/* ── guests stepper ── */
+document.addEventListener('click',e=>{const s=e.target.closest('.stepper button');if(!s)return;
+  guests=s.dataset.dir==='up'?Math.min(MAXG,guests+1):Math.max(1,guests-1);
+  $('guestVal').textContent=guests;$('maxWarn').hidden=guests<MAXG;updateAll();});
+
+/* ── extras ── */
+document.addEventListener('click',e=>{const x=e.target.closest('.x-row');if(!x)return;
+  const k=x.dataset.extra;EX[k]=!EX[k];x.classList.toggle('is-on',EX[k]);x.querySelector('.check').classList.toggle('is-on',EX[k]);updateAll();});
+
+/* ── navigation ── */
+const TITLES={'1':'Choisissez votre créneau','2':'Quelques détails','3':'Récapitulatif'};
+function goStep(s){
+  step=s;
+  document.querySelectorAll('.flow-body [data-step]').forEach(el=>el.hidden=el.dataset.step!==s);
+  const num=(s==='1'||s==='2'||s==='3');
+  $('stepCount').hidden=!num;$('progress').hidden=!num;$('flowTitle').hidden=!num;$('flowFoot').hidden=!num;
+  if(num){
+    $('stepCount').textContent=`Étape ${s} sur 3`;$('flowTitle').textContent=TITLES[s];
+    [...$('progress').children].forEach((seg,i)=>seg.classList.toggle('fill',i< +s));
+    $('backBtn').hidden=(s==='1');
+    $('nextBtn').textContent=(s==='3')?'Envoyer la demande':'Continuer';
+    if(s==='3')fillRecap();
+  }
+  if(s==='success')spawnConfetti();
+  $('flowBody').scrollTop=0;
+  document.querySelectorAll('.demo-bar button').forEach(b=>b.classList.toggle('is-on',b.dataset.go===s||(b.dataset.go==='1'&&num)));
+}
+$('nextBtn').addEventListener('click',()=>{ if(step==='1')goStep('2'); else if(step==='2')goStep('3'); else if(step==='3')goStep('success'); });
+$('backBtn').addEventListener('click',()=>{ if(step==='3')goStep('2'); else if(step==='2')goStep('1'); });
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>goStep(b.dataset.go)));
+
+/* ── success contact variant toggle ── */
+document.querySelectorAll('[data-cv]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-cv]').forEach(x=>{x.classList.remove('is-on');x.style.background='transparent';x.style.color='var(--ink-muted)';x.style.boxShadow='none';});
+  b.classList.add('is-on');b.style.background='#fff';b.style.color='var(--aqua-800)';b.style.boxShadow='var(--sh-sm)';
+  const pub=b.dataset.cv==='public';$('cvPublic').hidden=!pub;$('cvLocked').hidden=pub;
+}));
+
+/* ── confetti ── */
+function spawnConfetti(){const c=$('confetti');if(!c)return;const cols=['#22D3EE','#0E7490','#FB7185','#F59E0B','#15A24A'];let h='';
+  for(let i=0;i<28;i++){const x=Math.random()*100,dl=Math.random()*.5,du=2.2+Math.random()*1.5,rt=Math.random()*360;h+=`<i style="left:${x}%;background:${cols[i%cols.length]};animation-duration:${du}s;animation-delay:${dl}s;transform:rotate(${rt}deg)"></i>`;}
+  c.innerHTML=h;}
+
+/* ── close / relaunch ── */
+$('closeBtn').addEventListener('click',()=>{$('overlay').style.display='none';$('relaunch').hidden=false;});
+$('relaunchBtn').addEventListener('click',()=>{$('overlay').style.display='flex';$('relaunch').hidden=true;goStep('1');});
+$('exploreBtn').addEventListener('click',()=>{$('overlay').style.display='none';$('relaunch').hidden=false;});
+$('exploreBtn2').addEventListener('click',()=>{$('overlay').style.display='none';$('relaunch').hidden=false;});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('overlay').style.display='none';$('relaunch').hidden=false;}});
+
+updateAll();
+</script>
+</body>
+</html>

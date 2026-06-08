@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E7490">
+<title>Pissina · Villa avec piscine chauffée — Dar Bouazza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ════════ PISSINA TOKENS — identical to S1 ════════ */
+:root{
+  --aqua-50:#ECFEFF;--aqua-100:#CFF7FB;--aqua-200:#A4ECF5;--aqua-300:#6FDDED;--aqua-400:#22D3EE;--aqua-500:#06B6D4;--aqua-600:#0891B2;--aqua-700:#0E7490;--aqua-800:#155E75;--aqua-900:#164E63;
+  --ink-strong:#0A2D38;--ink:#0F3D4C;--ink-muted:#4F6E78;--ink-faint:#8AA2AB;
+  --coral:#FB7185;--coral-deep:#F43F5E;--coral-soft:#FFE4E8;--coral-ink:#9F1239;
+  --wa:#17A24E;--wa-deep:#138A42;--amber:#F59E0B;--amber-soft:#FEF3C7;--amber-ink:#92580A;
+  --success:#15A24A;--success-soft:#DCFCE7;--danger:#DC2626;--danger-deep:#B91C1C;--danger-soft:#FEE2E2;
+  --sand:#FAFAF7;--sand-2:#F1F1EA;--white:#FFFFFF;--line:#E6E7E1;--line-2:#EDEEE8;--line-strong:#D3D6CE;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-3xl:32px;--r-pill:999px;
+  --sh-sm:0 1px 2px rgba(15,61,76,.06),0 1px 1px rgba(15,61,76,.05);
+  --sh-card:0 6px 24px -8px rgba(15,61,76,.18),0 2px 6px -3px rgba(15,61,76,.08);
+  --sh-pop:0 12px 30px -8px rgba(15,61,76,.22);--sh-lg:0 22px 55px -14px rgba(15,61,76,.32);
+  --grad-fab:linear-gradient(160deg,#22D3EE 0%,#0E7490 100%);
+  --ease-water:cubic-bezier(.22,1,.36,1);--ease-soft:cubic-bezier(.4,0,.2,1);
+  --dur-1:.18s;--dur-2:.3s;--dur-3:.5s;--focus:0 0 0 3px rgba(6,182,212,.40);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+.ar{font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;}
+::selection{background:var(--aqua-200);color:var(--ink-strong);}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:16px;}
+@media(min-width:768px){.wrap{padding-inline:28px;}}
+.t-h2{font-size:clamp(1.45rem,3vw,1.9rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;}
+.t-h3{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;}
+.t-body{font-size:.9375rem;line-height:1.62;}.t-sm{font-size:.8125rem;line-height:1.45;}
+.muted{color:var(--ink-muted);}.faint{color:var(--ink-faint);}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:var(--r-pill);padding:.7rem 1.2rem;font-size:.95rem;line-height:1;cursor:pointer;border:1.5px solid transparent;transition:background-color var(--dur-1) var(--ease-soft),border-color var(--dur-1),color var(--dur-1),transform var(--dur-1),box-shadow var(--dur-1);white-space:nowrap;min-height:46px;}
+.btn:active{transform:translateY(1px);}.btn:focus-visible{outline:none;box-shadow:var(--focus);}.btn svg{width:18px;height:18px;flex:none;}
+.btn-lg{padding:.95rem 1.5rem;font-size:1.05rem;min-height:54px;}.btn-sm{padding:.5rem .85rem;font-size:.85rem;min-height:40px;}.btn-block{width:100%;}
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));}
+.btn-primary:hover{background-color:var(--aqua-800);}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong);}.btn-secondary:hover{border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50);}
+.btn-ghost{background:transparent;color:var(--aqua-800);}.btn-ghost:hover{background:var(--aqua-50);}
+.btn-wa{background:var(--wa);color:#fff;}.btn-wa:hover{background:var(--wa-deep);}
+.icon-btn{width:46px;height:46px;border-radius:var(--r-pill);display:inline-flex;align-items:center;justify-content:center;border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);cursor:pointer;transition:all var(--dur-1) var(--ease-soft);flex:none;}
+.icon-btn:hover{border-color:var(--aqua-500);color:var(--aqua-800);}.icon-btn:focus-visible{outline:none;box-shadow:var(--focus);}.icon-btn svg{width:21px;height:21px;}
+.icon-btn-wa{background:var(--wa);border-color:transparent;color:#fff;}.icon-btn-wa:hover{background:var(--wa-deep);color:#fff;}
+
+/* badges / stars / avatar / chip */
+.badge{display:inline-flex;align-items:center;gap:.32rem;padding:.34rem .6rem;border-radius:var(--r-pill);font-size:.76rem;font-weight:700;line-height:1;}.badge svg{width:14px;height:14px;}
+.badge-verified{background:var(--aqua-50);color:var(--aqua-800);}.badge-privacy{background:rgba(10,45,56,.86);color:#fff;}.badge-cash{background:var(--amber-soft);color:var(--amber-ink);}.badge-host{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--sh-sm);}.badge-host svg{color:var(--coral-deep);}
+.stars{position:relative;display:inline-block;font-size:.95rem;line-height:1;letter-spacing:.06em;}.stars .base{color:var(--line-strong);}.stars .fill{position:absolute;top:0;inset-inline-start:0;color:var(--amber);overflow:hidden;white-space:nowrap;}
+.avatar{border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;object-fit:cover;}
+.chip{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .8rem;border-radius:var(--r-pill);border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);font-weight:600;font-size:.84rem;cursor:pointer;min-height:40px;transition:all var(--dur-1);white-space:nowrap;}
+.chip:hover{border-color:var(--aqua-500);}.chip.is-on{background:var(--aqua-700);color:#fff;border-color:var(--aqua-700);}
+
+/* pool card (similaires) */
+.pcard{background:#fff;border-radius:var(--r-2xl);overflow:hidden;box-shadow:var(--sh-card);border:1px solid var(--line);transition:transform var(--dur-2) var(--ease-water),box-shadow var(--dur-2);}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg);}
+.pcard .ph{position:relative;aspect-ratio:4/3;background:var(--sand-2);overflow:hidden;}.pcard .ph img{width:100%;height:100%;object-fit:cover;}
+.pcard .body{padding:.8rem .9rem .95rem;}
+.fav{width:38px;height:38px;border-radius:999px;border:none;cursor:pointer;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);display:grid;place-items:center;box-shadow:var(--sh-sm);transition:transform var(--dur-1);}
+.fav:hover{transform:scale(1.08);}.fav:focus-visible{outline:none;box-shadow:var(--focus);}
+.fav svg{width:20px;height:20px;color:var(--ink);fill:none;stroke:currentColor;stroke-width:2;transition:all var(--dur-1);}.fav.is-on svg{color:var(--coral-deep);fill:var(--coral-deep);stroke:var(--coral-deep);}
+
+/* ════════ S4-specific ════════ */
+.desk-header{position:sticky;top:0;z-index:30;background:rgba(250,250,247,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+
+/* gallery */
+.gallery-mobile{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--ink-strong);}
+.gallery-mobile .track{display:flex;height:100%;transition:transform var(--dur-2) var(--ease-water);}
+.gallery-mobile .track img{width:100%;height:100%;flex:0 0 100%;object-fit:cover;cursor:zoom-in;}
+.g-top{position:absolute;top:0;inset-inline:0;padding:.8rem;display:flex;justify-content:space-between;z-index:5;}
+.g-btn{width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;border:none;cursor:pointer;box-shadow:var(--sh-sm);color:var(--ink);}
+.g-btn svg{width:20px;height:20px;}.g-btn.is-on svg{color:var(--coral-deep);fill:var(--coral-deep);}
+.gcnav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:999px;background:rgba(255,255,255,.9);border:none;display:grid;place-items:center;cursor:pointer;box-shadow:var(--sh-sm);color:var(--ink);z-index:4;}
+.gcnav.prev{inset-inline-start:.7rem;}.gcnav.next{inset-inline-end:.7rem;}.gcnav svg{width:20px;height:20px;}
+.g-counter{position:absolute;bottom:.8rem;inset-inline-end:.8rem;background:rgba(10,45,56,.72);color:#fff;font-size:.78rem;font-weight:700;padding:.32rem .65rem;border-radius:999px;z-index:5;backdrop-filter:blur(4px);}
+.gallery-desk{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:.5rem;height:440px;border-radius:var(--r-2xl);overflow:hidden;}
+.gallery-desk button{position:relative;border:none;padding:0;overflow:hidden;cursor:pointer;background:var(--sand-2);}
+.gallery-desk button:first-child{grid-row:1/3;}
+.gallery-desk img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity var(--dur-1);}
+.gallery-desk button:hover img{opacity:.9;}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(8,25,31,.97);z-index:60;overflow-y:auto;padding:1rem;display:none;}
+.lightbox.show{display:block;}
+.lightbox-grid{max-width:920px;margin:3.5rem auto;display:grid;gap:.7rem;grid-template-columns:1fr;}
+@media(min-width:700px){.lightbox-grid{grid-template-columns:1fr 1fr;}.lightbox-grid img:nth-child(3n+1){grid-column:1/-1;}}
+.lightbox-grid img{width:100%;border-radius:var(--r-md);display:block;}
+
+/* sections */
+.sec{padding-block:1.4rem;border-top:1px solid var(--line);}
+.sec h2{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.9rem;}
+.owner-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);padding:1.1rem;}
+.stat{flex:1;min-width:0;}.stat .v{font-weight:800;}.stat .l{font-size:.74rem;color:var(--ink-muted);}
+
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+@media(min-width:560px){.facts{grid-template-columns:repeat(4,1fr);}}
+.fact{display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:.7rem .8rem;}
+.fact .ic{font-size:1.25rem;line-height:1;}.fact .v{font-weight:700;font-size:.88rem;}.fact .l{font-size:.72rem;color:var(--ink-muted);}
+
+.clampable .ct.clamped{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+.eq{display:flex;align-items:center;gap:.6rem;padding:.45rem 0;}.eq .tk{color:var(--success);flex:none;}.eq .tk svg{width:18px;height:18px;}
+.extra{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.65rem .85rem;border:1px solid var(--line);border-radius:var(--r-lg);background:#fff;}
+.price-tag{font-weight:700;color:var(--aqua-800);background:var(--aqua-50);padding:.28rem .6rem;border-radius:999px;font-size:.82rem;white-space:nowrap;}
+.rule{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;font-weight:500;}
+.rule .yes{color:var(--success);flex:none;}.rule .no{color:var(--danger);flex:none;}.rule.no-allow{color:var(--ink-muted);}
+
+/* calendar */
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.2rem;}
+.cal-dow{text-align:center;font-size:.68rem;font-weight:700;color:var(--ink-muted);padding:.2rem 0;}
+.cal-day{aspect-ratio:1;border:none;background:none;border-radius:var(--r-md);font-weight:600;font-size:.88rem;color:var(--ink-faint);cursor:default;display:grid;place-items:center;position:relative;}
+.cal-day.avail{background:var(--aqua-50);color:var(--aqua-800);cursor:pointer;}
+.cal-day.avail:hover{background:var(--aqua-100);}
+.cal-day.off{color:var(--ink-faint);text-decoration:line-through;}
+.cal-day.sel{background:var(--aqua-700)!important;color:#fff;}
+.cal-day .dot{position:absolute;bottom:5px;width:4px;height:4px;border-radius:99px;background:var(--success);}.cal-day.sel .dot{background:#fff;}
+.slot-row{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.7rem .85rem;border:1.5px solid var(--line-strong);border-radius:var(--r-lg);cursor:pointer;transition:all var(--dur-1);background:#fff;width:100%;text-align:start;}
+.slot-row:hover{border-color:var(--aqua-400);}.slot-row.sel{border-color:var(--aqua-700);background:var(--aqua-50);}
+.slot-row .rad{width:20px;height:20px;border-radius:99px;border:2px solid var(--line-strong);display:grid;place-items:center;flex:none;}
+.slot-row.sel .rad{border-color:var(--aqua-700);}.slot-row.sel .rad::after{content:"";width:10px;height:10px;border-radius:99px;background:var(--aqua-700);}
+
+/* reviews */
+.rev-bars{display:grid;grid-template-columns:1fr;gap:.7rem;}
+@media(min-width:560px){.rev-bars{grid-template-columns:1fr 1fr;gap:.7rem 1.8rem;}}
+.rev-bar{display:flex;align-items:center;gap:.7rem;}.rev-bar .nm{flex:none;width:9.5rem;font-size:.86rem;font-weight:600;}.rev-bar .track{flex:1;height:6px;border-radius:99px;background:var(--sand-2);overflow:hidden;}.rev-bar .fill{height:100%;background:var(--aqua-600);border-radius:99px;}.rev-bar .vv{flex:none;font-weight:700;font-size:.82rem;width:2rem;text-align:end;}
+.rev-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);padding:1.1rem;box-shadow:var(--sh-sm);}
+
+/* map approximate */
+.map-approx{position:relative;height:250px;border-radius:var(--r-2xl);overflow:hidden;background:linear-gradient(160deg,#DCEFE6,#CFE9EC 50%,#BFE3EE);border:1px solid var(--line);}
+.map-approx .roads{position:absolute;inset:0;opacity:.55;}
+.approx-circle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:160px;height:160px;border-radius:50%;background:rgba(6,182,212,.16);border:2px dashed rgba(8,145,178,.55);}
+.approx-circle::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--aqua-700);box-shadow:0 0 0 6px rgba(14,116,144,.2);}
+
+/* booking card / sticky bar */
+.booking-card{position:sticky;top:88px;background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-card);padding:1.2rem;align-self:start;}
+.sticky-bar{position:fixed;inset-inline:0;bottom:0;z-index:34;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px -12px rgba(15,61,76,.25);padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom));}
+.reassure{display:flex;align-items:center;gap:.45rem;font-size:.8rem;font-weight:600;color:var(--amber-ink);background:var(--amber-soft);border-radius:var(--r-md);padding:.5rem .7rem;}
+.reassure svg{width:16px;height:16px;flex:none;}
+
+.hscroll{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:.3rem .1rem 1rem;}
+.hscroll::-webkit-scrollbar{display:none;}.hscroll>*{scroll-snap-align:start;flex:0 0 auto;width:240px;max-width:78vw;}
+
+@media(max-width:1023px){body{padding-bottom:124px;}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+</defs></svg>
+
+<!-- desktop header -->
+<header class="desk-header hidden lg:block">
+  <div class="wrap" style="display:flex;align-items:center;gap:1rem;height:60px">
+    <a href="#" style="display:flex;align-items:center;gap:.5rem"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg><strong style="font-size:1.1rem;letter-spacing:-.02em">pissina</strong></a>
+    <nav class="t-sm muted" style="margin-inline-start:.5rem">Explorer › Casablanca › Dar Bouazza</nav>
+    <div style="margin-inline-start:auto;display:flex;align-items:center;gap:.6rem">
+      <button class="btn btn-ghost btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5"/></svg>Partager</button>
+      <button class="btn btn-ghost btn-sm" id="saveDesk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>Enregistrer</button>
+      <span class="avatar" style="width:34px;height:34px;font-size:.8rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">YA</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ 1 · GALLERY ═══════════════ -->
+<!-- mobile carousel -->
+<div class="gallery-mobile lg:hidden" id="gMobile">
+  <div class="track" id="gTrack"></div>
+  <div class="g-top">
+    <a href="#" class="g-btn" aria-label="Retour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+    <div style="display:flex;gap:.5rem">
+      <button class="g-btn" aria-label="Partager"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5"/></svg></button>
+      <button class="g-btn" id="favMob" aria-label="Ajouter aux favoris" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+    </div>
+  </div>
+  <button class="gcnav prev" aria-label="Photo précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="gcnav next" aria-label="Photo suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+  <div class="g-counter"><span id="gCur">1</span>/11</div>
+</div>
+<!-- desktop collage -->
+<div class="wrap hidden lg:block" style="padding-top:1.2rem">
+  <div class="gallery-desk" id="gDesk"></div>
+</div>
+
+<main class="wrap" style="padding-top:1rem">
+  <div class="grid lg:grid-cols-[1fr_368px] gap-x-10 gap-y-2 items-start">
+
+    <!-- ░░ LEFT CONTENT ░░ -->
+    <div class="detail-main" style="min-width:0">
+
+      <!-- 2 · TITLE -->
+      <div style="padding-block:.4rem 1.1rem">
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.7rem">
+          <span class="badge badge-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>Vérifié</span>
+          <span class="badge badge-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>À l'abri des regards</span>
+          <span class="badge badge-host"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"/></svg>Hôte fiable</span>
+        </div>
+        <h1 class="t-h2">Villa avec piscine chauffée</h1>
+        <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-top:.5rem;color:var(--ink-muted)">
+          <span style="display:inline-flex;align-items:center;gap:.3rem;font-weight:600;color:var(--ink)"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:16px;height:16px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,8 <span class="muted" style="font-weight:500">(12 avis)</span></span>
+          <span aria-hidden="true">·</span>
+          <span style="display:inline-flex;align-items:center;gap:.3rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dar Bouazza, Casablanca</span>
+        </div>
+      </div>
+
+      <!-- 3 · OWNER CARD + CONTACT (prominent, near top) -->
+      <div class="owner-card">
+        <div style="display:flex;gap:.9rem;align-items:center">
+          <span class="avatar" style="width:56px;height:56px;font-size:1.1rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">YA</span>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap"><strong style="font-size:1.05rem">Hôte : Yasmine</strong><span class="badge badge-verified" style="padding:.2rem .45rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px"><path d="M20 6 9 17l-5-5"/></svg>Vérifiée</span></div>
+            <div class="t-sm muted" style="margin-top:.15rem">Membre depuis 2024 · Superhôte</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:.8rem;margin-top:.9rem;padding-block:.7rem;border-block:1px solid var(--line)">
+          <div class="stat"><div class="v">95 %</div><div class="l">Taux de réponse</div></div>
+          <div class="stat" style="border-inline-start:1px solid var(--line);padding-inline-start:.8rem"><div class="v">~ 1 h</div><div class="l">Répond en</div></div>
+          <div class="stat" style="border-inline-start:1px solid var(--line);padding-inline-start:.8rem"><div class="v">12</div><div class="l">Avis reçus</div></div>
+        </div>
+        <p class="t-sm muted" style="margin:.6rem 0 .8rem">Posez vos questions avant de réserver — Yasmine répond vite, en français ou en arabe.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+          <a href="tel:+212600000000" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.1 4.18 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>Appeler</a>
+          <a href="#" class="btn btn-wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- 4 · KEY FACTS -->
+      <div class="sec" style="border-top:none;padding-top:1.4rem">
+        <div class="facts">
+          <div class="fact"><span class="ic">👥</span><div><div class="v">15 invités</div><div class="l">capacité max.</div></div></div>
+          <div class="fact"><span class="ic">📏</span><div><div class="v">10 × 5 m</div><div class="l">profondeur 1,4 m</div></div></div>
+          <div class="fact"><span class="ic">🌡️</span><div><div class="v">Chauffée</div><div class="l">28°C toute l'année</div></div></div>
+          <div class="fact"><span class="ic">🚗</span><div><div class="v">Parking</div><div class="l">3 voitures</div></div></div>
+        </div>
+      </div>
+
+      <!-- 5 · DESCRIPTION -->
+      <div class="sec">
+        <h2>À propos de cette piscine</h2>
+        <div class="clampable" id="descBox">
+          <p class="t-body ct clamped" id="descText">Villa familiale au calme à Dar Bouazza, à 10 minutes de la plage. La piscine chauffée (10×5&nbsp;m, profondeur 1,40&nbsp;m) est entièrement clôturée et <strong>à l'abri des regards</strong> — idéale pour les familles et les groupes qui cherchent l'intimité.
+          Vous profitez d'un grand jardin arboré, d'une terrasse ombragée avec transats, d'un coin barbecue et d'une douche extérieure. Le pool house dispose de toilettes et d'un vestiaire. Parking privé sécurisé pour 3 voitures.
+          Le propriétaire n'est pas présent pendant votre créneau&nbsp;: vous êtes entre vous. Un gardien reste joignable en cas de besoin. Réservez la matinée, l'après-midi ou la journée complète — paiement en espèces à l'arrivée.</p>
+          <button class="btn btn-ghost btn-sm" id="descToggle" style="padding-inline:0;margin-top:.3rem">Lire la suite <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+      </div>
+
+      <!-- 6 · ÉQUIPEMENTS & EXTRAS -->
+      <div class="sec">
+        <h2>Équipements & extras</h2>
+        <div class="grid sm:grid-cols-2" style="gap:.1rem 1.4rem;margin-bottom:1.1rem">
+          <div class="eq"><span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>♨️ Piscine chauffée (28°C)</span></div>
+          <div class="eq"><span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>🚗 Parking privé (3 voitures)</span></div>
+          <div class="eq"><span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>🧺 Transats & parasols</span></div>
+          <div class="eq"><span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>🚿 Douche extérieure</span></div>
+          <div class="eq"><span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>🛟 Clôturé & sécurisé</span></div>
+          <div class="eq"><span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>🚻 Toilettes & vestiaire</span></div>
+        </div>
+        <div class="t-sm muted" style="font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.6rem">Extras payants — sur place</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <div class="extra"><span>🍖 Pack barbecue (charbon + ustensiles)</span><span class="price-tag">+100 DH</span></div>
+          <div class="extra"><span>🧺 Serviettes</span><span class="price-tag">+20 DH/pers</span></div>
+          <div class="extra"><span>🎵 Enceinte Bluetooth</span><span class="price-tag">+50 DH</span></div>
+          <div class="extra"><span>🧑‍🍳 Service traiteur (sur demande)</span><span class="price-tag">dès 80 DH/pers</span></div>
+        </div>
+      </div>
+
+      <!-- 7 · RÈGLEMENT -->
+      <div class="sec">
+        <h2>Règlement intérieur</h2>
+        <div class="grid sm:grid-cols-2" style="gap:0 1.4rem">
+          <div class="rule"><span class="yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px"><path d="M20 6 9 17l-5-5"/></svg></span><span>👨‍👩‍👧 Convient aux enfants</span></div>
+          <div class="rule"><span class="yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px"><path d="M20 6 9 17l-5-5"/></svg></span><span>🎶 Musique autorisée (jusqu'à 22h)</span></div>
+          <div class="rule no-allow"><span class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px"><path d="M18 6 6 18M6 6l12 12"/></svg></span><span>🐾 Animaux non acceptés</span></div>
+          <div class="rule"><span class="yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px"><path d="M20 6 9 17l-5-5"/></svg></span><span>🎉 Événements autorisés</span></div>
+          <div class="rule"><span class="yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px"><path d="M20 6 9 17l-5-5"/></svg></span><span>🔑 Propriétaire non présent</span></div>
+          <div class="rule no-allow"><span class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px"><path d="M18 6 6 18M6 6l12 12"/></svg></span><span>🚭 Interdit de fumer dans l'eau</span></div>
+        </div>
+      </div>
+
+      <!-- 8 · DISPONIBILITÉS (mobile) -->
+      <div class="sec lg:hidden">
+        <h2>Disponibilités</h2>
+        <p class="t-sm muted" style="margin-top:-.5rem;margin-bottom:.9rem">Touchez un jour disponible pour voir les créneaux et leurs prix.</p>
+        <div class="cal-mount" style="border:1px solid var(--line);border-radius:var(--r-lg);padding:.9rem;background:#fff"></div>
+        <div class="slots-mount" style="display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem"></div>
+      </div>
+
+      <!-- 9 · LOCALISATION -->
+      <div class="sec">
+        <h2>Localisation</h2>
+        <div class="map-approx">
+          <svg class="roads" viewBox="0 0 400 250" preserveAspectRatio="none" aria-hidden="true"><g stroke="#fff" stroke-width="5" fill="none" opacity=".7"><path d="M-10 80 L410 60"/><path d="M-10 180 L410 200"/><path d="M140 -10 L120 260"/><path d="M280 -10 L300 260"/></g></svg>
+          <div class="approx-circle"></div>
+        </div>
+        <div style="display:flex;gap:.6rem;align-items:flex-start;margin-top:.8rem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" style="width:20px;height:20px;flex:none;margin-top:1px"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <strong>Dar Bouazza, Casablanca</strong>
+            <p class="t-sm muted" style="margin-top:.2rem">Zone approximative. L'adresse exacte et l'itinéraire vous sont communiqués <strong>après l'acceptation</strong> de votre demande par l'hôte.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 · AVIS -->
+      <div class="sec">
+        <h2 style="display:flex;align-items:center;gap:.5rem"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:22px;height:22px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,8 · 12 avis</h2>
+        <div class="rev-bars" style="margin-bottom:1.3rem">
+          <div class="rev-bar"><span class="nm">Propreté</span><span class="track"><span class="fill" style="width:98%"></span></span><span class="vv">4,9</span></div>
+          <div class="rev-bar"><span class="nm">Conformité photos</span><span class="track"><span class="fill" style="width:96%"></span></span><span class="vv">4,8</span></div>
+          <div class="rev-bar"><span class="nm">Communication</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="vv">5,0</span></div>
+          <div class="rev-bar"><span class="nm">Confidentialité</span><span class="track"><span class="fill" style="width:98%"></span></span><span class="vv">4,9</span></div>
+        </div>
+        <div class="grid sm:grid-cols-2" style="gap:.8rem">
+          <div class="rev-card">
+            <div style="display:flex;align-items:center;gap:.6rem"><span class="avatar" style="width:40px;height:40px;font-size:.85rem;background:linear-gradient(135deg,#22D3EE,#0E7490)">IK</span><div><strong style="font-size:.95rem">Imane K.</strong><div class="t-sm muted">Juin 2026 · Casablanca</div></div></div>
+            <div class="stars" style="margin-top:.5rem" aria-label="5 sur 5"><span class="base">★★★★★</span><span class="fill" style="width:100%">★★★★★</span></div>
+            <p class="t-body" style="margin-top:.5rem">Piscine impeccable et vraiment à l'abri des regards, parfait pour un anniversaire en famille. Yasmine très réactive sur WhatsApp. On a payé sur place, aucun souci.</p>
+          </div>
+          <div class="rev-card">
+            <div style="display:flex;align-items:center;gap:.6rem"><span class="avatar" style="width:40px;height:40px;font-size:.85rem;background:linear-gradient(135deg,#FB7185,#F43F5E)">MR</span><div><strong style="font-size:.95rem">Mehdi R.</strong><div class="t-sm muted">Mai 2026 · Rabat</div></div></div>
+            <div class="stars" style="margin-top:.5rem" aria-label="4.5 sur 5"><span class="base">★★★★★</span><span class="fill" style="width:90%">★★★★★</span></div>
+            <p class="t-body" style="margin-top:.5rem">Eau bien chauffée, grand jardin, parking facile. Conforme aux photos. Le barbecue en extra à 100 DH vaut le coup pour un groupe.</p>
+          </div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:1rem">Voir les 12 avis</button>
+      </div>
+
+    </div>
+
+    <!-- ░░ DESKTOP BOOKING CARD ░░ -->
+    <aside class="booking-card hidden lg:block">
+      <div style="display:flex;align-items:baseline;gap:.4rem;margin-bottom:.2rem"><span class="muted t-sm">à partir de</span><strong style="font-size:1.5rem" id="bcPrice">350 DH</strong><span class="muted t-sm" id="bcSlotLabel">/ matinée</span></div>
+      <div style="display:flex;align-items:center;gap:.3rem;margin-bottom:1rem"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:14px;height:14px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><span class="t-sm" style="font-weight:600">4,8</span><span class="t-sm muted">· 12 avis</span></div>
+
+      <div class="cal-mount" style="border:1px solid var(--line);border-radius:var(--r-lg);padding:.8rem;margin-bottom:.8rem"></div>
+      <div class="slots-mount" style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:.9rem"></div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;font-weight:700"><span id="bcRecap">Après-midi · 18 juil.</span><span id="bcTotal">400 DH</span></div>
+      <button class="btn btn-primary btn-block btn-lg" style="margin-bottom:.6rem">Demander à réserver</button>
+      <a href="#" class="btn btn-wa btn-block" style="margin-bottom:.8rem"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24z"/></svg>Contacter sur WhatsApp</a>
+      <div class="reassure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="12" cy="12" r="2.5"/></svg>Paiement sur place — aucun paiement en ligne</div>
+      <p class="t-sm muted" style="text-align:center;margin-top:.7rem">Vous ne serez débité de rien aujourd'hui.</p>
+    </aside>
+
+  </div>
+
+  <!-- 11 · PISCINES SIMILAIRES -->
+  <section class="sec" style="margin-top:1rem">
+    <h2 style="font-size:1.3rem">Piscines similaires à Dar Bouazza</h2>
+    <div class="hscroll">
+      <article class="pcard"><div class="ph"><img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=600&q=68" alt="Piscine privée à Dar Bouazza" loading="lazy"><div style="position:absolute;top:.6rem;inset-inline-start:.6rem"><span class="badge badge-privacy" style="font-size:.66rem">À l'abri des regards</span></div><button class="fav" style="position:absolute;top:.6rem;inset-inline-end:.6rem" aria-label="Favori"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button></div><div class="body"><div style="display:flex;justify-content:space-between;gap:.4rem"><strong style="font-size:.95rem">Piscine moderne</strong><span style="font-weight:700;font-size:.85rem;flex:none">★ 4,9</span></div><div class="t-sm muted" style="margin-top:.15rem">Dar Bouazza · Tamaris</div><div style="margin-top:.5rem"><strong>350 DH</strong> <span class="muted t-sm">/ créneau</span></div></div></article>
+      <article class="pcard"><div class="ph"><img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=68" alt="Grande piscine familiale" loading="lazy"><button class="fav is-on" style="position:absolute;top:.6rem;inset-inline-end:.6rem" aria-label="Favori"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button></div><div class="body"><div style="display:flex;justify-content:space-between;gap:.4rem"><strong style="font-size:.95rem">Grande piscine familiale</strong><span style="font-weight:700;font-size:.85rem;flex:none">★ 4,7</span></div><div class="t-sm muted" style="margin-top:.15rem">Bouskoura</div><div style="margin-top:.5rem"><strong>400 DH</strong> <span class="muted t-sm">/ créneau</span></div></div></article>
+      <article class="pcard"><div class="ph"><img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=600&q=68" alt="Piscine vue mer" loading="lazy"><div style="position:absolute;top:.6rem;inset-inline-start:.6rem"><span class="badge badge-host" style="font-size:.66rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"/></svg>Hôte fiable</span></div><button class="fav" style="position:absolute;top:.6rem;inset-inline-end:.6rem" aria-label="Favori"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button></div><div class="body"><div style="display:flex;justify-content:space-between;gap:.4rem"><strong style="font-size:.95rem">Piscine vue mer</strong><span style="font-weight:700;font-size:.85rem;flex:none">★ 4,9</span></div><div class="t-sm muted" style="margin-top:.15rem">Casablanca · Aïn Diab</div><div style="margin-top:.5rem"><strong>600 DH</strong> <span class="muted t-sm">/ créneau</span></div></div></article>
+      <article class="pcard"><div class="ph"><img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=68" alt="Riad avec piscine" loading="lazy"><div style="position:absolute;top:.6rem;inset-inline-start:.6rem"><span class="badge badge-privacy" style="font-size:.66rem">À l'abri des regards</span></div><button class="fav" style="position:absolute;top:.6rem;inset-inline-end:.6rem" aria-label="Favori"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button></div><div class="body"><div style="display:flex;justify-content:space-between;gap:.4rem"><strong style="font-size:.95rem">Riad avec piscine</strong><span style="font-weight:700;font-size:.85rem;flex:none">★ 4,6</span></div><div class="t-sm muted" style="margin-top:.15rem">Rabat · Souissi</div><div style="margin-top:.5rem"><strong>450 DH</strong> <span class="muted t-sm">/ créneau</span></div></div></article>
+    </div>
+  </section>
+</main>
+
+<!-- sticky bottom bar (mobile) -->
+<div class="sticky-bar lg:hidden">
+  <div class="reassure" style="margin-bottom:.6rem;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="12" cy="12" r="2.5"/></svg>Paiement sur place — aucun paiement en ligne</div>
+  <div style="display:flex;align-items:center;gap:.6rem">
+    <div style="flex:none;line-height:1.12">
+      <div class="muted" style="font-size:.68rem">à partir de</div>
+      <strong style="font-size:1.05rem" id="sbPrice">350 DH</strong>
+      <div class="muted" style="font-size:.68rem" id="sbSlot">/ matinée</div>
+    </div>
+    <a href="#" class="icon-btn icon-btn-wa" style="margin-inline-start:auto" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24z"/></svg></a>
+    <button class="btn btn-primary" style="flex:1;min-height:50px">Demander à réserver</button>
+  </div>
+</div>
+
+<!-- @@CHROME@@ -->
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Toutes les photos">
+  <button class="g-btn" id="lbClose" style="position:fixed;top:1rem;inset-inline-end:1rem;z-index:2" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <div class="lightbox-grid" id="lbGrid"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESIGN NOTES · S4 — Fiche piscine (écran de conversion)
+     ────────────────────────────────────────────────────────────────
+     • La confiance avant tout : badges Vérifié / À l'abri des regards dès le titre,
+       carte hôte (taux + délai de réponse, « Membre depuis ») juste sous le titre
+       avec Appeler + WhatsApp VISIBLES sans effort — le contact direct n'est jamais
+       enterré sous la réservation. Avis détaillés par catégorie + confidentialité.
+     • Cash assumé : ligne « Paiement sur place — aucun paiement en ligne » dans la
+       carte de réservation ET la barre collante ; CTA « Demander à réserver »
+       (demande, pas paiement) + « Vous ne serez débité de rien aujourd'hui ».
+     • Créneaux, pas nuits : calendrier mois → le jour révèle Matinée 350 / Après-midi
+       400 / Journée 650 DH ; le récap et le total se mettent à jour en direct.
+     • Localisation approximative (cercle) tant que la demande n'est pas acceptée —
+       réassurance pour l'hôte comme pour le renter ; extras payants affichés avec prix.
+     • Mobile = barre d'action collante (prix + Demander + WhatsApp) ; desktop = carte
+       de réservation sticky à droite, contacts sous le bloc hôte. Tokens/composants
+       S1 réutilisés à l'identique ; galerie + calendrier rendus depuis des données.
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+/* ── photos ── */
+const ID=['1571896349842-33c89424de2d','1613977257363-707ba9348227','1576013551627-0cc20b96c2a7','1551882547-ff40c63fe5fa','1582719508461-905c673771fd','1502672023488-70e25813eb80'];
+const PHOTOS=Array.from({length:11},(_,i)=>`https://images.unsplash.com/photo-${ID[i%ID.length]}?auto=format&fit=crop&w=900&q=70`);
+const gTrack=document.getElementById('gTrack'),gDesk=document.getElementById('gDesk'),lbGrid=document.getElementById('lbGrid');
+gTrack.innerHTML=PHOTOS.map((s,i)=>`<img src="${s}" alt="Photo ${i+1} — villa avec piscine chauffée à Dar Bouazza" loading="${i<2?'eager':'lazy'}">`).join('');
+gDesk.innerHTML=PHOTOS.slice(0,5).map((s,i)=>`<button data-lb aria-label="Voir les 11 photos"><img src="${s}" alt="Photo ${i+1} de la villa">${i===4?'<span style="position:absolute;bottom:.85rem;inset-inline-end:.85rem;background:#fff;color:var(--ink);font-weight:700;font-size:.82rem;padding:.5rem .8rem;border-radius:999px;box-shadow:var(--sh-pop);display:inline-flex;align-items:center;gap:.4rem;pointer-events:none">▦ Voir les 11 photos</span>':''}</button>`).join('');
+lbGrid.innerHTML=PHOTOS.map((s,i)=>`<img src="${s}" alt="Photo ${i+1} de la villa">`).join('');
+
+/* ── mobile gallery carousel ── */
+const gMobile=document.getElementById('gMobile');let gi=0;
+function gGo(i){gi=(i+11)%11;gTrack.style.transform=`translateX(${-gi*100}%)`;document.getElementById('gCur').textContent=gi+1;}
+gMobile.querySelector('.gcnav.next').addEventListener('click',()=>gGo(gi+1));
+gMobile.querySelector('.gcnav.prev').addEventListener('click',()=>gGo(gi-1));
+let sx=null,moved=false;
+gMobile.addEventListener('pointerdown',e=>{if(e.target.closest('.gcnav')||e.target.closest('.g-btn'))return;sx=e.clientX;moved=false;});
+gMobile.addEventListener('pointermove',e=>{if(sx!=null&&Math.abs(e.clientX-sx)>10)moved=true;});
+gMobile.addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx;if(Math.abs(dx)>40)gGo(gi+(dx<0?1:-1));else if(!moved&&e.target.tagName==='IMG')openLB();sx=null;});
+
+/* ── lightbox ── */
+const lb=document.getElementById('lightbox');
+function openLB(){lb.classList.add('show');document.body.style.overflow='hidden';}
+function closeLB(){lb.classList.remove('show');document.body.style.overflow='';}
+document.getElementById('lbClose').addEventListener('click',closeLB);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLB();});
+document.addEventListener('click',e=>{if(e.target.closest('[data-lb]'))openLB();});
+
+/* ── description toggle ── */
+document.getElementById('descToggle').addEventListener('click',function(){
+  const t=document.getElementById('descText');const clamped=t.classList.toggle('clamped');
+  this.innerHTML=clamped?'Lire la suite <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><path d="m6 9 6 6 6-6"/></svg>':'Réduire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><path d="m18 15-6-6-6 6"/></svg>';
+});
+
+/* ── calendar + slots ── */
+const DOW=['L','M','M','J','V','S','D'];
+const AVAIL=new Set([2,3,4,5,9,10,11,12,16,17,18,19,23,24,25,26,30,31]);
+const chev=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="${d==='l'?'m15 18-6-6 6-6':'m9 18 6-6-6-6'}"/></svg>`;
+let selDay=18, selSlot={name:'Après-midi',price:400};
+const SLOTS=[['Matinée','9h – 14h',350],['Après-midi','15h – 20h',400],['Journée complète','9h – 20h',650]];
+function calHTML(){
+  let h=`<div class="cal-head"><button class="icon-btn" style="width:34px;height:34px" aria-label="Mois précédent">${chev('l')}</button><strong>Juillet 2026</strong><button class="icon-btn" style="width:34px;height:34px" aria-label="Mois suivant">${chev('r')}</button></div><div class="cal-grid">`;
+  h+=DOW.map(d=>`<span class="cal-dow">${d}</span>`).join('');
+  h+='<span></span><span></span>'; /* 1 juil. 2026 = mercredi → 2 cases vides (lundi-premier) */
+  for(let d=1;d<=31;d++){const av=AVAIL.has(d);h+=`<button class="cal-day ${av?'avail':'off'} ${d===selDay?'sel':''}" data-day="${d}" ${av?'':'disabled aria-disabled=true'}>${d}${av?'<span class="dot"></span>':''}</button>`;}
+  return h+'</div>';
+}
+function slotsHTML(){return SLOTS.map(s=>`<button class="slot-row ${s[0]===selSlot.name?'sel':''}" data-slot="${s[0]}" data-price="${s[2]}"><span style="display:flex;align-items:center;gap:.6rem"><span class="rad"></span><span><strong>${s[0]}</strong> <span class="muted t-sm">· ${s[1]}</span></span></span><strong>${s[2]} DH</strong></button>`).join('');}
+document.querySelectorAll('.cal-mount').forEach(m=>m.innerHTML=calHTML());
+document.querySelectorAll('.slots-mount').forEach(m=>m.innerHTML=slotsHTML());
+function syncRecap(){const r=document.getElementById('bcRecap'),t=document.getElementById('bcTotal');if(r)r.textContent=`${selSlot.name} · ${selDay} juil.`;if(t)t.textContent=selSlot.price+' DH';}
+syncRecap();
+document.addEventListener('click',e=>{
+  const day=e.target.closest('.cal-day.avail'); if(day){selDay=+day.dataset.day;document.querySelectorAll('.cal-mount .cal-day').forEach(d=>d.classList.toggle('sel',+d.dataset.day===selDay&&d.classList.contains('avail')));syncRecap();return;}
+  const slot=e.target.closest('.slot-row'); if(slot){selSlot={name:slot.dataset.slot,price:+slot.dataset.price};document.querySelectorAll('.slots-mount .slot-row').forEach(s=>s.classList.toggle('sel',s.dataset.slot===selSlot.name));syncRecap();return;}
+});
+
+/* ── favourites ── */
+document.addEventListener('click',e=>{
+  const f=e.target.closest('.fav,#favMob,#saveDesk'); if(f){f.classList.toggle('is-on');if(f.hasAttribute('aria-pressed'))f.setAttribute('aria-pressed',f.classList.contains('is-on'));}
+});
+
+/* ── escape ── */
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();});
+</script>
+</body>
+</html>

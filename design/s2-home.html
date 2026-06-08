@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E7490">
+<title>Pissina · Louez une piscine privée au Maroc</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+/* ════════════════ PISSINA TOKENS — identical to S1 (single source of truth) ════════════════ */
+:root{
+  --aqua-50:#ECFEFF;  --aqua-100:#CFF7FB; --aqua-200:#A4ECF5; --aqua-300:#6FDDED;
+  --aqua-400:#22D3EE; --aqua-500:#06B6D4; --aqua-600:#0891B2;
+  --aqua-700:#0E7490; --aqua-800:#155E75; --aqua-900:#164E63;
+  --ink-strong:#0A2D38;  --ink:#0F3D4C;  --ink-muted:#4F6E78;  --ink-faint:#8AA2AB;
+  --coral:#FB7185; --coral-deep:#F43F5E; --coral-soft:#FFE4E8; --coral-ink:#9F1239;
+  --wa:#17A24E; --wa-deep:#138A42;
+  --amber:#F59E0B; --amber-soft:#FEF3C7; --amber-ink:#92580A;
+  --success:#15A24A; --success-soft:#DCFCE7;
+  --danger:#DC2626; --danger-deep:#B91C1C; --danger-soft:#FEE2E2;
+  --sand:#FAFAF7;  --sand-2:#F1F1EA;  --white:#FFFFFF;
+  --line:#E6E7E1;  --line-2:#EDEEE8;  --line-strong:#D3D6CE;
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-2xl:24px; --r-3xl:32px; --r-pill:999px;
+  --sh-sm:0 1px 2px rgba(15,61,76,.06), 0 1px 1px rgba(15,61,76,.05);
+  --sh-card:0 6px 24px -8px rgba(15,61,76,.18), 0 2px 6px -3px rgba(15,61,76,.08);
+  --sh-pop:0 12px 30px -8px rgba(15,61,76,.22);
+  --sh-lg:0 22px 55px -14px rgba(15,61,76,.32);
+  --grad-hero:linear-gradient(140deg,#0E7490 0%,#0891B2 38%,#22C9DE 72%,#7FE6EF 100%);
+  --grad-fab:linear-gradient(160deg,#22D3EE 0%,#0E7490 100%);
+  --ease-water:cubic-bezier(.22,1,.36,1); --ease-soft:cubic-bezier(.4,0,.2,1);
+  --dur-1:.18s; --dur-2:.3s; --dur-3:.5s;
+  --focus:0 0 0 3px rgba(6,182,212,.40);
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+.ar{font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;}
+::selection{background:var(--aqua-200);color:var(--ink-strong);}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:20px;}
+@media(min-width:768px){.wrap{padding-inline:32px;}}
+
+/* type */
+.t-over{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua-700);}
+.t-display{font-size:clamp(2.3rem,6.4vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.03;}
+.t-h1{font-size:clamp(1.9rem,4.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.12;}
+.t-h2{font-size:clamp(1.5rem,3.4vw,2rem);font-weight:700;letter-spacing:-.02em;line-height:1.18;}
+.t-h3{font-size:1.3rem;font-weight:700;letter-spacing:-.015em;line-height:1.28;}
+.t-bodyl{font-size:1.0625rem;line-height:1.62;font-weight:400;}
+.t-body{font-size:.9375rem;line-height:1.6;font-weight:400;}
+.t-sm{font-size:.8125rem;line-height:1.45;}
+.muted{color:var(--ink-muted);} .faint{color:var(--ink-faint);}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:var(--r-pill);padding:.72rem 1.25rem;font-size:.95rem;line-height:1;cursor:pointer;border:1.5px solid transparent;transition:background-color var(--dur-1) var(--ease-soft),border-color var(--dur-1),color var(--dur-1),transform var(--dur-1),box-shadow var(--dur-1);white-space:nowrap;min-height:44px;}
+.btn:active{transform:translateY(1px);} .btn:focus-visible{outline:none;box-shadow:var(--focus);} .btn svg{width:18px;height:18px;flex:none;}
+.btn-lg{padding:.95rem 1.6rem;font-size:1.0625rem;min-height:52px;} .btn-sm{padding:.55rem .95rem;font-size:.85rem;min-height:38px;} .btn-block{width:100%;}
+.btn-primary{background:var(--aqua-700);color:#fff;box-shadow:var(--sh-sm);background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));}
+.btn-primary:hover{background-color:var(--aqua-800);}
+.btn-primary:disabled,.btn-primary.is-disabled{background:var(--aqua-200);color:#fff;background-image:none;box-shadow:none;cursor:not-allowed;transform:none;}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong);}
+.btn-secondary:hover{border-color:var(--aqua-500);color:var(--aqua-800);background:var(--aqua-50);}
+.btn-ghost{background:transparent;color:var(--aqua-800);} .btn-ghost:hover{background:var(--aqua-50);}
+.btn-wa{background:var(--wa);color:#fff;} .btn-wa:hover{background:var(--wa-deep);}
+.btn-white{background:#fff;color:var(--aqua-800);} .btn-white:hover{background:var(--aqua-50);}
+.icon-btn{width:44px;height:44px;border-radius:var(--r-pill);display:inline-flex;align-items:center;justify-content:center;border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);cursor:pointer;transition:all var(--dur-1) var(--ease-soft);}
+.icon-btn:hover{border-color:var(--aqua-500);color:var(--aqua-800);} .icon-btn:focus-visible{outline:none;box-shadow:var(--focus);} .icon-btn svg{width:20px;height:20px;}
+
+/* fields */
+.field{display:flex;flex-direction:column;gap:.4rem;} .label{font-size:.82rem;font-weight:600;color:var(--ink);} .hint{font-size:.78rem;color:var(--ink-muted);}
+.input,.select{width:100%;background:#fff;border:1.5px solid var(--line-strong);border-radius:var(--r-md);padding:.78rem .9rem;font-size:.95rem;color:var(--ink);min-height:48px;font-family:inherit;transition:border-color var(--dur-1),box-shadow var(--dur-1);}
+.input::placeholder{color:var(--ink-faint);} .input:focus,.select:focus{outline:none;border-color:var(--aqua-500);box-shadow:var(--focus);}
+.select-wrap{position:relative;} .select{appearance:none;-webkit-appearance:none;padding-inline-end:2.6rem;cursor:pointer;}
+.select-wrap > svg{position:absolute;inset-inline-end:.85rem;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--ink-muted);pointer-events:none;}
+.stepper{display:inline-flex;align-items:center;gap:.4rem;border:1.5px solid var(--line-strong);border-radius:var(--r-pill);padding:.28rem;background:#fff;}
+.stepper button{width:38px;height:38px;border-radius:var(--r-pill);border:none;background:var(--sand-2);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:all var(--dur-1);}
+.stepper button:hover{background:var(--aqua-50);color:var(--aqua-800);} .stepper button:focus-visible{outline:none;box-shadow:var(--focus);} .stepper button svg{width:18px;height:18px;}
+.stepper .val{min-width:2.2rem;text-align:center;font-weight:700;font-variant-numeric:tabular-nums;}
+.chip{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .9rem;border-radius:var(--r-pill);border:1.5px solid var(--line-strong);background:#fff;color:var(--ink);font-weight:600;font-size:.85rem;cursor:pointer;min-height:42px;transition:all var(--dur-1);}
+.chip:hover{border-color:var(--aqua-500);} .chip.is-on{background:var(--aqua-700);color:#fff;border-color:var(--aqua-700);}
+
+/* badges / stars / avatar */
+.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.34rem .62rem;border-radius:var(--r-pill);font-size:.76rem;font-weight:700;line-height:1;} .badge svg{width:14px;height:14px;}
+.badge-verified{background:var(--aqua-50);color:var(--aqua-800);} .badge-host{background:#fff;color:var(--ink);box-shadow:var(--sh-sm);border:1px solid var(--line);} .badge-host svg{color:var(--coral-deep);}
+.badge-privacy{background:rgba(10,45,56,.86);color:#fff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);} .badge-cash{background:var(--amber-soft);color:var(--amber-ink);}
+.stars{position:relative;display:inline-block;font-size:1rem;line-height:1;letter-spacing:.08em;} .stars .base{color:var(--line-strong);} .stars .fill{position:absolute;top:0;inset-inline-start:0;color:var(--amber);overflow:hidden;white-space:nowrap;}
+.avatar{width:48px;height:48px;border-radius:999px;object-fit:cover;border:2px solid #fff;box-shadow:var(--sh-sm);display:grid;place-items:center;color:#fff;font-weight:700;font-size:1rem;flex:none;}
+
+/* pool card */
+.pcard{background:#fff;border-radius:var(--r-2xl);overflow:hidden;box-shadow:var(--sh-card);border:1px solid var(--line);transition:transform var(--dur-2) var(--ease-water),box-shadow var(--dur-2);}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg);}
+.pcard .ph{position:relative;aspect-ratio:4/3;background:var(--sand-2);overflow:hidden;} .pcard .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform var(--dur-3) var(--ease-water);} .pcard:hover .ph img{transform:scale(1.05);}
+.pcard .body{padding:.95rem 1.05rem 1.15rem;}
+.fav{position:absolute;top:.7rem;inset-inline-end:.7rem;width:38px;height:38px;border-radius:999px;border:none;cursor:pointer;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;box-shadow:var(--sh-sm);transition:transform var(--dur-1);}
+.fav:hover{transform:scale(1.08);} .fav:focus-visible{outline:none;box-shadow:var(--focus);}
+.fav svg{width:20px;height:20px;color:var(--ink);fill:none;stroke:var(--ink);stroke-width:2;transition:all var(--dur-1);} .fav.is-on svg{color:var(--coral-deep);fill:var(--coral-deep);stroke:var(--coral-deep);}
+.ph-badges{position:absolute;top:.7rem;inset-inline-start:.7rem;display:flex;flex-direction:column;gap:.35rem;align-items:flex-start;}
+.skel{position:relative;overflow:hidden;background:var(--sand-2);border-radius:var(--r-sm);} .skel::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);animation:shimmer 1.5s infinite;}
+@keyframes shimmer{100%{transform:translateX(100%);}}
+
+/* tab bar */
+.tabbar{display:flex;justify-content:space-around;align-items:flex-end;background:#fff;border-top:1px solid var(--line);padding:.45rem .4rem calc(.45rem + env(safe-area-inset-bottom));}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:.18rem;color:var(--ink-muted);font-size:.66rem;font-weight:600;padding:.25rem 0;background:none;border:none;cursor:pointer;min-height:48px;} .tab svg{width:23px;height:23px;} .tab.is-on{color:var(--aqua-700);}
+.tab-fab{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;border:none;background:none;cursor:pointer;}
+.tab-fab .ring{width:50px;height:50px;border-radius:999px;background:var(--grad-fab);display:grid;place-items:center;color:#fff;margin-top:-22px;box-shadow:0 8px 18px -4px rgba(14,116,144,.55);border:3px solid var(--sand);} .tab-fab .ring svg{width:24px;height:24px;} .tab-fab span{font-size:.66rem;font-weight:700;color:var(--aqua-700);}
+
+/* hero atmosphere */
+.hero{position:relative;overflow:hidden;background:var(--grad-hero);color:#fff;isolation:isolate;}
+.hero .noise{position:absolute;inset:0;background-image:var(--noise);opacity:.05;mix-blend-mode:overlay;pointer-events:none;}
+.blob{position:absolute;border-radius:999px;filter:blur(40px);opacity:.5;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(255,255,255,0) 70%);pointer-events:none;z-index:-1;}
+
+/* ════════════════ S2-specific ════════════════ */
+.site-header{position:sticky;top:0;z-index:30;background:rgba(250,250,247,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.navlink{font-size:.92rem;font-weight:600;color:var(--ink);padding:.5rem .2rem;} .navlink:hover{color:var(--aqua-700);}
+.langsw{display:inline-flex;border:1.5px solid var(--line-strong);border-radius:999px;overflow:hidden;font-size:.78rem;font-weight:700;}
+.langsw .on{background:var(--aqua-700);color:#fff;padding:.3rem .6rem;} .langsw .off{color:var(--ink-muted);padding:.3rem .6rem;}
+
+.section{padding-block:clamp(2.6rem,6vw,4.6rem);}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.4rem;}
+
+.search-card{background:#fff;border-radius:var(--r-3xl);box-shadow:var(--sh-lg);border:1px solid var(--line);padding:1rem;}
+.ac{position:absolute;inset-inline:0;top:calc(100% + .4rem);background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-pop);z-index:50;overflow:hidden;max-height:288px;overflow-y:auto;}
+.ac button{display:flex;align-items:center;gap:.7rem;width:100%;padding:.65rem .8rem;background:none;border:none;text-align:start;cursor:pointer;color:var(--ink);}
+.ac button:hover,.ac button.active{background:var(--aqua-50);}
+.ac .pin{width:34px;height:34px;border-radius:10px;background:var(--aqua-50);display:grid;place-items:center;color:var(--aqua-700);flex:none;}
+
+.hscroll{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.4rem .2rem 1rem;scrollbar-width:none;}
+.hscroll::-webkit-scrollbar{display:none;} .hscroll>*{scroll-snap-align:start;flex:0 0 auto;width:268px;max-width:80vw;}
+
+.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);padding:1.4rem;box-shadow:var(--sh-sm);}
+.step .ico{width:56px;height:56px;border-radius:var(--r-lg);background:var(--aqua-50);display:grid;place-items:center;color:var(--aqua-700);} .step .ico svg{width:28px;height:28px;}
+.step .num{position:absolute;top:1.2rem;inset-inline-end:1.3rem;font-weight:800;font-size:1.5rem;color:var(--aqua-200);line-height:1;}
+
+.city-tile{position:relative;border-radius:var(--r-2xl);overflow:hidden;aspect-ratio:4/5;display:block;box-shadow:var(--sh-card);}
+.city-tile img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease-water);} .city-tile:hover img{transform:scale(1.06);}
+.city-tile .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,45,56,.8),rgba(10,45,56,.06) 58%);}
+.city-tile .cap{position:absolute;inset-inline:0;bottom:0;padding:.9rem 1rem;color:#fff;}
+
+.owner-band{background:var(--grad-hero);border-radius:var(--r-3xl);color:#fff;position:relative;overflow:hidden;isolation:isolate;}
+
+.trust-item{display:flex;align-items:center;gap:.7rem;padding:.9rem;text-align:start;}
+.trust-item .b{width:46px;height:46px;border-radius:var(--r-lg);background:var(--aqua-50);display:grid;place-items:center;color:var(--aqua-700);flex:none;} .trust-item .b svg{width:24px;height:24px;}
+
+.tabbar-fixed{position:fixed;inset-inline:0;bottom:0;z-index:40;box-shadow:0 -6px 20px -12px rgba(15,61,76,.25);}
+.pwa{position:fixed;inset-inline:.6rem;bottom:calc(70px + env(safe-area-inset-bottom));z-index:39;background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-pop);padding:.7rem .8rem;display:flex;align-items:center;gap:.7rem;}
+.pwa.hide{display:none;}
+
+.foot{background:#0A2D38;color:rgba(255,255,255,.82);}
+.foot a{color:rgba(255,255,255,.72);transition:color .15s;} .foot a:hover{color:#fff;}
+.foot .col-h{color:#fff;font-weight:700;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;}
+.soc{width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#fff;transition:background .15s;} .soc:hover{background:rgba(255,255,255,.18);}
+
+@media(max-width:1023px){ body{padding-bottom:152px;} }
+
+@media (prefers-reduced-motion:no-preference){
+  .rise{opacity:0;transform:translateY(16px);animation:rise .7s var(--ease-water) forwards;}
+  .blob{animation:float 15s ease-in-out infinite;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(22px,-26px)}}
+}
+@media (prefers-reduced-motion:reduce){ .skel::after{animation:none;} html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+</defs></svg>
+
+<!-- ═══════════════ HEADER (S1) ═══════════════ -->
+<header class="site-header">
+  <div class="wrap" style="display:flex;align-items:center;gap:1rem;height:64px">
+    <!-- logo -->
+    <a href="#" style="display:flex;align-items:center;gap:.5rem;flex:none" aria-label="Pissina, accueil">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg>
+      <strong style="font-size:1.2rem;letter-spacing:-.02em">pissina</strong>
+    </a>
+    <!-- desktop nav -->
+    <nav class="hidden lg:flex items-center gap-6" style="margin-inline-start:1.5rem">
+      <a href="#populaires" class="navlink">Piscines</a>
+      <a href="#how" class="navlink">Comment ça marche</a>
+      <a href="#owner" class="navlink">Devenir hôte</a>
+    </nav>
+    <div style="margin-inline-start:auto;display:flex;align-items:center;gap:.7rem">
+      <a href="#owner" class="btn btn-ghost btn-sm hidden lg:inline-flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Publier mon annonce</a>
+      <span class="langsw" role="group" aria-label="Langue"><span class="on">FR</span><span class="off ar">العربية</span></span>
+      <span class="avatar" style="width:36px;height:36px;font-size:.82rem;background:linear-gradient(135deg,#FB7185,#F43F5E)" aria-hidden="true">YA</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ═══════════════ HERO + SEARCH ═══════════════ -->
+  <section class="hero">
+    <div class="noise"></div>
+    <div class="blob" style="width:340px;height:340px;top:-90px;inset-inline-start:-70px"></div>
+    <div class="blob" style="width:280px;height:280px;bottom:-30px;inset-inline-end:6%;animation-delay:-6s"></div>
+    <div class="wrap" style="padding-top:clamp(2.4rem,5vw,3.6rem);padding-bottom:clamp(2.6rem,5vw,3.6rem)">
+      <div style="max-width:40rem;margin-inline:auto;text-align:center">
+        <span class="rise" style="display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.16);padding:.35rem .8rem;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.02em">
+          <span style="width:7px;height:7px;border-radius:99px;background:#FCD34D"></span>Location de piscines privées · Maroc
+        </span>
+        <h1 class="t-display rise" style="margin-top:1rem;animation-delay:.05s">Louez une piscine privée,<br>rien que pour vous.</h1>
+        <p class="ar rise" dir="rtl" style="margin-top:.5rem;font-size:1.3rem;font-weight:600;color:rgba(255,255,255,.92);animation-delay:.1s">اكتري مسبحًا خاصًا لك وحدك</p>
+        <p class="t-bodyl rise" style="margin-top:.8rem;color:rgba(255,255,255,.92);animation-delay:.14s">À l'heure ou à la journée, près de chez vous. <strong>Paiement en espèces sur place</strong> — sans carte, sans avance.</p>
+      </div>
+
+      <!-- search module -->
+      <div class="search-card rise" style="max-width:54rem;margin:1.6rem auto 0;animation-delay:.2s">
+        <div class="grid gap-3 lg:grid-cols-[1.5fr_1fr_auto_auto] lg:items-end">
+          <!-- city autocomplete -->
+          <div class="field" style="position:relative">
+            <label class="label" for="cityInput">Où&nbsp;?</label>
+            <div style="position:relative">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--aqua-700)" stroke-width="2" stroke-linecap="round" style="position:absolute;inset-inline-start:.8rem;top:50%;transform:translateY(-50%);width:18px;height:18px;pointer-events:none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <input class="input" id="cityInput" type="text" autocomplete="off" placeholder="Ville ou quartier" value="" style="padding-inline-start:2.5rem" role="combobox" aria-expanded="false" aria-controls="cityList" aria-autocomplete="list">
+            </div>
+            <div class="ac" id="cityList" role="listbox" hidden></div>
+          </div>
+          <!-- date -->
+          <label class="field">
+            <span class="label">Quand&nbsp;?</span>
+            <input class="input" type="date" value="2026-07-18">
+          </label>
+          <!-- guests -->
+          <div class="field">
+            <span class="label">Invités</span>
+            <div class="stepper" role="group" aria-label="Nombre d'invités" style="min-height:48px;align-self:flex-start">
+              <button data-dir="down" aria-label="Moins"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+              <span class="val">6</span>
+              <button data-dir="up" aria-label="Plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+          <!-- search -->
+          <button class="btn btn-primary btn-lg" style="height:48px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            Rechercher
+          </button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.4rem;margin-top:.95rem;padding-top:.85rem;border-top:1px solid var(--line)">
+          <span style="display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:600;color:var(--ink)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M20 6 9 17l-5-5"/></svg>Paiement sur place</span>
+          <span style="display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:600;color:var(--ink)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M20 6 9 17l-5-5"/></svg>Propriétaires vérifiés</span>
+          <span style="display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:600;color:var(--ink)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M20 6 9 17l-5-5"/></svg>Annulation flexible</span>
+        </div>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" style="display:block;width:100%;height:48px" aria-hidden="true"><path d="M0,38 C240,72 480,8 720,30 C960,52 1200,14 1440,40 L1440,70 L0,70 Z" fill="#FAFAF7"/></svg>
+  </section>
+
+  <!-- ═══════════════ TRUST STRIP ═══════════════ -->
+  <section class="wrap" style="margin-top:-.5rem">
+    <div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#E6E7E1]" style="background:#fff;border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-sm);overflow:hidden">
+      <div class="trust-item">
+        <span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><div style="font-weight:700">Propriétaires vérifiés</div><div class="t-sm muted">Identité & téléphone confirmés</div></div>
+      </div>
+      <div class="trust-item">
+        <span class="b" style="background:var(--amber-soft);color:var(--amber-ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+        <div><div style="font-weight:700">Paiement sur place</div><div class="t-sm muted">En espèces, à l'arrivée</div></div>
+      </div>
+      <div class="trust-item">
+        <span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span>
+        <div><div style="font-weight:700">Annulation flexible</div><div class="t-sm muted">Sans frais jusqu'à 48h avant</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PISCINES POPULAIRES ═══════════════ -->
+  <section id="populaires" class="wrap section">
+    <div class="sec-head">
+      <div>
+        <span class="t-over">Tendances de l'été</span>
+        <h2 class="t-h2" style="margin-top:.3rem">Piscines populaires</h2>
+      </div>
+      <a href="#" style="display:inline-flex;align-items:center;gap:.3rem;font-weight:700;color:var(--aqua-700);flex:none">Voir tout <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:18px;height:18px"><path d="m9 18 6-6-6-6"/></svg></a>
+    </div>
+
+    <div class="hscroll">
+      <!-- 1 -->
+      <article class="pcard">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=700&q=70" alt="Piscine privée bleue devant une villa à Dar Bouazza" loading="lazy">
+          <div class="ph-badges"><span class="badge badge-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>À l'abri des regards</span><span class="badge badge-host"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"/></svg>Hôte fiable</span></div>
+          <button class="fav" aria-label="Ajouter aux favoris" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+        </div>
+        <div class="body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:.5rem"><h3 style="font-size:1rem;font-weight:700;line-height:1.25">Villa avec piscine privée</h3><span style="display:inline-flex;align-items:center;gap:.2rem;font-weight:700;font-size:.88rem;flex:none"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:14px;height:14px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,9</span></div>
+          <div class="t-sm muted" style="margin-top:.25rem">Dar Bouazza · 87 avis</div>
+          <div style="margin-top:.6rem"><span style="font-weight:800;font-size:1.1rem">350 DH</span> <span class="muted t-sm">/ créneau</span></div>
+        </div>
+      </article>
+      <!-- 2 -->
+      <article class="pcard">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=700&q=70" alt="Piscine chauffée entourée de palmiers dans la Palmeraie de Marrakech" loading="lazy">
+          <div class="ph-badges"><span class="badge badge-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>À l'abri des regards</span></div>
+          <button class="fav is-on" aria-label="Retirer des favoris" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+        </div>
+        <div class="body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:.5rem"><h3 style="font-size:1rem;font-weight:700;line-height:1.25">Piscine chauffée · Palmeraie</h3><span style="display:inline-flex;align-items:center;gap:.2rem;font-weight:700;font-size:.88rem;flex:none"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:14px;height:14px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,8</span></div>
+          <div class="t-sm muted" style="margin-top:.25rem">Marrakech · 126 avis</div>
+          <div style="margin-top:.6rem"><span style="font-weight:800;font-size:1.1rem">500 DH</span> <span class="muted t-sm">/ créneau</span></div>
+        </div>
+      </article>
+      <!-- 3 -->
+      <article class="pcard">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=700&q=70" alt="Grande piscine familiale avec transats à Bouskoura" loading="lazy">
+          <button class="fav" aria-label="Ajouter aux favoris" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+        </div>
+        <div class="body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:.5rem"><h3 style="font-size:1rem;font-weight:700;line-height:1.25">Grande piscine familiale</h3><span style="display:inline-flex;align-items:center;gap:.2rem;font-weight:700;font-size:.88rem;flex:none"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:14px;height:14px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,7</span></div>
+          <div class="t-sm muted" style="margin-top:.25rem">Bouskoura · 54 avis</div>
+          <div style="margin-top:.6rem"><span style="font-weight:800;font-size:1.1rem">400 DH</span> <span class="muted t-sm">/ créneau</span></div>
+        </div>
+      </article>
+      <!-- 4 -->
+      <article class="pcard">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=700&q=70" alt="Piscine avec vue sur la mer à Aïn Diab, Casablanca" loading="lazy">
+          <div class="ph-badges"><span class="badge badge-host"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5"/></svg>Hôte fiable</span></div>
+          <button class="fav" aria-label="Ajouter aux favoris" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+        </div>
+        <div class="body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:.5rem"><h3 style="font-size:1rem;font-weight:700;line-height:1.25">Piscine vue mer · Aïn Diab</h3><span style="display:inline-flex;align-items:center;gap:.2rem;font-weight:700;font-size:.88rem;flex:none"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:14px;height:14px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,9</span></div>
+          <div class="t-sm muted" style="margin-top:.25rem">Casablanca · 73 avis</div>
+          <div style="margin-top:.6rem"><span style="font-weight:800;font-size:1.1rem">600 DH</span> <span class="muted t-sm">/ créneau</span></div>
+        </div>
+      </article>
+      <!-- 5 -->
+      <article class="pcard">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=700&q=70" alt="Piscine d'un riad avec jardin à Rabat Souissi" loading="lazy">
+          <div class="ph-badges"><span class="badge badge-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>À l'abri des regards</span></div>
+          <button class="fav" aria-label="Ajouter aux favoris" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+        </div>
+        <div class="body">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:.5rem"><h3 style="font-size:1rem;font-weight:700;line-height:1.25">Riad avec piscine · Souissi</h3><span style="display:inline-flex;align-items:center;gap:.2rem;font-weight:700;font-size:.88rem;flex:none"><svg viewBox="0 0 24 24" fill="var(--amber)" style="width:14px;height:14px"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>4,6</span></div>
+          <div class="t-sm muted" style="margin-top:.25rem">Rabat · 38 avis</div>
+          <div style="margin-top:.6rem"><span style="font-weight:800;font-size:1.1rem">450 DH</span> <span class="muted t-sm">/ créneau</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════════ COMMENT ÇA MARCHE ═══════════════ -->
+  <section id="how" style="background:var(--sand-2)">
+    <div class="wrap section">
+      <div style="text-align:center;max-width:40rem;margin-inline:auto">
+        <span class="t-over">Simple comme un plongeon</span>
+        <h2 class="t-h2" style="margin-top:.3rem">Comment ça marche</h2>
+        <p class="t-body muted" style="margin-top:.5rem">Pas de paiement en ligne, pas de complications. Trois étapes et vous êtes dans l'eau.</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3" style="margin-top:2rem">
+        <div class="step">
+          <span class="num">01</span>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+          <h3 class="t-h3" style="margin-top:1rem;font-size:1.15rem">Cherchez</h3>
+          <p class="t-body muted" style="margin-top:.35rem">Filtrez par ville, créneau et confidentialité. Appelez ou écrivez à l'hôte sur WhatsApp pour poser vos questions.</p>
+        </div>
+        <div class="step">
+          <span class="num">02</span>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></span>
+          <h3 class="t-h3" style="margin-top:1rem;font-size:1.15rem">Réservez votre créneau</h3>
+          <p class="t-body muted" style="margin-top:.35rem">Choisissez matinée, après-midi ou journée. Envoyez votre demande — l'hôte confirme, sans avance à payer.</p>
+        </div>
+        <div class="step">
+          <span class="num">03</span>
+          <span class="ico" style="background:var(--amber-soft);color:var(--amber-ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+          <h3 class="t-h3" style="margin-top:1rem;font-size:1.15rem">Profitez, payez sur place</h3>
+          <p class="t-body muted" style="margin-top:.35rem">Le jour J, vous réglez en espèces à l'arrivée. Plus qu'à plonger et profiter en toute tranquillité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PRIVACY VALUE PROP ═══════════════ -->
+  <section class="wrap section">
+    <div class="grid lg:grid-cols-2" style="background:#fff;border:1px solid var(--line);border-radius:var(--r-3xl);overflow:hidden;box-shadow:var(--sh-card)">
+      <div style="position:relative;min-height:280px">
+        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=900&q=72" alt="Piscine privée masquée par des palmiers, non visible des voisins" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <span class="badge badge-privacy" style="position:absolute;top:1rem;inset-inline-start:1rem;font-size:.8rem;padding:.45rem .8rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>À l'abri des regards</span>
+      </div>
+      <div style="padding:clamp(1.6rem,4vw,2.6rem)">
+        <span class="t-over">Confidentialité · Pour les familles</span>
+        <h2 class="t-h2" style="margin-top:.5rem">À l'abri des regards</h2>
+        <p class="ar" dir="rtl" style="margin-top:.3rem;font-size:1.15rem;font-weight:600;color:var(--aqua-700)">بعيد عن الأنظار</p>
+        <p class="t-bodyl" style="margin-top:.8rem;color:var(--ink)">Un filtre dédié pour trouver des piscines clôturées, non visibles des voisins ou de la rue. La tranquillité de profiter en famille, en toute intimité.</p>
+        <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:.6rem">
+          <li style="display:flex;align-items:center;gap:.6rem"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M20 6 9 17l-5-5"/></svg><span class="t-body">Espace clôturé et privatif</span></li>
+          <li style="display:flex;align-items:center;gap:.6rem"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M20 6 9 17l-5-5"/></svg><span class="t-body">Non visible depuis l'extérieur</span></li>
+          <li style="display:flex;align-items:center;gap:.6rem"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M20 6 9 17l-5-5"/></svg><span class="t-body">Badge vérifié par Pissina</span></li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-lg" style="margin-top:1.4rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.2 13.2 0 0 0 2 12s3 8 10 8a9.1 9.1 0 0 0 5.4-1.6M3 3l18 18M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>Voir les piscines privées</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ OWNER CTA BAND ═══════════════ -->
+  <section id="owner" class="wrap section" style="padding-top:0">
+    <div class="owner-band">
+      <div class="noise" style="position:absolute;inset:0;background-image:var(--noise);opacity:.05;mix-blend-mode:overlay"></div>
+      <div class="blob" style="width:300px;height:300px;top:-120px;inset-inline-end:-40px;z-index:0"></div>
+      <div class="grid lg:grid-cols-[1.4fr_1fr] items-center" style="position:relative;gap:1.5rem;padding:clamp(1.8rem,4.5vw,3rem)">
+        <div>
+          <span style="display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.16);padding:.35rem .8rem;border-radius:999px;font-size:.78rem;font-weight:700">Vous avez une piscine&nbsp;?</span>
+          <h2 style="font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;letter-spacing:-.025em;line-height:1.1;margin-top:.9rem">Gagnez jusqu'à<br><span style="font-size:1.2em">3 000 DH</span> par week-end</h2>
+          <p class="t-bodyl" style="margin-top:.7rem;color:rgba(255,255,255,.92);max-width:34rem">Inscription gratuite, et vous gardez le contrôle&nbsp;: vous acceptez ou refusez chaque demande, vous fixez vos créneaux et vos règles.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.4rem">
+            <a href="#" class="btn btn-white btn-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Publier mon annonce</a>
+            <a href="#how" class="btn btn-lg" style="background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.35)">Comment ça marche&nbsp;?</a>
+          </div>
+        </div>
+        <div class="hidden lg:block" style="position:relative">
+          <div style="border-radius:var(--r-2xl);overflow:hidden;box-shadow:var(--sh-lg);transform:rotate(2deg)"><img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=70" alt="Piscine d'un hôte particulier" loading="lazy" style="display:block;width:100%;height:230px;object-fit:cover"></div>
+          <div style="position:absolute;bottom:-18px;inset-inline-start:-18px;background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-pop);padding:.7rem .9rem;display:flex;align-items:center;gap:.6rem">
+            <span class="avatar" style="width:38px;height:38px;font-size:.82rem;background:linear-gradient(135deg,#22D3EE,#0E7490)">KH</span>
+            <div style="color:var(--ink)"><div style="font-weight:800;font-size:.92rem;line-height:1">+ 4 200 DH</div><div class="t-sm muted">ce mois-ci · Bouskoura</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CITIES GRID ═══════════════ -->
+  <section class="wrap section">
+    <div style="text-align:center;max-width:40rem;margin-inline:auto;margin-bottom:1.6rem">
+      <span class="t-over">Partout au Maroc</span>
+      <h2 class="t-h2" style="margin-top:.3rem">Explorez par ville</h2>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+      <a href="#" class="city-tile" style="background:var(--ink-strong)"><img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=600&q=68" alt="Piscines à Casablanca" loading="lazy"><div class="ov"></div><div class="cap"><div style="font-weight:800;font-size:1.15rem">Casablanca</div><div class="t-sm" style="opacity:.9">128 piscines</div></div></a>
+      <a href="#" class="city-tile" style="background:var(--ink-strong)"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=68" alt="Piscines à Marrakech" loading="lazy"><div class="ov"></div><div class="cap"><div style="font-weight:800;font-size:1.15rem">Marrakech</div><div class="t-sm" style="opacity:.9">96 piscines</div></div></a>
+      <a href="#" class="city-tile" style="background:var(--ink-strong)"><img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=68" alt="Piscines à Rabat" loading="lazy"><div class="ov"></div><div class="cap"><div style="font-weight:800;font-size:1.15rem">Rabat</div><div class="t-sm" style="opacity:.9">52 piscines</div></div></a>
+      <a href="#" class="city-tile" style="background:var(--ink-strong)"><img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=600&q=68" alt="Piscines à Agadir" loading="lazy"><div class="ov"></div><div class="cap"><div style="font-weight:800;font-size:1.15rem">Agadir</div><div class="t-sm" style="opacity:.9">41 piscines</div></div></a>
+      <a href="#" class="city-tile" style="background:var(--ink-strong)"><img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=68" alt="Piscines à Tanger" loading="lazy"><div class="ov"></div><div class="cap"><div style="font-weight:800;font-size:1.15rem">Tanger</div><div class="t-sm" style="opacity:.9">33 piscines</div></div></a>
+      <a href="#" class="city-tile" style="background:var(--ink-strong)"><img src="https://images.unsplash.com/photo-1502672023488-70e25813eb80?auto=format&fit=crop&w=600&q=68" alt="Piscines à Bouskoura" loading="lazy"><div class="ov"></div><div class="cap"><div style="font-weight:800;font-size:1.15rem">Bouskoura</div><div class="t-sm" style="opacity:.9">39 piscines</div></div></a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="foot">
+  <div class="wrap" style="padding-block:2.6rem">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+      <!-- brand -->
+      <div>
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg>
+          <strong style="color:#fff;font-size:1.2rem;letter-spacing:-.02em">pissina</strong>
+        </div>
+        <p class="t-body" style="margin-top:.8rem;max-width:30rem;color:rgba(255,255,255,.7)">La première marketplace marocaine de location de piscines privées entre particuliers. Réservez votre créneau, payez sur place.</p>
+        <div style="display:flex;gap:.6rem;margin-top:1.1rem">
+          <a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M14 9h3l.5-3H14V4.5c0-.9.3-1.5 1.6-1.5H17.6V.3C17.2.25 16.1.2 15 .2 12.6.2 11 1.7 11 4.2V6H8v3h3v9h3V9z"/></svg></a>
+          <a href="#" class="soc" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M16 3c.3 2.1 1.5 3.4 3.5 3.6V9c-1.3.1-2.5-.3-3.5-1v6.2c0 3.1-2.4 5.3-5.3 5.3A5.2 5.2 0 0 1 5.5 14a5.2 5.2 0 0 1 6-5.1v2.7a2.5 2.5 0 0 0-3.3 2.4c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.6V3H16z"/></svg></a>
+          <a href="#" class="soc" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zm-7.01 15.24a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 4.54 0 8.23 3.69 8.24 8.23 0 4.54-3.7 8.24-8.24 8.24z"/></svg></a>
+        </div>
+      </div>
+      <!-- découvrir -->
+      <div>
+        <div class="col-h">Découvrir</div>
+        <ul style="margin-top:.9rem;display:flex;flex-direction:column;gap:.6rem;font-size:.92rem">
+          <li><a href="#">À propos</a></li>
+          <li><a href="#how">Comment ça marche</a></li>
+          <li><a href="#">Villes</a></li>
+          <li><a href="#owner">Devenir hôte</a></li>
+        </ul>
+      </div>
+      <!-- aide -->
+      <div>
+        <div class="col-h">Aide & légal</div>
+        <ul style="margin-top:.9rem;display:flex;flex-direction:column;gap:.6rem;font-size:.92rem">
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">CGU</a></li>
+          <li><a href="#">Confidentialité</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <!-- langue -->
+      <div>
+        <div class="col-h">Langue</div>
+        <div style="margin-top:.9rem;display:inline-flex;border:1.5px solid rgba(255,255,255,.25);border-radius:999px;overflow:hidden;font-size:.82rem;font-weight:700">
+          <span style="padding:.4rem .8rem;background:var(--aqua-600);color:#fff">FR</span>
+          <span class="ar" style="padding:.4rem .8rem;color:rgba(255,255,255,.72)">العربية</span>
+        </div>
+        <div class="badge badge-cash" style="margin-top:1.1rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><circle cx="12" cy="12" r="2.5"/></svg>Paiement sur place</div>
+      </div>
+    </div>
+    <div style="margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:.6rem;justify-content:space-between;align-items:center">
+      <span class="t-sm" style="color:rgba(255,255,255,.55)">© 2026 Pissina · Tous droits réservés</span>
+      <span class="t-sm" style="color:rgba(255,255,255,.55)">Fait avec 💧 au Maroc</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ PWA INSTALL BANNER (mobile, dismissible) ═══════════════ -->
+<div class="pwa lg:hidden" id="pwaBanner" role="dialog" aria-label="Installer l'application Pissina">
+  <span style="width:42px;height:42px;border-radius:11px;flex:none;display:grid;place-items:center;background:var(--grad-fab)">
+    <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 19c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M5 23.5c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2 2.2 2 4.4 2" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-opacity=".6"/><circle cx="22.5" cy="10" r="3" fill="#FCD34D"/></svg>
+  </span>
+  <div style="flex:1;min-width:0">
+    <div style="font-weight:700;font-size:.9rem">Installez l'app Pissina</div>
+    <div class="t-sm muted">Plus rapide, même hors-ligne</div>
+  </div>
+  <button class="btn btn-primary btn-sm" data-pwa-close>Installer</button>
+  <button class="icon-btn" style="width:36px;height:36px;border:none;background:var(--sand-2)" data-pwa-close aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+</div>
+
+<!-- ═══════════════ BOTTOM TAB BAR (mobile) ═══════════════ -->
+<nav class="tabbar tabbar-fixed lg:hidden" aria-label="Navigation principale">
+  <button class="tab is-on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3 6.3-2.1Z"/></svg>Explorer</button>
+  <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>Réservations</button>
+  <button class="tab-fab" aria-label="Publier une piscine"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span>Publier</span></button>
+  <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>Messages</button>
+  <button class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profil</button>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════
+     DESIGN NOTES · S2 — Home / landing
+     ────────────────────────────────────────────────────────────────
+     • Comprendre en 3 s + chercher tout de suite : le module de recherche
+       (ville autocomplete + date + invités + Rechercher) est le héros, posé sur
+       le dégradé d'eau ; la microcopie « Paiement sur place · Vérifiés » lève le
+       frein juste sous le bouton.
+     • Confiance répétée sans saturer : bandeau 3 points, badges « Hôte fiable /
+       À l'abri des regards » sur les cartes, gains hôtes chiffrés — le tout
+       réutilise les composants S1 (.pcard, .badge, .btn) et les tokens à l'identique.
+     • Cash = argument : « Comment ça marche » se termine sur « payez sur place » ;
+       aucune mention de carte. Le créneau (pas la nuit) structure le parcours.
+     • Privacy en section dédiée, ciblée familles, avec le filtre, le badge et la
+       formule arabe « بعيد عن الأنظار » — segment clé du marché.
+     • Chrome PWA mobile : tab bar fixe 5 onglets + bannière d'installation
+       escamotable au-dessus, masquées ≥1024px où l'en-tête desktop prend le relais.
+     ════════════════════════════════════════════════════════════════ -->
+
+<script>
+/* ── delegated component interactions (from S1) ── */
+document.addEventListener('click',e=>{
+  const fav=e.target.closest('.fav'); if(fav){fav.classList.toggle('is-on');fav.setAttribute('aria-pressed',fav.classList.contains('is-on'));}
+  const chip=e.target.closest('.chip'); if(chip){chip.classList.toggle('is-on');}
+  const tab=e.target.closest('.tab'); if(tab){tab.parentNode.querySelectorAll('.tab').forEach(t=>t.classList.remove('is-on'));tab.classList.add('is-on');}
+  const step=e.target.closest('.stepper button'); if(step){const w=step.closest('.stepper');const v=w.querySelector('.val');let n=parseInt(v.textContent);n=step.dataset.dir==='up'?Math.min(25,n+1):Math.max(1,n-1);v.textContent=n;}
+});
+
+/* ── city autocomplete ── */
+const CITIES=[['Casablanca',128],['Dar Bouazza',64],['Bouskoura',39],['Marrakech',96],['Rabat',52],['Agadir',41],['Tanger',33],['Fès',21],['Mohammedia',18],['Témara',15]];
+const ci=document.getElementById('cityInput'), cl=document.getElementById('cityList'), cf=ci.closest('.field');
+const pinSVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+function renderCities(q){
+  const list=CITIES.filter(c=>c[0].toLowerCase().includes(q.toLowerCase()));
+  if(!list.length){cl.hidden=true;ci.setAttribute('aria-expanded','false');return;}
+  cl.innerHTML=list.map(c=>`<button type="button" role="option" data-city="${c[0]}"><span class="pin">${pinSVG}</span><span style="flex:1"><span style="font-weight:600;display:block">${c[0]}</span><span class="t-sm muted">${c[1]} piscines</span></span></button>`).join('');
+  cl.hidden=false; ci.setAttribute('aria-expanded','true');
+}
+ci.addEventListener('focus',()=>renderCities(ci.value));
+ci.addEventListener('input',()=>renderCities(ci.value));
+cl.addEventListener('mousedown',e=>{const b=e.target.closest('button');if(b){ci.value=b.dataset.city;cl.hidden=true;ci.setAttribute('aria-expanded','false');}});
+document.addEventListener('click',e=>{if(!cf.contains(e.target)){cl.hidden=true;ci.setAttribute('aria-expanded','false');}});
+
+/* ── PWA banner dismiss ── */
+document.addEventListener('click',e=>{ if(e.target.closest('[data-pwa-close]')){const p=document.getElementById('pwaBanner');if(p)p.classList.add('hide');} });
+</script>
+</body>
+</html>
