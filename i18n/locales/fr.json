@@ -654,5 +654,132 @@
       "step3Title": "Encaissez sur place",
       "step3Body": "Paiement en espèces, sans avance"
     }
+  },
+  "book": {
+    "seoTitle": "Demander à réserver",
+    "notFoundTitle": "Cette piscine s'est évaporée",
+    "notFoundBody": "L'annonce que vous cherchez est introuvable ou n'est plus disponible.",
+    "backToListing": "Retour à l'annonce",
+    "stepCount": "Étape {current} sur {total}",
+    "cashBanner": "💵 Paiement sur place",
+    "cashOnPlace": "Paiement en espèces sur place. Aucun paiement en ligne — vous réglez à l'arrivée, après avoir vu la piscine.",
+    "totalEstimate": "Total estimé",
+    "back": "Retour",
+    "continue": "Continuer",
+    "submit": "Envoyer la demande",
+    "step1": {
+      "title": "Date & créneau",
+      "dateLabel": "Date de la visite",
+      "slotLabel": "Créneau",
+      "noSlots": "Aucun créneau disponible pour cette piscine.",
+      "dayBlocked": "Cette date n'est pas disponible. Choisissez-en une autre.",
+      "slotTaken": "Déjà réservé",
+      "pickDate": "Choisissez d'abord une date."
+    },
+    "step2": {
+      "title": "Invités & extras",
+      "guestsLabel": "Nombre d'invités",
+      "guestsCap": "Capacité max. {count} personnes",
+      "guestsMax": "Capacité maximale atteinte pour cette piscine.",
+      "extrasLabel": "Extras (optionnels)",
+      "extrasPaid": "payés sur place",
+      "extrasNone": "Aucun extra proposé pour cette piscine.",
+      "perPerson": "/ pers",
+      "messageLabel": "Message à l'hôte",
+      "messagePlaceholder": "Présentez-vous : qui vient, à quelle occasion…",
+      "messageHint": "Un bon message augmente vos chances d'être accepté."
+    },
+    "step3": {
+      "title": "Récapitulatif",
+      "host": "Hôte : {name}",
+      "date": "Date",
+      "slot": "Créneau",
+      "guests": "Invités",
+      "guestsValue": "{count} personnes",
+      "extras": "Extras",
+      "extrasNone": "Aucun",
+      "weekendPremium": "Supplément week-end ({pct} %)",
+      "total": "Total estimé",
+      "requestNote": "Vous envoyez une demande : l'hôte doit l'accepter."
+    },
+    "success": {
+      "title": "Demande envoyée !",
+      "body": "L'hôte a 24 h pour répondre — souvent en moins d'une heure. On vous prévient dès qu'il y a du nouveau.",
+      "lockedTitle": "Le contact de l'hôte se débloque après acceptation.",
+      "lockedBody": "En attendant, retrouvez votre demande dans « Mes réservations ».",
+      "viewBookings": "Voir mes réservations",
+      "viewListing": "Revoir l'annonce"
+    },
+    "errors": {
+      "capacity": "Le nombre d'invités dépasse la capacité de la piscine.",
+      "ownPool": "Vous ne pouvez pas réserver votre propre piscine.",
+      "pastDate": "La date doit être aujourd'hui ou plus tard.",
+      "tooManyPending": "Vous avez trop de demandes en attente (5 maximum). Patientez une réponse avant d'en envoyer une autre.",
+      "duplicate": "Vous avez déjà une demande en attente pour ce créneau.",
+      "notAvailable": "Ce créneau vient d'être réservé. Choisissez un autre créneau ou une autre date.",
+      "notAuthenticated": "Connectez-vous pour envoyer votre demande.",
+      "generic": "Une erreur est survenue. Réessayez."
+    }
+  },
+  "bookings": {
+    "seoTitle": "Mes réservations",
+    "title": "Mes réservations",
+    "tabs": {
+      "pending": "En attente",
+      "accepted": "Acceptées",
+      "past": "Refusées / Annulées"
+    },
+    "status": {
+      "pending": "En attente",
+      "accepted": "Acceptée",
+      "declined": "Refusée",
+      "expired": "Expirée",
+      "cancelled_by_renter": "Annulée"
+    },
+    "guests": "{count} invités",
+    "totalOnPlace": "{total} · sur place",
+    "untitled": "Piscine",
+    "pendingNote": "L'hôte n'a pas encore répondu",
+    "expiresIn": "Expire dans {time}",
+    "expired": "Demande expirée",
+    "hoursShort": "{count} h",
+    "minutesShort": "{count} min",
+    "cancel": {
+      "action": "Annuler",
+      "title": "Annuler cette réservation ?",
+      "body": "Cette action est définitive. L'hôte sera prévenu de votre annulation.",
+      "confirm": "Confirmer l'annulation",
+      "keep": "Garder",
+      "error": "L'annulation a échoué. Réessayez."
+    },
+    "reveal": {
+      "address": "Adresse exacte",
+      "addressHint": "Communiquée après acceptation par l'hôte.",
+      "openMaps": "Ouvrir dans Google Maps",
+      "call": "Appeler",
+      "whatsapp": "WhatsApp",
+      "host": "Hôte",
+      "cashReminder": "Réglez en espèces sur place.",
+      "locked": "Le contact de l'hôte se débloque ici une fois la demande acceptée.",
+      "error": "Impossible d'afficher le contact. Réessayez."
+    },
+    "declineReason": "Raison de l'hôte : « {reason} »",
+    "declinedNoReason": "L'hôte n'a pas pu accepter cette demande.",
+    "empty": {
+      "pending": {
+        "title": "Aucune demande en attente",
+        "body": "Vos demandes en attente de réponse de l'hôte apparaîtront ici."
+      },
+      "accepted": {
+        "title": "Aucune réservation à venir",
+        "body": "Trouvez la piscine parfaite pour votre prochaine sortie en famille ou entre amis."
+      },
+      "past": {
+        "title": "Aucune réservation passée",
+        "body": "Vos demandes refusées, expirées ou annulées s'afficheront ici."
+      },
+      "cta": "Explorer les piscines"
+    },
+    "error": "Impossible de charger vos réservations. Réessayez."
   }
 }
