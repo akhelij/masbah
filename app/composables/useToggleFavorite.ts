@@ -10,8 +10,9 @@
 // `never[]`. Re-type just the insert chain we use (mirrors useProfiles), so
 // the payload is checked against the real favorites shape instead.
 interface FavoriteInsert {
-  renter_id: string
   pool_id: string
+  // renter_id defaults to auth.uid() at the DB (migration 0010).
+  renter_id?: string
 }
 interface FavoritesInsertQuery {
   from(table: 'favorites'): {
@@ -50,7 +51,6 @@ export function useToggleFavorite() {
           .from('favorites')
           .delete()
           .eq('pool_id', poolId)
-          .eq('renter_id', user.value.id)
         if (delErr) {
           error.value = delErr.message
           return null
@@ -59,7 +59,7 @@ export function useToggleFavorite() {
       } else {
         const { error: insErr } = await supabaseInsert
           .from('favorites')
-          .insert({ pool_id: poolId, renter_id: user.value.id })
+          .insert({ pool_id: poolId })
         // Ignore duplicate-key (already favorited) as a success.
         if (insErr && !/duplicate key|conflict/i.test(insErr.message)) {
           error.value = insErr.message
