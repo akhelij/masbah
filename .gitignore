@@ -1,0 +1,24 @@
+# Nuxt
+.nuxt
+.nitro
+.cache
+.output
+dist
+
+# Node
+node_modules
+*.log*
+
+# Env (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Misc
+.DS_Store
+.vercel
+.data
+logs
+
+# Local tooling (machine-specific)
+.claude/
