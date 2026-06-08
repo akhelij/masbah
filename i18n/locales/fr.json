@@ -781,5 +781,115 @@
       "cta": "Explorer les piscines"
     },
     "error": "Impossible de charger vos réservations. Réessayez."
+  },
+  "demandes": {
+    "seoTitle": "Demandes reçues",
+    "title": "Demandes de réservation",
+    "subtitle": "Vous avez {count} demande(s) à traiter.",
+    "subtitleEmpty": "Aucune demande en attente pour le moment.",
+    "contactRevealNote": "Le locataire débloque votre contact et l'adresse exacte après votre acceptation.",
+    "tabs": {
+      "pending": "À traiter",
+      "handled": "Traitées"
+    },
+    "status": {
+      "pending": "En attente",
+      "accepted": "Acceptée",
+      "declined": "Refusée",
+      "expired": "Expirée",
+      "cancelled_by_renter": "Annulée par le locataire"
+    },
+    "guests": "{count} invités",
+    "extrasCount": "{count} extra(s)",
+    "totalOnPlace": "Total · sur place",
+    "untitledPool": "Piscine",
+    "unknownRenter": "Locataire",
+    "phoneVerified": "Téléphone vérifié",
+    "phoneUnverified": "Téléphone non vérifié",
+    "acceptedNote": "Le locataire a été prévenu et a accès à votre contact.",
+    "expiredNote": "Cette demande a expiré faute de réponse à temps.",
+    "cancelledNote": "Le locataire a annulé cette demande.",
+    "declineReason": "Motif communiqué : « {reason} »",
+    "declinedNoReason": "Vous avez refusé cette demande.",
+    "accept": {
+      "action": "Accepter",
+      "autoDeclineHint": "Accepter refusera automatiquement les autres demandes en conflit sur ce créneau."
+    },
+    "decline": {
+      "action": "Refuser",
+      "title": "Refuser cette demande ?",
+      "body": "Indiquer un motif aide le locataire. Il reste courtois et privé.",
+      "reasonLabel": "Motif (facultatif)",
+      "reasonPlaceholder": "Ex : déjà réservé ce jour-là",
+      "confirm": "Refuser la demande"
+    },
+    "empty": {
+      "pending": {
+        "title": "Aucune demande à traiter",
+        "body": "Les nouvelles demandes de réservation sur vos piscines apparaîtront ici."
+      },
+      "handled": {
+        "title": "Aucune demande traitée",
+        "body": "Vos demandes acceptées, refusées ou expirées s'afficheront ici."
+      },
+      "manageCta": "Gérer mes annonces"
+    },
+    "errors": {
+      "notAuthorized": "Vous n'êtes pas autorisé à répondre à cette demande.",
+      "notPending": "Cette demande a déjà été traitée.",
+      "notFound": "Cette demande est introuvable.",
+      "generic": "L'opération a échoué. Réessayez."
+    },
+    "error": "Impossible de charger vos demandes. Réessayez."
+  },
+  "notifications": {
+    "seoTitle": "Notifications",
+    "title": "Notifications",
+    "markAll": "Tout marquer comme lu",
+    "bell": "Notifications",
+    "bellWithCount": "Notifications, {count} non lues",
+    "thePool": "votre piscine",
+    "groups": {
+      "unread": "Non lues",
+      "read": "Plus anciennes"
+    },
+    "types": {
+      "new_request": {
+        "title": "Nouvelle demande de réservation",
+        "body": "Une nouvelle demande pour « {pool} » — {date} · {slot}."
+      },
+      "request_accepted": {
+        "title": "Demande acceptée 🎉",
+        "body": "Votre demande pour « {pool} » a été acceptée — {date}. Paiement en espèces sur place."
+      },
+      "request_declined": {
+        "title": "Demande refusée",
+        "body": "Votre demande pour « {pool} » ({date}) n'a pas pu être acceptée.",
+        "bodyReason": "Votre demande pour « {pool} » ({date}) a été refusée : « {reason} »."
+      },
+      "request_expired": {
+        "title": "Demande expirée",
+        "body": "Votre demande pour « {pool} » ({date}) a expiré — l'hôte n'a pas répondu à temps."
+      },
+      "visit_reminder": {
+        "title": "Votre visite, c'est bientôt ⏰",
+        "body": "Rappel : « {pool} » — {date}. Pensez à préparer votre venue."
+      },
+      "new_review": {
+        "title": "Nouvel avis reçu",
+        "body": "Vous avez reçu un nouvel avis sur « {pool} »."
+      },
+      "system": {
+        "title": "Information",
+        "body": "Vous avez une nouvelle notification.",
+        "bookingCancelled": "Le locataire a annulé sa réservation pour « {pool} » ({date})."
+      }
+    },
+    "empty": {
+      "title": "Vous êtes à jour ✓",
+      "body": "Aucune nouvelle notification. Les demandes, confirmations et rappels apparaîtront ici.",
+      "cta": "Explorer les piscines"
+    },
+    "error": "Impossible de charger vos notifications. Réessayez."
   }
 }

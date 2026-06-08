@@ -66,7 +66,8 @@ watch(
   { immediate: true }
 )
 const selectedSlotRow = computed(
-  () => detail.value?.slots.find((s) => s.slot === selectedSlot.value) ?? detail.value?.slots[0] ?? null
+  () =>
+    detail.value?.slots.find((s) => s.slot === selectedSlot.value) ?? detail.value?.slots[0] ?? null
 )
 const selectedPrice = computed(
   () => selectedSlotRow.value?.price_mad ?? detail.value?.priceFrom ?? null
@@ -95,10 +96,26 @@ const rulesList = computed<RuleItem[]>(() => {
   const r: PoolRules | undefined = detail.value?.pool.rules
   if (!r) return []
   return [
-    { key: 'kids', allowed: r.kids_allowed, label: r.kids_allowed ? t('pool.rules.kidsYes') : t('pool.rules.kidsNo') },
-    { key: 'music', allowed: r.music_allowed, label: r.music_allowed ? t('pool.rules.musicYes') : t('pool.rules.musicNo') },
-    { key: 'events', allowed: r.events_allowed, label: r.events_allowed ? t('pool.rules.eventsYes') : t('pool.rules.eventsNo') },
-    { key: 'pets', allowed: r.pets_allowed, label: r.pets_allowed ? t('pool.rules.petsYes') : t('pool.rules.petsNo') },
+    {
+      key: 'kids',
+      allowed: r.kids_allowed,
+      label: r.kids_allowed ? t('pool.rules.kidsYes') : t('pool.rules.kidsNo'),
+    },
+    {
+      key: 'music',
+      allowed: r.music_allowed,
+      label: r.music_allowed ? t('pool.rules.musicYes') : t('pool.rules.musicNo'),
+    },
+    {
+      key: 'events',
+      allowed: r.events_allowed,
+      label: r.events_allowed ? t('pool.rules.eventsYes') : t('pool.rules.eventsNo'),
+    },
+    {
+      key: 'pets',
+      allowed: r.pets_allowed,
+      label: r.pets_allowed ? t('pool.rules.petsYes') : t('pool.rules.petsNo'),
+    },
   ]
 })
 const quietHours = computed(() => detail.value?.pool.rules?.quiet_hours ?? null)
@@ -113,17 +130,31 @@ const facts = computed<Fact[]>(() => {
   const p = detail.value?.pool
   if (!p) return []
   const out: Fact[] = [
-    { ic: '👥', v: t('pool.facts.guests', { count: p.max_guests }), l: t('pool.facts.guestsLabel') },
+    {
+      ic: '👥',
+      v: t('pool.facts.guests', { count: p.max_guests }),
+      l: t('pool.facts.guestsLabel'),
+    },
   ]
   if (p.length_m && p.width_m) {
-    out.push({ ic: '📏', v: t('pool.facts.size', { l: p.length_m, w: p.width_m }), l: t('pool.facts.sizeLabel') })
+    out.push({
+      ic: '📏',
+      v: t('pool.facts.size', { l: p.length_m, w: p.width_m }),
+      l: t('pool.facts.sizeLabel'),
+    })
   }
   if (p.depth_min != null && p.depth_max != null) {
-    out.push({ ic: '🌊', v: t('pool.facts.depth', { min: p.depth_min, max: p.depth_max }), l: t('pool.facts.depthLabel') })
+    out.push({
+      ic: '🌊',
+      v: t('pool.facts.depth', { min: p.depth_min, max: p.depth_max }),
+      l: t('pool.facts.depthLabel'),
+    })
   }
   if (p.heated) out.push({ ic: '🌡️', v: t('pool.facts.heated'), l: t('pool.facts.heatedLabel') })
-  else if (p.covered) out.push({ ic: '⛱️', v: t('pool.facts.covered'), l: t('pool.facts.coveredLabel') })
-  else if (p.child_safe) out.push({ ic: '🛟', v: t('pool.facts.childSafe'), l: t('pool.facts.childSafeLabel') })
+  else if (p.covered)
+    out.push({ ic: '⛱️', v: t('pool.facts.covered'), l: t('pool.facts.coveredLabel') })
+  else if (p.child_safe)
+    out.push({ ic: '🛟', v: t('pool.facts.childSafe'), l: t('pool.facts.childSafeLabel') })
   return out.slice(0, 4)
 })
 
@@ -352,7 +383,10 @@ useHead(() => ({
           <div class="skel" style="height: 28px; width: 70%; margin-top: 1.2rem" />
           <div class="skel" style="height: 14px; width: 45%; margin-top: 0.7rem" />
           <div class="skel sk-owner" />
-          <div class="skel" style="height: 200px; margin-top: 1.2rem; border-radius: var(--r-2xl)" />
+          <div
+            class="skel"
+            style="height: 200px; margin-top: 1.2rem; border-radius: var(--r-2xl)"
+          />
         </div>
         <div class="skel sk-book hidden lg:block" />
       </div>
@@ -486,7 +520,9 @@ useHead(() => ({
               <span class="avatar owner-avatar">{{ ownerInitials }}</span>
               <div style="flex: 1; min-width: 0">
                 <div class="owner-name-row">
-                  <strong class="owner-name">{{ detail.owner?.full_name || t('pool.owner.title') }}</strong>
+                  <strong class="owner-name">{{
+                    detail.owner?.full_name || t('pool.owner.title')
+                  }}</strong>
                   <span v-if="detail.owner?.phone_verified" class="badge badge-phone">
                     <svg
                       viewBox="0 0 24 24"
@@ -511,7 +547,12 @@ useHead(() => ({
             <template v-if="detail.pool.direct_contact_enabled">
               <p class="t-sm muted owner-reassure">{{ t('pool.owner.reassure') }}</p>
               <div class="owner-actions">
-                <button class="btn btn-secondary" type="button" :disabled="contactPending" @click="onCall">
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  :disabled="contactPending"
+                  @click="onCall"
+                >
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -539,7 +580,9 @@ useHead(() => ({
                   {{ t('pool.owner.whatsapp') }}
                 </PButton>
               </div>
-              <p v-if="contactError" class="hint-err" style="margin-top: 0.5rem">{{ contactError }}</p>
+              <p v-if="contactError" class="hint-err" style="margin-top: 0.5rem">
+                {{ contactError }}
+              </p>
             </template>
 
             <div v-else class="owner-locked">
@@ -557,7 +600,9 @@ useHead(() => ({
               </svg>
               <div>
                 <strong class="t-sm">{{ t('pool.owner.lockedTitle') }}</strong>
-                <p class="t-sm muted" style="margin-top: 0.2rem">{{ t('pool.owner.lockedBody') }}</p>
+                <p class="t-sm muted" style="margin-top: 0.2rem">
+                  {{ t('pool.owner.lockedBody') }}
+                </p>
               </div>
             </div>
           </div>
@@ -609,7 +654,8 @@ useHead(() => ({
                 <div v-for="(a, i) in paidExtras" :key="i" class="extra">
                   <span>{{ amenityLabel(a.label_fr, a.label_ar) }}</span>
                   <span class="price-tag">
-                    +{{ formatMad(a.price, locale) }}<template v-if="a.per_person"> {{ t('common.perPerson') }}</template>
+                    +{{ formatMad(a.price, locale)
+                    }}<template v-if="a.per_person"> {{ t('common.perPerson') }}</template>
                   </span>
                 </div>
               </div>
@@ -620,7 +666,12 @@ useHead(() => ({
           <div v-if="rulesList.length" class="sec">
             <h2>{{ t('pool.rules.title') }}</h2>
             <div class="rules-grid">
-              <div v-for="r in rulesList" :key="r.key" class="rule" :class="{ 'rule-no': !r.allowed }">
+              <div
+                v-for="r in rulesList"
+                :key="r.key"
+                class="rule"
+                :class="{ 'rule-no': !r.allowed }"
+              >
                 <span :class="r.allowed ? 'rule-yes' : 'rule-no-ic'">
                   <svg
                     v-if="r.allowed"
@@ -743,7 +794,12 @@ useHead(() => ({
                 />
               </svg>
               <span v-if="detail.rating != null">
-                {{ t('pool.reviews_section.summary', { rating: detail.rating.toLocaleString(locale), count: detail.reviewCount }) }}
+                {{
+                  t('pool.reviews_section.summary', {
+                    rating: detail.rating.toLocaleString(locale),
+                    count: detail.reviewCount,
+                  })
+                }}
               </span>
               <span v-else>{{ t('pool.reviews_section.title') }}</span>
             </h2>
@@ -755,28 +811,39 @@ useHead(() => ({
                   <span class="rev-track">
                     <span class="rev-fill" :style="{ width: `${((c.avg ?? 0) / 5) * 100}%` }" />
                   </span>
-                  <span class="rev-vv">{{ (c.avg ?? 0).toLocaleString(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) }}</span>
+                  <span class="rev-vv">{{
+                    (c.avg ?? 0).toLocaleString(locale, {
+                      minimumFractionDigits: 1,
+                      maximumFractionDigits: 1,
+                    })
+                  }}</span>
                 </div>
               </div>
 
               <div class="rev-cards">
                 <div v-for="rev in detail.reviews" :key="rev.id" class="rev-card">
                   <div class="rev-author">
-                    <span class="avatar rev-avatar">{{ reviewInitials(rev.author?.full_name) }}</span>
+                    <span class="avatar rev-avatar">{{
+                      reviewInitials(rev.author?.full_name)
+                    }}</span>
                     <div>
                       <strong class="rev-author-name">{{ rev.author?.full_name || '—' }}</strong>
                       <div class="t-sm muted">{{ reviewDate(rev.created_at) }}</div>
                     </div>
                   </div>
                   <PRating :rating="rev.rating" size="sm" style="margin-top: 0.5rem" />
-                  <p v-if="rev.comment" class="t-body" style="margin-top: 0.5rem">{{ rev.comment }}</p>
+                  <p v-if="rev.comment" class="t-body" style="margin-top: 0.5rem">
+                    {{ rev.comment }}
+                  </p>
                 </div>
               </div>
             </template>
 
             <div v-else class="reviews-empty">
               <strong>{{ t('pool.reviews_section.empty') }}</strong>
-              <p class="t-sm muted" style="margin-top: 0.3rem">{{ t('pool.reviews_section.emptyBody') }}</p>
+              <p class="t-sm muted" style="margin-top: 0.3rem">
+                {{ t('pool.reviews_section.emptyBody') }}
+              </p>
             </div>
           </div>
         </div>

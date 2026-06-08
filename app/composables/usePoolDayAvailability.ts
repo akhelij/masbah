@@ -7,34 +7,44 @@ export interface DayAvailability {
   /** Slot keys blocked via blocked_dates for this date. */
   blockedSlots: SlotKey[]
   /**
-   * Slot keys occupied by the signed-in user's OR the owner's accepted
-   * bookings (booking RLS only exposes those). Other renters' accepted
-   * bookings are invisible here — the insert trigger is the source of truth.
+   * Slot keys occupied by ANY accepted booking on this date (sourced from the
+   * pool_day_availability SECURITY DEFINER RPC, which sees across renters
+   * without exposing their identities). accept_booking also rejects accepting a
+   * conflicting slot, so this stays authoritative.
    */
   acceptedSlots: SlotKey[]
 }
 
-interface BlockedRow {
-  slot: SlotKey | null
+interface AvailabilityRpcRow {
+  day_blocked: boolean
+  blocked_slots: SlotKey[] | null
+  accepted_slots: SlotKey[] | null
 }
-interface AcceptedRow {
-  slot: SlotKey
-}
+// The generated Database type is a placeholder, so `supabase.rpc(...)` resolves
+// to an `undefined`-args signature. Re-type just the one RPC we call (mirrors
+// useCancelBooking).
+type AvailabilityRpc = (
+  // eslint-disable-next-line no-unused-vars
+  fn: 'pool_day_availability',
+  // eslint-disable-next-line no-unused-vars
+  args: { p_pool_id: string; p_date: string }
+) => Promise<{ data: AvailabilityRpcRow[] | null; error: { message: string } | null }>
 
 /**
- * Fetch the availability signals for one pool on one date:
- *   • blocked_dates (publicly readable) → greyed-out slots,
- *   • accepted booking_requests visible under RLS (renter's own / owner's).
+ * Fetch the availability signals for one pool on one date via the
+ * `pool_day_availability` RPC: whole-day block, blocked slots, and slots taken
+ * by ANY accepted booking (cross-renter, identities not exposed).
  *
- * Kept intentionally simple: the page greys out blocked/known-taken slots, but
- * the server trigger remains authoritative on submit (it rejects conflicts the
- * client can't see). `date` may be a ref/getter so it re-fetches on change.
+ * The page greys out blocked/taken slots; accept_booking stays authoritative on
+ * the owner side (it refuses to accept an already-taken slot). `date` may be a
+ * ref/getter so it re-fetches on change.
  */
 export function usePoolDayAvailability(
   poolId: MaybeRefOrGetter<string>,
   date: MaybeRefOrGetter<string | null | undefined>
 ) {
   const supabase = useSupabaseClient()
+  const callAvailability = supabase.rpc.bind(supabase) as unknown as AvailabilityRpc
 
   const pid = computed(() => toValue(poolId))
   const day = computed(() => toValue(date) ?? null)
@@ -45,31 +55,22 @@ export function usePoolDayAvailability(
       const empty: DayAvailability = { dayBlocked: false, blockedSlots: [], acceptedSlots: [] }
       if (!pid.value || !day.value) return empty
 
-      const [blockedRes, acceptedRes] = await Promise.all([
-        supabase
-          .from('blocked_dates')
-          .select('slot')
-          .eq('pool_id', pid.value)
-          .eq('date', day.value),
-        // RLS-scoped: returns only rows the caller may see (own renter rows or
-        // owned-pool rows). No renter_id filter (the user ref id is unreliable).
-        supabase
-          .from('booking_requests')
-          .select('slot')
-          .eq('pool_id', pid.value)
-          .eq('date', day.value)
-          .eq('status', 'accepted'),
-      ])
-      if (blockedRes.error) throw blockedRes.error
-      if (acceptedRes.error) throw acceptedRes.error
+      // SECURITY DEFINER RPC (migration 0013): returns the blocked + accepted
+      // slots for this pool/date WITHOUT leaking who booked them. Reading the
+      // base table directly under RLS would hide OTHER renters' accepted
+      // bookings, under-reporting taken slots to a browsing renter.
+      const { data: rows, error: rpcErr } = await callAvailability('pool_day_availability', {
+        p_pool_id: pid.value,
+        p_date: day.value,
+      })
+      if (rpcErr) throw rpcErr
 
-      const blocked = (blockedRes.data ?? []) as unknown as BlockedRow[]
-      const accepted = (acceptedRes.data ?? []) as unknown as AcceptedRow[]
-
+      const row = rows?.[0]
+      if (!row) return empty
       return {
-        dayBlocked: blocked.some((b) => b.slot === null),
-        blockedSlots: blocked.filter((b): b is { slot: SlotKey } => b.slot !== null).map((b) => b.slot),
-        acceptedSlots: accepted.map((a) => a.slot),
+        dayBlocked: !!row.day_blocked,
+        blockedSlots: row.blocked_slots ?? [],
+        acceptedSlots: row.accepted_slots ?? [],
       }
     },
     { watch: [pid, day] }

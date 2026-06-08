@@ -8,6 +8,19 @@ const { signOut } = useAuthForm()
 
 const city = ref('')
 
+// Live unread notification count for the bell badge (signed-in only). subscribe()
+// opens the realtime channel so the badge updates without a refresh.
+const { unreadCount, subscribe, unsubscribe } = useNotifications()
+onMounted(() => {
+  if (user.value) subscribe()
+})
+// Open the channel as soon as the user signs in (and close it on sign-out).
+watch(user, (u) => {
+  if (u) subscribe()
+  else unsubscribe()
+})
+onBeforeUnmount(unsubscribe)
+
 function search(): void {
   const q = city.value.trim()
   router.push(localePath(q ? `/search?city=${encodeURIComponent(q)}` : '/search'))
@@ -76,7 +89,7 @@ async function onSignOut(): Promise<void> {
           type="search"
           :placeholder="t('home.searchPlaceholder')"
           :aria-label="t('home.searchPlaceholder')"
-        >
+        />
         <button class="btn btn-primary btn-sm search-btn" type="submit">
           {{ t('common.search') }}
         </button>
@@ -98,6 +111,34 @@ async function onSignOut(): Promise<void> {
         </NuxtLink>
         <div class="hidden md:flex"><LanguageSwitcher /></div>
         <div class="flex md:hidden"><LanguageSwitcher compact /></div>
+
+        <!-- Notification bell (signed in) -->
+        <NuxtLink
+          v-if="user"
+          :to="localePath('/notifications')"
+          class="icon-btn bell"
+          :aria-label="
+            unreadCount
+              ? t('notifications.bellWithCount', { count: unreadCount })
+              : t('notifications.bell')
+          "
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+          </svg>
+          <span v-if="unreadCount" class="bell-badge">{{
+            unreadCount > 99 ? '99+' : unreadCount
+          }}</span>
+        </NuxtLink>
 
         <!-- Signed out: sign-in CTA -->
         <NuxtLink
@@ -167,7 +208,7 @@ async function onSignOut(): Promise<void> {
               </svg>
               {{ t('auth.menu.verifyPhone') }}
             </NuxtLink>
-            <hr class="menu-sep" >
+            <hr class="menu-sep" />
             <button type="button" class="menu-item menu-signout" role="menuitem" @click="onSignOut">
               <svg
                 viewBox="0 0 24 24"
@@ -208,7 +249,7 @@ async function onSignOut(): Promise<void> {
           type="search"
           :placeholder="t('home.searchPlaceholder')"
           :aria-label="t('home.searchPlaceholder')"
-        >
+        />
         <button
           class="btn btn-primary btn-sm search-btn"
           type="submit"
@@ -309,6 +350,35 @@ async function onSignOut(): Promise<void> {
 }
 .signin-link {
   flex: none;
+}
+
+/* notification bell */
+.bell {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  flex: none;
+}
+.bell svg {
+  width: 19px;
+  height: 19px;
+}
+.bell-badge {
+  position: absolute;
+  top: -3px;
+  inset-inline-end: -3px;
+  min-width: 17px;
+  height: 17px;
+  padding-inline: 0.25rem;
+  border-radius: 99px;
+  background: var(--coral-deep);
+  color: #fff;
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
 }
 
 /* account dropdown */

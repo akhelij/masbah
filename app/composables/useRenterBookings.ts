@@ -2,12 +2,7 @@ import type { BookingExtra } from '~/composables/useCreateBooking'
 import type { City, PoolPhoto, SlotKey } from '~/types/db'
 
 /** A renter's booking_requests status (enum `booking_status`). */
-export type BookingStatus =
-  | 'pending'
-  | 'accepted'
-  | 'declined'
-  | 'expired'
-  | 'cancelled_by_renter'
+export type BookingStatus = 'pending' | 'accepted' | 'declined' | 'expired' | 'cancelled_by_renter'
 
 /** Base-table row we read for the signed-in renter (RLS-scoped to renter_id). */
 interface BookingRow {
@@ -63,11 +58,12 @@ export interface RenterBookingItem {
 /**
  * The signed-in renter's booking requests across every status, newest first.
  *
- * RLS scopes `booking_requests` SELECT to `renter_id = auth.uid()`, so we never
- * filter by renter_id (the user ref's id is unreliable in this context — see
- * useOwnerPools / useToggleFavorite). Each row is hydrated with its pool's
- * title, cover photo and city name via the public projection. Returns an empty
- * list when logged out. Keyed on logged-in presence + locale (like useOwnerPools).
+ * NOTE: `booking_requests` is readable under two RLS policies (renter OR
+ * pool-owner), so we MUST filter by renter_id to keep owner-received requests
+ * out of this renter view. The user ref's id is unreliable here, so we resolve
+ * the caller's id from `profiles` (own-row RLS). Each row is hydrated with its
+ * pool's title, cover photo and city name via the public projection. Returns an
+ * empty list when logged out. Keyed on logged-in presence + locale.
  */
 export function useRenterBookings() {
   const supabase = useSupabaseClient()
@@ -81,13 +77,26 @@ export function useRenterBookings() {
     async () => {
       if (!user.value) return []
 
-      // RLS restricts `booking_requests` SELECT to the renter's own rows, so no
-      // explicit renter_id filter is needed (and the user ref's id is flaky).
+      // `booking_requests` has TWO RLS SELECT policies — renter_id = auth.uid()
+      // OR the caller owns the pool — so RLS scoping alone would ALSO surface
+      // requests *received* on pools this user owns (the owner inbox lives in
+      // useOwnerRequests). Scope this renter view explicitly to the caller's
+      // own id. The user ref's id is unreliable here, so resolve it from
+      // `profiles` (own-row RLS → exactly the caller's row).
+      const { data: meRow, error: meErr } = await supabase
+        .from('profiles')
+        .select('id')
+        .maybeSingle()
+      if (meErr) throw meErr
+      const myId = (meRow as unknown as { id: string } | null)?.id
+      if (!myId) return []
+
       const { data: bookingsData, error: bookingsErr } = await supabase
         .from('booking_requests')
         .select(
           'id, pool_id, date, slot, guests, extras, message, total_estimate_mad, status, decline_reason, responded_at, expires_at, created_at'
         )
+        .eq('renter_id', myId)
         .order('created_at', { ascending: false })
       if (bookingsErr) throw bookingsErr
       const bookings = (bookingsData ?? []) as unknown as BookingRow[]
