@@ -23,6 +23,10 @@ export default defineNuxtConfig({
     strict: true,
   },
 
+  // Resolve components by filename regardless of subfolder, so <PButton>,
+  // <PHeader>, <PoolCard> work from components/ui|layout|pool/*.
+  components: [{ path: '~/components', pathPrefix: false }],
+
   tailwindcss: {
     cssPath: '~/assets/css/main.css',
   },
@@ -44,7 +48,7 @@ export default defineNuxtConfig({
     langDir: 'locales',
     detectBrowserLanguage: {
       useCookie: true,
-      cookieKey: 'pissina_lang',
+      cookieKey: 'masbah_lang',
       redirectOn: 'root',
       alwaysRedirect: false,
     },
@@ -63,14 +67,20 @@ export default defineNuxtConfig({
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
-      name: 'Pissina — Location de piscines au Maroc',
-      short_name: 'Pissina',
+      name: 'Masbah — Location de piscines au Maroc',
+      short_name: 'Masbah',
       description: 'Louez une piscine près de chez vous. Paiement sur place.',
       lang: 'fr',
       theme_color: '#0E7490',
       background_color: '#FAFAF7',
       display: 'standalone',
       start_url: '/',
+      icons: [
+        { src: '/pwa-64x64.png', sizes: '64x64', type: 'image/png' },
+        { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
+        { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+        { src: '/maskable-icon-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      ],
     },
     workbox: {
       navigateFallback: undefined,
@@ -93,6 +103,10 @@ export default defineNuxtConfig({
       meta: [
         { name: 'theme-color', content: '#0E7490' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
+      ],
+      link: [
+        { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
       ],
     },
   },

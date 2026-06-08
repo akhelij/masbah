@@ -4,7 +4,9 @@
     "bookings": "Réservations",
     "publish": "Publier",
     "messages": "Messages",
-    "profile": "Profil"
+    "profile": "Profil",
+    "home": "Accueil",
+    "primary": "Navigation principale"
   },
   "common": {
     "search": "Rechercher",
@@ -12,11 +14,77 @@
     "book": "Réserver",
     "perSlot": "/ créneau",
     "from": "à partir de",
-    "currency": "DH"
+    "currency": "DH",
+    "priceFmt": "{n} DH",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer"
   },
   "home": {
     "title": "Louez une piscine près de chez vous",
     "subtitle": "La première marketplace marocaine de location de piscines entre particuliers. Réservez un créneau, payez en espèces sur place.",
     "searchPlaceholder": "Ville ou quartier"
+  },
+  "pool": {
+    "sheltered": "À l'abri des regards",
+    "reliableHost": "Hôte fiable",
+    "favorite": "Ajouter aux favoris",
+    "unfavorite": "Retirer des favoris",
+    "reviews": "{count} avis"
+  },
+  "slots": {
+    "morning": "Matinée",
+    "afternoon": "Après-midi",
+    "fullDay": "Journée",
+    "evening": "Soirée"
+  },
+  "lang": {
+    "switch": "Changer de langue"
+  },
+  "footer": {
+    "tagline": "La marketplace marocaine de location de piscines entre particuliers.",
+    "links": "Liens utiles",
+    "howItWorks": "Comment ça marche",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d'utilisation",
+    "cashReminder": "Paiement en espèces sur place."
+  },
+  "error": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundBody": "La page que vous cherchez est introuvable — peut-être vidée pour l'hiver. Pas de panique, l'eau est plus claire ailleurs.",
+    "genericTitle": "Une vague nous a submergés",
+    "genericBody": "Quelque chose s'est mal passé de notre côté. Réessayez dans un instant.",
+    "tag404": "Erreur 404",
+    "tagGeneric": "Erreur",
+    "backHome": "Retour à l'accueil",
+    "illustrationAlt": "Illustration d'une piscine vidée"
+  },
+  "dev": {
+    "title": "Système de design — Playground",
+    "subtitle": "Tous les composants de Masbah, leurs variantes et états, en un seul endroit.",
+    "colors": "Couleurs",
+    "typography": "Typographie",
+    "buttons": "Boutons",
+    "iconButtons": "Boutons icône",
+    "inputs": "Champs de saisie",
+    "select": "Liste déroulante",
+    "counter": "Compteur",
+    "chips": "Chips",
+    "checkbox": "Cases à cocher",
+    "toggle": "Interrupteurs",
+    "badges": "Badges",
+    "skeletons": "Squelettes",
+    "rating": "Note & étoiles",
+    "slotPicker": "Sélecteur de créneau",
+    "datePicker": "Sélecteur de date",
+    "poolCard": "Carte piscine",
+    "overlays": "Modale & feuille",
+    "navigation": "Navigation",
+    "openModal": "Ouvrir la modale",
+    "openSheet": "Ouvrir la feuille",
+    "modalDemoTitle": "Confirmer la réservation",
+    "modalDemoBody": "Vous réglez en espèces sur place après avoir vu la piscine. Aucun paiement en ligne n'est requis.",
+    "sheetDemoTitle": "Filtres",
+    "sheetDemoBody": "Affinez votre recherche par équipements, créneau et prix."
   }
 }

@@ -25,7 +25,7 @@ useSeoMeta({
         "
       />
       <div class="wrap" style="padding-block: clamp(2.75rem, 7vw, 5rem)">
-        <p class="t-over rise" style="color: rgba(255, 255, 255, 0.85)">Pissina · v2</p>
+        <p class="t-over rise" style="color: rgba(255, 255, 255, 0.85)">Masbah · v2</p>
         <h1
           class="t-display rise"
           style="max-width: 18ch; margin-top: 0.6rem; animation-delay: 0.06s"

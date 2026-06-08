@@ -36,7 +36,7 @@ const fieldId = computed(() => props.id ?? generatedId)
       :inputmode="inputmode"
       :aria-invalid="error ? 'true' : undefined"
       :aria-describedby="error || hint ? `${fieldId}-desc` : undefined"
-    />
+    >
     <span v-if="error" :id="`${fieldId}-desc`" class="hint-err">
       <svg
         viewBox="0 0 24 24"

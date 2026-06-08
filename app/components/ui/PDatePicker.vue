@@ -49,7 +49,7 @@ function onChange(e: Event): void {
       :aria-invalid="error ? 'true' : undefined"
       :aria-describedby="error || hint ? `${fieldId}-desc` : undefined"
       @change="onChange"
-    />
+    >
     <span v-if="error" :id="`${fieldId}-desc`" class="hint-err">
       <svg
         viewBox="0 0 24 24"
