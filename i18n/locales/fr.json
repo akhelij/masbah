@@ -3,7 +3,7 @@
     "explore": "Explorer",
     "bookings": "Réservations",
     "publish": "Publier",
-    "messages": "Messages",
+    "favorites": "Favoris",
     "profile": "Profil",
     "home": "Accueil",
     "primary": "Navigation principale"
@@ -263,6 +263,7 @@
     "menu": {
       "profile": "Mon profil",
       "bookings": "Mes réservations",
+      "settings": "Mon compte",
       "verifyPhone": "Vérifier mon téléphone",
       "signOut": "Se déconnecter"
     },
@@ -975,5 +976,155 @@
     "notFoundTitle": "Profil introuvable",
     "notFoundBody": "Ce membre n’existe pas ou n’est plus disponible.",
     "backHome": "Retour à l’accueil"
+  },
+  "favorites": {
+    "seoTitle": "Mes favoris",
+    "title": "Mes favoris",
+    "subtitle": "Les piscines que vous avez enregistrées.",
+    "count": "{n} piscine(s) enregistrée(s)",
+    "error": "Impossible de charger vos favoris. Réessayez.",
+    "empty": {
+      "title": "Aucun favori",
+      "body": "Touchez le cœur ♥ sur une annonce pour enregistrer vos piscines préférées et les retrouver ici.",
+      "cta": "Explorer les piscines"
+    }
+  },
+  "howItWorks": {
+    "seoTitle": "Comment ça marche",
+    "seoDescription": "Réservez une piscine privée au Maroc en quelques clics : cherchez, demandez un créneau, profitez et payez en espèces sur place. Aucun paiement en ligne.",
+    "hero": {
+      "over": "Simple · Sûr · Sans paiement en ligne",
+      "title": "Comment ça marche",
+      "subtitle": "Réserver une piscine privée n’a jamais été aussi simple. Vous payez en espèces, sur place, après avoir vu la piscine."
+    },
+    "steps": {
+      "over": "Côté locataire",
+      "title": "3 étapes pour plonger",
+      "step1Title": "Cherchez",
+      "step1Body": "Filtrez par ville, créneau et équipements. Comparez les photos, les prix et les avis vérifiés des autres voyageurs.",
+      "step2Title": "Demandez votre créneau",
+      "step2Body": "Choisissez matinée, après-midi, soirée ou journée, puis envoyez votre demande. Aucun paiement en ligne, aucune avance.",
+      "step3Title": "Profitez et payez sur place",
+      "step3Body": "Une fois la demande acceptée, l’adresse exacte et le téléphone de l’hôte vous sont communiqués. Le jour J, réglez en espèces à l’arrivée."
+    },
+    "owner": {
+      "over": "Côté propriétaire",
+      "title": "Mettez votre piscine à profit",
+      "step1Title": "Publiez gratuitement",
+      "step1Body": "Décrivez votre piscine en quelques minutes : photos, créneaux, prix et règles. Vous gardez le contrôle.",
+      "step2Title": "Recevez des demandes",
+      "step2Body": "Les voyageurs vous envoient des demandes avec la date, le créneau et le nombre d’invités. Consultez leur profil et leurs avis.",
+      "step3Title": "Acceptez et encaissez",
+      "step3Body": "Acceptez qui vous voulez. Le client paie en espèces sur place. Aucune commission n’est prélevée en ligne.",
+      "cta": "Publier mon annonce"
+    },
+    "trust": {
+      "over": "Confiance & sécurité",
+      "title": "La confiance au cœur de Masbah",
+      "subtitle": "Recevoir des inconnus chez soi — ou entrer chez quelqu’un — demande de la confiance. Voici comment nous la protégeons.",
+      "phoneTitle": "Téléphone vérifié",
+      "phoneBody": "Les membres confirment leur numéro par SMS. Les profils vérifiés affichent un badge ✓.",
+      "addressTitle": "Adresse approximative jusqu’à l’acceptation",
+      "addressBody": "Tant que l’hôte n’a pas accepté votre demande, seule une zone approximative est affichée sur la carte. L’adresse exacte et le téléphone ne sont débloqués qu’une fois la demande acceptée.",
+      "reviewsTitle": "Avis croisés",
+      "reviewsBody": "Après chaque visite, voyageur et propriétaire peuvent se noter mutuellement. Seules les personnes ayant réellement réservé peuvent laisser un avis.",
+      "safetyTitle": "Sécurité d’abord",
+      "safetyBody": "Profondeur, clôture, sécurité des enfants : ces informations sont mises en avant sur chaque annonce pour les familles."
+    },
+    "cash": {
+      "title": "💵 Paiement sur place — aucun paiement en ligne",
+      "body": "Sur Masbah, on ne paie jamais en ligne. Tout se règle en espèces, directement à l’hôte, le jour de la visite et après avoir vu la piscine. Pas de carte, pas d’avance, aucune commission prélevée en ligne — c’est plus simple et ça met tout le monde en confiance."
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "q1": "Comment se passe le paiement ?",
+      "a1": "Tout se règle en espèces, sur place, à votre arrivée — après avoir vu la piscine. Aucune carte ni avance n’est demandée en ligne.",
+      "q2": "Quand obtient-on l’adresse exacte ?",
+      "a2": "L’adresse exacte et le numéro de téléphone de l’hôte vous sont communiqués dès que votre demande est acceptée. Avant cela, seule une zone approximative est visible sur la carte.",
+      "q3": "Puis-je annuler ma demande ?",
+      "a3": "Oui. Comme vous ne payez rien en ligne, vous pouvez annuler depuis « Mes réservations », sans remboursement à attendre. Prévenez l’hôte le plus tôt possible.",
+      "q4": "Masbah prend-il une commission ?",
+      "a4": "Aucune commission n’est prélevée en ligne. Vous payez le prix affiché, directement à l’hôte, sur place."
+    },
+    "ctaTitle": "Prêt à plonger ?",
+    "ctaSubtitle": "Trouvez la piscine parfaite près de chez vous. Paiement sur place, sans engagement.",
+    "ctaExplore": "Explorer les piscines"
+  },
+  "legal": {
+    "lastUpdated": "Dernière mise à jour : {date}",
+    "privacy": {
+      "seoTitle": "Politique de confidentialité",
+      "title": "Politique de confidentialité",
+      "intro": "Masbah est une marketplace marocaine de location de piscines entre particuliers. Cette politique explique quelles données nous collectons, pourquoi, et comment nous les protégeons. En utilisant Masbah, vous acceptez les pratiques décrites ci-dessous.",
+      "s1Title": "1. Données que nous collectons",
+      "s1Body": "Nous collectons les informations que vous nous fournissez lors de la création de votre compte (nom, e-mail, numéro de téléphone), la publication d’une annonce (photos, description, localisation, prix, créneaux) et l’envoi d’une demande de réservation (date, créneau, nombre d’invités, message). Nous collectons aussi des données techniques de base (type d’appareil, pages consultées) pour faire fonctionner et améliorer le service.",
+      "s2Title": "2. Utilisation des données",
+      "s2Body": "Vos données servent à faire fonctionner la marketplace : afficher les annonces, mettre en relation voyageurs et propriétaires, envoyer les notifications liées à vos demandes, et assurer la confiance entre membres (vérification du téléphone, avis). Nous n’effectuons aucun paiement en ligne : aucune donnée bancaire n’est collectée par Masbah.",
+      "s3Title": "3. Localisation des piscines",
+      "s3Body": "Pour protéger la vie privée des hôtes, l’adresse exacte d’une piscine n’est jamais publique. Tant qu’une demande n’a pas été acceptée, seule une zone approximative est affichée. L’adresse exacte et le numéro de téléphone de l’hôte ne sont communiqués au voyageur qu’une fois la demande acceptée.",
+      "s4Title": "4. Partage des données",
+      "s4Body": "Nous ne vendons pas vos données personnelles. Certaines informations sont partagées entre membres dans le cadre d’une réservation (par exemple le contact de l’hôte après acceptation). Nous faisons appel à des prestataires techniques (hébergement, stockage de photos) qui traitent les données pour notre compte et sont tenus de les protéger.",
+      "s5Title": "5. Avis",
+      "s5Body": "Après une visite, voyageurs et propriétaires peuvent se laisser des avis croisés. Ces avis, ainsi que votre nom public et votre photo, sont visibles par les autres membres afin de renforcer la confiance.",
+      "s6Title": "6. Sécurité",
+      "s6Body": "Nous mettons en œuvre des moyens raisonnables pour protéger vos données. Vous êtes responsable de la confidentialité de vos identifiants de connexion. Aucun système n’étant infaillible, nous ne pouvons garantir une sécurité absolue.",
+      "s7Title": "7. Vos droits",
+      "s7Body": "Vous pouvez consulter, corriger ou supprimer vos informations personnelles depuis votre compte, ou en nous contactant. La suppression de votre compte entraîne le retrait de vos annonces et de vos données personnelles.",
+      "s8Title": "8. Modifications",
+      "s8Body": "Cette politique peut être mise à jour. La date de dernière mise à jour figure en haut de cette page. Nous vous invitons à la consulter régulièrement.",
+      "contactTitle": "Contact",
+      "contactBody": "Pour toute question sur cette politique, écrivez-nous à contact{'@'}masbah.ma."
+    },
+    "terms": {
+      "seoTitle": "Conditions d’utilisation",
+      "title": "Conditions d’utilisation",
+      "intro": "En utilisant Masbah, vous acceptez les présentes conditions. Masbah est une plateforme de mise en relation entre des propriétaires de piscines et des voyageurs au Maroc. Masbah n’est ni propriétaire des piscines, ni partie au contrat de location conclu entre les membres.",
+      "s1Title": "1. Rôle de Masbah",
+      "s1Body": "Masbah fournit uniquement la technologie permettant aux membres de se découvrir, d’échanger et de convenir d’une réservation. La location elle-même est un accord direct entre le propriétaire et le voyageur. Masbah n’intervient pas dans cet accord et ne perçoit aucune commission en ligne.",
+      "s2Title": "2. Paiement en espèces sur place",
+      "s2Body": "Aucun paiement n’est effectué en ligne. Le voyageur règle le prix convenu en espèces, directement à l’hôte, le jour de la visite. Masbah ne traite, ne détient ni ne garantit aucun paiement.",
+      "s3Title": "3. Compte et éligibilité",
+      "s3Body": "Vous devez être majeur pour utiliser Masbah et fournir des informations exactes. Vous êtes responsable de l’activité réalisée depuis votre compte et de la confidentialité de vos identifiants.",
+      "s4Title": "4. Obligations des propriétaires",
+      "s4Body": "Les propriétaires s’engagent à décrire leur piscine de façon honnête (photos, équipements, sécurité, prix, règles), à tenir à jour leurs disponibilités et à accueillir les voyageurs dans des conditions sûres et conformes à l’annonce. Ils doivent disposer du droit de mettre leur piscine à disposition.",
+      "s5Title": "5. Obligations des voyageurs",
+      "s5Body": "Les voyageurs s’engagent à respecter la piscine, les règles de l’hôte et la sécurité (notamment des enfants), à venir aux horaires convenus et à régler le montant prévu sur place. Les annulations doivent être signalées à l’hôte le plus tôt possible.",
+      "s6Title": "6. Localisation et contact",
+      "s6Body": "L’adresse exacte et le téléphone de l’hôte ne sont partagés qu’après acceptation d’une demande. Ces informations sont strictement destinées à l’organisation de la visite et ne doivent pas être diffusées.",
+      "s7Title": "7. Avis et comportement",
+      "s7Body": "Les avis doivent être honnêtes et courtois. Tout comportement abusif, frauduleux ou dangereux, ainsi que toute tentative de contourner la plateforme à des fins illicites, peut entraîner la suspension du compte.",
+      "s8Title": "8. Responsabilité",
+      "s8Body": "Masbah ne peut être tenu responsable des litiges, dommages ou pertes liés à une location entre membres, l’accord étant conclu directement entre eux. Le service est fourni « en l’état », sans garantie de disponibilité permanente.",
+      "s9Title": "9. Modifications",
+      "s9Body": "Ces conditions peuvent évoluer. La date de dernière mise à jour figure en haut de cette page. En continuant à utiliser Masbah, vous acceptez la version en vigueur.",
+      "contactTitle": "Contact",
+      "contactBody": "Pour toute question sur ces conditions, écrivez-nous à contact{'@'}masbah.ma."
+    }
+  },
+  "account": {
+    "seoTitle": "Mon compte",
+    "title": "Mon compte",
+    "loading": "Chargement…",
+    "memberSince": "Membre depuis {year}",
+    "phoneVerified": "Téléphone vérifié",
+    "phoneNotVerified": "Téléphone non vérifié",
+    "viewPublicProfile": "Voir mon profil public",
+    "verifyPhone": "Vérifier mon téléphone",
+    "verifyPhoneCta": "Vérifier",
+    "notifTitle": "Préférences de notification",
+    "notifSubtitle": "Choisissez les notifications que vous souhaitez recevoir.",
+    "notif": {
+      "newRequest": "Nouvelle demande de réservation",
+      "newRequestHint": "Quand un voyageur demande l’un de vos créneaux.",
+      "requestAccepted": "Demande acceptée",
+      "requestAcceptedHint": "Quand un hôte accepte votre demande.",
+      "requestDeclined": "Demande refusée",
+      "requestDeclinedHint": "Quand un hôte refuse votre demande.",
+      "newReview": "Nouvel avis",
+      "newReviewHint": "Quand vous recevez un nouvel avis."
+    },
+    "notifSaved": "Préférences enregistrées",
+    "notifError": "Impossible d’enregistrer. Réessayez.",
+    "signOut": "Se déconnecter"
   }
 }

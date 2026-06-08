@@ -80,10 +80,19 @@ useHead(() => ({
     <!-- ═══════════ HERO + SEARCH ═══════════ -->
     <section class="hero">
       <div class="noise" />
-      <div class="blob" style="width: 340px; height: 340px; top: -90px; inset-inline-start: -70px" />
       <div
         class="blob"
-        style="width: 280px; height: 280px; bottom: -30px; inset-inline-end: 6%; animation-delay: -6s"
+        style="width: 340px; height: 340px; top: -90px; inset-inline-start: -70px"
+      />
+      <div
+        class="blob"
+        style="
+          width: 280px;
+          height: 280px;
+          bottom: -30px;
+          inset-inline-end: 6%;
+          animation-delay: -6s;
+        "
       />
       <div class="wrap hero-inner">
         <div class="hero-copy">
@@ -124,7 +133,7 @@ useHead(() => ({
                   type="text"
                   autocomplete="off"
                   :placeholder="t('home.search.cityPlaceholder')"
-                >
+                />
               </div>
             </div>
 
@@ -198,12 +207,7 @@ useHead(() => ({
           </div>
         </form>
       </div>
-      <svg
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-        class="hero-wave"
-        aria-hidden="true"
-      >
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none" class="hero-wave" aria-hidden="true">
         <path
           d="M0,38 C240,72 480,8 720,30 C960,52 1200,14 1440,40 L1440,70 L0,70 Z"
           fill="#FAFAF7"
@@ -385,7 +389,7 @@ useHead(() => ({
           </div>
         </div>
         <div class="how-cta">
-          <NuxtLink :to="localePath('/how-it-works')" class="btn btn-secondary">
+          <NuxtLink :to="localePath('/comment-ca-marche')" class="btn btn-secondary">
             {{ t('home.how.cta') }}
           </NuxtLink>
         </div>

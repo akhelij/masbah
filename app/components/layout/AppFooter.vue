@@ -13,11 +13,15 @@ const year = new Date().getFullYear()
       </div>
 
       <nav class="ftr-links" :aria-label="t('footer.links')">
-        <NuxtLink :to="localePath('/how-it-works')" class="ftr-link">
+        <NuxtLink :to="localePath('/comment-ca-marche')" class="ftr-link">
           {{ t('footer.howItWorks') }}
         </NuxtLink>
-        <NuxtLink :to="localePath('/privacy')" class="ftr-link">{{ t('footer.privacy') }}</NuxtLink>
-        <NuxtLink :to="localePath('/terms')" class="ftr-link">{{ t('footer.terms') }}</NuxtLink>
+        <NuxtLink :to="localePath('/confidentialite')" class="ftr-link">{{
+          t('footer.privacy')
+        }}</NuxtLink>
+        <NuxtLink :to="localePath('/conditions')" class="ftr-link">{{
+          t('footer.terms')
+        }}</NuxtLink>
       </nav>
     </div>
     <div class="wrap ftr-legal">

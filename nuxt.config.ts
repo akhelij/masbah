@@ -12,6 +12,8 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
+    // Vercel Web Analytics — only emits in production on Vercel; no-op locally.
+    '@vercel/analytics/nuxt',
     // '@pinia/nuxt' — re-enabled in M3 (client UI state: filters, wizard draft).
     // Deferred: @pinia/nuxt@0.11.3 SSR hook crashes on Nuxt 4.4; revisit version then.
   ],
@@ -79,11 +81,33 @@ export default defineNuxtConfig({
         { src: '/pwa-64x64.png', sizes: '64x64', type: 'image/png' },
         { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
         { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
-        { src: '/maskable-icon-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+        {
+          src: '/maskable-icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'maskable',
+        },
       ],
     },
     workbox: {
+      // SSR app: don't hijack navigations with an offline shell (data must stay
+      // fresh). Precache the built client assets and runtime-cache only remote
+      // images — Unsplash + Supabase Storage objects — never the REST/auth API.
       navigateFallback: undefined,
+      globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+      runtimeCaching: [
+        {
+          urlPattern: ({ url }) =>
+            url.hostname === 'images.unsplash.com' ||
+            (url.hostname.endsWith('.supabase.co') && url.pathname.includes('/storage/')),
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'masbah-images',
+            expiration: { maxEntries: 160, maxAgeSeconds: 60 * 60 * 24 * 30 },
+            cacheableResponse: { statuses: [0, 200] },
+          },
+        },
+      ],
     },
     devOptions: {
       enabled: false,

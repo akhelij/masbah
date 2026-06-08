@@ -115,12 +115,12 @@ async function onGoogle(): Promise<void> {
           <PCheckbox v-model="acceptedTerms">
             <i18n-t keypath="auth.signUp.terms" tag="span" class="t-sm" scope="global">
               <template #cgu>
-                <NuxtLink :to="localePath('/terms')" class="terms-link" @click.stop>{{
+                <NuxtLink :to="localePath('/conditions')" class="terms-link" @click.stop>{{
                   t('auth.signUp.termsCgu')
                 }}</NuxtLink>
               </template>
               <template #privacy>
-                <NuxtLink :to="localePath('/privacy')" class="terms-link" @click.stop>{{
+                <NuxtLink :to="localePath('/confidentialite')" class="terms-link" @click.stop>{{
                   t('auth.signUp.termsPrivacy')
                 }}</NuxtLink>
               </template>
