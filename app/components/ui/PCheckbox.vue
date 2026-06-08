@@ -28,10 +28,20 @@ function onKeydown(e: KeyboardEvent): void {
       @click="toggle"
       @keydown="onKeydown"
     >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
         <path d="m5 12 5 5L20 6" />
       </svg>
     </span>
-    <span v-if="$slots.default || label" class="t-body"><slot>{{ label }}</slot></span>
+    <span v-if="$slots.default || label" class="t-body"
+      ><slot>{{ label }}</slot></span
+    >
   </label>
 </template>

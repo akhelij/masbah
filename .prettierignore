@@ -1,0 +1,12 @@
+node_modules
+.nuxt
+.nitro
+.output
+dist
+.vercel
+pnpm-lock.yaml
+.data
+# Reference material — keep verbatim
+design/
+PISSINA_V2_DESIGN_PROMPTS.md
+PISSINA_V2_REBUILD_PROMPT.md

@@ -2,7 +2,7 @@
 type Variant = 'primary' | 'secondary' | 'ghost' | 'whatsapp' | 'destructive'
 type Size = 'sm' | 'md' | 'lg'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     variant?: Variant
     size?: Size
@@ -18,7 +18,7 @@ const props = withDefaults(
     disabled: false,
     loading: false,
     type: 'button',
-  },
+  }
 )
 
 const variantClass: Record<Variant, string> = {
@@ -44,15 +44,14 @@ const sizeClass: Record<Size, string> = {
     :disabled="disabled || loading"
     :aria-busy="loading ? 'true' : undefined"
   >
-    <svg
-      v-if="loading"
-      class="spin"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-    >
+    <svg v-if="loading" class="spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.4" stroke-opacity=".25" />
-      <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+      <path
+        d="M21 12a9 9 0 0 0-9-9"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+      />
     </svg>
     <slot v-else name="icon" />
     <slot />

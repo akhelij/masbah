@@ -11,7 +11,7 @@ const props = withDefaults(
     min: 1,
     max: 99,
     step: 1,
-  },
+  }
 )
 
 const model = defineModel<number>({ default: 0 })
@@ -42,7 +42,14 @@ function inc(): void {
       :disabled="atMin"
       @click="dec"
     >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
         <path d="M5 12h14" />
       </svg>
     </button>
@@ -53,7 +60,14 @@ function inc(): void {
       :disabled="atMax"
       @click="inc"
     >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
         <path d="M12 5v14M5 12h14" />
       </svg>
     </button>

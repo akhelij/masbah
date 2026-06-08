@@ -13,7 +13,7 @@ const props = withDefaults(
   {
     type: 'text',
     required: false,
-  },
+  }
 )
 
 const model = defineModel<string>()

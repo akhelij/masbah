@@ -17,7 +17,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.14.0",
@@ -36,6 +37,20 @@
     "ws": "^8.21.0"
   },
   "devDependencies": {
-    "@types/ws": "^8.18.1"
+    "@nuxt/eslint": "^1.15.2",
+    "@types/ws": "^8.18.1",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "prettier": "^3.8.3",
+    "typescript-eslint": "^8.60.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md,yml,yaml}": "prettier --write"
   }
 }

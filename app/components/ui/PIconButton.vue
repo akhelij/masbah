@@ -10,7 +10,7 @@ withDefaults(
   {
     variant: 'default',
     disabled: false,
-  },
+  }
 )
 </script>
 

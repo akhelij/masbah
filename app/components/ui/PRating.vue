@@ -11,7 +11,7 @@ const props = withDefaults(
   {
     size: 'md',
     showValue: false,
-  },
+  }
 )
 
 const fillWidth = computed(() => `${(Math.min(5, Math.max(0, props.rating)) / 5) * 100}%`)

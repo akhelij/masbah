@@ -29,7 +29,7 @@ function onKeydown(e: KeyboardEvent, index: number): void {
   if (!opt) return
   select(opt.key)
   const tabs = (e.currentTarget as HTMLElement).parentElement?.querySelectorAll<HTMLButtonElement>(
-    '[role="tab"]',
+    '[role="tab"]'
   )
   tabs?.[next]?.focus()
 }

@@ -15,10 +15,7 @@ function toggle(): void {
 </script>
 
 <template>
-  <label
-    v-if="label"
-    style="display: flex; align-items: center; gap: 0.7rem; cursor: pointer"
-  >
+  <label v-if="label" style="display: flex; align-items: center; gap: 0.7rem; cursor: pointer">
     <button
       class="toggle"
       :class="{ 'is-on': model }"

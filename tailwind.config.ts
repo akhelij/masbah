@@ -18,8 +18,16 @@ export default <Partial<Config>>{
     extend: {
       colors: {
         aqua: {
-          50: '#ECFEFF', 100: '#CFF7FB', 200: '#A4ECF5', 300: '#6FDDED', 400: '#22D3EE',
-          500: '#06B6D4', 600: '#0891B2', 700: '#0E7490', 800: '#155E75', 900: '#164E63',
+          50: '#ECFEFF',
+          100: '#CFF7FB',
+          200: '#A4ECF5',
+          300: '#6FDDED',
+          400: '#22D3EE',
+          500: '#06B6D4',
+          600: '#0891B2',
+          700: '#0E7490',
+          800: '#155E75',
+          900: '#164E63',
         },
         ink: { DEFAULT: '#0F3D4C', strong: '#0A2D38', muted: '#4F6E78', faint: '#8AA2AB' },
         coral: { DEFAULT: '#FB7185', deep: '#F43F5E', soft: '#FFE4E8', ink: '#9F1239' },
@@ -31,8 +39,13 @@ export default <Partial<Config>>{
         line: { DEFAULT: '#E6E7E1', 2: '#EDEEE8', strong: '#D3D6CE' },
       },
       borderRadius: {
-        sm: '8px', md: '12px', lg: '16px', xl: '20px',
-        '2xl': '24px', '3xl': '32px', pill: '999px',
+        sm: '8px',
+        md: '12px',
+        lg: '16px',
+        xl: '20px',
+        '2xl': '24px',
+        '3xl': '32px',
+        pill: '999px',
       },
       boxShadow: {
         sm: 'var(--sh-sm)',

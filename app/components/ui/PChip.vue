@@ -18,7 +18,15 @@ function toggle(): void {
     :aria-pressed="model"
     @click="toggle"
   >
-    <svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+    <svg
+      class="chk"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="3"
+      stroke-linecap="round"
+      aria-hidden="true"
+    >
       <path d="m5 12 5 5L20 6" />
     </svg>
     <slot>{{ label }}</slot>

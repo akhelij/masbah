@@ -8,11 +8,11 @@ const props = withDefaults(
   }>(),
   {
     variant: 'neutral',
-  },
+  }
 )
 
 const variantClass = computed(() =>
-  props.variant === 'neutral' ? undefined : `badge-${props.variant}`,
+  props.variant === 'neutral' ? undefined : `badge-${props.variant}`
 )
 </script>
 

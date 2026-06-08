@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
+    '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
     '@nuxt/fonts',
     '@nuxtjs/i18n',
@@ -40,7 +41,6 @@ export default defineNuxtConfig({
       { code: 'fr', language: 'fr-MA', dir: 'ltr', file: 'fr.json', name: 'Français' },
       { code: 'ar', language: 'ar-MA', dir: 'rtl', file: 'ar.json', name: 'العربية' },
     ],
-    lazy: true,
     langDir: 'locales',
     detectBrowserLanguage: {
       useCookie: true,
