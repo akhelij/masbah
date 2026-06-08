@@ -43,6 +43,9 @@ export default defineNuxtConfig({
   i18n: {
     strategy: 'prefix',
     defaultLocale: 'fr',
+    // Canonical production origin → useLocaleHead({ seo: true }) emits ABSOLUTE
+    // canonical + hreflang URLs (relative ones are invalid per Lighthouse SEO).
+    baseUrl: 'https://masbah.ma',
     locales: [
       { code: 'fr', language: 'fr-MA', dir: 'ltr', file: 'fr.json', name: 'Français' },
       { code: 'ar', language: 'ar-MA', dir: 'rtl', file: 'ar.json', name: 'العربية' },

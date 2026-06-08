@@ -91,7 +91,7 @@ async function onSignOut(): Promise<void> {
 <template>
   <header class="hdr">
     <div class="wrap hdr-inner">
-      <NuxtLink :to="localePath('/')" class="brand-link" :aria-label="t('nav.home')">
+      <NuxtLink :to="localePath('/')" class="brand-link" :aria-label="t('nav.homeAria')">
         <BrandLogo :size="30" />
       </NuxtLink>
 

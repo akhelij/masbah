@@ -645,7 +645,8 @@ useHead(() => ({
   inset-inline-end: 1.3rem;
   font-weight: 800;
   font-size: 1.5rem;
-  color: var(--aqua-200);
+  /* aqua-700 on the white card → ~4.6:1, passes WCAG AA (was aqua-200, ~1.3:1) */
+  color: var(--aqua-700);
   line-height: 1;
 }
 .step-title {
