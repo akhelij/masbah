@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "explore": "Explorer",
+    "bookings": "Réservations",
+    "publish": "Publier",
+    "messages": "Messages",
+    "profile": "Profil"
+  },
+  "common": {
+    "search": "Rechercher",
+    "cashOnPlace": "Paiement sur place",
+    "book": "Réserver",
+    "perSlot": "/ créneau",
+    "from": "à partir de",
+    "currency": "DH"
+  },
+  "home": {
+    "title": "Louez une piscine près de chez vous",
+    "subtitle": "La première marketplace marocaine de location de piscines entre particuliers. Réservez un créneau, payez en espèces sur place.",
+    "searchPlaceholder": "Ville ou quartier"
+  }
+}
