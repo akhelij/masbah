@@ -11,6 +11,7 @@
     </main>
     <AppFooter class="hidden md:block" />
     <PTabBar class="md:hidden fixed bottom-0 inset-x-0 z-40" />
+    <AuthGateHost />
   </div>
 </template>
 

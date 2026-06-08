@@ -2,12 +2,51 @@
 const { t } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
+const route = useRoute()
+const user = useSupabaseUser()
+const { signOut } = useAuthForm()
 
 const city = ref('')
 
 function search(): void {
   const q = city.value.trim()
   router.push(localePath(q ? `/search?city=${encodeURIComponent(q)}` : '/search'))
+}
+
+// ── Account menu (authed) ───────────────────────────────────────────────
+const menuOpen = ref(false)
+const menuRef = ref<HTMLElement | null>(null)
+
+const initials = computed(() => {
+  const meta = user.value?.user_metadata as { full_name?: string; name?: string } | undefined
+  const name = (meta?.full_name ?? meta?.name ?? '').trim()
+  if (name) {
+    const parts = name.split(/\s+/).filter(Boolean)
+    const first = parts[0]?.[0] ?? ''
+    const last = parts.length > 1 ? (parts[parts.length - 1]?.[0] ?? '') : ''
+    return (first + last).toUpperCase()
+  }
+  // Fall back to the first letter of the email.
+  return (user.value?.email?.[0] ?? '?').toUpperCase()
+})
+
+function toggleMenu(): void {
+  menuOpen.value = !menuOpen.value
+}
+
+function closeMenu(): void {
+  menuOpen.value = false
+}
+
+onClickOutside(menuRef, closeMenu)
+
+// Close the menu on navigation.
+watch(() => route.fullPath, closeMenu)
+
+async function onSignOut(): Promise<void> {
+  closeMenu()
+  await signOut()
+  await navigateTo(localePath('/'))
 }
 </script>
 
@@ -59,20 +98,93 @@ function search(): void {
         </NuxtLink>
         <LanguageSwitcher class="lang-desk" />
         <LanguageSwitcher class="lang-mobile" compact />
-        <button class="avatar avatar-btn" type="button" :aria-label="t('nav.profile')">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
+
+        <!-- Signed out: sign-in CTA -->
+        <NuxtLink
+          v-if="!user"
+          :to="localePath('/login')"
+          class="btn btn-secondary btn-sm signin-link"
+        >
+          {{ t('auth.signIn.cta') }}
+        </NuxtLink>
+
+        <!-- Signed in: avatar + dropdown -->
+        <div v-else ref="menuRef" class="account">
+          <button
+            class="avatar avatar-btn avatar-initials"
+            type="button"
+            :aria-label="t('nav.profile')"
+            :aria-expanded="menuOpen"
+            aria-haspopup="menu"
+            @click="toggleMenu"
           >
-            <circle cx="12" cy="8" r="4" />
-            <path d="M4 21a8 8 0 0 1 16 0" />
-          </svg>
-        </button>
+            {{ initials }}
+          </button>
+
+          <div v-if="menuOpen" class="menu" role="menu">
+            <NuxtLink :to="localePath('/profile')" class="menu-item" role="menuitem">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21a8 8 0 0 1 16 0" />
+              </svg>
+              {{ t('auth.menu.profile') }}
+            </NuxtLink>
+            <NuxtLink :to="localePath('/bookings')" class="menu-item" role="menuitem">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <path d="M16 2v4M8 2v4M3 10h18" />
+              </svg>
+              {{ t('auth.menu.bookings') }}
+            </NuxtLink>
+            <NuxtLink :to="localePath('/account/phone')" class="menu-item" role="menuitem">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="5" y="2" width="14" height="20" rx="2" />
+                <path d="M12 18h.01" />
+              </svg>
+              {{ t('auth.menu.verifyPhone') }}
+            </NuxtLink>
+            <hr class="menu-sep" >
+            <button type="button" class="menu-item menu-signout" role="menuitem" @click="onSignOut">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="m16 17 5-5-5-5M21 12H9" />
+              </svg>
+              {{ t('auth.menu.signOut') }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -97,7 +209,11 @@ function search(): void {
           :placeholder="t('home.searchPlaceholder')"
           :aria-label="t('home.searchPlaceholder')"
         >
-        <button class="btn btn-primary btn-sm search-btn" type="submit" :aria-label="t('common.search')">
+        <button
+          class="btn btn-primary btn-sm search-btn"
+          type="submit"
+          :aria-label="t('common.search')"
+        >
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -178,6 +294,91 @@ function search(): void {
 .avatar-btn:focus-visible {
   outline: none;
   box-shadow: var(--focus);
+}
+.avatar-initials {
+  background: linear-gradient(135deg, #22d3ee, #0e7490);
+  color: #fff;
+  border-color: transparent;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.avatar-initials:hover {
+  color: #fff;
+  border-color: transparent;
+  filter: brightness(1.05);
+}
+.signin-link {
+  flex: none;
+}
+
+/* account dropdown */
+.account {
+  position: relative;
+  flex: none;
+}
+.menu {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + 0.5rem);
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-pop);
+  padding: 0.4rem;
+  z-index: 60;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--r-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: start;
+  transition: background-color var(--dur-1);
+}
+.menu-item:hover {
+  background: var(--aqua-50);
+  color: var(--aqua-800);
+}
+.menu-item:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+.menu-item svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--ink-muted);
+}
+.menu-item:hover svg {
+  color: var(--aqua-700);
+}
+.menu-sep {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 0.35rem 0.2rem;
+}
+.menu-signout {
+  color: var(--danger-deep);
+}
+.menu-signout:hover {
+  background: var(--danger-soft);
+  color: var(--danger-deep);
+}
+.menu-signout svg {
+  color: var(--danger);
+}
+.menu-signout:hover svg {
+  color: var(--danger-deep);
 }
 
 /* Responsive: hide desktop bits on mobile, show compact bits */

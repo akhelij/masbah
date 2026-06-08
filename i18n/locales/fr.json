@@ -41,6 +41,132 @@
   "lang": {
     "switch": "Changer de langue"
   },
+  "auth": {
+    "or": "ou",
+    "continueWithGoogle": "Continuer avec Google",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "fields": {
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "ex. Salma Bennani",
+      "email": "E-mail",
+      "emailPlaceholder": "vous{'@'}exemple.com",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Votre mot de passe",
+      "passwordHint": "8 caractères minimum.",
+      "newPassword": "Nouveau mot de passe"
+    },
+    "signIn": {
+      "title": "Bon retour",
+      "subtitle": "Connectez-vous pour continuer.",
+      "submit": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Pas encore de compte ?",
+      "signUpLink": "S'inscrire",
+      "cta": "Se connecter"
+    },
+    "signUp": {
+      "title": "Créer un compte",
+      "subtitle": "Quelques infos et c'est parti.",
+      "submit": "Créer mon compte",
+      "terms": "J'accepte les {cgu} et la {privacy}.",
+      "termsCgu": "CGU",
+      "termsPrivacy": "politique de confidentialité",
+      "termsRequired": "Veuillez accepter les conditions pour continuer.",
+      "hasAccount": "Déjà un compte ?",
+      "signInLink": "Se connecter",
+      "checkEmailTitle": "Vérifiez votre e-mail",
+      "checkEmailBody": "Un lien de confirmation est parti vers {email}. Ouvrez-le pour activer votre compte (pensez aux spams).",
+      "backToSignIn": "Retour à la connexion"
+    },
+    "reset": {
+      "title": "Mot de passe oublié ?",
+      "subtitle": "Entrez votre e-mail, on vous envoie un lien de réinitialisation.",
+      "requestSubmit": "Envoyer le lien",
+      "sentTitle": "E-mail envoyé",
+      "sentBody": "Un lien de réinitialisation est parti vers {email}. Vérifiez votre boîte (et les spams).",
+      "newTitle": "Nouveau mot de passe",
+      "newSubtitle": "Choisissez un nouveau mot de passe pour votre compte.",
+      "updateSubmit": "Mettre à jour le mot de passe",
+      "doneTitle": "Mot de passe mis à jour",
+      "doneBody": "Votre mot de passe a été modifié. Redirection en cours…",
+      "backToSignIn": "Retour à la connexion"
+    },
+    "confirm": {
+      "loading": "Connexion en cours…"
+    },
+    "onboarding": {
+      "title": "Bienvenue sur Masbah",
+      "subtitle": "Complétez votre profil pour commencer.",
+      "languageLabel": "Langue préférée",
+      "submit": "Continuer",
+      "skip": "Passer"
+    },
+    "phone": {
+      "title": "Vérifiez votre numéro",
+      "subtitle": "Un numéro vérifié rassure les propriétaires et débloque la réservation.",
+      "soon": "La vérification par téléphone sera bientôt disponible.",
+      "numberLabel": "Numéro de téléphone",
+      "numberPlaceholder": "6 12 34 56 78",
+      "numberHint": "Nous vous enverrons un code par SMS.",
+      "sendCode": "Envoyer le code par SMS",
+      "invalidNumber": "Entrez un numéro marocain valide (9 chiffres).",
+      "privacy": "Votre numéro reste privé — il n'est jamais affiché publiquement.",
+      "otpTitle": "Entrez le code",
+      "otpSubtitle": "Code à 6 chiffres envoyé au {phone}.",
+      "edit": "Modifier",
+      "digitLabel": "Chiffre {n}",
+      "devHint": "Démo : utilisez le code 000000.",
+      "verify": "Vérifier",
+      "invalidCode": "Code invalide. Vérifiez les 6 chiffres et réessayez.",
+      "doneTitle": "Numéro vérifié",
+      "doneBody": "Votre numéro vérifié rassure les propriétaires.",
+      "backHome": "Retour à l'accueil"
+    },
+    "menu": {
+      "profile": "Mon profil",
+      "bookings": "Mes réservations",
+      "verifyPhone": "Vérifier mon téléphone",
+      "signOut": "Se déconnecter"
+    },
+    "gate": {
+      "signIn": "Se connecter",
+      "signUp": "S'inscrire",
+      "free": "Gratuit",
+      "cashOnPlace": "Paiement sur place",
+      "default": {
+        "title": "Connectez-vous pour continuer",
+        "subtitle": "Créez un compte ou connectez-vous en quelques secondes. C'est gratuit et sans engagement."
+      },
+      "booking": {
+        "title": "Connectez-vous pour réserver",
+        "subtitle": "Une seconde, et votre demande de réservation part. Aucun paiement maintenant."
+      },
+      "favorite": {
+        "title": "Connectez-vous pour ajouter aux favoris",
+        "subtitle": "Enregistrez vos piscines préférées et retrouvez-les à tout moment."
+      },
+      "publish": {
+        "title": "Connectez-vous pour publier",
+        "subtitle": "Mettez votre piscine en location et commencez à recevoir des demandes."
+      },
+      "message": {
+        "title": "Connectez-vous pour envoyer un message",
+        "subtitle": "Contactez le propriétaire et posez vos questions avant de réserver."
+      }
+    },
+    "errors": {
+      "invalidCredentials": "E-mail ou mot de passe incorrect. Réessayez.",
+      "emailTaken": "Un compte existe déjà avec cet e-mail.",
+      "weakPassword": "Mot de passe trop faible. Utilisez au moins 8 caractères.",
+      "emailInvalid": "Adresse e-mail invalide.",
+      "emailNotConfirmed": "Veuillez confirmer votre e-mail avant de vous connecter.",
+      "rateLimited": "Trop de tentatives. Patientez un instant avant de réessayer.",
+      "samePassword": "Le nouveau mot de passe doit être différent de l'ancien.",
+      "googleSoon": "Google sera bientôt disponible.",
+      "generic": "Une erreur est survenue. Réessayez."
+    }
+  },
   "footer": {
     "tagline": "La marketplace marocaine de location de piscines entre particuliers.",
     "links": "Liens utiles",
