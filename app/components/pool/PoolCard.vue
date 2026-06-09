@@ -11,6 +11,8 @@ interface Pool {
   amenities?: string[]
   sheltered?: boolean
   reliableHost?: boolean
+  /** Distance from the visitor in km (set when "Près de moi" is active). */
+  distanceKm?: number
 }
 
 const props = defineProps<Pool>()
@@ -29,6 +31,13 @@ const ratingLabel = computed(() =>
 const price = computed(() =>
   props.priceFrom !== undefined ? props.priceFrom.toLocaleString(locale.value) : undefined
 )
+
+const distanceLabel = computed(() => {
+  if (props.distanceKm == null) return undefined
+  const d = props.distanceKm
+  const n = d < 10 ? Number(d.toFixed(1)) : Math.round(d)
+  return t('pool.distance', { d: n.toLocaleString(locale.value) })
+})
 
 function toggleFav(): void {
   favorite.value = !favorite.value
@@ -119,7 +128,14 @@ function toggleFav(): void {
           <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z" />
           <circle cx="12" cy="10" r="3" />
         </svg>
-        <span>{{ city }}<template v-if="reviewCount !== undefined"> · {{ t('pool.reviews', { count: reviewCount }) }}</template></span>
+        <span
+          >{{ city
+          }}<template v-if="reviewCount !== undefined">
+            · {{ t('pool.reviews', { count: reviewCount }) }}</template
+          ><template v-if="distanceLabel">
+            · <strong class="dist">{{ distanceLabel }}</strong></template
+          ></span
+        >
       </div>
 
       <div v-if="amenities?.length" class="amenities">
@@ -175,6 +191,10 @@ function toggleFav(): void {
   width: 14px;
   height: 14px;
   flex: none;
+}
+.meta .dist {
+  color: var(--aqua-700);
+  font-weight: 700;
 }
 .amenities {
   display: flex;

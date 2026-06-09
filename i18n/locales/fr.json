@@ -69,6 +69,7 @@
     "favorite": "Ajouter aux favoris",
     "unfavorite": "Retirer des favoris",
     "reviews": "{count} avis",
+    "distance": "à {d} km",
     "verified": "Vérifié",
     "notFoundTitle": "Cette piscine s'est évaporée",
     "notFoundBody": "L'annonce que vous cherchez est introuvable ou n'est plus disponible. Pas de panique, l'eau est plus claire ailleurs.",
@@ -340,7 +341,14 @@
       "recent": "Plus récentes",
       "priceAsc": "Prix croissant",
       "priceDesc": "Prix décroissant",
-      "rating": "Mieux notées"
+      "rating": "Mieux notées",
+      "nearest": "Les plus proches"
+    },
+    "nearMe": "Près de moi",
+    "geo": {
+      "locating": "Localisation…",
+      "denied": "Localisation refusée ou indisponible.",
+      "unsupported": "La géolocalisation n’est pas disponible sur cet appareil."
     },
     "filters": {
       "title": "Filtres",
@@ -498,7 +506,12 @@
       "pinLabel": "Ajustez le repère sur la carte",
       "pinHint": "Cliquez ou glissez le repère pour préciser l'emplacement.",
       "pinUnset": "Touchez la carte pour placer le repère.",
-      "approxNote": "Une zone approximative (~500 m) sera affichée publiquement, jamais le point exact."
+      "approxNote": "Une zone approximative (~500 m) sera affichée publiquement, jamais le point exact.",
+      "searchPlaceholder": "Cherchez une adresse ou un lieu…",
+      "searchBtn": "Rechercher",
+      "myPosition": "Ma position",
+      "searching": "Recherche…",
+      "noResults": "Aucun lieu trouvé. Essayez une autre adresse ou touchez la carte."
     },
     "photos": {
       "over": "Étape 4 sur 8",
@@ -767,6 +780,7 @@
       "address": "Adresse exacte",
       "addressHint": "Communiquée après acceptation par l'hôte.",
       "openMaps": "Ouvrir dans Google Maps",
+      "mapLabel": "Carte de l’emplacement exact",
       "call": "Appeler",
       "whatsapp": "WhatsApp",
       "host": "Hôte",

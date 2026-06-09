@@ -350,6 +350,15 @@ const emptyCopy = computed(() => ({
                 <div class="t-sm muted">{{ t('bookings.reveal.addressHint') }}</div>
               </div>
             </div>
+            <ClientOnly>
+              <PoolExactMap
+                v-if="contactByBooking[b.id]?.lat != null && contactByBooking[b.id]?.lng != null"
+                :lat="contactByBooking[b.id]!.lat!"
+                :lng="contactByBooking[b.id]!.lng!"
+                :label="t('bookings.reveal.mapLabel')"
+                style="margin-top: 0.7rem"
+              />
+            </ClientOnly>
             <a
               :href="mapsHref(contactByBooking[b.id]!)"
               target="_blank"

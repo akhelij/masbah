@@ -12,6 +12,7 @@ import type {
   Map as LeafletMap,
   CircleMarker as LeafletCircleMarker,
   LayerGroup as LeafletLayerGroup,
+  Marker as LeafletMarker,
 } from 'leaflet'
 import type { PoolListItem } from '~/types/db'
 
@@ -19,6 +20,8 @@ const props = defineProps<{
   pools: PoolListItem[]
   /** Currently highlighted pool id (e.g. the rail card in view). */
   activeId?: string | null
+  /** The visitor's geolocation ("Près de moi") — shown as a distinct marker. */
+  userPos?: { lat: number; lng: number } | null
   label?: string
 }>()
 
@@ -33,6 +36,7 @@ const localePath = useLocalePath()
 const el = ref<HTMLElement | null>(null)
 let map: LeafletMap | null = null
 let markerLayer: LeafletLayerGroup | null = null
+let userMarker: LeafletMarker | null = null
 const markersById = new Map<string, LeafletCircleMarker>()
 
 // Only pools with public coordinates can be plotted.
@@ -112,6 +116,35 @@ async function build(): Promise<void> {
 
   markerLayer = L.layerGroup().addTo(map)
   drawMarkers(L)
+  drawUser(L)
+  if (props.userPos) map.setView([props.userPos.lat, props.userPos.lng], 11)
+}
+
+// Distinct "you are here" marker for the visitor's geolocation.
+function drawUser(L: typeof import('leaflet')): void {
+  if (!map) return
+  const u = props.userPos
+  if (!u) {
+    userMarker?.remove()
+    userMarker = null
+    return
+  }
+  if (userMarker) {
+    userMarker.setLatLng([u.lat, u.lng])
+    return
+  }
+  const icon = L.divIcon({
+    className: 'sm-user',
+    html: '<span class="sm-user-dot"></span>',
+    iconSize: [22, 22],
+    iconAnchor: [11, 11],
+  })
+  userMarker = L.marker([u.lat, u.lng], {
+    icon,
+    interactive: false,
+    keyboard: false,
+    zIndexOffset: 1000,
+  }).addTo(map)
 }
 
 function drawMarkers(L: typeof import('leaflet')): void {
@@ -179,11 +212,24 @@ watch(
   }
 )
 
+// Recenter + (re)draw the visitor marker when geolocation resolves/changes.
+watch(
+  () => props.userPos,
+  async (u) => {
+    if (!import.meta.client || !map) return
+    const L = await import('leaflet')
+    drawUser(L)
+    if (u) map.setView([u.lat, u.lng], 11)
+  },
+  { flush: 'post' }
+)
+
 onMounted(build)
 onBeforeUnmount(() => {
   map?.remove()
   map = null
   markerLayer = null
+  userMarker = null
   markersById.clear()
 })
 </script>
@@ -287,5 +333,19 @@ onBeforeUnmount(() => {
   color: var(--ink-strong);
   font-size: 0.92rem;
   margin-top: 0.1rem;
+}
+/* "You are here" marker — blue, distinct from the aqua pool markers. */
+.search-map :deep(.sm-user) {
+  background: none;
+  border: none;
+}
+.search-map :deep(.sm-user-dot) {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #2563eb;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
 }
 </style>

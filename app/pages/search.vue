@@ -47,7 +47,9 @@ function numParam(v: unknown): number | null {
 }
 
 const cityModel = ref<string>(strParam(route.query.city))
-const slotModel = ref<string>(SLOT_VALUES.includes(strParam(route.query.slot) as SlotKey) ? strParam(route.query.slot) : '')
+const slotModel = ref<string>(
+  SLOT_VALUES.includes(strParam(route.query.slot) as SlotKey) ? strParam(route.query.slot) : ''
+)
 const amenityModel = ref<AmenityKey[]>(
   strParam(route.query.amenities)
     .split(',')
@@ -56,7 +58,9 @@ const amenityModel = ref<AmenityKey[]>(
 )
 const minModel = ref<number | null>(numParam(route.query.min))
 const maxModel = ref<number | null>(numParam(route.query.max))
-const sortModel = ref<SortValue>(
+// 'nearest' is a runtime-only sort (needs the visitor's geolocation); it is
+// never read from or written to the URL.
+const sortModel = ref<SortValue | 'nearest'>(
   SORT_VALUES.includes(strParam(route.query.sort) as SortValue)
     ? (strParam(route.query.sort) as SortValue)
     : 'recent'
@@ -70,12 +74,69 @@ const filters = computed<PoolFilters>(() => ({
   amenities: amenityModel.value.slice(),
   minPrice: minModel.value,
   maxPrice: maxModel.value,
-  sort: sortModel.value,
+  // 'nearest' is resolved client-side from geolocation, so the query sorts by
+  // 'recent' and we re-order by distance below.
+  sort: sortModel.value === 'nearest' ? 'recent' : sortModel.value,
   q: qModel.value.trim() || null,
 }))
 
 const { pools, pending, error, refresh } = usePools(filters)
 const { cities } = useCities()
+
+// ── "Près de moi" geolocation + distance ─────────────────────────────────
+interface DecoratedPool extends PoolListItem {
+  distanceKm: number | null
+}
+const userPos = ref<{ lat: number; lng: number } | null>(null)
+const locating = ref(false)
+const geoError = ref<string | null>(null)
+
+function haversineKm(aLat: number, aLng: number, bLat: number, bLng: number): number {
+  const R = 6371
+  const dLat = ((bLat - aLat) * Math.PI) / 180
+  const dLng = ((bLng - aLng) * Math.PI) / 180
+  const s =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((aLat * Math.PI) / 180) * Math.cos((bLat * Math.PI) / 180) * Math.sin(dLng / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(s))
+}
+
+function locateMe(): void {
+  if (!import.meta.client || !navigator.geolocation) {
+    geoError.value = 'search.geo.unsupported'
+    return
+  }
+  locating.value = true
+  geoError.value = null
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      userPos.value = { lat: pos.coords.latitude, lng: pos.coords.longitude }
+      sortModel.value = 'nearest'
+      locating.value = false
+    },
+    () => {
+      geoError.value = 'search.geo.denied'
+      locating.value = false
+    },
+    { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+  )
+}
+
+// pools decorated with distance from the visitor; re-ordered when sort=nearest.
+const displayPools = computed<DecoratedPool[]>(() => {
+  const u = userPos.value
+  const list: DecoratedPool[] = pools.value.map((p) => ({
+    ...p,
+    distanceKm:
+      u && p.approxLat != null && p.approxLng != null
+        ? haversineKm(u.lat, u.lng, p.approxLat, p.approxLng)
+        : null,
+  }))
+  if (sortModel.value === 'nearest' && u) {
+    list.sort((a, b) => (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity))
+  }
+  return list
+})
 
 // ── Keep the URL in sync (shareable + SSR) ───────────────────────────────
 const queryFromState = computed<Record<string, string>>(() => {
@@ -85,7 +146,7 @@ const queryFromState = computed<Record<string, string>>(() => {
   if (amenityModel.value.length) q.amenities = amenityModel.value.join(',')
   if (minModel.value != null) q.min = String(minModel.value)
   if (maxModel.value != null) q.max = String(maxModel.value)
-  if (sortModel.value !== 'recent') q.sort = sortModel.value
+  if (sortModel.value !== 'recent' && sortModel.value !== 'nearest') q.sort = sortModel.value
   if (qModel.value.trim()) q.q = qModel.value.trim()
   return q
 })
@@ -144,15 +205,15 @@ const cityName = computed(() => {
 })
 
 const sortOptions = computed(() => [
+  // Only offer "nearest" once we have the visitor's location.
+  ...(userPos.value ? [{ value: 'nearest', label: t('search.sort.nearest') }] : []),
   { value: 'recent', label: t('search.sort.recent') },
   { value: 'price_asc', label: t('search.sort.priceAsc') },
   { value: 'price_desc', label: t('search.sort.priceDesc') },
   { value: 'rating', label: t('search.sort.rating') },
 ])
 
-const slotOptions = computed(() =>
-  SLOT_VALUES.map((k) => ({ key: k, label: t(SLOT_LABELS[k]) }))
-)
+const slotOptions = computed(() => SLOT_VALUES.map((k) => ({ key: k, label: t(SLOT_LABELS[k]) })))
 
 const minInput = computed<string>({
   get: () => (minModel.value != null ? String(minModel.value) : ''),
@@ -184,7 +245,9 @@ const activeFilterCount = computed(
     (minModel.value != null ? 1 : 0) +
     (maxModel.value != null ? 1 : 0)
 )
-const hasAnyFilter = computed(() => activeFilterCount.value > 0 || !!cityModel.value || !!qModel.value)
+const hasAnyFilter = computed(
+  () => activeFilterCount.value > 0 || !!cityModel.value || !!qModel.value
+)
 
 function resetFilters(): void {
   cityModel.value = ''
@@ -237,7 +300,8 @@ function onMapSelect(id: string): void {
 
 // ── SEO ──────────────────────────────────────────────────────────────────
 const pageTitle = computed(
-  () => `${t('search.seoTitle')}${cityName.value ? ` ${t('search.seoTitleCity', { city: cityName.value })}` : ''} — Masbah`
+  () =>
+    `${t('search.seoTitle')}${cityName.value ? ` ${t('search.seoTitleCity', { city: cityName.value })}` : ''} — Masbah`
 )
 const pageDescription = computed(() =>
   cityName.value ? t('search.seoDescCity', { city: cityName.value }) : t('search.seoDesc')
@@ -267,6 +331,29 @@ useHead(() => ({
       <div class="wrap s-top-row">
         <h1 class="s-title">{{ resultsHeading }}</h1>
         <div class="s-top-actions">
+          <button
+            class="btn btn-sm near-me-btn"
+            :class="userPos ? 'btn-primary' : 'btn-secondary'"
+            type="button"
+            :disabled="locating"
+            :aria-pressed="!!userPos"
+            @click="locateMe"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+              <circle cx="12" cy="12" r="7" />
+              <circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none" />
+            </svg>
+            {{ locating ? t('search.geo.locating') : t('search.nearMe') }}
+          </button>
           <PSelect
             v-model="sortModel"
             class="sort-select"
@@ -308,18 +395,35 @@ useHead(() => ({
               <line x1="3" y1="12" x2="3.01" y2="12" />
               <line x1="3" y1="18" x2="3.01" y2="18" />
             </svg>
-            <span class="view-toggle-lbl">{{ view === 'list' ? t('search.view.map') : t('search.view.list') }}</span>
+            <span class="view-toggle-lbl">{{
+              view === 'list' ? t('search.view.map') : t('search.view.list')
+            }}</span>
           </button>
         </div>
       </div>
 
+      <p v-if="geoError" class="wrap geo-note" role="status">
+        {{ t(geoError) }}
+      </p>
+
       <!-- Mobile filter chips row -->
       <div class="filter-chips lg:hidden">
         <button class="chip" type="button" @click="filterSheetOpen = true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="7" y1="12" x2="17" y2="12" />
+            <line x1="10" y1="18" x2="14" y2="18" />
           </svg>
-          {{ t('search.filters.title') }}<template v-if="activeFilterCount"> ({{ activeFilterCount }})</template>
+          {{ t('search.filters.title')
+          }}<template v-if="activeFilterCount"> ({{ activeFilterCount }})</template>
         </button>
         <PChip
           v-for="k in AMENITY_KEYS"
@@ -350,11 +454,7 @@ useHead(() => ({
           </div>
 
           <div class="fgroup">
-            <PSelect
-              v-model="cityModel"
-              :label="t('search.filters.city')"
-              :options="cityOptions"
-            />
+            <PSelect v-model="cityModel" :label="t('search.filters.city')" :options="cityOptions" />
           </div>
 
           <div class="fgroup">
@@ -416,8 +516,18 @@ useHead(() => ({
             <!-- error -->
             <div v-if="error" class="state-card">
               <span class="ill-circle" style="color: var(--danger)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M10.3 3.3 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0Z" />
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M10.3 3.3 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0Z"
+                  />
                   <path d="M12 9v4.5M12 17h.01" />
                 </svg>
               </span>
@@ -437,8 +547,18 @@ useHead(() => ({
             <div v-else-if="resultCount === 0" class="state-card">
               <span class="ill-circle">
                 <span class="acc" />
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="11" cy="11" r="7" /><path d="m21 21-3.5-3.5" /><path d="M8 11c.8-1 2.2-1 3 0s2.2 1 3 0" />
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m21 21-3.5-3.5" />
+                  <path d="M8 11c.8-1 2.2-1 3 0s2.2 1 3 0" />
                 </svg>
               </span>
               <div class="sc-title">{{ t('search.empty.title') }}</div>
@@ -451,7 +571,7 @@ useHead(() => ({
             <!-- results -->
             <div v-else class="card-grid">
               <PoolCard
-                v-for="pool in pools"
+                v-for="pool in displayPools"
                 :id="pool.id"
                 :key="pool.id"
                 :title="pool.title"
@@ -463,6 +583,7 @@ useHead(() => ({
                 :amenities="cardAmenities(pool)"
                 :sheltered="pool.sheltered"
                 :reliable-host="pool.rating !== null && pool.rating >= 4.7"
+                :distance-km="pool.distanceKm ?? undefined"
                 :favorite="isFav(pool.id)"
                 @update:favorite="(v: boolean) => onToggleFav(pool, v)"
               />
@@ -478,8 +599,17 @@ useHead(() => ({
               </template>
               <div v-else-if="resultCount === 0" class="state-card">
                 <span class="ill-circle">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="11" cy="11" r="7" /><path d="m21 21-3.5-3.5" />
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m21 21-3.5-3.5" />
                   </svg>
                 </span>
                 <div class="sc-title">{{ t('search.empty.title') }}</div>
@@ -490,7 +620,7 @@ useHead(() => ({
               </div>
               <template v-else>
                 <div
-                  v-for="pool in pools"
+                  v-for="pool in displayPools"
                   :key="pool.id"
                   class="rail-card"
                   :class="{ 'is-active': activeMapId === pool.id }"
@@ -507,6 +637,7 @@ useHead(() => ({
                     :amenities="cardAmenities(pool)"
                     :sheltered="pool.sheltered"
                     :reliable-host="pool.rating !== null && pool.rating >= 4.7"
+                    :distance-km="pool.distanceKm ?? undefined"
                     :favorite="isFav(pool.id)"
                     @update:favorite="(v: boolean) => onToggleFav(pool, v)"
                   />
@@ -517,7 +648,12 @@ useHead(() => ({
             <!-- map canvas (client-only Leaflet) -->
             <div class="map-canvas">
               <ClientOnly>
-                <SearchMap :pools="pools" :active-id="activeMapId" @select="onMapSelect" />
+                <SearchMap
+                  :pools="displayPools"
+                  :user-pos="userPos"
+                  :active-id="activeMapId"
+                  @select="onMapSelect"
+                />
                 <template #fallback>
                   <div class="skel map-skel" />
                 </template>
@@ -553,8 +689,20 @@ useHead(() => ({
         <div class="fgroup">
           <h3>{{ t('search.filters.price') }}</h3>
           <div class="price-row">
-            <PInput v-model="minInput" type="number" inputmode="numeric" :label="t('search.filters.priceMin')" :placeholder="t('search.filters.priceMinPh')" />
-            <PInput v-model="maxInput" type="number" inputmode="numeric" :label="t('search.filters.priceMax')" :placeholder="t('search.filters.priceMaxPh')" />
+            <PInput
+              v-model="minInput"
+              type="number"
+              inputmode="numeric"
+              :label="t('search.filters.priceMin')"
+              :placeholder="t('search.filters.priceMinPh')"
+            />
+            <PInput
+              v-model="maxInput"
+              type="number"
+              inputmode="numeric"
+              :label="t('search.filters.priceMax')"
+              :placeholder="t('search.filters.priceMaxPh')"
+            />
           </div>
         </div>
         <div class="fgroup">
@@ -629,6 +777,17 @@ useHead(() => ({
   flex: none;
   align-self: end;
   height: 46px;
+}
+.near-me-btn {
+  flex: none;
+  align-self: end;
+  height: 46px;
+  gap: 0.4rem;
+}
+.geo-note {
+  margin: 0.5rem auto 0;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
 }
 .filter-chips {
   display: flex;
