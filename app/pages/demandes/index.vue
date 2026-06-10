@@ -25,9 +25,42 @@ type Tab = 'pending' | 'handled'
 const tab = ref<Tab>('pending')
 
 const handledRequests = computed(() => requests.value.filter((r) => r.status !== 'pending'))
+// Pending sorted by soonest-to-expire: the 24h timer is the inbox's main job.
 const visible = computed(() =>
-  tab.value === 'pending' ? pendingRequests.value : handledRequests.value
+  tab.value === 'pending'
+    ? [...pendingRequests.value].sort((a, b) => a.expiresAt.localeCompare(b.expiresAt))
+    : handledRequests.value
 )
+
+// ── 24h expiry countdown ─────────────────────────────────────────────────
+const now = ref(Date.now())
+let expiryTimer: ReturnType<typeof setInterval> | null = null
+onMounted(() => {
+  expiryTimer = setInterval(() => {
+    now.value = Date.now()
+  }, 60_000)
+})
+onBeforeUnmount(() => {
+  if (expiryTimer) clearInterval(expiryTimer)
+})
+function expiresLabel(expiresAt: string): string {
+  const ms = new Date(expiresAt).getTime() - now.value
+  if (ms <= 0) return t('demandes.expired')
+  const minutes = Math.floor(ms / 60_000)
+  if (minutes >= 60)
+    return t('demandes.expiresIn', {
+      time: t('demandes.hoursShort', { count: Math.floor(minutes / 60) }),
+    })
+  return t('demandes.expiresIn', {
+    time: t('demandes.minutesShort', { count: Math.max(1, minutes) }),
+  })
+}
+function expiryUrgent(expiresAt: string): boolean {
+  return new Date(expiresAt).getTime() - now.value < 6 * 60 * 60 * 1000
+}
+function memberYear(createdAt: string): number {
+  return new Date(createdAt).getFullYear()
+}
 
 // ── Slot labels ─────────────────────────────────────────────────────────────
 const SLOT_LABELS: Record<SlotKey, string> = {
@@ -272,7 +305,9 @@ async function confirmDecline(): Promise<void> {
                 </svg>
                 {{ t('demandes.phoneVerified') }}
               </PBadge>
-              <span v-else class="t-sm faint">{{ t('demandes.phoneUnverified') }}</span>
+              <span v-else-if="req.renter?.created_at" class="t-sm faint">{{
+                t('demandes.memberSince', { year: memberYear(req.renter.created_at) })
+              }}</span>
             </div>
           </div>
         </div>
@@ -299,6 +334,25 @@ async function confirmDecline(): Promise<void> {
 
         <!-- meta chips -->
         <div class="req-meta">
+          <span
+            v-if="req.status === 'pending'"
+            class="mchip mchip-exp"
+            :class="{ 'is-urgent': expiryUrgent(req.expiresAt) }"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>
+            {{ expiresLabel(req.expiresAt) }}
+          </span>
           <span class="mchip">
             <svg
               viewBox="0 0 24 24"
@@ -619,6 +673,15 @@ async function confirmDecline(): Promise<void> {
   font-size: 0.82rem;
   padding: 0.35rem 0.6rem;
   border-radius: var(--r-pill);
+}
+.mchip-exp {
+  background: var(--amber-soft);
+  color: var(--amber-ink);
+  font-weight: 700;
+}
+.mchip-exp.is-urgent {
+  background: var(--coral);
+  color: #fff;
 }
 .mchip svg {
   width: 14px;
