@@ -16,6 +16,10 @@ export interface PoolFilters {
   amenities?: string[]
   minPrice?: number | null
   maxPrice?: number | null
+  /** Pool-attribute toggles (true = required; false/undefined = no filter). */
+  heated?: boolean
+  sheltered?: boolean
+  childSafe?: boolean
   /** 'price_asc' | 'price_desc' | 'rating' | 'recent' (default). */
   sort?: 'price_asc' | 'price_desc' | 'rating' | 'recent' | null
   q?: string | null
@@ -187,6 +191,10 @@ export function usePools(filters: PoolFilters | Ref<PoolFilters> = {}) {
           return wantedAmenities.every((k) => keys.has(k))
         })
       }
+      // Boolean pool attributes (chauffée / à l'abri des regards / enfants).
+      if (f.heated) items = items.filter((it) => it.heated)
+      if (f.sheltered) items = items.filter((it) => it.sheltered)
+      if (f.childSafe) items = items.filter((it) => it.childSafe)
 
       // ── Sort ──────────────────────────────────────────────────────────
       const sort = f.sort ?? 'recent'

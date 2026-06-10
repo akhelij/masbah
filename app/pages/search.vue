@@ -45,6 +45,9 @@ function numParam(v: unknown): number | null {
   const n = Number(s)
   return Number.isFinite(n) ? n : null
 }
+function boolParam(v: unknown): boolean {
+  return strParam(v) === '1'
+}
 
 const cityModel = ref<string>(strParam(route.query.city))
 const slotModel = ref<string>(
@@ -58,6 +61,10 @@ const amenityModel = ref<AmenityKey[]>(
 )
 const minModel = ref<number | null>(numParam(route.query.min))
 const maxModel = ref<number | null>(numParam(route.query.max))
+// Pool-attribute toggles (URL: ?chauffee=1&abri=1&enfants=1).
+const heatedModel = ref<boolean>(boolParam(route.query.chauffee))
+const shelteredModel = ref<boolean>(boolParam(route.query.abri))
+const childSafeModel = ref<boolean>(boolParam(route.query.enfants))
 // 'nearest' is a runtime-only sort (needs the visitor's geolocation); it is
 // never read from or written to the URL.
 const sortModel = ref<SortValue | 'nearest'>(
@@ -74,6 +81,9 @@ const filters = computed<PoolFilters>(() => ({
   amenities: amenityModel.value.slice(),
   minPrice: minModel.value,
   maxPrice: maxModel.value,
+  heated: heatedModel.value || undefined,
+  sheltered: shelteredModel.value || undefined,
+  childSafe: childSafeModel.value || undefined,
   // 'nearest' is resolved client-side from geolocation, so the query sorts by
   // 'recent' and we re-order by distance below.
   sort: sortModel.value === 'nearest' ? 'recent' : sortModel.value,
@@ -146,6 +156,9 @@ const queryFromState = computed<Record<string, string>>(() => {
   if (amenityModel.value.length) q.amenities = amenityModel.value.join(',')
   if (minModel.value != null) q.min = String(minModel.value)
   if (maxModel.value != null) q.max = String(maxModel.value)
+  if (heatedModel.value) q.chauffee = '1'
+  if (shelteredModel.value) q.abri = '1'
+  if (childSafeModel.value) q.enfants = '1'
   if (sortModel.value !== 'recent' && sortModel.value !== 'nearest') q.sort = sortModel.value
   if (qModel.value.trim()) q.q = qModel.value.trim()
   return q
@@ -182,6 +195,9 @@ watch(
       .filter((s): s is AmenityKey => (AMENITY_KEYS as readonly string[]).includes(s))
     minModel.value = numParam(q.min)
     maxModel.value = numParam(q.max)
+    heatedModel.value = boolParam(q.chauffee)
+    shelteredModel.value = boolParam(q.abri)
+    childSafeModel.value = boolParam(q.enfants)
     sortModel.value = SORT_VALUES.includes(strParam(q.sort) as SortValue)
       ? (strParam(q.sort) as SortValue)
       : 'recent'
@@ -243,7 +259,10 @@ const activeFilterCount = computed(
     (slotModel.value ? 1 : 0) +
     amenityModel.value.length +
     (minModel.value != null ? 1 : 0) +
-    (maxModel.value != null ? 1 : 0)
+    (maxModel.value != null ? 1 : 0) +
+    (heatedModel.value ? 1 : 0) +
+    (shelteredModel.value ? 1 : 0) +
+    (childSafeModel.value ? 1 : 0)
 )
 const hasAnyFilter = computed(
   () => activeFilterCount.value > 0 || !!cityModel.value || !!qModel.value
@@ -255,6 +274,9 @@ function resetFilters(): void {
   amenityModel.value = []
   minModel.value = null
   maxModel.value = null
+  heatedModel.value = false
+  shelteredModel.value = false
+  childSafeModel.value = false
   sortModel.value = 'recent'
   qModel.value = ''
 }
@@ -507,6 +529,15 @@ useHead(() => ({
               </PChip>
             </div>
           </div>
+
+          <div class="fgroup">
+            <h3>{{ t('search.filters.features') }}</h3>
+            <div class="chip-wrap">
+              <PChip v-model="heatedModel">{{ t('search.filters.heated') }}</PChip>
+              <PChip v-model="shelteredModel">{{ t('search.filters.sheltered') }}</PChip>
+              <PChip v-model="childSafeModel">{{ t('search.filters.childSafe') }}</PChip>
+            </div>
+          </div>
         </aside>
 
         <!-- ═══ RESULTS COLUMN ═══ -->
@@ -716,6 +747,14 @@ useHead(() => ({
             >
               {{ t(`search.amenities.${k}`) }}
             </PChip>
+          </div>
+        </div>
+        <div class="fgroup">
+          <h3>{{ t('search.filters.features') }}</h3>
+          <div class="chip-wrap">
+            <PChip v-model="heatedModel">{{ t('search.filters.heated') }}</PChip>
+            <PChip v-model="shelteredModel">{{ t('search.filters.sheltered') }}</PChip>
+            <PChip v-model="childSafeModel">{{ t('search.filters.childSafe') }}</PChip>
           </div>
         </div>
       </div>

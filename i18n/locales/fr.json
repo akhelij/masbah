@@ -69,6 +69,7 @@
     "favorite": "Ajouter aux favoris",
     "unfavorite": "Retirer des favoris",
     "reviews": "{count} avis",
+    "newListing": "Nouveau",
     "distance": "à {d} km",
     "verified": "Vérifié",
     "notFoundTitle": "Cette piscine s'est évaporée",
@@ -121,7 +122,9 @@
       "title": "Disponibilités",
       "subtitle": "Les jours barrés ne sont pas disponibles.",
       "blocked": "Indisponible",
-      "available": "Disponible"
+      "available": "Disponible",
+      "dateLabel": "Date de visite",
+      "dateHint": "Cette date sera pré-remplie à l'étape de réservation."
     },
     "location": {
       "title": "Localisation",
@@ -363,6 +366,10 @@
       "priceMinPh": "Min DH",
       "priceMaxPh": "Max DH",
       "amenities": "Équipements",
+      "features": "Caractéristiques",
+      "heated": "Chauffée",
+      "sheltered": "À l'abri des regards",
+      "childSafe": "Sécurisée enfants",
       "clearAll": "Tout effacer",
       "showResults": "Voir {n} piscines"
     },
@@ -669,6 +676,20 @@
       "confirm": "Supprimer définitivement",
       "cancel": "Annuler"
     },
+    "blocked": {
+      "action": "Disponibilités",
+      "title": "Gérer les disponibilités",
+      "subtitle": "Bloquez des dates ou des créneaux pour « {title} » : ils ne pourront plus être réservés.",
+      "dateLabel": "Date",
+      "slotLabel": "Créneau",
+      "wholeDay": "Journée entière",
+      "reasonLabel": "Motif (optionnel)",
+      "reasonPlaceholder": "Ex. : entretien, usage personnel…",
+      "addBtn": "Bloquer cette date",
+      "listTitle": "Dates bloquées à venir",
+      "empty": "Aucune date bloquée à venir.",
+      "remove": "Débloquer cette date"
+    },
     "empty": {
       "title": "Transformez votre piscine en revenu",
       "body": "Les hôtes au Maroc gagnent en moyenne jusqu'à 3 000 DH par week-end. Inscription gratuite, vous gardez le contrôle de chaque demande.",
@@ -700,6 +721,7 @@
       "noSlots": "Aucun créneau disponible pour cette piscine.",
       "dayBlocked": "Cette date n'est pas disponible. Choisissez-en une autre.",
       "slotTaken": "Déjà réservé",
+      "slotPast": "Déjà passé",
       "pickDate": "Choisissez d'abord une date."
     },
     "step2": {

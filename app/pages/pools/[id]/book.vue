@@ -42,8 +42,21 @@ const stepTitle = computed(() => {
 })
 
 // ── Form state ────────────────────────────────────────────────────────────
-const date = ref<string>('')
-const selectedSlot = ref<string | undefined>(undefined)
+// Deep-link support: /pools/:id/book?date=YYYY-MM-DD&slot=morning pre-fills
+// step 1 (only today-or-later dates and known slot keys). Best-effort: the
+// availability watchers below still drop the slot if it turns out disabled,
+// blocked or taken once the data resolves.
+const SLOT_KEYS: SlotKey[] = ['morning', 'afternoon', 'evening', 'full_day']
+function queryStr(v: unknown): string {
+  return Array.isArray(v) ? String(v[0] ?? '') : typeof v === 'string' ? v : ''
+}
+const qDate = queryStr(route.query.date)
+const qSlot = queryStr(route.query.slot)
+
+const date = ref<string>(/^\d{4}-\d{2}-\d{2}$/.test(qDate) && qDate >= todayIso() ? qDate : '')
+const selectedSlot = ref<string | undefined>(
+  SLOT_KEYS.includes(qSlot as SlotKey) ? qSlot : undefined
+)
 const guests = ref(2)
 const selectedExtraKeys = ref<string[]>([])
 const message = ref('')
@@ -69,28 +82,56 @@ const slotEnabledMap = computed(() =>
   slotAvailability(detail.value, date.value || null, availability.value.acceptedSlots)
 )
 
+// Same-day cutoffs: when the chosen date is TODAY, slots whose window already
+// ended are disabled (morning ends 14h, afternoon + full_day end 20h; evening
+// runs to midnight so it never expires same-day). Computed client-side only —
+// nowHour stays null during SSR so server and client first paint match.
+const SLOT_END_HOUR: Record<SlotKey, number> = {
+  morning: 14,
+  afternoon: 20,
+  evening: 24,
+  full_day: 20,
+}
+const nowHour = ref<number | null>(null)
+onMounted(() => {
+  nowHour.value = new Date().getHours()
+})
+function isSlotPast(slot: SlotKey): boolean {
+  if (nowHour.value === null) return false
+  if (!date.value || date.value !== todayIso()) return false
+  return nowHour.value >= SLOT_END_HOUR[slot]
+}
+
 interface SlotChoice {
   key: SlotKey
   label: string
   sub: string
   price: number
   available: boolean
+  /** True when unavailable because the window already ended today. */
+  past: boolean
 }
 const slotChoices = computed<SlotChoice[]>(() =>
-  (detail.value?.slots ?? []).map((s) => ({
-    key: s.slot,
-    label: t(SLOT_LABELS[s.slot]),
-    sub: t(SLOT_SUBS[s.slot]),
-    price: s.price_mad,
-    available: date.value ? slotEnabledMap.value[s.slot] : true,
-  }))
+  (detail.value?.slots ?? []).map((s) => {
+    const past = isSlotPast(s.slot)
+    return {
+      key: s.slot,
+      label: t(SLOT_LABELS[s.slot]),
+      sub: t(SLOT_SUBS[s.slot]),
+      price: s.price_mad,
+      available: date.value ? slotEnabledMap.value[s.slot] && !past : true,
+      past,
+    }
+  })
 )
 const dayBlocked = computed(() => Boolean(date.value) && availability.value.dayBlocked)
 
-// If the currently selected slot becomes unavailable for the chosen date, drop it.
-watch([slotEnabledMap, date], () => {
+// If the currently selected slot becomes unavailable for the chosen date
+// (blocked, taken, or already past today), drop it.
+watch([slotEnabledMap, date, nowHour], () => {
   if (!date.value || !selectedSlot.value) return
-  if (!slotEnabledMap.value[selectedSlot.value as SlotKey]) selectedSlot.value = undefined
+  const slot = selectedSlot.value as SlotKey
+  if (!slotEnabledMap.value[slot] || isSlotPast(slot)) selectedSlot.value = undefined
 })
 
 function pickSlot(choice: SlotChoice): void {
@@ -112,13 +153,7 @@ function toggleExtra(key: string): void {
 }
 
 // ── Live price ────────────────────────────────────────────────────────────
-const price = useBookingPrice(
-  () => detail.value,
-  selectedSlot,
-  date,
-  guests,
-  selectedExtraKeys
-)
+const price = useBookingPrice(() => detail.value, selectedSlot, date, guests, selectedExtraKeys)
 
 // ── Derived display ───────────────────────────────────────────────────────
 const selectedSlotRow = computed(
@@ -292,7 +327,9 @@ async function onSubmit(): Promise<void> {
           </svg>
           {{ t('book.backToListing') }}
         </NuxtLink>
-        <div class="step-count">{{ t('book.stepCount', { current: step, total: TOTAL_STEPS }) }}</div>
+        <div class="step-count">
+          {{ t('book.stepCount', { current: step, total: TOTAL_STEPS }) }}
+        </div>
         <h1 class="t-h2 flow-title">{{ stepTitle }}</h1>
         <div class="progress-seg" aria-hidden="true">
           <span :class="{ fill: step >= 1 }"><i /></span>
@@ -300,9 +337,7 @@ async function onSubmit(): Promise<void> {
           <span :class="{ fill: step >= 3 }"><i /></span>
         </div>
         <!-- 💵 Paiement sur place — visible on every step -->
-        <div class="cash-pill">
-          <span aria-hidden="true">💵</span>{{ t('common.cashOnPlace') }}
-        </div>
+        <div class="cash-pill"><span aria-hidden="true">💵</span>{{ t('common.cashOnPlace') }}</div>
       </div>
 
       <div class="flow-body">
@@ -339,11 +374,19 @@ async function onSubmit(): Promise<void> {
               @click="pickSlot(c)"
             >
               <span class="lab">{{ c.label }}</span>
-              <span class="sub">{{ c.available ? formatMad(c.price, locale) : t('book.step1.slotTaken') }}</span>
+              <span class="sub">{{
+                c.available
+                  ? formatMad(c.price, locale)
+                  : c.past
+                    ? t('book.step1.slotPast')
+                    : t('book.step1.slotTaken')
+              }}</span>
             </button>
           </div>
           <p v-else class="t-sm muted">{{ t('book.step1.noSlots') }}</p>
-          <p v-if="!date" class="t-sm muted" style="margin-top: 0.7rem">{{ t('book.step1.pickDate') }}</p>
+          <p v-if="!date" class="t-sm muted" style="margin-top: 0.7rem">
+            {{ t('book.step1.pickDate') }}
+          </p>
         </section>
 
         <!-- STEP 2 · INVITÉS & EXTRAS -->
@@ -405,7 +448,8 @@ async function onSubmit(): Promise<void> {
                 <span>{{ amenityLabel(a.label_fr, a.label_ar) }}</span>
               </span>
               <span class="x-price">
-                +{{ formatMad(a.price, locale) }}<template v-if="a.per_person"> {{ t('book.step2.perPerson') }}</template>
+                +{{ formatMad(a.price, locale)
+                }}<template v-if="a.per_person"> {{ t('book.step2.perPerson') }}</template>
               </span>
             </button>
           </div>
@@ -435,7 +479,9 @@ async function onSubmit(): Promise<void> {
             <div v-else class="recap-thumb recap-thumb-empty" aria-hidden="true" />
             <div style="min-width: 0">
               <strong>{{ detail.pool.title }}</strong>
-              <div class="t-sm muted">{{ locationLine }} · {{ t('book.step3.host', { name: ownerName }) }}</div>
+              <div class="t-sm muted">
+                {{ locationLine }} · {{ t('book.step3.host', { name: ownerName }) }}
+              </div>
             </div>
           </div>
 
@@ -457,10 +503,12 @@ async function onSubmit(): Promise<void> {
               <span class="recap-extras">
                 <template v-if="price.lines.some((l) => l.kind === 'extra')">
                   <span v-for="l in price.lines.filter((x) => x.kind === 'extra')" :key="l.key">
-                    {{ amenityLabel(
-                      paidExtras.find((a) => a.key === l.key)?.label_fr ?? l.key,
-                      paidExtras.find((a) => a.key === l.key)?.label_ar ?? l.key
-                    ) }}
+                    {{
+                      amenityLabel(
+                        paidExtras.find((a) => a.key === l.key)?.label_fr ?? l.key,
+                        paidExtras.find((a) => a.key === l.key)?.label_ar ?? l.key
+                      )
+                    }}
                     +{{ formatMad(l.amount, locale) }}
                   </span>
                 </template>
@@ -468,7 +516,9 @@ async function onSubmit(): Promise<void> {
               </span>
             </div>
             <div v-if="price.weekendPremium > 0" class="recap-row">
-              <span class="muted">{{ t('book.step3.weekendPremium', { pct: price.weekendPct }) }}</span>
+              <span class="muted">{{
+                t('book.step3.weekendPremium', { pct: price.weekendPct })
+              }}</span>
               <strong>+{{ formatMad(price.weekendPremium, locale) }}</strong>
             </div>
             <div class="recap-row recap-total">

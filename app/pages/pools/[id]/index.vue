@@ -251,8 +251,16 @@ async function onShare(): Promise<void> {
 }
 
 // ── Reserve CTA ─────────────────────────────────────────────────────────
+// When the visitor picked a (future) date in the Disponibilités section, the
+// booking flow is deep-linked with ?date= (+ the selected slot) so step 1
+// arrives pre-filled.
 function onReserve(): void {
-  requireAuth('booking', () => navigateTo(localePath(`/pools/${id.value}/book`)))
+  const query: Record<string, string> = {}
+  if (visitDate.value && visitDate.value >= todayIso()) {
+    query.date = visitDate.value
+    if (selectedSlot.value) query.slot = selectedSlot.value
+  }
+  requireAuth('booking', () => navigateTo({ path: localePath(`/pools/${id.value}/book`), query }))
 }
 
 // ── Reviews ─────────────────────────────────────────────────────────────
@@ -352,6 +360,10 @@ async function submitReply(reviewId: string): Promise<void> {
 }
 
 // ── Availability (simple list of next blocked dates) ────────────────────
+// Lightweight date selection: picking a date here (plus the slot selected in
+// the slot picker) deep-links the Réserver flow — see onReserve above.
+const visitDate = ref('')
+
 const blockedList = computed(() => {
   const blocked = detail.value?.blockedDates ?? []
   return blocked.slice(0, 12).map((b) => ({
@@ -857,6 +869,12 @@ useHead(() => ({
             <p class="t-sm muted" style="margin-top: -0.4rem; margin-bottom: 0.8rem">
               {{ t('pool.availability.subtitle') }}
             </p>
+            <PDatePicker
+              v-model="visitDate"
+              class="avail-date"
+              :label="t('pool.availability.dateLabel')"
+              :hint="visitDate ? t('pool.availability.dateHint') : undefined"
+            />
             <div v-if="blockedList.length" class="blocked-list">
               <span v-for="b in blockedList" :key="b.id" class="blocked-chip">
                 <svg
@@ -1544,6 +1562,10 @@ useHead(() => ({
 }
 
 /* availability */
+.avail-date {
+  max-width: 18rem;
+  margin-bottom: 0.9rem;
+}
 .blocked-list {
   display: flex;
   flex-wrap: wrap;

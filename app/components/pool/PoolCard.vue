@@ -130,12 +130,13 @@ function toggleFav(): void {
         </svg>
         <span
           >{{ city
-          }}<template v-if="reviewCount !== undefined">
+          }}<template v-if="reviewCount !== undefined && reviewCount > 0">
             · {{ t('pool.reviews', { count: reviewCount }) }}</template
           ><template v-if="distanceLabel">
             · <strong class="dist">{{ distanceLabel }}</strong></template
           ></span
         >
+        <span v-if="reviewCount === 0" class="new-pill">{{ t('pool.newListing') }}</span>
       </div>
 
       <div v-if="amenities?.length" class="amenities">
@@ -195,6 +196,17 @@ function toggleFav(): void {
 .meta .dist {
   color: var(--aqua-700);
   font-weight: 700;
+}
+.new-pill {
+  flex: none;
+  background: var(--aqua-50);
+  color: var(--aqua-800);
+  font-weight: 600;
+  font-size: 0.72rem;
+  line-height: 1;
+  padding: 0.28rem 0.55rem;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
 }
 .amenities {
   display: flex;

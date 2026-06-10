@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { OwnerPoolItem } from '~/composables/useOwnerPools'
+import type { SlotKey } from '~/types/db'
 
 // The S7 "Mes annonces" management page: lists the owner's pools (all statuses)
 // as rows with cover/title/city/status/completion/price + Modifier, Publier /
@@ -147,6 +148,86 @@ async function confirmDelete(): Promise<void> {
   }
 }
 
+// ── Blocked-dates ("Disponibilités") manager ──────────────────────────────
+const SLOT_LABELS: Record<SlotKey, string> = {
+  morning: 'slots.morning',
+  afternoon: 'slots.afternoon',
+  evening: 'slots.evening',
+  full_day: 'slots.fullDay',
+}
+
+const availTarget = ref<OwnerPoolItem | null>(null)
+const availOpen = ref(false)
+// Only feed the composable a pool id while the modal is open, so closing
+// clears the list and reopening always refetches fresh rows.
+const availPoolId = computed(() => (availOpen.value ? (availTarget.value?.id ?? null) : null))
+const {
+  blocked,
+  pending: blockedPending,
+  error: blockedError,
+  saving: blockSaving,
+  addBlock,
+  removeBlock,
+} = useBlockedDates(availPoolId)
+
+const blockDate = ref('')
+const blockSlot = ref('') // '' = whole day (slot = null)
+const blockReason = ref('')
+const removingId = ref<string | null>(null)
+
+const blockSlotOptions = computed(() => [
+  { value: '', label: t('annonces.blocked.wholeDay') },
+  { value: 'morning', label: t('slots.morning') },
+  { value: 'afternoon', label: t('slots.afternoon') },
+  { value: 'evening', label: t('slots.evening') },
+  { value: 'full_day', label: t('slots.fullDay') },
+])
+
+// The native date input enforces min=today in the picker, but a typed value
+// can still be in the past — gate the Ajouter button on it.
+const blockDateValid = computed(() => !!blockDate.value && blockDate.value >= todayIso())
+
+function openAvail(item: OwnerPoolItem): void {
+  availTarget.value = item
+  blockDate.value = ''
+  blockSlot.value = ''
+  blockReason.value = ''
+  availOpen.value = true
+}
+
+async function onAddBlock(): Promise<void> {
+  if (!blockDateValid.value) return
+  const ok = await addBlock({
+    date: blockDate.value,
+    slot: (blockSlot.value || null) as SlotKey | null,
+    reason: blockReason.value,
+  })
+  if (ok) {
+    blockDate.value = ''
+    blockSlot.value = ''
+    blockReason.value = ''
+  }
+}
+
+async function onRemoveBlock(id: string): Promise<void> {
+  removingId.value = id
+  try {
+    await removeBlock(id)
+  } finally {
+    removingId.value = null
+  }
+}
+
+function blockDateLabel(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number)
+  if (!y || !m || !d) return iso
+  return new Date(y, m - 1, d).toLocaleDateString(locale.value === 'ar' ? 'ar-MA' : 'fr-MA', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+  })
+}
+
 function statusClass(status: OwnerPoolItem['status']): string {
   if (status === 'published') return 'st-ok'
   if (status === 'paused') return 'st-no'
@@ -254,7 +335,7 @@ function priceText(item: OwnerPoolItem): string {
       <article v-for="item in pools" :key="item.id" class="card listing">
         <div class="listing-row">
           <div class="listing-thumb">
-            <img v-if="item.coverUrl" :src="item.coverUrl" :alt="item.title">
+            <img v-if="item.coverUrl" :src="item.coverUrl" :alt="item.title" />
             <div v-else class="thumb-empty">
               <svg
                 viewBox="0 0 24 24"
@@ -274,14 +355,21 @@ function priceText(item: OwnerPoolItem): string {
 
           <div class="listing-main">
             <div class="listing-title-row">
-              <strong class="listing-title">{{ item.title || t('publish.essential.titlePlaceholder') }}</strong>
-              <span class="st" :class="statusClass(item.status)">{{ t(`annonces.status.${item.status}`) }}</span>
+              <strong class="listing-title">{{
+                item.title || t('publish.essential.titlePlaceholder')
+              }}</strong>
+              <span class="st" :class="statusClass(item.status)">{{
+                t(`annonces.status.${item.status}`)
+              }}</span>
             </div>
             <div class="t-sm muted listing-loc">
               {{ [item.neighborhood, item.cityName].filter(Boolean).join(', ') || '—' }}
             </div>
             <div class="listing-facts t-sm">
-              <span><strong>{{ item.views }}</strong> <span class="muted">{{ t('annonces.viewsLabel') }}</span></span>
+              <span
+                ><strong>{{ item.views }}</strong>
+                <span class="muted">{{ t('annonces.viewsLabel') }}</span></span
+              >
               <span class="listing-price">{{ priceText(item) }}</span>
             </div>
           </div>
@@ -306,6 +394,25 @@ function priceText(item: OwnerPoolItem): string {
               {{ item.status === 'draft' ? t('annonces.complete') : t('annonces.edit') }}
             </NuxtLink>
             <button
+              class="btn btn-secondary btn-sm avail-btn"
+              type="button"
+              @click="openAvail(item)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <path d="M16 2v4M8 2v4M3 10h18" />
+              </svg>
+              {{ t('annonces.blocked.action') }}
+            </button>
+            <button
               class="icon-btn del-btn"
               type="button"
               :aria-label="t('annonces.delete')"
@@ -320,7 +427,9 @@ function priceText(item: OwnerPoolItem): string {
                 stroke-linejoin="round"
                 aria-hidden="true"
               >
-                <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                <path
+                  d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"
+                />
               </svg>
             </button>
           </div>
@@ -334,7 +443,10 @@ function priceText(item: OwnerPoolItem): string {
               <strong>{{ item.completionScore }} %</strong>
             </div>
             <div class="meter"><i :style="{ width: `${item.completionScore}%` }" /></div>
-            <NuxtLink :to="localePath(`/publish/${item.id}`)" class="btn btn-primary btn-sm complete-cta">
+            <NuxtLink
+              :to="localePath(`/publish/${item.id}`)"
+              class="btn btn-primary btn-sm complete-cta"
+            >
               {{ t('annonces.complete') }}
             </NuxtLink>
           </div>
@@ -355,6 +467,71 @@ function priceText(item: OwnerPoolItem): string {
           {{ t('annonces.deleteModal.confirm') }}
         </PButton>
       </template>
+    </PModal>
+
+    <!-- blocked-dates ("Disponibilités") manager -->
+    <PModal v-model:open="availOpen" :title="t('annonces.blocked.title')">
+      <p class="t-sm muted blocked-sub">
+        {{ t('annonces.blocked.subtitle', { title: availTarget?.title || '—' }) }}
+      </p>
+
+      <div class="block-form">
+        <PDatePicker v-model="blockDate" :label="t('annonces.blocked.dateLabel')" />
+        <PSelect
+          v-model="blockSlot"
+          :label="t('annonces.blocked.slotLabel')"
+          :options="blockSlotOptions"
+        />
+        <PInput
+          v-model="blockReason"
+          :label="t('annonces.blocked.reasonLabel')"
+          :placeholder="t('annonces.blocked.reasonPlaceholder')"
+        />
+        <PButton
+          size="sm"
+          :disabled="!blockDateValid"
+          :loading="blockSaving && !removingId"
+          @click="onAddBlock"
+        >
+          {{ t('annonces.blocked.addBtn') }}
+        </PButton>
+      </div>
+
+      <p v-if="blockedError" class="hint-err block-err">{{ t('annonces.actionError') }}</p>
+
+      <div class="block-list-label">{{ t('annonces.blocked.listTitle') }}</div>
+      <p v-if="blockedPending && !blocked.length" class="t-sm muted">
+        {{ t('annonces.loading') }}
+      </p>
+      <p v-else-if="!blocked.length" class="t-sm muted">{{ t('annonces.blocked.empty') }}</p>
+      <ul v-else class="block-list">
+        <li v-for="b in blocked" :key="b.id" class="block-row">
+          <span class="block-date">{{ blockDateLabel(b.date) }}</span>
+          <span class="block-slot">{{
+            b.slot ? t(SLOT_LABELS[b.slot]) : t('annonces.blocked.wholeDay')
+          }}</span>
+          <span v-if="b.reason" class="t-sm muted block-reason">{{ b.reason }}</span>
+          <button
+            class="icon-btn block-remove"
+            type="button"
+            :disabled="removingId === b.id"
+            :aria-label="t('annonces.blocked.remove')"
+            @click="onRemoveBlock(b.id)"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </li>
+      </ul>
     </PModal>
 
     <!-- toast -->
@@ -512,6 +689,89 @@ function priceText(item: OwnerPoolItem): string {
   border-color: var(--danger);
   color: var(--danger);
 }
+.avail-btn {
+  gap: 0.35rem;
+}
+.avail-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* blocked-dates modal */
+.blocked-sub {
+  margin-bottom: 0.9rem;
+}
+.block-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: var(--sand-2);
+  border-radius: var(--r-lg);
+  padding: 0.9rem;
+}
+.block-err {
+  margin-top: 0.6rem;
+}
+.block-list-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  margin: 1.1rem 0 0.5rem;
+}
+.block-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.block-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem 0.55rem;
+  background: #fff;
+}
+.block-date {
+  font-weight: 700;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+.block-slot {
+  flex: none;
+  background: var(--aqua-50);
+  color: var(--aqua-800);
+  font-weight: 600;
+  font-size: 0.76rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.block-reason {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.block-remove {
+  margin-inline-start: auto;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  color: var(--ink-muted);
+}
+.block-remove:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.block-remove svg {
+  width: 14px;
+  height: 14px;
+}
 
 /* status badges */
 .st {
@@ -654,7 +914,9 @@ function priceText(item: OwnerPoolItem): string {
 }
 .toast-enter-active,
 .toast-leave-active {
-  transition: opacity var(--dur-2), transform var(--dur-2) var(--ease-water);
+  transition:
+    opacity var(--dur-2),
+    transform var(--dur-2) var(--ease-water);
 }
 .toast-enter-from,
 .toast-leave-to {
