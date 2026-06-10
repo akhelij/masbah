@@ -161,8 +161,15 @@ watch(
 function digitsOnly(phone: string): string {
   return phone.replace(/[^\d]/g, '')
 }
-function whatsappHref(phone: string): string {
-  return `https://wa.me/${digitsOnly(phone)}`
+function whatsappHref(phone: string, b: RenterBookingItem): string {
+  // Pre-filled with the booking context so the owner instantly knows which
+  // reservation the message is about (empty chats stall conversations).
+  const text = t('bookings.reveal.waPrefill', {
+    title: b.poolTitle ?? '',
+    date: formatDate(b.date),
+    slot: slotLabel(b.slot),
+  })
+  return `https://wa.me/${digitsOnly(phone)}?text=${encodeURIComponent(text)}`
 }
 function mapsHref(contact: PoolContact): string {
   if (contact.lat != null && contact.lng != null) {
@@ -412,7 +419,7 @@ const emptyCopy = computed(() => ({
                   {{ t('bookings.reveal.call') }}
                 </a>
                 <a
-                  :href="whatsappHref(contactByBooking[b.id]!.ownerPhone!)"
+                  :href="whatsappHref(contactByBooking[b.id]!.ownerPhone!, b)"
                   target="_blank"
                   rel="noopener"
                   class="btn btn-wa btn-sm"

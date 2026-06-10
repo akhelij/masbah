@@ -214,10 +214,40 @@ function onWhatsApp(): void {
   requireAuth('message', () => {
     void fetchContact().then((phone) => {
       if (phone && import.meta.client) {
-        window.open(`https://wa.me/${digitsOnly(phone)}`, '_blank', 'noopener')
+        // Pre-filled message: opening an empty chat makes people freeze, and the
+        // owner gets no context about which listing the message is about.
+        const text = `${t('pool.waPrefill', { title: detail.value?.pool.title ?? '' })}\n${listingUrl.value}`
+        window.open(
+          `https://wa.me/${digitsOnly(phone)}?text=${encodeURIComponent(text)}`,
+          '_blank',
+          'noopener'
+        )
       }
     })
   })
+}
+
+// ── Share ───────────────────────────────────────────────────────────────
+const listingUrl = computed(() => `${config.public.siteUrl}${localePath(`/pools/${id.value}`)}`)
+
+async function onShare(): Promise<void> {
+  if (!import.meta.client || !detail.value) return
+  const title = detail.value.pool.title
+  const text = t('pool.shareText', { title })
+  if (navigator.share) {
+    try {
+      await navigator.share({ title, text, url: listingUrl.value })
+    } catch {
+      // User dismissed the share sheet — nothing to do.
+    }
+  } else {
+    // Desktop fallback: WhatsApp share (the dominant channel in Morocco).
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(`${text}\n${listingUrl.value}`)}`,
+      '_blank',
+      'noopener'
+    )
+  }
 }
 
 // ── Reserve CTA ─────────────────────────────────────────────────────────
@@ -537,6 +567,20 @@ useHead(() => ({
 
             <div class="title-row">
               <h1 class="t-h2">{{ detail.pool.title }}</h1>
+              <button
+                class="share-inline"
+                type="button"
+                :aria-label="t('pool.share')"
+                @click="onShare"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+              </button>
               <button
                 class="fav fav-inline"
                 :class="{ 'is-on': isFavorite }"
@@ -1259,6 +1303,31 @@ useHead(() => ({
 }
 .fav-inline:hover {
   border-color: var(--coral);
+}
+.share-inline {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink);
+}
+.share-inline:hover {
+  border-color: var(--aqua-600);
+  color: var(--aqua-700);
+}
+.share-inline svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 .meta-row {
   display: flex;
