@@ -14,7 +14,14 @@ export function usePoolImageUrl(storagePath: string | null | undefined): string 
   if (!storagePath) return null
   if (/^https?:\/\//i.test(storagePath)) return storagePath
 
-  const base = useRuntimeConfig().public.supabase?.url
+  // Called from inside useAsyncData handlers (after awaits), where
+  // useRuntimeConfig() THROWS "composable called outside setup". This stayed
+  // latent while every cover was a seeded http URL (early return above) — the
+  // first real uploaded photo (a storage key) hit this line and broke every
+  // pool list. tryUseNuxtApp() degrades to null instead of throwing, and
+  // experimental.asyncContext (nuxt.config) keeps the instance available so
+  // the URL actually resolves.
+  const base = tryUseNuxtApp()?.$config?.public?.supabase?.url
   if (!base) return null
   const clean = storagePath.replace(/^\/+/, '')
   return `${String(base).replace(/\/+$/, '')}/storage/v1/object/public/pool-photos/${clean}`

@@ -21,6 +21,14 @@ export default defineNuxtConfig({
   // Public pages are SEO-critical → server-rendered.
   ssr: true,
 
+  // Keep the Nuxt instance available across `await` boundaries inside
+  // useAsyncData handlers (usePoolImageUrl reads runtime config there).
+  // Without this, composables called after an await throw — which emptied
+  // every pool list once the first uploaded (non-http) cover photo appeared.
+  experimental: {
+    asyncContext: true,
+  },
+
   typescript: {
     strict: true,
   },
