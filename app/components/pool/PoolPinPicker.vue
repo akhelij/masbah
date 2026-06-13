@@ -32,6 +32,7 @@ const el = ref<HTMLElement | null>(null)
 let map: LeafletMap | null = null
 let marker: LeafletMarker | null = null
 let LRef: typeof import('leaflet') | null = null
+let resizeObserver: ResizeObserver | null = null
 
 // ── Address search (Nominatim) + geolocation ──────────────────────────────
 interface GeoResult {
@@ -149,6 +150,16 @@ onMounted(async () => {
     placeMarker(L, e.latlng.lat, e.latlng.lng)
     emit('update', e.latlng.lat, e.latlng.lng)
   })
+
+  // The wizard renders steps with v-show, so this map often mounts while its
+  // step is display:none (zero width) — Leaflet then caches that size and only
+  // tiles part of the container once it becomes visible. Re-measuring on every
+  // size change (hidden→shown, resize) keeps the tiles filling the box.
+  map.invalidateSize()
+  if (typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(() => map?.invalidateSize())
+    resizeObserver.observe(el.value)
+  }
 })
 
 // Keep the marker in sync if the parent resets the coordinates.
@@ -163,6 +174,8 @@ watch(
 )
 
 onBeforeUnmount(() => {
+  resizeObserver?.disconnect()
+  resizeObserver = null
   map?.remove()
   map = null
   marker = null
