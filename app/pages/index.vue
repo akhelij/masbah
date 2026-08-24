@@ -72,6 +72,58 @@ useHead(() => ({
   htmlAttrs: localeHead.value.htmlAttrs,
   link: [...(localeHead.value.link ?? [])],
   meta: [...(localeHead.value.meta ?? [])],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            '@id': `${config.public.siteUrl}/#website`,
+            url: config.public.siteUrl,
+            name: 'Masbah',
+            description: t('home.subtitle'),
+            inLanguage: locale.value === 'ar' ? 'ar-MA' : 'fr-MA',
+            publisher: { '@id': `${config.public.siteUrl}/#organization` },
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: `${config.public.siteUrl}/${locale.value}/search?city={search_term_string}`,
+              'query-input': 'required name=search_term_string',
+            },
+          },
+          {
+            '@type': 'Organization',
+            '@id': `${config.public.siteUrl}/#organization`,
+            name: 'Masbah',
+            alternateName: 'مصباح',
+            url: config.public.siteUrl,
+            logo: `${config.public.siteUrl}/pwa-512x512.png`,
+            sameAs: [],
+            contactPoint: {
+              '@type': 'ContactPoint',
+              contactType: 'customer support',
+              availableLanguage: ['French', 'Arabic'],
+            },
+          },
+          {
+            '@type': 'LocalBusiness',
+            '@id': `${config.public.siteUrl}/#localbusiness`,
+            name: 'Masbah — Location de piscines privées',
+            description: t('home.subtitle'),
+            url: config.public.siteUrl,
+            areaServed: {
+              '@type': 'Country',
+              name: 'Morocco',
+            },
+            priceRange: '$$',
+            paymentAccepted: 'Cash',
+            currenciesAccepted: 'MAD',
+          },
+        ],
+      }),
+    },
+  ],
 }))
 </script>
 

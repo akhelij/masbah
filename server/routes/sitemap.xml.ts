@@ -62,7 +62,18 @@ export default defineEventHandler(async (event) => {
   }
 
   // Build the list of path *suffixes* (locale prefix is added per-locale).
-  const paths: string[] = ['', '/search', '/how-it-works']
+  const paths: string[] = [
+    '',
+    '/search',
+    '/comment-ca-marche',
+    '/devenir-hote',
+    '/conditions',
+    '/confidentialite',
+    '/blog',
+    '/blog/louer-piscine-privee-maroc',
+    '/blog/devenir-hote-piscine-maroc',
+    '/blog/meilleures-piscines-casablanca',
+  ]
   for (const slug of citySlugs) paths.push(`/piscines/${slug}`)
   for (const id of poolIds) paths.push(`/pools/${id}`)
 

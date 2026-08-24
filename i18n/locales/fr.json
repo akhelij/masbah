@@ -1170,5 +1170,68 @@
     "notifSaved": "Préférences enregistrées",
     "notifError": "Impossible d’enregistrer. Réessayez.",
     "signOut": "Se déconnecter"
+  },
+  "hostLanding": {
+    "seoTitle": "Devenez hôte — Gagnez de l'argent avec votre piscine",
+    "seoDescription": "Louez votre piscine privée sur Masbah et générez des revenus. 0% de commission pour les 50 premiers hôtes. Inscription gratuite en 10 minutes.",
+    "hero": {
+      "over": "Revenus passifs",
+      "title": "Votre piscine peut vous rapporter jusqu'à 10 000 DH/mois",
+      "subtitle": "Rejoignez la première marketplace marocaine de location de piscines. Inscription gratuite, gestion simplifiée, paiement en espèces sur place.",
+      "ctaPrimary": "Publier ma piscine",
+      "ctaWhatsApp": "Nous contacter sur WhatsApp",
+      "note": "Gratuit et sans engagement"
+    },
+    "calculator": {
+      "over": "Simulateur",
+      "title": "Combien pourriez-vous gagner ?"
+    },
+    "benefits": {
+      "over": "Pourquoi nous rejoindre",
+      "title": "Les avantages d'être hôte sur Masbah",
+      "b1Title": "Revenus garantis",
+      "b1Body": "Définissez vos prix, vos créneaux, vos règles. Vous gardez le contrôle total.",
+      "b2Title": "Flexibilité totale",
+      "b2Body": "Bloquez les dates indisponibles. Louez quand vous voulez, aussi souvent que vous voulez.",
+      "b3Title": "Sécurité avant tout",
+      "b3Body": "Vérification téléphonique, adresse approximative, avis clients. Vous êtes protégé.",
+      "b4Title": "Photos professionnelles offertes",
+      "b4Body": "Les 20 premiers hôtes reçoivent une séance photo professionnelle gratuite."
+    },
+    "steps": {
+      "over": "Comment ça marche",
+      "title": "Devenez hôte en 3 étapes",
+      "s1Title": "Créez votre annonce",
+      "s1Body": "Photos, description, équipements, tarifs. Notre guide vous accompagne pas à pas.",
+      "s2Title": "Validez vos créneaux",
+      "s2Body": "Définissez vos disponibilités et tarifs pour chaque créneau (matin, après-midi, soirée, journée complète).",
+      "s3Title": "Accueillez vos visiteurs",
+      "s3Body": "Recevez les demandes, acceptez celles qui vous conviennent, encaissez sur place."
+    },
+    "trust": {
+      "over": "Notre engagement",
+      "title": "Pourquoi les hôtes nous font confiance",
+      "stat1": "Commission pour les 50 premiers hôtes",
+      "stat2": "Validation des annonces",
+      "stat3": "Contrôle de vos disponibilités",
+      "stat4": "Support disponible"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "q1": "Combien ça coûte de publier ma piscine ?",
+      "a1": "C'est 100% gratuit. Aucun frais d'inscription, aucun abonnement. Les 50 premiers hôtes bénéficient de 0% de commission pendant 3 mois.",
+      "q2": "Comment se passe le paiement ?",
+      "a2": "Le voyageur paie en espèces directement sur place lors de son arrivée. Pas de carte bancaire, pas de commissions cachées.",
+      "q3": "Puis-je refuser une réservation ?",
+      "a3": "Oui, vous avez le contrôle total. Chaque demande doit être acceptée par vous. Aucune réservation automatique.",
+      "q4": "Quelles sont les règles islamiques à respecter ?",
+      "a4": "Masbah respecte les valeurs islamiques. Vous pouvez proposer des créneaux familiaux, des options femmes uniquement, et préciser vos règles dans l'annonce.",
+      "q5": "Qui prend les photos de ma piscine ?",
+      "a5": "Vous pouvez ajouter vos propres photos. Les 20 premiers hôtes à Casablanca et Mohammedia bénéficient d'une séance photo professionnelle gratuite."
+    },
+    "ctaTitle": "Prêt à gagner de l'argent avec votre piscine ?",
+    "ctaSubtitle": "Rejoignez les hôtes pionniers de Masbah. Les 50 premiers inscrits profitent de 0% de commission pendant 3 mois.",
+    "ctaButton": "Publier ma piscine gratuitement",
+    "ctaNote": "Inscription en 10 minutes · Sans engagement"
   }
 }
