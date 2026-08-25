@@ -267,6 +267,28 @@ useHead(() => ({
       </svg>
     </section>
 
+<!-- ═══════════ STATS / TRUST BAR ═══════════ -->
+    <section class="wrap stats-bar">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-num">15+</span>
+          <span class="stat-label">{{ t('home.stats.cities') }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">{{ t('home.stats.cash') }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">24h</span>
+          <span class="stat-label">{{ t('home.stats.response') }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0 DH</span>
+          <span class="stat-label">{{ t('home.stats.fees') }}</span>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══════════ POPULAR CITIES ═══════════ -->
     <section v-if="popularCities.length" class="wrap section cities-section">
       <div class="sec-head">
@@ -372,6 +394,58 @@ useHead(() => ({
       </div>
     </section>
 
+    <!-- ═══════════ WHY MASBAH ═══════════ -->
+    <section class="wrap section why-section">
+      <div class="sec-head-center">
+        <span class="t-over">{{ t('home.why.over') }}</span>
+        <h2 class="t-h2" style="margin-top: 0.3rem">{{ t('home.why.title') }}</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <span class="why-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3Z"/>
+            </svg>
+          </span>
+          <h3 class="why-title">{{ t('home.why.b1Title') }}</h3>
+          <p class="t-body muted">{{ t('home.why.b1Body') }}</p>
+        </div>
+        <div class="why-card">
+          <span class="why-ico why-ico-aqua">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2.5"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+              <path d="m9 16 2 2 4-4"/>
+            </svg>
+          </span>
+          <h3 class="why-title">{{ t('home.why.b2Title') }}</h3>
+          <p class="t-body muted">{{ t('home.why.b2Body') }}</p>
+        </div>
+        <div class="why-card">
+          <span class="why-ico why-ico-amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <rect x="2" y="5" width="20" height="14" rx="3"/>
+              <circle cx="12" cy="12" r="2.5"/>
+            </svg>
+          </span>
+          <h3 class="why-title">{{ t('home.why.b3Title') }}</h3>
+          <p class="t-body muted">{{ t('home.why.b3Body') }}</p>
+        </div>
+        <div class="why-card">
+          <span class="why-ico why-ico-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          <h3 class="why-title">{{ t('home.why.b4Title') }}</h3>
+          <p class="t-body muted">{{ t('home.why.b4Body') }}</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══════════ HOW IT WORKS ═══════════ -->
     <section class="how-section">
       <div class="wrap section">
@@ -448,14 +522,126 @@ useHead(() => ({
       </div>
     </section>
 
-    <!-- ═══════════ CASH / TRUST STRIP ═══════════ -->
-    <section class="wrap section cash-section">
-      <div class="cash-strip">
-        <span class="cash-ico">💵</span>
-        <div>
-          <div class="cash-title">{{ t('home.cash.title') }}</div>
-          <div class="t-sm muted">{{ t('home.cash.subtitle') }}</div>
+    <!-- ═══════════ SOCIAL PROOF ═══════════ -->
+    <section class="wrap section proof-section">
+      <div class="sec-head-center">
+        <span class="t-over">{{ t('home.proof.over') }}</span>
+        <h2 class="t-h2" style="margin-top: 0.3rem">{{ t('home.proof.title') }}</h2>
+      </div>
+      <div class="proof-grid">
+        <div class="proof-card">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-quote">{{ t('home.proof.q1') }}</p>
+          <div class="proof-author">
+            <span class="proof-name">{{ t('home.proof.a1Name') }}</span>
+            <span class="proof-meta">{{ t('home.proof.a1Meta') }}</span>
+          </div>
         </div>
+        <div class="proof-card">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-quote">{{ t('home.proof.q2') }}</p>
+          <div class="proof-author">
+            <span class="proof-name">{{ t('home.proof.a2Name') }}</span>
+            <span class="proof-meta">{{ t('home.proof.a2Meta') }}</span>
+          </div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-quote">{{ t('home.proof.q3') }}</p>
+          <div class="proof-author">
+            <span class="proof-name">{{ t('home.proof.a3Name') }}</span>
+            <span class="proof-meta">{{ t('home.proof.a3Meta') }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ HOST CTA ═══════════ -->
+    <section class="wrap section">
+      <div class="host-cta-band">
+        <div class="host-cta-inner">
+          <div class="host-cta-copy">
+            <span class="t-over" style="color: rgba(255,255,255,0.85)">{{ t('home.hostCta.over') }}</span>
+            <h2 class="host-cta-title">{{ t('home.hostCta.title') }}</h2>
+            <p class="t-bodyl" style="color: rgba(255,255,255,0.92); margin-top: 0.5rem">{{ t('home.hostCta.subtitle') }}</p>
+            <div class="host-cta-row">
+              <NuxtLink :to="localePath('/devenir-hote')" class="btn btn-white btn-lg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+                {{ t('home.hostCta.cta') }}
+              </NuxtLink>
+            </div>
+            <p class="host-cta-note">{{ t('home.hostCta.note') }}</p>
+          </div>
+          <div class="host-cta-visual">
+            <div class="host-cta-card">
+              <div class="host-cta-card-title">💰 {{ t('home.hostCta.estimateTitle') }}</div>
+              <div class="host-cta-card-num">3 000 - 10 000 DH</div>
+              <div class="host-cta-card-sub">{{ t('home.hostCta.estimateSub') }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ FAQ ═══════════ -->
+    <section class="wrap section faq-section">
+      <div class="sec-head-center" style="margin-bottom: 1.6rem">
+        <span class="t-over">{{ t('home.faq.over') }}</span>
+        <h2 class="t-h2" style="margin-top: 0.3rem">{{ t('home.faq.title') }}</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>
+            {{ t('home.faq.q1') }}
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </summary>
+          <p class="faq-ans">{{ t('home.faq.a1') }}</p>
+        </details>
+        <details class="faq">
+          <summary>
+            {{ t('home.faq.q2') }}
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </summary>
+          <p class="faq-ans">{{ t('home.faq.a2') }}</p>
+        </details>
+        <details class="faq">
+          <summary>
+            {{ t('home.faq.q3') }}
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </summary>
+          <p class="faq-ans">{{ t('home.faq.a3') }}</p>
+        </details>
+        <details class="faq">
+          <summary>
+            {{ t('home.faq.q4') }}
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </summary>
+          <p class="faq-ans">{{ t('home.faq.a4') }}</p>
+        </details>
+        <details class="faq">
+          <summary>
+            {{ t('home.faq.q5') }}
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </summary>
+          <p class="faq-ans">{{ t('home.faq.a5') }}</p>
+        </details>
+      </div>
+      <div class="faq-more">
+        <NuxtLink :to="localePath('/comment-ca-marche')" class="btn btn-secondary">
+          {{ t('home.faq.more') }}
+        </NuxtLink>
       </div>
     </section>
   </div>
@@ -734,5 +920,279 @@ useHead(() => ({
 }
 .cash-title {
   font-weight: 700;
+}
+
+/* ── Stats bar ────────────────────────────────────────────────────── */
+.stats-bar {
+  padding-block: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.stat {
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  padding: 1.2rem 0.8rem;
+  box-shadow: var(--sh-sm);
+}
+.stat-num {
+  display: block;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+  color: var(--aqua-700);
+  line-height: 1.1;
+}
+.stat-label {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+
+/* ── Why Masbah ───────────────────────────────────────────────────── */
+.sec-head-center {
+  text-align: center;
+  max-width: 36rem;
+  margin-inline: auto;
+  margin-bottom: 2rem;
+}
+.why-section {
+  background: var(--sand-2);
+}
+.why-grid {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .why-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.why-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  padding: 1.4rem;
+  box-shadow: var(--sh-sm);
+}
+.why-ico {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-lg);
+  background: var(--aqua-50);
+  color: var(--aqua-700);
+  display: grid;
+  place-items: center;
+  margin-bottom: 0.9rem;
+}
+.why-ico svg {
+  width: 24px;
+  height: 24px;
+}
+.why-ico-aqua {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+.why-ico-amber {
+  background: var(--amber-soft);
+  color: var(--amber-ink);
+}
+.why-ico-green {
+  background: #dcfce7;
+  color: #15803d;
+}
+.why-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 0.2rem;
+}
+
+/* ── Social Proof ─────────────────────────────────────────────────── */
+.proof-section {
+  max-width: 920px;
+  margin-inline: auto;
+}
+.proof-grid {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .proof-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.proof-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  padding: 1.4rem;
+  box-shadow: var(--sh-sm);
+  display: flex;
+  flex-direction: column;
+}
+.proof-stars {
+  color: #f59e0b;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.6rem;
+}
+.proof-quote {
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.6;
+  flex: 1;
+  font-size: 0.95rem;
+}
+.proof-author {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
+}
+.proof-name {
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.proof-meta {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin-top: 0.15rem;
+}
+
+/* ── Host CTA Band ────────────────────────────────────────────────── */
+.host-cta-band {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--r-3xl);
+  background: linear-gradient(140deg, #0e7490 0%, #0891b2 38%, #22c9de 72%, #7fe6ef 100%);
+  color: #fff;
+}
+.host-cta-inner {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.8rem, 4.5vw, 3rem);
+}
+@media (min-width: 768px) {
+  .host-cta-inner {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: center;
+  }
+}
+.host-cta-title {
+  font-size: clamp(1.4rem, 3.2vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-top: 0.4rem;
+}
+.host-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+}
+.host-cta-note {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+.host-cta-visual {
+  display: flex;
+  justify-content: center;
+}
+.host-cta-card {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--r-2xl);
+  padding: 1.4rem 1.8rem;
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+}
+.host-cta-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+}
+.host-cta-card-num {
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 800;
+  margin-top: 0.4rem;
+  color: #fff;
+}
+.host-cta-card-sub {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.2rem;
+}
+
+/* ── FAQ ──────────────────────────────────────────────────────────── */
+.faq-section {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.faq {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary .chev {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  transition: transform var(--dur-2);
+  color: var(--aqua-700);
+}
+.faq[open] summary .chev {
+  transform: rotate(180deg);
+}
+.faq-ans {
+  padding: 0 1.1rem 1.1rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+.faq-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.4rem;
 }
 </style>

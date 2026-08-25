@@ -61,6 +61,61 @@
     "cash": {
       "title": "Paiement sur place — aucun paiement en ligne",
       "subtitle": "En espèces, à l'arrivée. Vous ne payez rien avant d'avoir vu la piscine."
+    },
+    "stats": {
+      "cities": "Villes couvertes",
+      "cash": "Paiement en espèces",
+      "response": "Réponse de l'hôte",
+      "fees": "Sans frais cachés"
+    },
+    "why": {
+      "over": "Pourquoi choisir Masbah",
+      "title": "La location de piscine, enfin simple",
+      "b1Title": "100% confidentiel",
+      "b1Body": "Piscines à l'abri des regards, adresse exacte dévoilée uniquement après confirmation.",
+      "b2Title": "Réservation en 2 min",
+      "b2Body": "Choisissez votre créneau, envoyez votre demande. L'hôte confirme — sans avance.",
+      "b3Title": "Payez sur place",
+      "b3Body": "Aucun paiement en ligne. Vous réglez en espèces à l'arrivée, après avoir vu la piscine.",
+      "b4Title": "Pour toute la famille",
+      "b4Body": "Filtrer par sécurité enfants, profondeur, équipements. Trouvez la piscine idéale pour votre groupe."
+    },
+    "proof": {
+      "over": "Ils ont plongé",
+      "title": "Ce que disent nos premiers voyageurs",
+      "q1": "Super expérience ! La piscine était exactement comme sur les photos. Le paiement sur place nous a mis en confiance.",
+      "a1Name": "Famille B.",
+      "a1Meta": "Casablanca · Juillet 2026",
+      "q2": "Nous avons passé un excellent après-midi entre amis. L'hôte était très accueillant et la piscine était parfaitement propre.",
+      "a2Name": "Youssef & Amis",
+      "a2Meta": "Rabat · Août 2026",
+      "q3": "Enfin une solution pour profiter d'une piscine privée en toute tranquillité. Le processus est simple et rapide.",
+      "a3Name": "Sarah M.",
+      "a3Meta": "Mohammedia · Août 2026"
+    },
+    "hostCta": {
+      "over": "Propriétaire de piscine ?",
+      "title": "Votre piscine pourrait vous rapporter jusqu'à 10 000 DH/mois",
+      "subtitle": "Rejoignez les hôtes pionniers de Masbah. Inscription gratuite, vous gardez le contrôle total.",
+      "cta": "Devenir hôte",
+      "note": "Gratuit · Sans engagement · 0% commission pour les 50 premiers",
+      "estimateTitle": "Gains estimés",
+      "estimateSub": "par mois, selon la fréquence"
+    },
+    "faq": {
+      "over": "Vous avez des questions ?",
+      "title": "Questions fréquentes",
+      "q1": "Comment se passe le paiement ?",
+      "a1": "Tout se règle en espèces, sur place, à votre arrivée — après avoir vu la piscine. Aucune carte ni avance n'est demandée en ligne.",
+      "q2": "Quand obtient-on l'adresse exacte ?",
+      "a2": "L'adresse exacte et le numéro de téléphone de l'hôte vous sont communiqués dès que votre demande est acceptée. Avant cela, seule une zone approximative est visible.",
+      "q3": "Puis-je annuler ma demande ?",
+      "a3": "Oui. Comme vous ne payez rien en ligne, vous pouvez annuler depuis « Mes réservations » sans remboursement à attendre. Prévenez l'hôte le plus tôt possible.",
+      "q4": "Les piscines sont-elles vraiment privées ?",
+      "a4": "Oui. Masbah met en avant les piscines à l'abri des regards. Chaque annonce indique si la piscine est clôturée et non visible des voisins.",
+      "q5": "Puis-je louer avec des enfants ?",
+      "a5": "Absolument. Vous pouvez filtrer par piscines sécurisées pour enfants (barrière, alarme, profondeur adaptée). Chaque annonce détaille les équipements de sécurité.",
+      "more": "Tout savoir sur Masbah"
     }
   },
   "pool": {
