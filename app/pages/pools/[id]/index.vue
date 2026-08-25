@@ -409,14 +409,18 @@ useSeoMeta({
 const jsonLd = computed(() => {
   const d = detail.value
   if (!d) return null
-  const ld: Record<string, unknown> = {
+  const base = config.public.siteUrl
+  const currentPath = `${base}${localePath(`/pools/${id.value}`)}`
+  const cityPath = `${base}${localePath(`/piscines/${d.citySlug}`)}`
+
+  const productLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `${currentPath}#product`,
     name: d.pool.title,
     description: d.pool.description ?? undefined,
     image: d.photos.map((p) => p.url).slice(0, 6),
     category: 'Pool rental',
-    // City / neighbourhood only — never the exact address.
     areaServed: {
       '@type': 'City',
       name: d.cityName,
@@ -425,7 +429,7 @@ const jsonLd = computed(() => {
     },
   }
   if (d.priceFrom != null) {
-    ld.offers = {
+    productLd.offers = {
       '@type': 'Offer',
       priceCurrency: 'MAD',
       price: d.priceFrom,
@@ -433,7 +437,7 @@ const jsonLd = computed(() => {
     }
   }
   if (d.rating != null && d.reviewCount > 0) {
-    ld.aggregateRating = {
+    productLd.aggregateRating = {
       '@type': 'AggregateRating',
       ratingValue: d.rating,
       reviewCount: d.reviewCount,
@@ -441,7 +445,33 @@ const jsonLd = computed(() => {
       worstRating: 1,
     }
   }
-  return ld
+
+  const breadcrumbLd = {
+    '@type': 'BreadcrumbList',
+    '@id': `${currentPath}#breadcrumb`,
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: locale.value === 'ar' ? 'الرئيسية' : 'Accueil',
+        item: `${base}${localePath('/')}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: d.cityName,
+        item: cityPath,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: d.pool.title,
+        item: currentPath,
+      },
+    ],
+  }
+
+  return { '@context': 'https://schema.org', '@graph': [productLd, breadcrumbLd] }
 })
 
 useHead(() => ({

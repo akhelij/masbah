@@ -71,6 +71,8 @@ export default defineEventHandler(async (event) => {
     '/confidentialite',
     '/blog',
     '/blog/louer-piscine-privee-maroc',
+    '/blog/prix-location-piscine-privee-maroc',
+    '/blog/location-piscine-marrakech-agadir-rabat',
     '/blog/devenir-hote-piscine-maroc',
     '/blog/meilleures-piscines-casablanca',
   ]

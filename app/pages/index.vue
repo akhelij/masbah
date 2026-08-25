@@ -120,6 +120,62 @@ useHead(() => ({
             paymentAccepted: 'Cash',
             currenciesAccepted: 'MAD',
           },
+          {
+            '@type': 'FAQPage',
+            '@id': `${config.public.siteUrl}/#faqpage`,
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: locale.value === 'ar' ? 'كيفاش كنحجزو مسبح فمصباح؟' : 'Comment réserver une piscine sur Masbah ?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: locale.value === 'ar'
+                    ? 'باش تحجز مسبح فمصباح، كتبحث بالمدينة والوقت اللي بغيتي، كتختار المسبح اللي عجبك، وكتبعت طلب الحجز. المضيف كيرد عليك فواتساب أو بالتلفون باش يأكد. الدفع كيكون نقداً فالمكان، بدون دفع عبر الإنترنت.'
+                    : 'Pour réserver une piscine sur Masbah, recherchez par ville et créneau, choisissez la piscine qui vous plaît, et envoyez une demande de réservation. L\'hôte vous confirme par WhatsApp ou téléphone. Le paiement se fait en espèces sur place, sans paiement en ligne.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: locale.value === 'ar' ? 'واش خاصني نخلص على الإنترنت؟' : 'Faut-il payer en ligne ?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: locale.value === 'ar'
+                    ? 'لا. مصباح ما كيخلصش على الإنترنت. كتخلص نقداً عند المضيف فنهار الحجز.'
+                    : 'Non. Masbah ne prend aucun paiement en ligne. Vous réglez en espèces directement auprès de l\'hôte le jour de la réservation.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: locale.value === 'ar' ? 'شحال كيكلف استئجار مسبح خاص فالمغرب؟' : 'Combien coûte la location d\'une piscine privée au Maroc ?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: locale.value === 'ar'
+                    ? 'الأثمنة كتبدأ من 250 درهم للصباح فالمدن الصغيرة، حتى 2000 درهم للنهار كامل فالفيلات الراقية بمراكش. المتوسط فالدار البيضاء هو 400-800 درهم للوقت.'
+                    : 'Les prix varient de 250 DH la matinée dans les petites villes à 2 000 DH la journée complète pour les villas haut de gamme à Marrakech. La moyenne à Casablanca est de 400-800 DH le créneau.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: locale.value === 'ar' ? 'واش كنقدر نلغي الحجز؟' : 'Peut-on annuler une réservation ?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: locale.value === 'ar'
+                    ? 'إيه، الإلغاء مجاني. حيث ما كتخلص والو مسبقاً، غير خاصك تخبر المضيف فوقت معقول.'
+                    : 'Oui, l\'annulation est gratuite. Comme vous n\'avez rien payé à l\'avance, il suffit de prévenir l\'hôte dans un délai raisonnable.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: locale.value === 'ar' ? 'كيفاش نولي مضيف فمصباح؟' : 'Comment devenir hôte sur Masbah ?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: locale.value === 'ar'
+                    ? 'سهل! دير حساب، صاوب إعلان ديال المسبح ديالك بصور ووصف وثمن، وفعّل الأوقات اللي بغيتي. غادي تستقبل طلبات الحجز فواتساب أو بالتلفون. التسجيل مجاني تماماً.'
+                    : 'C\'est simple ! Créez un compte, publiez votre annonce avec photos, description et tarifs, et activez les créneaux disponibles. Vous recevez les demandes par WhatsApp ou téléphone. L\'inscription est 100 % gratuite.',
+                },
+              },
+            ],
+          },
         ],
       }),
     },

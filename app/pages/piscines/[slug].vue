@@ -85,6 +85,7 @@ useSeoMeta({
 const jsonLd = computed(() => {
   if (!city.value) return null
   const base = config.public.siteUrl
+  const currentPath = `${base}${localePath(`/piscines/${slug.value}`)}`
   const items = pools.value.slice(0, 24).map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -93,20 +94,49 @@ const jsonLd = computed(() => {
   }))
   return {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: pageTitle.value,
-    description: pageDescription.value,
-    url: `${base}${localePath(`/piscines/${slug.value}`)}`,
-    about: {
-      '@type': 'City',
-      name: cityName.value,
-      addressCountry: 'MA',
-    },
-    mainEntity: {
-      '@type': 'ItemList',
-      numberOfItems: pools.value.length,
-      itemListElement: items,
-    },
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${currentPath}#collectionpage`,
+        name: pageTitle.value,
+        description: pageDescription.value,
+        url: currentPath,
+        about: {
+          '@type': 'City',
+          name: cityName.value,
+          addressCountry: 'MA',
+        },
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: pools.value.length,
+          itemListElement: items,
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${currentPath}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: locale.value === 'ar' ? 'الرئيسية' : 'Accueil',
+            item: `${base}${localePath('/')}`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: locale.value === 'ar' ? 'استكشاف' : 'Explorer',
+            item: `${base}${localePath('/search')}`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: cityName.value,
+            item: currentPath,
+          },
+        ],
+      },
+    ],
   }
 })
 
