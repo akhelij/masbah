@@ -718,7 +718,23 @@ const postsMeta: Record<string, { title: string; description: string; date: stri
       ? 'دليل شامل لاستئجار مسبح خاص في المغرب. اكتشف الأسعار، المدن الأكثر طلباً، والنصائح للحصول على أفضل تجربة.'
       : 'Guide complet pour louer une piscine privée au Maroc. Découvrez les prix, les villes les plus demandées et nos conseils.',
     date: '2024-08-20',
-    readTime: '5 min',
+    readTime: '8 min',
+  },
+  'prix-location-piscine-privee-maroc': {
+    title: locale.value === 'ar' ? 'أسعار تأجير المسابح الخاصة في المغرب 2024' : 'Prix location piscine privée Maroc 2024 : guide tarifaire',
+    description: locale.value === 'ar'
+      ? 'تعرف على أسعار استئجار المسابح الخاصة حسب المدينة والوقت. مقارنة شاملة للأسعار في الدار البيضاء، الرباط، مراكش وأكادير.'
+      : 'Découvrez les tarifs de location de piscines privées par ville et par créneau. Comparaison complète des prix à Casablanca, Rabat, Marrakech et Agadir.',
+    date: '2024-08-22',
+    readTime: '6 min',
+  },
+  'location-piscine-marrakech-agadir-rabat': {
+    title: locale.value === 'ar' ? 'أحسن المسابح الخاصة بمراكش، أكادير والرباط' : 'Location piscine privée Marrakech, Agadir, Rabat : le comparatif',
+    description: locale.value === 'ar'
+      ? 'قارن بين أفضل المسابح الخاصة في ثلاث من أكبر مدن المغرب. الأسعار، التجهيزات، وأحسن الأوقات للحجز.'
+      : 'Comparez les meilleures piscines privées dans les 3 plus grandes villes du Maroc. Prix, équipements et meilleurs moments pour réserver.',
+    date: '2024-08-19',
+    readTime: '7 min',
   },
   'devenir-hote-piscine-maroc': {
     title: locale.value === 'ar' ? 'كن مضيف مسبح في المغرب: الدخل والمزايا' : 'Devenir hôte de piscine au Maroc : revenus et avantages',
@@ -726,7 +742,7 @@ const postsMeta: Record<string, { title: string; description: string; date: stri
       ? 'حوّل مسبحك الخاص إلى مصدر دخل. تعرّف على الإمكانيات المالية، المزايا، وكيفية البدء.'
       : 'Transformez votre piscine privée en source de revenus. Découvrez le potentiel financier et comment démarrer.',
     date: '2024-08-18',
-    readTime: '4 min',
+    readTime: '5 min',
   },
   'meilleures-piscines-casablanca': {
     title: locale.value === 'ar' ? 'أفضل المسابح الخاصة في الدار البيضاء' : 'Les meilleures piscines privées à Casablanca et environs',
@@ -734,11 +750,9 @@ const postsMeta: Record<string, { title: string; description: string; date: stri
       ? 'استكشف أفضل الخيارات في دار بوعزة، بوسكورة، المحمدية والدار البيضاء.'
       : 'Explorez les meilleures options à Dar Bouazza, Bouskoura, Mohammedia et Casablanca.',
     date: '2024-08-15',
-    readTime: '6 min',
+    readTime: '7 min',
   },
 }
-
-const meta = computed(() => postsMeta[slug.value])
 
 useSeoMeta({
   title: () => meta.value ? `${meta.value.title} — Masbah Blog` : 'Blog — Masbah',
